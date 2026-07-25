@@ -1147,10 +1147,10 @@ int32_t BehaviourDatabase::searchDigit(const std::string& message)
 	try {
 		value = std::stoi(message.substr(start, end).c_str());
 	}
-	catch (std::invalid_argument) {
+	catch (const std::invalid_argument&) {
 		return 0;
 	}
-	catch (std::out_of_range) {
+	catch (const std::out_of_range&) {
 		return 0;
 	}
 
