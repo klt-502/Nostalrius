@@ -1838,7 +1838,17 @@ bool RuneSpell::executeUse(Player* player, Item* item, const Position&, Thing* t
 	}
 
 	postCastSpell(player);
-	if (hasCharges && item && g_config.getBoolean(ConfigManager::REMOVE_RUNE_CHARGES)) {
+
+	// Project Zedas Enhanced:
+	// Action ID 65001 = Endless Ultimate Healing Rune
+	// Action ID 65002 = Endless Great Fireball Rune
+	const bool endlessRune = item && (
+		item->getActionId() == 65001 ||
+		item->getActionId() == 65002
+	);
+
+	if (hasCharges && item && !endlessRune &&
+		g_config.getBoolean(ConfigManager::REMOVE_RUNE_CHARGES)) {
 		int32_t newCount = std::max<int32_t>(0, item->getCharges() - 1);
 		g_game.transformItem(item, item->getID(), newCount);
 	}

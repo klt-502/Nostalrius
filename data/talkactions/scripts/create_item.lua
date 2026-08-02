@@ -20,6 +20,7 @@ function onSay(player, words, param)
 
 	local keynumber = 0
 	local count = tonumber(split[2])
+	local actionId = tonumber(split[3])
 	if count ~= nil then
 		if itemType:isStackable() then
 			count = math.min(10000, math.max(1, count))
@@ -37,20 +38,32 @@ function onSay(player, words, param)
 
 	local result = player:addItem(itemType:getId(), count)
 	if result ~= nil then
-		if not itemType:isStackable() then
-			if type(result) == "table" then
-				for _, item in ipairs(result) do
-					if itemType:isKey() then
-						item:setAttribute(ITEM_ATTRIBUTE_KEYNUMBER, keynumber)
-					end
-					item:decay()
-				end
-			else
-				if itemType:isKey() then
-					result:setAttribute(ITEM_ATTRIBUTE_KEYNUMBER, keynumber)
-				end
-				result:decay()
+		local function configureItem(item)
+			if itemType:isKey() then
+				item:setAttribute(ITEM_ATTRIBUTE_KEYNUMBER, keynumber)
 			end
+
+			if actionId ~= nil then
+				if actionId < 1 or actionId > 65535 then
+					player:sendCancelMessage(
+						"Action ID must be between 1 and 65535."
+					)
+					return false
+				end
+
+				item:setActionId(actionId)
+			end
+
+			item:decay()
+			return true
+		end
+
+		if type(result) == "table" then
+			for _, item in ipairs(result) do
+				configureItem(item)
+			end
+		else
+			configureItem(result)
 		end
 
 		player:getPosition():sendMagicEffect(CONST_ME_MAGIC_GREEN)
