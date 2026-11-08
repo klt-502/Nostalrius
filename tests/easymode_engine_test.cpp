@@ -19,6 +19,7 @@
 #include "vocation.h"
 #include <cstdlib>
 
+LuaEnvironment g_luaEnvironment;
 DatabaseTasks g_databaseTasks;
 Dispatcher g_dispatcher;
 Scheduler g_scheduler;
@@ -27,7 +28,6 @@ ConfigManager g_config;
 Monsters g_monsters;
 Vocations g_vocations;
 RSA g_RSA;
-extern LuaEnvironment g_luaEnvironment;
 extern Actions* g_actions;
 extern Spells* g_spells;
 extern MoveEvents* g_moveEvents;

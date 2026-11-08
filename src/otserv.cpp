@@ -35,7 +35,10 @@
 #include "databasemanager.h"
 #include "scheduler.h"
 #include "databasetasks.h"
+#include "luascript.h"
 
+// Game contains script interfaces; construction/destruction order must be explicit.
+LuaEnvironment g_luaEnvironment;
 DatabaseTasks g_databaseTasks;
 Dispatcher g_dispatcher;
 Scheduler g_scheduler;

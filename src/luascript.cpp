@@ -49,7 +49,7 @@ uint32_t ScriptEnvironment::lastResultId = 0;
 
 std::multimap<ScriptEnvironment*, Item*> ScriptEnvironment::tempItems;
 
-LuaEnvironment g_luaEnvironment;
+extern LuaEnvironment g_luaEnvironment;
 
 ScriptEnvironment::ScriptEnvironment()
 {
@@ -240,9 +240,9 @@ std::string LuaScriptInterface::getErrorDesc(ErrorCode_t code)
 ScriptEnvironment LuaScriptInterface::scriptEnv[16];
 int32_t LuaScriptInterface::scriptEnvIndex = -1;
 
-LuaScriptInterface::LuaScriptInterface(std::string interfaceName) : interfaceName(std::move(interfaceName))
+LuaScriptInterface::LuaScriptInterface(std::string interfaceName, bool mainEnvironment) : interfaceName(std::move(interfaceName))
 {
-	if (!g_luaEnvironment.getLuaState()) {
+	if (!mainEnvironment && !g_luaEnvironment.getLuaState()) {
 		g_luaEnvironment.initState();
 	}
 }
@@ -11283,7 +11283,12 @@ int LuaScriptInterface::luaPartySetSharedExperience(lua_State* L)
 }
 
 //
-LuaEnvironment::LuaEnvironment() : LuaScriptInterface("Main Interface") {}
+LuaEnvironment::LuaEnvironment() : LuaScriptInterface("Main Interface", true)
+{
+	// Construct derived members before initializing the main state. Never access
+	// the global environment through its still-running base constructor.
+	initState();
+}
 
 LuaEnvironment::~LuaEnvironment()
 {

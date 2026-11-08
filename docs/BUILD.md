@@ -20,3 +20,17 @@ or launch the server. Compilation and automated tests do not replace testing
 target indicators, movement, item updates, or command bindings in Tibia 7.72.
 
 Keep the Classic checkout/database and tag `v0.5-endless-consumables` unchanged.
+
+The server and native tests share `tfs_engine`. Their entry-point translation
+units construct the main Lua environment before `Game` (which owns script
+interfaces), and destroy it afterward. Main-state initialization happens after
+the environment's derived members are constructed. This avoids dependence on
+static-library link order; sanitizer checks cover this startup path.
+
+For additional native memory/undefined-behavior checks, configure another build
+with `-DCMAKE_CXX_FLAGS="-fsanitize=address,undefined -fno-omit-frame-pointer"`
+and `-DCMAKE_EXE_LINKER_FLAGS="-fsanitize=address,undefined"`, compile it, then run
+CTest with `ASAN_OPTIONS=detect_leaks=0 UBSAN_OPTIONS=halt_on_error=1`.
+Leak detection is excluded because fixtures retain process-lifetime engine
+objects; address, reference-lifetime and undefined-behavior checks remain active.
+All ten current tests passed in both the normal and sanitizer builds locally.
