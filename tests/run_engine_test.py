@@ -33,11 +33,19 @@ with tempfile.TemporaryDirectory(prefix="zedas-engine-") as directory:
         '<actions><action itemid="2874" script="misc/fluids.lua" /></actions>')
     enabled = "false" if scenario == "disabled" else '"invalid"' if scenario == "invalid_config" else "true"
     endless = "false" if scenario == "feature_disabled" else "true"
-    (root / "config.lua").write_text(
+    config = (
         f'easyModeEnabled = {enabled}\n'
         f'easyModeEndlessRunes = {endless}\n'
         f'easyModeEndlessManaFluid = {endless}\n'
         'easyModeCommands = true\neasyModeAutoTarget = true\neasyModeAutoGold = true\n'
         'removeChargesFromRunes = true\ntimeBetweenExActions = 25\n'
         'autoStackCumulatives = false\nqueryPlayerContainers = false\n')
+    if scenario == "defaults":
+        config = 'removeChargesFromRunes = true\ntimeBetweenExActions = 25\n'
+    for scenario_name, key in (("commands_disabled", "easyModeCommands"),
+                               ("target_disabled", "easyModeAutoTarget"),
+                               ("gold_disabled", "easyModeAutoGold")):
+        if scenario == scenario_name:
+            config = config.replace(key + " = true", key + " = false")
+    (root / "config.lua").write_text(config)
     subprocess.run([binary, scenario], cwd=root, check=True)

@@ -15,6 +15,7 @@
 #include "scheduler.h"
 #include "spells.h"
 #include "talkaction.h"
+#include "tools.h"
 #include "vocation.h"
 #include <cstdlib>
 
@@ -61,7 +62,7 @@ static Player* makePlayer(int x = 100, int y = 100)
 	return player;
 }
 
-static Monster* makeMonster(int health, int x, int y, bool hostile = true, bool attackable = true)
+static Monster* makeMonster(int health, int x, int y, bool hostile = true, bool attackable = true, MonsterType** createdType = nullptr)
 {
 	MonsterType* type = new MonsterType();
 	type->name = "test monster";
@@ -70,6 +71,7 @@ static Monster* makeMonster(int health, int x, int y, bool hostile = true, bool 
 	type->info.healthMax = health;
 	type->info.isHostile = hostile;
 	type->info.isAttackable = attackable;
+	if (createdType) *createdType = type;
 	Monster* monster = new Monster(type);
 	require(g_game.internalPlaceCreature(monster, Position(x, y, 7)), "place test monster");
 	g_game.map.clearSpectatorCache();
@@ -81,11 +83,38 @@ static Item* carry(Player& player, uint16_t id, uint16_t aid = 0, uint16_t subty
 	Container* bag = Item::CreateItem(2854)->getContainer();
 	Container* nested = Item::CreateItem(2853)->getContainer();
 	require(g_game.internalAddItem(&player, bag, CONST_SLOT_BACKPACK) == RETURNVALUE_NOERROR, "equip carried bag");
-	bag->internalAddThing(nested);
+	require(g_game.internalAddItem(bag, nested) == RETURNVALUE_NOERROR, "add nested carried bag");
 	Item* item = Item::CreateItem(id, subtype);
 	if (aid) item->setActionId(aid);
-	nested->internalAddThing(item);
+	require(g_game.internalAddItem(nested, item) == RETURNVALUE_NOERROR, "add carried test item");
 	return item;
+}
+
+static Container* corpseAt(int x, int y)
+{
+	Container* corpse = Item::CreateItem(3994)->getContainer();
+	require(corpse != nullptr, "create real corpse container");
+	corpse->setCorpseOwner(0x12345678);
+	require(g_game.internalAddItem(g_game.map.getTile(x, y, 7), corpse, INDEX_WHEREEVER, FLAG_NOLIMIT) == RETURNVALUE_NOERROR, "place corpse");
+	return corpse;
+}
+
+static Item* addCoin(Container& container, uint16_t id, uint16_t count, uint16_t aid = 0)
+{
+	Item* item = Item::CreateItem(id, count);
+	if (aid) item->setActionId(aid);
+	require(g_game.internalAddItem(&container, item) == RETURNVALUE_NOERROR, "add test currency");
+	return item;
+}
+
+static uint64_t contentsValue(Container& container)
+{
+	uint64_t value = 0;
+	for (Item* item : container.getItemList()) {
+		value += item->getWorth();
+		if (Container* child = item->getContainer()) value += contentsValue(*child);
+	}
+	return value;
 }
 
 static void setup()
@@ -131,7 +160,7 @@ int main(int argc, char** argv)
 	}
 	require(loaded, "load test configuration");
 	setup();
-	const bool enabled = scenario != "disabled" && scenario != "feature_disabled";
+	const bool enabled = scenario != "disabled" && scenario != "feature_disabled" && scenario != "defaults";
 	for (const auto& definition : EasyMode::CONSUMABLES) {
 		Item* item = Item::CreateItem(definition.itemId, definition.subtype ? definition.subtype : 2);
 		item->setActionId(definition.actionId);
@@ -151,6 +180,25 @@ int main(int argc, char** argv)
 		restored->decrementReferenceCounter();
 	}
 	Player* player = makePlayer();
+	if (scenario == "commands_disabled") {
+		player->setVarStats(STAT_MAGICPOINTS, 10);
+		carry(*player, 3160, 65001);
+		require(!EasyMode::useConsumable(*player, "uh"), "command feature gate");
+		return 0;
+	}
+	if (scenario == "target_disabled") {
+		require(!EasyMode::setAutoTarget(*player, true), "auto-target feature gate");
+		EasyMode::updateAutoTarget(*player, 1000);
+		require(!player->getAttackedCreature(), "disabled auto-target never acquires");
+		return 0;
+	}
+	if (scenario == "gold_disabled") {
+		Container* corpse = corpseAt(100, 101);
+		addCoin(*corpse, 3031, 20);
+		EasyMode::onLootGenerated(*corpse);
+		require(EasyMode::collectGold(*player) == 0 && contentsValue(*corpse) == 20, "auto-gold feature gate");
+		return 0;
+	}
 	if (!enabled) {
 		require(!EasyMode::useConsumable(*player, "uh"), "disabled command fails");
 		player->setVarStats(STAT_MAGICPOINTS, 10);
@@ -280,6 +328,97 @@ int main(int argc, char** argv)
 	require(hunter->getAttackedCreature() != healthy, "bounded unreachable target released");
 	g_game.playerFollowCreature(hunter->getID(), healer->getID());
 	require(!hunter->getEasyModeAutoTargetState().active, "manual follow suspends automation");
+	Player* collector = makePlayer(107, 106);
+	Item* carriedRune = carry(*collector, 3160);
+	Container* carriedBag = carriedRune->getParent()->getItem()->getContainer();
+	Item* existingGold = addCoin(*carriedBag, 3031, 95);
+	Container* corpse = corpseAt(107, 107);
+	Container* lootBag = Item::CreateItem(2853)->getContainer();
+	Container* deepBag = Item::CreateItem(2853)->getContainer();
+	corpse->internalAddThing(lootBag);
+	lootBag->internalAddThing(deepBag);
+	addCoin(*deepBag, 3031, 30);
+	addCoin(*corpse, 3031, 100);
+	addCoin(*lootBag, 3035, 6);
+	addCoin(*deepBag, 3043, 1);
+	Item* special = addCoin(*corpse, 3031, 50, 65001);
+	const uint64_t originalValue = collector->getMoney() + contentsValue(*corpse);
+	EasyMode::onLootGenerated(*corpse);
+	EasyMode::onLootGenerated(*corpse);
+	require(EasyMode::collectGold(*collector) == 10730, "nested real gold/platinum/crystal transferred");
+	require(existingGold->getItemCount() == 100 && special->getParent() == corpse, "scoped stacking and special currency exclusion");
+	require(collector->getMoney() + contentsValue(*corpse) == originalValue, "total currency value conserved");
+	require(EasyMode::collectGold(*collector) == 0, "reprocessing cannot duplicate value");
+	addCoin(*corpse, 3031, 20);
+	EasyMode::onLootGenerated(*corpse);
+	require(EasyMode::collectGold(*collector) == 0, "post-registration inserted currency excluded");
+	Player* competitor = makePlayer(108, 106);
+	require(EasyMode::collectGold(*competitor) == 0 && competitor->getMoney() == 0, "first successful collector wins");
+	Player* limited = makePlayer(111, 106);
+	Item* heavy = Item::CreateItem(3264);
+	heavy->setIntAttr(ITEM_ATTRIBUTE_WEIGHT, limited->getCapacity() - 50);
+	require(g_game.internalAddItem(limited, heavy, CONST_SLOT_RIGHT) == RETURNVALUE_NOERROR, "set capacity-limited inventory");
+	require(limited->getFreeCapacity() == 50, "five-coin capacity fixture");
+	Container* partial = corpseAt(111, 107);
+	Item* partialGold = addCoin(*partial, 3031, 20);
+	EasyMode::onLootGenerated(*partial);
+	require(EasyMode::collectGold(*limited) == 5 && limited->getMoney() == 5 && partialGold->getItemCount() == 15, "partial movement respects capacity and leaves remainder");
+	require(EasyMode::collectGold(*limited) == 0 && partialGold->getItemCount() == 15, "full capacity never drops coins to ground");
+	require(EasyMode::collectGold(*competitor) == 15 && competitor->getMoney() == 15, "another collector can take actual remainder");
+	Container* relocated = corpseAt(108, 107);
+	addCoin(*relocated, 3031, 10);
+	EasyMode::onLootGenerated(*relocated);
+	require(g_game.internalMoveItem(relocated->getParent(), g_game.map.getTile(108, 108, 7), INDEX_WHEREEVER, relocated, 1, nullptr) == RETURNVALUE_NOERROR, "move registered corpse");
+	require(EasyMode::collectGold(*competitor) == 0 && contentsValue(*relocated) == 10, "relocated corpse invalidated safely");
+	MonsterType* lootType;
+	Monster* lootMonster = makeMonster(5, 110, 108, true, true, &lootType);
+	lootType->info.lookcorpse = 3994;
+	LootBlock goldLoot;
+	goldLoot.id = 3031;
+	goldLoot.countmax = 100;
+	goldLoot.chance = MAX_LOOTCHANCE;
+	lootType->info.lootItems.push_back(goldLoot);
+	getRandomGenerator().seed(12345);
+	lootMonster->changeHealth(-5);
+	lootMonster->onDeath();
+	Container* generated = nullptr;
+	for (Item* item : *g_game.map.getTile(110, 108, 7)->getItemList()) {
+		if (item->getID() == 3994) generated = item->getContainer();
+	}
+	require(generated && contentsValue(*generated) > 0, "real death generates currency");
+	const uint64_t deathValue = contentsValue(*generated);
+	Player* deathCollector = makePlayer(110, 107);
+	require(EasyMode::collectGold(*deathCollector) == deathValue && deathCollector->getMoney() == deathValue, "real post-loot notification registers completed generated loot");
+	Container* tradeCorpse = corpseAt(108, 107);
+	Item* offered = addCoin(*tradeCorpse, 3031, 10);
+	EasyMode::onLootGenerated(*tradeCorpse);
+	collector->addContainer(1, tradeCorpse);
+	g_game.playerRequestTrade(collector->getID(), Position(0xFFFF, 0x41, tradeCorpse->getThingIndex(offered)), 0, competitor->getID(), 3031);
+	require(collector->getTradeItem() == offered, "offer source currency through real trade API");
+	require(EasyMode::collectGold(*competitor) == 0 && offered->getParent() == tradeCorpse, "active source trade is protected");
+	g_game.playerCloseTrade(collector->getID());
+	require(EasyMode::collectGold(*competitor) == 10, "collection resumes after trade cancellation");
+	Container* manuallyLooted = corpseAt(108, 107);
+	Item* manualGold = addCoin(*manuallyLooted, 3031, 10);
+	EasyMode::onLootGenerated(*manuallyLooted);
+	require(g_game.internalMoveItem(manuallyLooted, competitor, INDEX_WHEREEVER, manualGold, 10, nullptr) == RETURNVALUE_NOERROR, "manual currency pickup");
+	g_game.cleanup();
+	require(EasyMode::collectGold(*collector) == 0, "manually moved currency is not credited again after cleanup");
+	Container* removedCorpse = corpseAt(108, 107);
+	addCoin(*removedCorpse, 3031, 10);
+	EasyMode::onLootGenerated(*removedCorpse);
+	require(g_game.internalRemoveItem(removedCorpse) == RETURNVALUE_NOERROR, "remove registered corpse");
+	g_game.cleanup();
+	require(EasyMode::collectGold(*collector) == 0, "removed corpse handles survive cleanup safely");
+	Player* full = makePlayer(109, 106);
+	for (int slot = CONST_SLOT_FIRST; slot <= CONST_SLOT_LAST; ++slot) {
+		// Saturated inventory fixture; production placement still uses queryAdd.
+		static_cast<Cylinder&>(*full).addThing(slot, Item::CreateItem(3031, 100));
+	}
+	Container* noDestination = corpseAt(109, 107);
+	addCoin(*noDestination, 3031, 10);
+	EasyMode::onLootGenerated(*noDestination);
+	require(EasyMode::collectGold(*full) == 0 && contentsValue(*noDestination) == 10, "full destinations leave currency in corpse");
 	std::cout << "Native engine scenario passed: " << scenario << std::endl;
 	return 0;
 }

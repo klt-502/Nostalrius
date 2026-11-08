@@ -20,6 +20,7 @@
 #include "otpch.h"
 
 #include "monster.h"
+#include "easymode.h"
 #include "game.h"
 #include "spells.h"
 #include "configmanager.h"
@@ -2051,6 +2052,7 @@ void Monster::dropLoot(Container* corpse, Creature*)
 {
 	if (corpse && lootDrop) {
 		mType->createLoot(corpse);
+		EasyMode::onLootGenerated(*corpse);
 	}
 }
 

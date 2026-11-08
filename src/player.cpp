@@ -1142,6 +1142,7 @@ void Player::onThink(uint32_t interval)
 {
 	Creature::onThink(interval);
 	EasyMode::updateAutoTarget(*this, OTSYS_TIME());
+	EasyMode::collectGold(*this);
 
 	sendPing();
 

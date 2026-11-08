@@ -30,27 +30,31 @@ bool inTrade(Player& player, const Item& item)
 
 Item* findConsumable(Player& player, EasyMode::Consumable kind)
 {
-	std::vector<Item*> items;
-	for (int slot = CONST_SLOT_FIRST; slot <= CONST_SLOT_LAST; ++slot) {
-		if (Item* item = player.getInventoryItem(static_cast<slots_t>(slot))) {
-			items.push_back(item);
-		}
-	}
-	for (size_t i = 0; i < items.size(); ++i) {
-		Item* item = items[i];
-		if (inTrade(player, *item)) {
-			continue;
-		}
+	for (Item* item : EasyMode::getCarriedItems(player)) {
 		if (EasyMode::recognizeConsumable(item->getID(), item->getActionId(), item->getSubType()) == kind &&
 		    (kind == EasyMode::Consumable::ManaFluid || item->getCharges() > 0)) {
 			return item;
 		}
-		if (Container* container = item->getContainer()) {
-			items.insert(items.end(), container->getItemList().begin(), container->getItemList().end());
-		}
 	}
 	return nullptr;
 }
+}
+
+std::vector<Item*> EasyMode::getCarriedItems(Player& player)
+{
+	std::vector<Item*> pending, result;
+	for (int slot = CONST_SLOT_FIRST; slot <= CONST_SLOT_LAST; ++slot) {
+		if (Item* item = player.getInventoryItem(static_cast<slots_t>(slot))) pending.push_back(item);
+	}
+	for (size_t i = 0; i < pending.size(); ++i) {
+		Item* item = pending[i];
+		if (inTrade(player, *item)) continue;
+		result.push_back(item);
+		if (Container* container = item->getContainer()) {
+			pending.insert(pending.end(), container->getItemList().begin(), container->getItemList().end());
+		}
+	}
+	return result;
 }
 
 bool EasyMode::isEndlessRune(const Item& item)

@@ -111,6 +111,43 @@ try stairs, protected tiles, invisibility, summons and logout/relogin. Server
 target selection does not promise that an unchanged client's red target indicator
 or battle-list selection mirrors it; validate those visuals in Tibia 7.72.
 
+## Auto-gold
+
+Requires `easyModeEnabled` and `easyModeAutoGold`. Collection runs during normal
+player think, independently of auto-target and consumable commands. Only ordinary
+3031/3035/3043 currency captured after monster loot generation is considered,
+including generated nested bags. Access is first successful transfer wins; corpse
+owner/kill credit does not restrict this feature. Player corpses are not registered.
+
+The collector moves existing stacks using `Game::internalMoveItem`, merges matching
+stacks, searches carried nested containers explicitly, and respects item capacity,
+slot availability and active trades. It never calls a money/item factory, changes
+coin denominations, falls back to the ground, or changes global stacking settings.
+Partial source-stack changes are measured even if the move reports an error.
+Currency that cannot fit remains in the corpse. Marked/customized currency and
+currency inserted after registration are excluded.
+
+Collection requires same-floor visible line of sight within 5 tiles. Corpse handles
+are reference-counted and invalidated on relocation, removal, ID/decay change or
+after 300000 ms. The session registry retains at most 1024 entries, evicting the
+oldest without removing its loot. These limits are centralized in `easymode.h`.
+No financial tables or player storage keys are introduced; normal inventory saving
+persists pickups. No player action/exhaustion clock is changed by collection.
+
+Native tests check deep nested coins, all three denominations, same-denomination
+merging with historical stacking disabled, protected and subsequently inserted
+currency, duplicate notifications/reprocessing, competing collectors, exact value
+conservation, five-coin partial capacity and safe corpse relocation.
+They also execute a real monster death/post-loot callback, protect an active
+corpse-item trade, retry after trade cancellation, and handle manual removal and
+corpse destruction across engine cleanup. Separate cases exercise defaults and
+each command/target/gold feature gate; saturated destinations retain their coins.
+
+Client checklist: kill monsters containing coins/nested loot; verify stack updates,
+normal noncurrency loot, and value conservation. Fill bags and capacity, collect
+part of a stack, free space and retry. Race another collector/manual looting, move
+or decay a corpse, test walls/floors, relog after saving, and repeat with flags off.
+
 ## Automated verification
 
 Native CTest scenarios link the same engine library as the server and load real

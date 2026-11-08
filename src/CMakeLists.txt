@@ -21,6 +21,7 @@ set(tfs_SRC
 	${CMAKE_CURRENT_LIST_DIR}/depotlocker.cpp
 	${CMAKE_CURRENT_LIST_DIR}/easymode.cpp
 	${CMAKE_CURRENT_LIST_DIR}/easymodetarget.cpp
+	${CMAKE_CURRENT_LIST_DIR}/easyloot.cpp
 	${CMAKE_CURRENT_LIST_DIR}/fileloader.cpp
 	${CMAKE_CURRENT_LIST_DIR}/game.cpp
 	${CMAKE_CURRENT_LIST_DIR}/globalevent.cpp

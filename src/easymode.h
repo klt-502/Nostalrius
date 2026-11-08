@@ -3,13 +3,18 @@
 
 #include <cstdint>
 #include <string>
+#include <vector>
 
 class Item;
 class Player;
 class Creature;
+class Container;
 
 namespace EasyMode {
 static constexpr int64_t AUTO_TARGET_UNREACHABLE_MS = 3000;
+static constexpr int GOLD_PICKUP_RADIUS_TILES = 5;
+static constexpr size_t MAX_REGISTERED_CORPSES = 1024;
+static constexpr int64_t CORPSE_REGISTRY_TTL_MS = 300000;
 
 struct AutoTargetState {
 	bool active = false;
@@ -56,6 +61,9 @@ bool useConsumable(Player& player, const std::string& command);
 bool isPlayerControlled(const Creature& creature);
 bool setAutoTarget(Player& player, bool active);
 void updateAutoTarget(Player& player, int64_t now);
+std::vector<Item*> getCarriedItems(Player& player);
+void onLootGenerated(Container& corpse);
+uint64_t collectGold(Player& player);
 }
 
 #endif
