@@ -60,6 +60,13 @@ requests. Client check: `/i 2874,10,65004`, drain mana, use `!mana`, then altern
 with an ordinary mana vial; verify timing, retained marked fluid and ordinary
 empty-vial behavior. Rune exhaustion is not newly imposed on historical fluids.
 
+`!explo` uses 3200/65003 centered on the currently attacked monster. Explosion
+retains its existing cross-shaped area; it is not converted into a single-target
+spell. Native tests exercise missing/player targets, center/adjacent damage,
+diagonal exclusion, charge persistence and repeat rejection. Client check:
+`/i 3200,6,65003`, attack a monster and use the command; test target loss, walls,
+range, floors, protection zones and switching targets before the next command.
+
 Client checks: mark a nested UH with `/i 3160,1,65001`; damage yourself and use
 `!uh`; confirm healing, retained charge, paralysis removal and normal exhaustion.
 Test missing/wrong items, low magic level, trading the containing bag, and

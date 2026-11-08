@@ -10,6 +10,7 @@
 #include "monster.h"
 #include "movement.h"
 #include "player.h"
+#include "protocolgame.h"
 #include "rsa.h"
 #include "scheduler.h"
 #include "spells.h"
@@ -43,14 +44,34 @@ static void require(bool condition, const char* message)
 
 static Group ordinaryGroup = {"Test", 0, 0, 0, 1, false};
 
+struct ProtocolGameTestAccess {
+	static void bind(ProtocolGame& protocol, Player& player) { protocol.player = &player; }
+};
+
 static Player* makePlayer(int x = 100, int y = 100)
 {
-	Player* player = new Player(nullptr);
+	ProtocolGame_ptr protocol = std::make_shared<ProtocolGame>(nullptr);
+	Player* player = new Player(protocol);
+	ProtocolGameTestAccess::bind(*protocol, *player);
 	player->setName("Test" + std::to_string(x) + "x" + std::to_string(y));
 	player->setGroup(&ordinaryGroup);
 	require(player->setVocation(0), "set test vocation");
 	require(g_game.internalPlaceCreature(player, Position(x, y, 7)), "place test player");
 	return player;
+}
+
+static Monster* makeMonster(int health, int x, int y, bool hostile = true, bool attackable = true)
+{
+	MonsterType* type = new MonsterType();
+	type->name = "test monster";
+	type->nameDescription = "a test monster";
+	type->info.health = health;
+	type->info.healthMax = health;
+	type->info.isHostile = hostile;
+	type->info.isAttackable = attackable;
+	Monster* monster = new Monster(type);
+	require(g_game.internalPlaceCreature(monster, Position(x, y, 7)), "place test monster");
+	return monster;
 }
 
 static Item* carry(Player& player, uint16_t id, uint16_t aid = 0, uint16_t subtype = 1)
@@ -173,6 +194,20 @@ int main(int argc, char** argv)
 	require(drinker->getMana() >= 50 && drinker->getMana() <= 100 && vial->getFluidType() == 10, "real mana restoration and retained subtype");
 	const uint32_t mana = drinker->getMana();
 	require(!EasyMode::useConsumable(*drinker, "mana") && drinker->getMana() == mana, "mana shares item action clock");
+	Player* bomber = makePlayer(100, 102);
+	bomber->setVarStats(STAT_MAGICPOINTS, 10);
+	Item* explosion = carry(*bomber, 3200, 65003, 6);
+	require(!EasyMode::useConsumable(*bomber, "explo"), "missing offensive target fails");
+	bomber->setAttackedCreature(healer);
+	require(!EasyMode::useConsumable(*bomber, "explo"), "player target fails");
+	Monster* target = makeMonster(1000, 100, 104);
+	Monster* adjacent = makeMonster(1000, 101, 104);
+	Monster* diagonal = makeMonster(1000, 101, 105);
+	require(bomber->setAttackedCreature(target), "set offensive target");
+	g_game.playerSay(bomber->getID(), 0, TALKTYPE_SAY, "", "!explo");
+	require(target->getHealth() < 1000 && adjacent->getHealth() < 1000, "Explosion preserves existing cross area");
+	require(diagonal->getHealth() == 1000 && explosion->getCharges() == 6, "Explosion diagonal exclusion and endless charges");
+	require(!EasyMode::useConsumable(*bomber, "explo"), "offensive exhaustion/action clock retained");
 	std::cout << "Native engine scenario passed: " << scenario << std::endl;
 	return 0;
 }

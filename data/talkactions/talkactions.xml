@@ -2,6 +2,7 @@
 <talkactions>
 	<talkaction words="!uh" separator=" " script="easymode/use_consumable.lua" />
 	<talkaction words="!mana" separator=" " script="easymode/use_consumable.lua" />
+	<talkaction words="!explo" separator=" " script="easymode/use_consumable.lua" />
 	<!-- commands -->
 	<talkaction words="/ban" separator=" " script="ban.lua" />
 	<talkaction words="/ipban" separator=" " script="ipban.lua" />

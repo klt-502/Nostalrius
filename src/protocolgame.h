@@ -246,6 +246,7 @@ class ProtocolGame final : public Protocol
 		void parseExtendedOpcode(NetworkMessage& msg);
 
 		friend class Player;
+		friend struct ProtocolGameTestAccess; // Native tests bind an in-memory session without login/DB.
 
 		// Helpers so we don't need to bind every time
 		template <typename Callable, typename... Args>
