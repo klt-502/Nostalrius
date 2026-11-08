@@ -67,6 +67,15 @@ diagonal exclusion, charge persistence and repeat rejection. Client check:
 `/i 3200,6,65003`, attack a monster and use the command; test target loss, walls,
 range, floors, protection zones and switching targets before the next command.
 
+`!gfb` uses 3191/65002 at the current monster target's position, preserving the
+existing circular fire area and combat rules for every affected creature.
+Native tests verify actual center/diagonal damage, outside-area exclusion,
+wall blocking, protection zones and charge persistence. Client check:
+`/i 3191,4,65002`, select a monster, use `!gfb`, then change targets and repeat
+after normal exhaustion. Verify area placement, range/floor rejection, target
+death/disappearance and alternating mouse/command usage. Existing area-spell
+collateral/PvP behavior remains; selecting a monster is not a safe-area filter.
+
 Client checks: mark a nested UH with `/i 3160,1,65001`; damage yourself and use
 `!uh`; confirm healing, retained charge, paralysis removal and normal exhaustion.
 Test missing/wrong items, low magic level, trading the containing bag, and

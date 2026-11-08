@@ -208,6 +208,32 @@ int main(int argc, char** argv)
 	require(target->getHealth() < 1000 && adjacent->getHealth() < 1000, "Explosion preserves existing cross area");
 	require(diagonal->getHealth() == 1000 && explosion->getCharges() == 6, "Explosion diagonal exclusion and endless charges");
 	require(!EasyMode::useConsumable(*bomber, "explo"), "offensive exhaustion/action clock retained");
+	Player* fireCaster = makePlayer(105, 100);
+	fireCaster->setVarStats(STAT_MAGICPOINTS, 10);
+	Item* gfb = carry(*fireCaster, 3191, 65002, 4);
+	Monster* fireTarget = makeMonster(1000, 105, 104);
+	Monster* fireDiagonal = makeMonster(1000, 106, 105);
+	Monster* outside = makeMonster(1000, 109, 104);
+	require(fireCaster->setAttackedCreature(fireTarget), "set GFB target");
+	g_game.playerSay(fireCaster->getID(), 0, TALKTYPE_SAY, "", "!gfb");
+	require(fireTarget->getHealth() < 1000 && fireDiagonal->getHealth() < 1000, "GFB preserves real circular area");
+	require(outside->getHealth() == 1000 && gfb->getCharges() == 4, "GFB outside area and charges");
+	Player* blocked = makePlayer(109, 94);
+	blocked->setVarStats(STAT_MAGICPOINTS, 10);
+	Item* blockedRune = carry(*blocked, 3191, 65002, 4);
+	Monster* blockedTarget = makeMonster(1000, 109, 98);
+	uint16_t wallId = 0;
+	for (size_t id = 100; id < Item::items.size(); ++id) {
+		const ItemType& type = Item::items[id];
+		if (type.id && !type.isGroundTile() && type.blockSolid && type.blockProjectile && !type.moveable) { wallId = id; break; }
+	}
+	require(wallId != 0, "find projectile-blocking wall");
+	require(g_game.internalAddItem(g_game.map.getTile(109, 96, 7), Item::CreateItem(wallId), INDEX_WHEREEVER, FLAG_NOLIMIT) == RETURNVALUE_NOERROR, "place wall");
+	require(blocked->setAttackedCreature(blockedTarget), "select visible target behind wall");
+	require(!EasyMode::useConsumable(*blocked, "gfb") && blockedTarget->getHealth() == 1000 && blockedRune->getCharges() == 4, "wall prevents command damage");
+	fireCaster->getTile()->setFlag(TILESTATE_PROTECTIONZONE);
+	require(!EasyMode::useConsumable(*fireCaster, "gfb"), "protection zone preserved");
+	fireCaster->getTile()->resetFlag(TILESTATE_PROTECTIONZONE);
 	std::cout << "Native engine scenario passed: " << scenario << std::endl;
 	return 0;
 }
