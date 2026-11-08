@@ -8,6 +8,15 @@ function onSay(player, words, param)
 	end
 
 	local split = param:split(",")
+	-- Validate before addItem: malformed/fractional IDs must never create anything.
+	local actionId
+	if split[3] ~= nil then
+		actionId = tonumber(split[3])
+		if not actionId or actionId < 1 or actionId > 65535 or actionId ~= math.floor(actionId) then
+			player:sendCancelMessage("Action ID must be an integer between 1 and 65535.")
+			return false
+		end
+	end
 
 	local itemType = ItemType(split[1])
 	if itemType:getId() == 0 then
@@ -20,7 +29,6 @@ function onSay(player, words, param)
 
 	local keynumber = 0
 	local count = tonumber(split[2])
-	local actionId = tonumber(split[3])
 	if count ~= nil then
 		if itemType:isStackable() then
 			count = math.min(10000, math.max(1, count))
@@ -44,13 +52,6 @@ function onSay(player, words, param)
 			end
 
 			if actionId ~= nil then
-				if actionId < 1 or actionId > 65535 then
-					player:sendCancelMessage(
-						"Action ID must be between 1 and 65535."
-					)
-					return false
-				end
-
 				item:setActionId(actionId)
 			end
 

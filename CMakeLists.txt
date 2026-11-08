@@ -52,4 +52,10 @@ if(BUILD_TESTING)
     add_executable(easymode_constants_test tests/easymode_constants_test.cpp)
     target_include_directories(easymode_constants_test PRIVATE src)
     add_test(NAME easymode_constants COMMAND easymode_constants_test)
+    find_program(LUAJIT_EXECUTABLE NAMES luajit)
+    if(LUAJIT_EXECUTABLE)
+        add_test(NAME create_item_validation COMMAND ${LUAJIT_EXECUTABLE}
+            ${CMAKE_SOURCE_DIR}/tests/create_item_test.lua
+            ${CMAKE_SOURCE_DIR}/data/talkactions/scripts/create_item.lua)
+    endif()
 endif()
