@@ -153,6 +153,9 @@ or decay a corpse, test walls/floors, relog after saving, and repeat with flags 
 
 ## Automated verification
 
+Use [WAVE1_TEST_CHECKLIST.md](WAVE1_TEST_CHECKLIST.md) for the full local gameplay
+acceptance sequence, disabled-mode checks and exact GM item-creation commands.
+
 Native CTest scenarios link the same engine library as the server and load real
 item, rune, fluid and vocation definitions in a temporary synthetic map. They
 need no database or client. Cases verify master/feature gates, rejected config
