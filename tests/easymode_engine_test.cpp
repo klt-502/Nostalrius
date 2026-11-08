@@ -315,6 +315,7 @@ int main(int argc, char** argv)
 	stronger->changeHealth(-stronger->getHealth());
 	EasyMode::updateAutoTarget(*hunter, 4000);
 	require(hunter->getAttackedCreature() == healthy, "dead automatic target released");
+	g_game.playerSay(hunter->getID(), 0, TALKTYPE_SAY, "", "!autotarget on");
 	for (int dx = -1; dx <= 1; ++dx) {
 		for (int dy = -1; dy <= 1; ++dy) {
 			if (dx == 0 && dy == 0) continue;
@@ -322,6 +323,7 @@ int main(int argc, char** argv)
 		}
 	}
 	EasyMode::updateAutoTarget(*hunter, 5000);
+	g_game.playerSay(hunter->getID(), 0, TALKTYPE_SAY, "", "!autotarget on");
 	EasyMode::updateAutoTarget(*hunter, 7999);
 	require(hunter->getAttackedCreature() == healthy, "transient unreachability retains target");
 	EasyMode::updateAutoTarget(*hunter, 8000);

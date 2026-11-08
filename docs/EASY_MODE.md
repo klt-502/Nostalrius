@@ -89,6 +89,9 @@ Use `!autotarget on` to start/resume, `!autotarget off` to stop, and
 `!autotarget status` to inspect. Manual attack selection always takes priority;
 manual cancel/Escape and manual follow suspend automation until explicit resume.
 Turning automation off only clears its own automatic target, not a manual target.
+Repeated `!autotarget on` is idempotent: automatic ownership and an ongoing
+unreachable timer remain intact. A regression test repeats it before and during
+a blockage and still requires release at the original deadline.
 
 Each normal player think selects a living visible same-floor attackable hostile
 monster in the 7-by-5 viewport only when no target exists. Player-controlled

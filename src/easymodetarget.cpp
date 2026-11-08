@@ -46,6 +46,7 @@ bool EasyMode::setAutoTarget(Player& player, bool active)
 		return false;
 	}
 	AutoTargetState& state = player.getEasyModeAutoTargetState();
+	if (active && state.active) return true; // Repeated "on" must retain ownership and failure time.
 	Creature* target = player.getAttackedCreature();
 	if (!active && target && target->getID() == state.automaticTargetId) {
 		player.setAttackedCreature(nullptr);
