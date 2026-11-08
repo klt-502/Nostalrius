@@ -2,8 +2,10 @@
 #define ZEDAS_EASYMODE_H
 
 #include <cstdint>
+#include <string>
 
 class Item;
+class Player;
 
 namespace EasyMode {
 enum class Consumable { None, UltimateHealing, GreatFireball, Explosion, ManaFluid };
@@ -36,6 +38,7 @@ inline Consumable recognizeConsumable(uint16_t itemId, uint16_t actionId, uint16
 
 bool isEndlessRune(const Item& item);
 bool isEndlessManaFluid(const Item& item);
+bool useConsumable(Player& player, const std::string& command);
 }
 
 #endif

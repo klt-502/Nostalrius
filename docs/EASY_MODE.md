@@ -40,7 +40,32 @@ Wrong pairings, ordinary items and other fluid containers receive no exemption.
 Existing spell/action scripts still apply effects, costs and exhaustion. Mana
 endlessness applies to drinking; ordinary pouring/filling behavior remains.
 
-## Verification
+## Consumable commands
+
+`!uh` uses the exact marked UH on self. Commands require `easyModeEnabled`,
+`easyModeCommands` and the relevant endless-consumable switch. Only carried
+inventory (including closed nested bags) is searched; active trade items and
+their contents are excluded. An ordinary item is never substituted or created.
+Local SAY without parameters is required. The native bridge delegates to
+`Actions::useItemEx` and existing rune/fluid scripts, sharing the existing action
+clock and spell exhaustion with mouse use. Requests during action delay fail
+without queuing. Offensive bridge requests require a living visible same-floor
+monster and normal combat permission; player-controlled summons are excluded.
+No separate spell formulas, areas, cooldowns or rune scripts are introduced.
+
+Client checks: mark a nested UH with `/i 3160,1,65001`; damage yourself and use
+`!uh`; confirm healing, retained charge, paralysis removal and normal exhaustion.
+Test missing/wrong items, low magic level, trading the containing bag, and
+alternating the command with ordinary mouse use. Verify text-hotkey behavior
+and movement stopping in the unchanged 7.72 client.
+
+## Automated verification
+
+Native CTest scenarios link the same engine library as the server and load real
+item, rune, fluid and vocation definitions in a temporary synthetic map. They
+need no database or client. Cases verify master/feature gates, rejected config
+types, attribute round trips, ordinary consumption with Easy Mode disabled,
+nested item selection, actual UH healing, magic-level checks and shared exhaustion.
 
 `/i item,count,actionId` validates the optional Action ID before creating items.
 Only integers 1–65535 are accepted. Malformed, fractional and out-of-range input

@@ -1974,6 +1974,7 @@ void LuaScriptInterface::registerFunctions()
 	registerMethod("Player", "removeItem", LuaScriptInterface::luaPlayerRemoveItem);
 
 	registerMethod("Player", "getMoney", LuaScriptInterface::luaPlayerGetMoney);
+	registerMethod("Player", "useEasyModeItem", LuaScriptInterface::luaPlayerUseEasyModeItem);
 	registerMethod("Player", "addMoney", LuaScriptInterface::luaPlayerAddMoney);
 	registerMethod("Player", "removeMoney", LuaScriptInterface::luaPlayerRemoveMoney);
 
@@ -7932,6 +7933,13 @@ int LuaScriptInterface::luaPlayerRemoveItem(lua_State* L)
 	int32_t subType = getNumber<int32_t>(L, 4, -1);
 	bool ignoreEquipped = getBoolean(L, 5, false);
 	pushBoolean(L, player->removeItemOfType(itemId, count, subType, ignoreEquipped));
+	return 1;
+}
+
+int LuaScriptInterface::luaPlayerUseEasyModeItem(lua_State* L)
+{
+	Player* player = getUserdata<Player>(L, 1);
+	pushBoolean(L, player && EasyMode::useConsumable(*player, getString(L, 2)));
 	return 1;
 }
 
