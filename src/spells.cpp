@@ -1844,7 +1844,8 @@ bool RuneSpell::executeUse(Player* player, Item* item, const Position&, Thing* t
 	// Action ID 65002 = Endless Great Fireball Rune
 	const bool endlessRune = item && (
 		item->getActionId() == 65001 ||
-		item->getActionId() == 65002
+		item->getActionId() == 65002 ||
+		item->getActionId() == 65003
 	);
 
 	if (hasCharges && item && !endlessRune &&
