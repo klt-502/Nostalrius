@@ -651,6 +651,7 @@ class LuaScriptInterface
 		static int luaItemGetMovementId(lua_State* L);
 		static int luaItemSetMovementId(lua_State* L);
 		static int luaItemGetActionId(lua_State* L);
+		static int luaItemIsEndlessManaFluid(lua_State* L);
 		static int luaItemSetActionId(lua_State* L);
 		static int luaItemGetUniqueId(lua_State* L);
 

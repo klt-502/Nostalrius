@@ -46,6 +46,26 @@ bool ConfigManager::load()
 
 	//parse config
 	if (!loaded) { //info that must be loaded one time (unless we reset the modules involved)
+		// Easy Mode is startup-only. Validate all values before changing configuration.
+		const char* easyNames[] = {"easyModeEnabled", "easyModeEndlessRunes", "easyModeEndlessManaFluid",
+		                          "easyModeCommands", "easyModeAutoTarget", "easyModeAutoGold"};
+		const boolean_config_t easyKeys[] = {EASY_MODE_ENABLED, EASY_MODE_ENDLESS_RUNES, EASY_MODE_ENDLESS_MANA_FLUID,
+		                                   EASY_MODE_COMMANDS, EASY_MODE_AUTO_TARGET, EASY_MODE_AUTO_GOLD};
+		bool easyValues[6] = {};
+		for (size_t i = 0; i < 6; ++i) {
+			lua_getglobal(L, easyNames[i]);
+			if (!lua_isnil(L, -1) && !lua_isboolean(L, -1)) {
+				std::cout << "[Error - ConfigManager::load] " << easyNames[i] << " must be true or false." << std::endl;
+				lua_close(L);
+				return false;
+			}
+			easyValues[i] = lua_toboolean(L, -1) != 0;
+			lua_pop(L, 1);
+		}
+		for (size_t i = 0; i < 6; ++i) {
+			boolean[easyKeys[i]] = easyValues[i];
+		}
+
 		boolean[BIND_ONLY_GLOBAL_ADDRESS] = getGlobalBoolean(L, "bindOnlyGlobalAddress", false);
 		boolean[OPTIMIZE_DATABASE] = getGlobalBoolean(L, "startupDatabaseOptimization", true);
 

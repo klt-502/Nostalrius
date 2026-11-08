@@ -21,6 +21,7 @@
 
 #include "combat.h"
 #include "configmanager.h"
+#include "easymode.h"
 #include "game.h"
 #include "monster.h"
 #include "pugicast.h"
@@ -1839,14 +1840,7 @@ bool RuneSpell::executeUse(Player* player, Item* item, const Position&, Thing* t
 
 	postCastSpell(player);
 
-	// Project Zedas Enhanced:
-	// Action ID 65001 = Endless Ultimate Healing Rune
-	// Action ID 65002 = Endless Great Fireball Rune
-	const bool endlessRune = item && (
-		item->getActionId() == 65001 ||
-		item->getActionId() == 65002 ||
-		item->getActionId() == 65003
-	);
+	const bool endlessRune = item && EasyMode::isEndlessRune(*item);
 
 	if (hasCharges && item && !endlessRune &&
 		g_config.getBoolean(ConfigManager::REMOVE_RUNE_CHARGES)) {

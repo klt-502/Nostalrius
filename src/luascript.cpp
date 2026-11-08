@@ -29,6 +29,7 @@
 #include "spells.h"
 #include "iologindata.h"
 #include "configmanager.h"
+#include "easymode.h"
 #include "teleport.h"
 #include "databasemanager.h"
 #include "bed.h"
@@ -1547,6 +1548,12 @@ void LuaScriptInterface::registerFunctions()
 	registerEnumIn("configKeys", ConfigManager::ALLOW_CHANGEOUTFIT)
 	registerEnumIn("configKeys", ConfigManager::ONE_PLAYER_ON_ACCOUNT)
 	registerEnumIn("configKeys", ConfigManager::REMOVE_RUNE_CHARGES)
+	registerEnumIn("configKeys", ConfigManager::EASY_MODE_ENABLED)
+	registerEnumIn("configKeys", ConfigManager::EASY_MODE_ENDLESS_RUNES)
+	registerEnumIn("configKeys", ConfigManager::EASY_MODE_ENDLESS_MANA_FLUID)
+	registerEnumIn("configKeys", ConfigManager::EASY_MODE_COMMANDS)
+	registerEnumIn("configKeys", ConfigManager::EASY_MODE_AUTO_TARGET)
+	registerEnumIn("configKeys", ConfigManager::EASY_MODE_AUTO_GOLD)
 	registerEnumIn("configKeys", ConfigManager::EXPERIENCE_FROM_PLAYERS)
 	registerEnumIn("configKeys", ConfigManager::FREE_PREMIUM)
 	registerEnumIn("configKeys", ConfigManager::REPLACE_KICK_ON_LOGIN)
@@ -1752,6 +1759,7 @@ void LuaScriptInterface::registerFunctions()
 	registerMethod("Item", "getMovementId", LuaScriptInterface::luaItemGetMovementId);
 	registerMethod("Item", "setMovementId", LuaScriptInterface::luaItemSetMovementId);
 	registerMethod("Item", "getActionId", LuaScriptInterface::luaItemGetActionId);
+	registerMethod("Item", "isEndlessManaFluid", LuaScriptInterface::luaItemIsEndlessManaFluid);
 	registerMethod("Item", "setActionId", LuaScriptInterface::luaItemSetActionId);
 	registerMethod("Item", "getUniqueId", LuaScriptInterface::luaItemGetUniqueId);
 
@@ -5400,6 +5408,13 @@ int LuaScriptInterface::luaItemGetMovementId(lua_State* L)
 	} else {
 		lua_pushnil(L);
 	}
+	return 1;
+}
+
+int LuaScriptInterface::luaItemIsEndlessManaFluid(lua_State* L)
+{
+	const Item* item = getUserdata<const Item>(L, 1);
+	pushBoolean(L, item && EasyMode::isEndlessManaFluid(*item));
 	return 1;
 }
 

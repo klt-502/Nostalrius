@@ -66,9 +66,7 @@ function onUse(player, item, fromPosition, target, toPosition)
 			else
 				target:say("Gulp.", TALKTYPE_MONSTER_SAY)
 			end
-			local endlessManaFluid =
-				item:getActionId() == 65004 and
-				item:getFluidType() == FLUID_MANAFLUID
+			local endlessManaFluid = item:isEndlessManaFluid()
 
 			if not endlessManaFluid then
 				item:transform(item:getId(), FLUID_NONE)

@@ -1,4 +1,13 @@
 -- Combat settings
+-- Zedas Easy Mode (startup-only; all features disabled by default).
+-- See docs/EASY_MODE.md. The master switch and individual feature must both be true.
+easyModeEnabled = false
+easyModeEndlessRunes = false
+easyModeEndlessManaFluid = false
+easyModeCommands = false
+easyModeAutoTarget = false
+easyModeAutoGold = false
+
 -- NOTE: valid values for worldType are: "pvp", "no-pvp" and "pvp-enforced"
 worldType = "pvp"
 protectionLevel = 1
