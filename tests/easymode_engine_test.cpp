@@ -164,6 +164,15 @@ int main(int argc, char** argv)
 	require(healer->hasCondition(CONDITION_EXHAUST), "real rune exhaustion applied");
 	require(!EasyMode::useConsumable(*healer, "uh") && healer->getHealth() == health, "action clock blocks repetition");
 	require(!g_spells->getRuneSpell(3160)->executeUse(healer, uh, healer->getPosition(), healer, healer->getPosition()), "ordinary route shares exhaustion");
+	Player* drinker = makePlayer(102, 100);
+	drinker->setVarStats(STAT_MAXMANAPOINTS, 500);
+	Item* vial = carry(*drinker, 2874, 65004, 11);
+	require(!EasyMode::useConsumable(*drinker, "mana"), "wrong fluid subtype rejected");
+	g_game.transformItem(vial, 2874, 10);
+	g_game.playerSay(drinker->getID(), 0, TALKTYPE_SAY, "", "!mana");
+	require(drinker->getMana() >= 50 && drinker->getMana() <= 100 && vial->getFluidType() == 10, "real mana restoration and retained subtype");
+	const uint32_t mana = drinker->getMana();
+	require(!EasyMode::useConsumable(*drinker, "mana") && drinker->getMana() == mana, "mana shares item action clock");
 	std::cout << "Native engine scenario passed: " << scenario << std::endl;
 	return 0;
 }

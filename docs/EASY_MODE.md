@@ -53,6 +53,13 @@ without queuing. Offensive bridge requests require a living visible same-floor
 monster and normal combat permission; player-controlled summons are excluded.
 No separate spell formulas, areas, cooldowns or rune scripts are introduced.
 
+`!mana` uses 2874/65004/subtype 10 on self through the existing fluid action,
+restoring the historical random 50–100 mana and sharing normal item timing.
+Native tests cover wrong fluid subtype, real mana gain, persistence and repeated
+requests. Client check: `/i 2874,10,65004`, drain mana, use `!mana`, then alternate
+with an ordinary mana vial; verify timing, retained marked fluid and ordinary
+empty-vial behavior. Rune exhaustion is not newly imposed on historical fluids.
+
 Client checks: mark a nested UH with `/i 3160,1,65001`; damage yourself and use
 `!uh`; confirm healing, retained charge, paralysis removal and normal exhaustion.
 Test missing/wrong items, low magic level, trading the containing bag, and
