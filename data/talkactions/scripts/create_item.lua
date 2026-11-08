@@ -7,7 +7,15 @@ function onSay(player, words, param)
 		return false
 	end
 
-	local split = param:split(",")
+	-- The shared string.split drops empty fields, which would shift arguments.
+	local split = {}
+	for field in (param .. ","):gmatch("(.-),") do
+		split[#split + 1] = field
+	end
+	if #split > 3 then
+		player:sendCancelMessage("Use /i item,count,actionId.")
+		return false
+	end
 	-- Validate before addItem: malformed/fractional IDs must never create anything.
 	local actionId
 	if split[3] ~= nil then

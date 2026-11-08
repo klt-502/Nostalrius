@@ -50,6 +50,13 @@ for _, valid in ipairs({1, 65001, 65535}) do
     assert(created == 1 and assigned == valid)
 end
 created, assigned = 0, nil
+onSay(player, "/i", "3160,,65001.5")
+assert(created == 0 and assigned == nil)
+onSay(player, "/i", "3160,1,65001,extra")
+assert(created == 0 and assigned == nil)
+onSay(player, "/i", "3160,,65001")
+assert(created == 1 and assigned == 65001)
+created, assigned = 0, nil
 onSay(player, "/i", "3160,1")
 assert(created == 1 and assigned == nil)
 key = true

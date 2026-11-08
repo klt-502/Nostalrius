@@ -45,6 +45,7 @@ endlessness applies to drinking; ordinary pouring/filling behavior remains.
 `/i item,count,actionId` validates the optional Action ID before creating items.
 Only integers 1–65535 are accepted. Malformed, fractional and out-of-range input
 creates nothing. The two-argument form and key-number argument keep their meaning.
+Empty comma fields retain their positions; additional arguments are rejected.
 `create_item_validation` exercises the real Lua script with a recording item factory.
 
 See [BUILD.md](BUILD.md) for compile/CTest commands. The consumable registry test
