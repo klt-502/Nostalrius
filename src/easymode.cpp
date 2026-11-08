@@ -101,7 +101,7 @@ bool EasyMode::useConsumable(Player& player, const std::string& command)
 	if (kind == Consumable::Explosion || kind == Consumable::GreatFireball) {
 		target = player.getAttackedCreature();
 		if (!target || !target->getMonster() || target->isRemoved() || target->getHealth() <= 0 ||
-		    (target->getMaster() && target->getMaster()->getPlayer()) ||
+		    isPlayerControlled(*target) ||
 		    target->getPosition().z != player.getPosition().z ||
 		    !player.canSee(target->getPosition()) || !player.canSeeCreature(target)) {
 			player.sendCancelMessage("Select a living, visible monster first.");
@@ -120,4 +120,13 @@ bool EasyMode::useConsumable(Player& player, const std::string& command)
 	}
 	// Items are already verified as carried; no client container window is needed.
 	return g_actions->useItemEx(&player, Position(0xFFFF, 0, 0), target->getPosition(), 0, item, target);
+}
+
+bool EasyMode::isPlayerControlled(const Creature& creature)
+{
+	const Creature* master = creature.getMaster();
+	for (unsigned depth = 0; master && depth < 32; ++depth, master = master->getMaster()) {
+		if (master->getPlayer()) return true;
+	}
+	return master != nullptr; // Exclude malformed/cyclic master chains as well.
 }

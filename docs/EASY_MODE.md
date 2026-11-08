@@ -82,6 +82,35 @@ Test missing/wrong items, low magic level, trading the containing bag, and
 alternating the command with ordinary mouse use. Verify text-hotkey behavior
 and movement stopping in the unchanged 7.72 client.
 
+## Auto-target
+
+Requires `easyModeEnabled` and `easyModeAutoTarget`. It starts OFF each login.
+Use `!autotarget on` to start/resume, `!autotarget off` to stop, and
+`!autotarget status` to inspect. Manual attack selection always takes priority;
+manual cancel/Escape and manual follow suspend automation until explicit resume.
+Turning automation off only clears its own automatic target, not a manual target.
+
+Each normal player think selects a living visible same-floor attackable hostile
+monster in the 7-by-5 viewport only when no target exists. Player-controlled
+summons (including master chains), players and NPCs are excluded. Highest current
+absolute HP wins; ties use creature ID. Existing targets are retained when a
+stronger monster appears. Automatic invalid/dead/disappeared targets are released;
+unreachability must last 3000 ms (`AUTO_TARGET_UNREACHABLE_MS`) before release.
+Reachability uses normal weapon sight/range or the existing bounded pathfinder.
+Attack speed, chase mode, combat permission and exhaustion remain unchanged.
+State/IDs/timers are session-only and never saved. Auto-target does not cast runes.
+Disconnect also suspends automation and releases its automatic target. Native
+tests exercise real protocol visibility, current-HP ranking, ineligible hostiles,
+invisibility, summons, target retention, manual override/Escape/resume/follow,
+death and a blocked route immediately before/at the three-second deadline.
+
+Client checklist: enable/resume, observe attack/chase and target indicators;
+introduce stronger and wounded monsters; manually select another target; press
+Escape and verify no reacquisition; resume; block a route for over three seconds;
+try stairs, protected tiles, invisibility, summons and logout/relogin. Server
+target selection does not promise that an unchanged client's red target indicator
+or battle-list selection mirrors it; validate those visuals in Tibia 7.72.
+
 ## Automated verification
 
 Native CTest scenarios link the same engine library as the server and load real

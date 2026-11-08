@@ -1975,6 +1975,8 @@ void LuaScriptInterface::registerFunctions()
 
 	registerMethod("Player", "getMoney", LuaScriptInterface::luaPlayerGetMoney);
 	registerMethod("Player", "useEasyModeItem", LuaScriptInterface::luaPlayerUseEasyModeItem);
+	registerMethod("Player", "setEasyModeAutoTarget", LuaScriptInterface::luaPlayerSetEasyModeAutoTarget);
+	registerMethod("Player", "isEasyModeAutoTargetActive", LuaScriptInterface::luaPlayerIsEasyModeAutoTargetActive);
 	registerMethod("Player", "addMoney", LuaScriptInterface::luaPlayerAddMoney);
 	registerMethod("Player", "removeMoney", LuaScriptInterface::luaPlayerRemoveMoney);
 
@@ -7940,6 +7942,20 @@ int LuaScriptInterface::luaPlayerUseEasyModeItem(lua_State* L)
 {
 	Player* player = getUserdata<Player>(L, 1);
 	pushBoolean(L, player && EasyMode::useConsumable(*player, getString(L, 2)));
+	return 1;
+}
+
+int LuaScriptInterface::luaPlayerSetEasyModeAutoTarget(lua_State* L)
+{
+	Player* player = getUserdata<Player>(L, 1);
+	pushBoolean(L, player && EasyMode::setAutoTarget(*player, getBoolean(L, 2)));
+	return 1;
+}
+
+int LuaScriptInterface::luaPlayerIsEasyModeAutoTargetActive(lua_State* L)
+{
+	const Player* player = getUserdata<const Player>(L, 1);
+	pushBoolean(L, player && player->getEasyModeAutoTargetState().active);
 	return 1;
 }
 

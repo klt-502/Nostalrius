@@ -2739,6 +2739,7 @@ void Game::playerSetAttackedCreature(uint32_t playerId, uint32_t creatureId)
 	if (!player) {
 		return;
 	}
+	player->getEasyModeAutoTargetState().manualInput(creatureId == 0);
 
 	if (player->getAttackedCreature() && creatureId == 0) {
 		player->setAttackedCreature(nullptr);
@@ -2771,6 +2772,7 @@ void Game::playerFollowCreature(uint32_t playerId, uint32_t creatureId)
 	if (!player) {
 		return;
 	}
+	player->getEasyModeAutoTargetState().manualInput(true);
 
 	player->setAttackedCreature(nullptr);
 	g_dispatcher.addTask(createTask(std::bind(&Game::updateCreatureWalk, this, player->getID())));

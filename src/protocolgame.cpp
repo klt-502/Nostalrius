@@ -44,6 +44,7 @@ void ProtocolGame::release()
 {
 	//dispatcher thread
 	if (player && player->client == shared_from_this()) {
+		if (player->getEasyModeAutoTargetState().active) EasyMode::setAutoTarget(*player, false);
 		player->client.reset();
 		player->decrementReferenceCounter();
 		player = nullptr;

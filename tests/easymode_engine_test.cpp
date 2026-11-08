@@ -57,6 +57,7 @@ static Player* makePlayer(int x = 100, int y = 100)
 	player->setGroup(&ordinaryGroup);
 	require(player->setVocation(0), "set test vocation");
 	require(g_game.internalPlaceCreature(player, Position(x, y, 7)), "place test player");
+	g_game.map.clearSpectatorCache();
 	return player;
 }
 
@@ -71,6 +72,7 @@ static Monster* makeMonster(int health, int x, int y, bool hostile = true, bool 
 	type->info.isAttackable = attackable;
 	Monster* monster = new Monster(type);
 	require(g_game.internalPlaceCreature(monster, Position(x, y, 7)), "place test monster");
+	g_game.map.clearSpectatorCache();
 	return monster;
 }
 
@@ -234,6 +236,50 @@ int main(int argc, char** argv)
 	fireCaster->getTile()->setFlag(TILESTATE_PROTECTIONZONE);
 	require(!EasyMode::useConsumable(*fireCaster, "gfb"), "protection zone preserved");
 	fireCaster->getTile()->resetFlag(TILESTATE_PROTECTIONZONE);
+	Player* hunter = makePlayer(90, 94);
+	Monster* wounded = makeMonster(1000, 94, 94);
+	wounded->changeHealth(-850);
+	Monster* healthy = makeMonster(400, 93, 94);
+	makeMonster(5000, 92, 93, false);
+	makeMonster(6000, 95, 94, true, false);
+	Monster* summon = makeMonster(7000, 96, 94);
+	hunter->addSummon(summon);
+	Monster* invisible = makeMonster(8000, 97, 94);
+	invisible->addCondition(Condition::createCondition(CONDITIONID_DEFAULT, CONDITION_INVISIBLE, 100000));
+	makePlayer(91, 94);
+	EasyMode::updateAutoTarget(*hunter, 1000);
+	require(!hunter->getAttackedCreature(), "auto-target starts inactive");
+	g_game.playerSay(hunter->getID(), 0, TALKTYPE_SAY, "", "!autotarget on");
+	EasyMode::updateAutoTarget(*hunter, 1000);
+	require(hunter->getAttackedCreature() == healthy, "highest CURRENT HP eligible hostile selected");
+	Monster* stronger = makeMonster(900, 96, 95);
+	EasyMode::updateAutoTarget(*hunter, 2000);
+	require(hunter->getAttackedCreature() == healthy, "stronger newcomer does not steal target");
+	g_game.playerSetAttackedCreature(hunter->getID(), wounded->getID());
+	EasyMode::updateAutoTarget(*hunter, 2000);
+	require(hunter->getAttackedCreature() == wounded, "manual target overrides automation");
+	g_game.playerCancelAttackAndFollow(hunter->getID());
+	EasyMode::updateAutoTarget(*hunter, 3000);
+	require(!hunter->getAttackedCreature() && !hunter->getEasyModeAutoTargetState().active, "Escape suspends reacquisition");
+	require(EasyMode::setAutoTarget(*hunter, true), "explicit resume");
+	EasyMode::updateAutoTarget(*hunter, 4000);
+	require(hunter->getAttackedCreature() == stronger, "resume acquires highest living target");
+	stronger->changeHealth(-stronger->getHealth());
+	EasyMode::updateAutoTarget(*hunter, 4000);
+	require(hunter->getAttackedCreature() == healthy, "dead automatic target released");
+	for (int dx = -1; dx <= 1; ++dx) {
+		for (int dy = -1; dy <= 1; ++dy) {
+			if (dx == 0 && dy == 0) continue;
+			require(g_game.internalAddItem(g_game.map.getTile(93 + dx, 94 + dy, 7), Item::CreateItem(wallId), INDEX_WHEREEVER, FLAG_NOLIMIT) == RETURNVALUE_NOERROR, "enclose target");
+		}
+	}
+	EasyMode::updateAutoTarget(*hunter, 5000);
+	EasyMode::updateAutoTarget(*hunter, 7999);
+	require(hunter->getAttackedCreature() == healthy, "transient unreachability retains target");
+	EasyMode::updateAutoTarget(*hunter, 8000);
+	require(hunter->getAttackedCreature() != healthy, "bounded unreachable target released");
+	g_game.playerFollowCreature(hunter->getID(), healer->getID());
+	require(!hunter->getEasyModeAutoTargetState().active, "manual follow suspends automation");
 	std::cout << "Native engine scenario passed: " << scenario << std::endl;
 	return 0;
 }

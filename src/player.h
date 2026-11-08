@@ -32,6 +32,7 @@
 #include "guild.h"
 #include "groups.h"
 #include "town.h"
+#include "easymode.h"
 
 class BehaviourDatabase;
 class House;
@@ -97,6 +98,8 @@ class Player final : public Creature, public Cylinder
 {
 	public:
 		explicit Player(ProtocolGame_ptr p);
+		EasyMode::AutoTargetState& getEasyModeAutoTargetState() { return easyModeAutoTarget; }
+		const EasyMode::AutoTargetState& getEasyModeAutoTargetState() const { return easyModeAutoTarget; }
 		~Player();
 
 		// non-copyable
@@ -989,6 +992,7 @@ class Player final : public Creature, public Cylinder
 		Guild* guild = nullptr;
 		const GuildRank* guildRank = nullptr;
 		Group* group = nullptr;
+		EasyMode::AutoTargetState easyModeAutoTarget; // Session-only; deliberately never serialized.
 		Item* tradeItem = nullptr;
  		Item* inventory[CONST_SLOT_LAST + 1] = {};
 		Item* writeItem = nullptr;
