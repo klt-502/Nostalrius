@@ -37,6 +37,12 @@ fresh configurations, the default, ON → OFF → ON in one build directory,
 legacy mixed cache entries, and rejection of mismatched LuaJIT headers/libraries.
 The probe never starts the server or opens a database connection.
 
+The native `engine_defaults` regression also loads a sparse configuration.
+Configuration getters must consume the Lua value they push on every path,
+including fallback values for missing or wrongly typed settings. Leaving those
+values on the stack exhausted standard Lua 5.2's reserved stack slots and caused
+a crash; both backend jobs now exercise the corrected, balanced getters.
+
 Compilation links the database client library but does not connect to a database
 or launch the server. Compilation and automated tests do not replace testing
 target indicators, movement, item updates, or command bindings in Tibia 7.72.

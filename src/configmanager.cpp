@@ -198,6 +198,7 @@ std::string ConfigManager::getGlobalString(lua_State* L, const char* identifier,
 {
 	lua_getglobal(L, identifier);
 	if (!lua_isstring(L, -1)) {
+		lua_pop(L, 1);
 		return defaultValue;
 	}
 
@@ -211,6 +212,7 @@ int32_t ConfigManager::getGlobalNumber(lua_State* L, const char* identifier, con
 {
 	lua_getglobal(L, identifier);
 	if (!lua_isnumber(L, -1)) {
+		lua_pop(L, 1);
 		return defaultValue;
 	}
 
@@ -224,6 +226,7 @@ bool ConfigManager::getGlobalBoolean(lua_State* L, const char* identifier, const
 	lua_getglobal(L, identifier);
 	if (!lua_isboolean(L, -1)) {
 		if (!lua_isstring(L, -1)) {
+			lua_pop(L, 1);
 			return defaultValue;
 		}
 
