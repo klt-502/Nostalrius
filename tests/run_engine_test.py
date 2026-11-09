@@ -48,4 +48,13 @@ with tempfile.TemporaryDirectory(prefix="zedas-engine-") as directory:
         if scenario == scenario_name:
             config = config.replace(key + " = true", key + " = false")
     (root / "config.lua").write_text(config)
+    if scenario == "invalid_config":
+        # Exercise each startup setting independently, including newly reserved flags.
+        valid = config.replace('"invalid"', 'false')
+        for key in ("easyModeEnabled", "easyModeEndlessRunes", "easyModeEndlessManaFluid",
+                    "easyModeCommands", "easyModeAutoTarget", "easyModeAutoGold",
+                    "easyModeLootSpill", "easyModeGoldBag", "easyModeRespawn"):
+            (root / "config.lua").write_text(valid + f'\n{key} = "invalid"\n')
+            subprocess.run([binary, scenario], cwd=root, check=True)
+        (root / "config.lua").write_text(valid + '\neasyModeRespawnPolicyFile = 123\n')
     subprocess.run([binary, scenario], cwd=root, check=True)

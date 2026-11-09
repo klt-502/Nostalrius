@@ -7,6 +7,11 @@ easyModeEndlessManaFluid = false
 easyModeCommands = false
 easyModeAutoTarget = false
 easyModeAutoGold = false
+easyModeLootSpill = false
+easyModeGoldBag = false
+-- No world spawns change without an exact reviewed manifest entry.
+easyModeRespawn = false
+easyModeRespawnPolicyFile = "data/zedas/spawns.xml"
 
 -- NOTE: valid values for worldType are: "pvp", "no-pvp" and "pvp-enforced"
 worldType = "pvp"

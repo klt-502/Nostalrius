@@ -48,11 +48,15 @@ bool ConfigManager::load()
 	if (!loaded) { //info that must be loaded one time (unless we reset the modules involved)
 		// Easy Mode is startup-only. Validate all values before changing configuration.
 		const char* easyNames[] = {"easyModeEnabled", "easyModeEndlessRunes", "easyModeEndlessManaFluid",
-		                          "easyModeCommands", "easyModeAutoTarget", "easyModeAutoGold"};
+		                          "easyModeCommands", "easyModeAutoTarget", "easyModeAutoGold",
+		                          "easyModeLootSpill", "easyModeGoldBag", "easyModeRespawn"};
 		const boolean_config_t easyKeys[] = {EASY_MODE_ENABLED, EASY_MODE_ENDLESS_RUNES, EASY_MODE_ENDLESS_MANA_FLUID,
-		                                   EASY_MODE_COMMANDS, EASY_MODE_AUTO_TARGET, EASY_MODE_AUTO_GOLD};
-		bool easyValues[6] = {};
-		for (size_t i = 0; i < 6; ++i) {
+		                                   EASY_MODE_COMMANDS, EASY_MODE_AUTO_TARGET, EASY_MODE_AUTO_GOLD,
+		                                   EASY_MODE_LOOT_SPILL, EASY_MODE_GOLD_BAG, EASY_MODE_RESPAWN};
+		constexpr size_t easyCount = sizeof(easyKeys) / sizeof(easyKeys[0]);
+		static_assert(easyCount == sizeof(easyNames) / sizeof(easyNames[0]), "Easy Mode configuration registry mismatch");
+		bool easyValues[easyCount] = {};
+		for (size_t i = 0; i < easyCount; ++i) {
 			lua_getglobal(L, easyNames[i]);
 			if (!lua_isnil(L, -1) && !lua_isboolean(L, -1)) {
 				std::cout << "[Error - ConfigManager::load] " << easyNames[i] << " must be true or false." << std::endl;
@@ -62,9 +66,18 @@ bool ConfigManager::load()
 			easyValues[i] = lua_toboolean(L, -1) != 0;
 			lua_pop(L, 1);
 		}
-		for (size_t i = 0; i < 6; ++i) {
+		lua_getglobal(L, "easyModeRespawnPolicyFile");
+		if (!lua_isnil(L, -1) && lua_type(L, -1) != LUA_TSTRING) {
+			std::cout << "[Error - ConfigManager::load] easyModeRespawnPolicyFile must be a string." << std::endl;
+			lua_close(L);
+			return false;
+		}
+		const std::string respawnPolicy = lua_isnil(L, -1) ? "data/zedas/spawns.xml" : lua_tostring(L, -1);
+		lua_pop(L, 1);
+		for (size_t i = 0; i < easyCount; ++i) {
 			boolean[easyKeys[i]] = easyValues[i];
 		}
+		string[EASY_MODE_RESPAWN_POLICY_FILE] = respawnPolicy;
 
 		boolean[BIND_ONLY_GLOBAL_ADDRESS] = getGlobalBoolean(L, "bindOnlyGlobalAddress", false);
 		boolean[OPTIMIZE_DATABASE] = getGlobalBoolean(L, "startupDatabaseOptimization", true);

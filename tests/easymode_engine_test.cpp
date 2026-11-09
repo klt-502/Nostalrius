@@ -18,6 +18,7 @@
 #include "tools.h"
 #include "vocation.h"
 #include <cstdlib>
+#include <fstream>
 
 LuaEnvironment g_luaEnvironment;
 DatabaseTasks g_databaseTasks;
@@ -159,6 +160,19 @@ int main(int argc, char** argv)
 		return 0;
 	}
 	require(loaded, "load test configuration");
+	if (scenario == "defaults") {
+		const ConfigManager::boolean_config_t wave2[] = {ConfigManager::EASY_MODE_LOOT_SPILL,
+			ConfigManager::EASY_MODE_GOLD_BAG, ConfigManager::EASY_MODE_RESPAWN};
+		for (auto key : wave2) require(!g_config.getBoolean(key), "Wave 2 flags default disabled");
+		require(g_config.getString(ConfigManager::EASY_MODE_RESPAWN_POLICY_FILE) == "data/zedas/spawns.xml", "default manifest path");
+		std::ofstream config("config.lua", std::ios::app);
+		config << "\neasyModeLootSpill = true\neasyModeGoldBag = true\neasyModeRespawn = true\n"
+		          "easyModeRespawnPolicyFile = 'changed.xml'\n";
+		config.close();
+		require(g_config.load(), "reload valid config without changing startup state");
+		for (auto key : wave2) require(!g_config.getBoolean(key), "Wave 2 flags remain startup only");
+		require(g_config.getString(ConfigManager::EASY_MODE_RESPAWN_POLICY_FILE) == "data/zedas/spawns.xml", "manifest path remains startup only");
+	}
 	setup();
 	const bool enabled = scenario != "disabled" && scenario != "feature_disabled" && scenario != "defaults";
 	for (const auto& definition : EasyMode::CONSUMABLES) {

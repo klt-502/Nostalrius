@@ -1,13 +1,14 @@
-# Zedas Easy Mode — Wave 1
+# Zedas Easy Mode
 
 Work branch: `zedas-easy-mode`. Preserved checkpoint:
 `v0.5-endless-consumables` (`409f173caa7d4279af8a84ee944f78ce06cd7a85`).
 Keep the Classic checkout, configuration, database and binary separate.
-Wave 1 does not change spawns, NPC sales, XP, skills, monster statistics or drop rates.
+The accepted Wave 1 checkpoint is `v0.6-easy-mode-wave1` (`ed3c7c6`).
+Easy Mode does not change NPC sales, XP, skills, monster statistics or drop rates.
 
 ## Configuration
 
-All six options are boolean, default to `false`, and require a server restart.
+All boolean options default to `false` and require a server restart.
 `/reload config` does not change them. Missing options are false; nonboolean
 values are rejected on startup. Both master and feature switches must be true.
 
@@ -19,6 +20,16 @@ values are rejected on startup. Both master and feature switches must be true.
 | `easyModeCommands` | Checked consumable commands, as implemented below |
 | `easyModeAutoTarget` | Session-only automatic targeting, as implemented below |
 | `easyModeAutoGold` | Nearby generated-corpse currency collection, as implemented below |
+| `easyModeLootSpill` | Conservatively expose generated ordinary corpse loot on its tile |
+| `easyModeGoldBag` | Prefer an exact marked carried Gold Bag for auto-gold |
+| `easyModeRespawn` | Permit only explicitly classified ordinary spawn slots to use adjusted deadlines |
+
+`easyModeRespawnPolicyFile` is a startup-only string, default
+`"data/zedas/spawns.xml"`. The production manifest is empty; merely enabling the
+respawn switch does not accelerate the map. Unknown slots retain Classic behavior.
+Non-string paths are rejected. Wave 2 adds these switches centrally before the
+individual feature commits; enabling a switch has no effect until its feature is
+present. All remain gated by `easyModeEnabled`.
 
 To preserve the v0.5 endless functionality in an Easy deployment, explicitly
 enable the master and both endless-consumable flags. The generic example keeps

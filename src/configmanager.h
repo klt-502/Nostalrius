@@ -47,6 +47,9 @@ class ConfigManager
 			EASY_MODE_COMMANDS,
 			EASY_MODE_AUTO_TARGET,
 			EASY_MODE_AUTO_GOLD,
+			EASY_MODE_LOOT_SPILL,
+			EASY_MODE_GOLD_BAG,
+			EASY_MODE_RESPAWN,
 
 			LAST_BOOLEAN_CONFIG /* this must be the last one */
 		};
@@ -70,6 +73,7 @@ class ConfigManager
 			MYSQL_SOCK,
 			DEFAULT_PRIORITY,
 			MAP_AUTHOR,
+			EASY_MODE_RESPAWN_POLICY_FILE,
 
 			LAST_STRING_CONFIG /* this must be the last one */
 		};
