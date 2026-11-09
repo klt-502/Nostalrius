@@ -15,6 +15,13 @@ static constexpr int64_t AUTO_TARGET_UNREACHABLE_MS = 3000;
 static constexpr int GOLD_PICKUP_RADIUS_TILES = 5;
 static constexpr size_t MAX_REGISTERED_CORPSES = 1024;
 static constexpr int64_t CORPSE_REGISTRY_TTL_MS = 300000;
+static constexpr uint16_t GOLD_BAG_ITEM_ID = 2856; // Existing 7.72 present, five slots.
+static constexpr uint16_t GOLD_BAG_ACTION_ID = 65005;
+
+inline bool recognizeGoldBag(uint16_t itemId, uint16_t actionId)
+{
+	return itemId == GOLD_BAG_ITEM_ID && actionId == GOLD_BAG_ACTION_ID;
+}
 
 struct AutoTargetState {
 	bool active = false;

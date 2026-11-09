@@ -49,7 +49,7 @@ if(BUILD_TESTING)
     add_executable(easymode_engine_test tests/easymode_engine_test.cpp)
     target_include_directories(easymode_engine_test PRIVATE src)
     target_link_libraries(easymode_engine_test tfs_engine)
-    foreach(scenario enabled disabled feature_disabled invalid_config defaults commands_disabled target_disabled gold_disabled)
+    foreach(scenario enabled disabled feature_disabled invalid_config defaults commands_disabled target_disabled gold_disabled bag_enabled)
         add_test(NAME engine_${scenario} COMMAND ${PYTHON_EXECUTABLE}
             ${CMAKE_SOURCE_DIR}/tests/run_engine_test.py
             $<TARGET_FILE:easymode_engine_test> ${CMAKE_SOURCE_DIR} ${scenario})

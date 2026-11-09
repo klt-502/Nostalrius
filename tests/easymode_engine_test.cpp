@@ -118,6 +118,8 @@ static uint64_t contentsValue(Container& container)
 	return value;
 }
 
+#include "gold_bag_cases.h"
+
 static void setup()
 {
 	g_actions = new Actions();
@@ -174,6 +176,10 @@ int main(int argc, char** argv)
 		require(g_config.getString(ConfigManager::EASY_MODE_RESPAWN_POLICY_FILE) == "data/zedas/spawns.xml", "manifest path remains startup only");
 	}
 	setup();
+	if (scenario == "bag_enabled") {
+		testGoldBag();
+		return 0;
+	}
 	const bool enabled = scenario != "disabled" && scenario != "feature_disabled" && scenario != "defaults";
 	for (const auto& definition : EasyMode::CONSUMABLES) {
 		Item* item = Item::CreateItem(definition.itemId, definition.subtype ? definition.subtype : 2);

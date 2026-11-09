@@ -42,6 +42,8 @@ with tempfile.TemporaryDirectory(prefix="zedas-engine-") as directory:
         'autoStackCumulatives = false\nqueryPlayerContainers = false\n')
     if scenario == "defaults":
         config = 'removeChargesFromRunes = true\ntimeBetweenExActions = 25\n'
+    if scenario == "bag_enabled":
+        config += 'easyModeGoldBag = true\n'
     for scenario_name, key in (("commands_disabled", "easyModeCommands"),
                                ("target_disabled", "easyModeAutoTarget"),
                                ("gold_disabled", "easyModeAutoGold")):

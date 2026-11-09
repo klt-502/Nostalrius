@@ -13,6 +13,10 @@ static void require(bool condition)
 int main()
 {
 	using namespace EasyMode;
+	require(recognizeGoldBag(2856, 65005));
+	require(!recognizeGoldBag(2853, 65005));
+	require(!recognizeGoldBag(2856, 65004));
+	require(!recognizeGoldBag(2856, 0));
 	for (const auto& expected : CONSUMABLES) {
 		require(recognizeConsumable(expected.itemId, expected.actionId, expected.subtype) == expected.kind);
 		require(recognizeConsumable(expected.itemId, 0, expected.subtype) == Consumable::None);

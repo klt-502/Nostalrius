@@ -86,6 +86,33 @@ uint32_t moveCurrency(Player& player, Item& coin, Cylinder& destination, int32_t
 uint32_t transfer(Player& player, Item& coin)
 {
 	const std::vector<Item*> carried = EasyMode::getCarriedItems(player);
+	if (g_config.getBoolean(ConfigManager::EASY_MODE_GOLD_BAG)) {
+		Container* goldBag = nullptr;
+		for (Item* item : carried) {
+			if (EasyMode::recognizeGoldBag(item->getID(), item->getActionId()) && item->getContainer()) {
+				goldBag = item->getContainer();
+				break; // Stable carried breadth-first order; no persistent selection.
+			}
+		}
+		if (goldBag) {
+			for (Item* destination : carried) {
+				if (inside(*destination, *goldBag) && ordinaryCurrency(*destination) && destination->equals(&coin) && destination->getItemCount() < 100) {
+					uint32_t moved = moveCurrency(player, coin, *destination->getParent(), destination->getParent()->getThingIndex(destination), 100 - destination->getItemCount());
+					if (moved) return moved;
+				}
+			}
+			for (Item* item : carried) {
+				if (item == goldBag || inside(*item, *goldBag)) {
+					if (Container* destination = item->getContainer()) {
+						if (destination->size() < destination->capacity()) {
+							uint32_t moved = moveCurrency(player, coin, *destination, destination->size(), coin.getItemCount());
+							if (moved) return moved;
+						}
+					}
+				}
+			}
+		}
+	}
 	for (Item* destination : carried) {
 		if (ordinaryCurrency(*destination) && destination->equals(&coin) && destination->getItemCount() < 100) {
 			uint32_t moved = moveCurrency(player, coin, *destination->getParent(), destination->getParent()->getThingIndex(destination), 100 - destination->getItemCount());

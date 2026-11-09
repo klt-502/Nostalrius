@@ -46,6 +46,7 @@ normally, subject to existing historical settings such as `removeChargesFromRune
 | 3191 | 65002 | Endless Great Fireball | Existing rune requirements |
 | 3200 | 65003 | Endless Explosion | Existing rune requirements |
 | 2874 | 65004 | Endless Mana Fluid | Mana subtype 10 |
+| 2856 | 65005 | Dedicated Gold Bag | Existing five-slot present container |
 
 Wrong pairings, ordinary items and other fluid containers receive no exemption.
 Existing spell/action scripts still apply effects, costs and exhaustion. Mana
@@ -161,6 +162,28 @@ Client checklist: kill monsters containing coins/nested loot; verify stack updat
 normal noncurrency loot, and value conservation. Fill bags and capacity, collect
 part of a stack, free space and retry. Race another collector/manual looting, move
 or decay a corpse, test walls/floors, relog after saving, and repeat with flags off.
+
+### Gold Bag
+
+With `easyModeEnabled`, `easyModeAutoGold` and `easyModeGoldBag` enabled, the
+collector first searches for the exact carried **2856 / 65005** container,
+including closed nested bags. Create it as GM using `/i 2856,1,65005`. It keeps
+the historical catalog name, **present**, five slots and six-ounce weight; no
+client ID or appearance is added. See [GOLD_BAG_AUDIT.md](GOLD_BAG_AUDIT.md) for
+the catalog and source/map Action-ID collision evidence.
+
+Existing matching coin stacks inside that bag (and its nested containers) are
+filled first, then its free container slots. If several marked bags are carried,
+the first in the existing breadth-first inventory order wins: equipped slots in
+ascending order, then each container's stored item order. Offered trade items
+and their descendants are excluded. Other bags receive only normal fallback
+priority. No bag, a full bag, insufficient capacity, or an unavailable destination
+falls back to the accepted Wave 1 destinations; undeliverable coins stay in the
+corpse. The marker persists through normal item attribute serialization.
+
+Only existing gold/platinum/crystal coins move. There is no denomination exchange,
+money creation, ledger, bank mutation or global stacking change. With the feature
+disabled, the marked present is simply an ordinary historical container.
 
 ## Automated verification
 
