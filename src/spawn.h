@@ -22,6 +22,7 @@
 
 #include "tile.h"
 #include "position.h"
+#include "easyspawn.h"
 
 class Monster;
 class MonsterType;
@@ -33,6 +34,9 @@ struct spawnBlock_t {
 	int64_t lastSpawn;
 	uint32_t interval;
 	Direction direction;
+	bool easyRespawn = false;
+	EasyMode::RespawnPolicy easyPolicy;
+	EasyMode::RespawnDeadline easyDeadline;
 };
 
 class Spawn
@@ -45,7 +49,8 @@ class Spawn
 		Spawn(const Spawn&) = delete;
 		Spawn& operator=(const Spawn&) = delete;
 
-		bool addMonster(const std::string& name, const Position& pos, Direction dir, uint32_t interval);
+		bool addMonster(const std::string& name, const Position& pos, Direction dir, uint32_t interval,
+		                const EasyMode::RespawnPolicy* easyPolicy = nullptr);
 		void removeMonster(Monster* monster);
 
 		uint32_t getInterval() const;
@@ -58,6 +63,7 @@ class Spawn
 		void cleanup();
 
 	private:
+		friend struct SpawnTestAccess;
 		//map of the spawned creatures
 		typedef std::multimap<uint32_t, Monster*> SpawnedMap;
 		typedef SpawnedMap::value_type spawned_pair;
@@ -71,10 +77,12 @@ class Spawn
 
 		uint32_t interval = 60000;
 		uint32_t checkSpawnEvent = 0;
+		bool hasEasyRespawn = false;
 
 		static bool findPlayer(const Position& pos);
 		bool spawnMonster(uint32_t spawnId, MonsterType* mType, const Position& pos, Direction dir, bool startup = false);
 		void checkSpawn();
+		uint32_t nextSpawnCheck() const;
 };
 
 class Spawns

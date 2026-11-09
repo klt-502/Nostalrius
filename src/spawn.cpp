@@ -49,6 +49,17 @@ bool Spawns::loadFromXml(const std::string& filename)
 	this->filename = filename;
 	loaded = true;
 
+	EasyMode::RespawnManifest easyManifest;
+	if (g_config.getBoolean(ConfigManager::EASY_MODE_ENABLED) && g_config.getBoolean(ConfigManager::EASY_MODE_RESPAWN)) {
+		std::string error;
+		const std::string& policyFile = g_config.getString(ConfigManager::EASY_MODE_RESPAWN_POLICY_FILE);
+		if (!easyManifest.load(policyFile, error)) {
+			std::cout << "[Warning - Spawns::loadFromXml] Easy respawn policy disabled: " << policyFile << ": " << error << std::endl;
+		} else {
+			std::cout << "[Spawns::loadFromXml] Easy respawn policy contains " << easyManifest.size() << " explicitly classified slots." << std::endl;
+		}
+	}
+
 	for (auto spawnNode : doc.child("spawns").children()) {
 		Position centerPos(
 			pugi::cast<uint16_t>(spawnNode.attribute("centerx").value()),
@@ -93,9 +104,11 @@ bool Spawns::loadFromXml(const std::string& filename)
 				if (interval > MINSPAWN_INTERVAL) {
 					uint32_t exInterval = g_config.getNumber(ConfigManager::RATE_SPAWN);
 					if (exInterval) {
-						spawn.addMonster(nameAttribute.as_string(), pos, dir, exInterval * 1000);
+						spawn.addMonster(nameAttribute.as_string(), pos, dir, exInterval * 1000,
+						    easyManifest.find(nameAttribute.as_string(), pos.x, pos.y, pos.z, exInterval * 1000));
 					} else {
-						spawn.addMonster(nameAttribute.as_string(), pos, dir, interval);
+						spawn.addMonster(nameAttribute.as_string(), pos, dir, interval,
+						    easyManifest.find(nameAttribute.as_string(), pos.x, pos.y, pos.z, interval));
 					}
 				} else {
 					std::cout << "[Warning - Spawns::loadFromXml] " << nameAttribute.as_string() << ' ' << pos << " spawntime can not be less than " << MINSPAWN_INTERVAL / 1000 << " seconds." << std::endl;
@@ -171,7 +184,10 @@ bool Spawns::isInZone(const Position& centerPos, int32_t radius, const Position&
 void Spawn::startSpawnCheck()
 {
 	if (checkSpawnEvent == 0) {
-		checkSpawnEvent = g_scheduler.addEvent(createSchedulerTask(getInterval(), std::bind(&Spawn::checkSpawn, this)));
+		// The disappearance callback precedes isRemoved(). Inspect eligible slots
+		// promptly; Classic slots retain exactly their historical first poll.
+		const uint32_t delay = hasEasyRespawn ? std::min(getInterval(), static_cast<uint32_t>(1000)) : getInterval();
+		checkSpawnEvent = g_scheduler.addEvent(createSchedulerTask(delay, std::bind(&Spawn::checkSpawn, this)));
 	}
 }
 
@@ -223,6 +239,7 @@ bool Spawn::spawnMonster(uint32_t spawnId, MonsterType* mType, const Position& p
 
 	spawnedMap.insert(spawned_pair(spawnId, monster));
 	spawnMap[spawnId].lastSpawn = OTSYS_TIME();
+	if (spawnMap[spawnId].easyRespawn) spawnMap[spawnId].easyDeadline.clear();
 	return true;
 }
 
@@ -268,6 +285,20 @@ void Spawn::checkSpawn()
 		}
 
 		spawnBlock_t& sb = it.second;
+		if (sb.easyRespawn) {
+			if (!sb.easyDeadline.isPending()) {
+				sb.easyDeadline.begin(sb.easyPolicy, sb.interval, g_game.getPlayersOnline(), OTSYS_TIME(), normal_random);
+			}
+			if (sb.easyDeadline.isDue(OTSYS_TIME())) {
+				if (findPlayer(sb.pos)) {
+					sb.lastSpawn = OTSYS_TIME();
+					sb.easyDeadline.postpone(sb.lastSpawn);
+				} else {
+					spawnMonster(spawnId, sb.mType, sb.pos, sb.direction);
+				}
+			}
+			continue;
+		}
 		if (OTSYS_TIME() >= sb.lastSpawn + sb.interval) {
 			if (findPlayer(sb.pos)) {
 				sb.lastSpawn = OTSYS_TIME();
@@ -279,8 +310,23 @@ void Spawn::checkSpawn()
 	}
 
 	if (spawnedMap.size() < spawnMap.size()) {
-		checkSpawnEvent = g_scheduler.addEvent(createSchedulerTask(getInterval(), std::bind(&Spawn::checkSpawn, this)));
+		checkSpawnEvent = g_scheduler.addEvent(createSchedulerTask(nextSpawnCheck(), std::bind(&Spawn::checkSpawn, this)));
 	}
+}
+
+uint32_t Spawn::nextSpawnCheck() const
+{
+	// Preserve getInterval's call count and RNG use for every Classic-only Spawn.
+	uint32_t delay = getInterval();
+	if (hasEasyRespawn) {
+		const int64_t now = OTSYS_TIME();
+		for (const auto& it : spawnMap) {
+			if (it.second.easyRespawn && spawnedMap.find(it.first) == spawnedMap.end()) {
+				delay = it.second.easyDeadline.nextCheck(now, delay);
+			}
+		}
+	}
+	return delay;
 }
 
 void Spawn::cleanup()
@@ -291,7 +337,11 @@ void Spawn::cleanup()
 		Monster* monster = it->second;
 		if (monster->isRemoved()) {
 			if (spawnId != 0) {
-				spawnMap[spawnId].lastSpawn = OTSYS_TIME();
+				spawnBlock_t& sb = spawnMap[spawnId];
+				sb.lastSpawn = OTSYS_TIME();
+				if (sb.easyRespawn && !sb.easyDeadline.isPending()) {
+					sb.easyDeadline.begin(sb.easyPolicy, sb.interval, g_game.getPlayersOnline(), sb.lastSpawn, normal_random);
+				}
 			}
 
 			monster->decrementReferenceCounter();
@@ -302,7 +352,8 @@ void Spawn::cleanup()
 	}
 }
 
-bool Spawn::addMonster(const std::string& name, const Position& pos, Direction dir, uint32_t interval)
+bool Spawn::addMonster(const std::string& name, const Position& pos, Direction dir, uint32_t interval,
+                       const EasyMode::RespawnPolicy* easyPolicy)
 {
 	MonsterType* mType = g_monsters.getMonsterType(name);
 	if (!mType) {
@@ -318,6 +369,13 @@ bool Spawn::addMonster(const std::string& name, const Position& pos, Direction d
 	sb.direction = dir;
 	sb.interval = interval;
 	sb.lastSpawn = 0;
+	// No reliable boss/quest flag exists: the manifest must explicitly review each
+	// exact world slot. Non-hostile/non-attackable species are additionally refused.
+	if (easyPolicy && mType->info.isHostile && mType->info.isAttackable) {
+		sb.easyRespawn = true;
+		sb.easyPolicy = *easyPolicy;
+		hasEasyRespawn = true;
+	}
 
 	uint32_t spawnId = spawnMap.size() + 1;
 	spawnMap[spawnId] = sb;
@@ -328,8 +386,15 @@ void Spawn::removeMonster(Monster* monster)
 {
 	for (auto it = spawnedMap.begin(), end = spawnedMap.end(); it != end; ++it) {
 		if (it->second == monster) {
+			const auto block = spawnMap.find(it->first);
 			monster->decrementReferenceCounter();
 			spawnedMap.erase(it);
+			if (hasEasyRespawn && block != spawnMap.end() && block->second.easyRespawn) {
+				spawnBlock_t& sb = block->second;
+				sb.lastSpawn = OTSYS_TIME();
+				sb.easyDeadline.begin(sb.easyPolicy, sb.interval, g_game.getPlayersOnline(), sb.lastSpawn, normal_random);
+				startSpawnCheck();
+			}
 			break;
 		}
 	}

@@ -2,15 +2,19 @@
 
 ## Project Zedas Easy Mode
 
-The `zedas-easy-mode` branch contains Wave 1's opt-in ruleset. All Easy features
-default off. Keep Classic and the `v0.5-endless-consumables` checkpoint separate.
+The `zedas-easy-mode` branch adds optional Wave 2 features to the client-accepted
+Wave 1 ruleset. All Easy features default off. Keep Classic and the preserved
+`v0.5-endless-consumables` / `v0.6-easy-mode-wave1` checkpoints separate.
 
 - [Configuration, reserved Action IDs and behavior](docs/EASY_MODE.md)
 - [Ubuntu 24.04 build and automated tests](docs/BUILD.md)
-- [Local Tibia 7.72 gameplay acceptance checklist](docs/WAVE1_TEST_CHECKLIST.md)
+- [Accepted Wave 1 gameplay regression checklist](docs/WAVE1_TEST_CHECKLIST.md)
+- [Wave 2 local Tibia 7.72 acceptance checklist](docs/WAVE2_TEST_CHECKLIST.md)
+- [Conservative exact-slot respawn policy](docs/EASY_RESPAWN.md)
 
-Client and live-database acceptance remains required before treating Wave 1 as a
-replacement for the known-good deployment. Broker and respawn work is deferred.
+Wave 2 needs original-client and live save/relog acceptance before deployment.
+Respawn infrastructure ships with an empty policy and accelerates no world
+spawns. Broker, auto-sale, pending balances and economy work remain out of scope.
 
 Nostalrius is a 7.7 clone project that has been in development for a long time, it is based on TheForgottenServer 1.2 fork.
 

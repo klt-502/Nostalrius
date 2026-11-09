@@ -45,6 +45,7 @@ static void require(bool condition, const char* message)
 }
 
 static Group ordinaryGroup = {"Test", 0, 0, 0, 1, false};
+void testRespawnEngine(Player& observer);
 
 struct ProtocolGameTestAccess {
 	static void bind(ProtocolGame& protocol, Player& player) { protocol.player = &player; }
@@ -226,6 +227,10 @@ int main(int argc, char** argv)
 		restored->decrementReferenceCounter();
 	}
 	Player* player = makePlayer();
+	if (scenario == "respawn_enabled") {
+		testRespawnEngine(*player);
+		return 0;
+	}
 	if (scenario == "commands_disabled") {
 		player->setVarStats(STAT_MAGICPOINTS, 10);
 		carry(*player, 3160, 65001);

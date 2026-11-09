@@ -196,6 +196,19 @@ normal corpse tree for auto-gold/manual pickup. Unsafe or ten-thing-full tiles
 retain pending loot in the corpse. See [LOOT_SPILL.md](LOOT_SPILL.md) for safety,
 stack limits, lifecycle and persistence details.
 
+## Reviewed respawn infrastructure
+
+`easyModeRespawn` is disabled by default, and the production
+`data/zedas/spawns.xml` manifest contains **zero** eligible slots. The loader
+requires an explicit ordinary classification for an exact monster, absolute
+position/floor and effective base interval. Unclassified slots keep the original
+polling, deadlines and RNG calls; raids never read the policy. Eligible slots
+sample one actual deadline per cycle, preserve nearby-player suppression and
+optionally use the existing population curve only when explicitly requested in
+that slot's policy. No broad map classification or acceleration is shipped.
+See [EASY_RESPAWN.md](EASY_RESPAWN.md) for every policy attribute, timing detail,
+controlled test fixture and local acceptance sequence.
+
 ## Automated verification
 
 Use [WAVE1_TEST_CHECKLIST.md](WAVE1_TEST_CHECKLIST.md) for the full local gameplay

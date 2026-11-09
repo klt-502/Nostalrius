@@ -59,6 +59,8 @@ with tempfile.TemporaryDirectory(prefix="zedas-engine-") as directory:
         config += 'easyModeLootSpill = true\n'
     if scenario == "wave2_disabled":
         config += 'easyModeGoldBag = true\neasyModeRespawn = true\n'
+    if scenario == "respawn_enabled":
+        config += 'easyModeRespawn = true\n'
     if scenario == "spill_only":
         config += 'easyModeAutoGold = false\n'
         shutil.copytree(source / "data/zedas", root / "data/zedas")

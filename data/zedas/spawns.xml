@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Intentionally empty. See docs/EASY_RESPAWN.md before classifying a world slot.
+     Bosses, rare spawns, quest encounters and raids must remain unclassified. -->
+<easyspawns version="1" />

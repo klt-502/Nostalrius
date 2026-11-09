@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Synthetic test coordinates only. Never used as production classification. -->
+<easyspawns version="1">
+    <spawn monster="Rat" x="101" y="102" z="7" classification="ordinary"
+           baseSeconds="60" intervalPercent="50" minSeconds="5" />
+    <spawn monster="Cyclops" x="150" y="151" z="7" classification="ordinary"
+           baseSeconds="600" intervalPercent="100" minSeconds="2" populationFloor="800" />
+</easyspawns>

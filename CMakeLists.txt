@@ -46,11 +46,11 @@ cotire(tfs_engine)
 include(CTest)
 if(BUILD_TESTING)
     find_package(PythonInterp 3 REQUIRED)
-    add_executable(easymode_engine_test tests/easymode_engine_test.cpp)
+    add_executable(easymode_engine_test tests/easymode_engine_test.cpp tests/easyspawn_engine_test.cpp)
     target_include_directories(easymode_engine_test PRIVATE src)
     target_link_libraries(easymode_engine_test tfs_engine)
     foreach(scenario enabled disabled feature_disabled invalid_config defaults commands_disabled target_disabled gold_disabled
-            bag_enabled bag_disabled spill_enabled spill_only spill_invalid_policy spill_missing_policy wave2_disabled)
+            bag_enabled bag_disabled spill_enabled spill_only spill_invalid_policy spill_missing_policy wave2_disabled respawn_enabled)
         add_test(NAME engine_${scenario} COMMAND ${PYTHON_EXECUTABLE}
             ${CMAKE_SOURCE_DIR}/tests/run_engine_test.py
             $<TARGET_FILE:easymode_engine_test> ${CMAKE_SOURCE_DIR} ${scenario})
@@ -58,6 +58,11 @@ if(BUILD_TESTING)
     add_executable(easymode_constants_test tests/easymode_constants_test.cpp)
     target_include_directories(easymode_constants_test PRIVATE src)
     add_test(NAME easymode_constants COMMAND easymode_constants_test)
+    add_executable(easyspawn_test tests/easyspawn_test.cpp src/easyspawn.cpp)
+    target_include_directories(easyspawn_test PRIVATE src)
+    target_link_libraries(easyspawn_test ${PUGIXML_LIBRARIES})
+    add_test(NAME easyspawn_policy_and_deadline COMMAND easyspawn_test
+        ${CMAKE_SOURCE_DIR}/tests/fixtures/easyspawns.xml)
     if(NOT CMAKE_CROSSCOMPILING)
         add_test(NAME lua_backend_selection COMMAND ${PYTHON_EXECUTABLE}
             ${CMAKE_SOURCE_DIR}/tests/cmake/test_lua_selection.py
