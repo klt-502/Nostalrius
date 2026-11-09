@@ -20,19 +20,12 @@ include(FindCXX11)
 # Find packages.
 find_package(GMP REQUIRED)
 find_package(PugiXML REQUIRED)
-find_package(LuaJIT)
 find_package(MySQL)
 find_package(Threads)
 
-option(USE_LUAJIT "Use LuaJIT" ${LUAJIT_FOUND})
-
-if(USE_LUAJIT)
-    find_package(LuaJIT REQUIRED)
-    if(APPLE)
-      set(CMAKE_EXE_LINKER_FLAGS "-pagezero_size 10000 -image_base 100000000")
-    endif()
-else()
-    find_package(Lua)
+include(SelectLua)
+if(USE_LUAJIT AND APPLE)
+    set(CMAKE_EXE_LINKER_FLAGS "-pagezero_size 10000 -image_base 100000000")
 endif()
 
 find_package(Boost 1.53.0 COMPONENTS system filesystem REQUIRED)
@@ -42,8 +35,8 @@ list(REMOVE_ITEM tfs_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/otserv.cpp)
 add_library(tfs_engine STATIC ${tfs_SRC})
 add_executable(tfs src/otserv.cpp)
 
-include_directories(${MYSQL_INCLUDE_DIR} ${LUA_INCLUDE_DIR} ${Boost_INCLUDE_DIRS} ${PUGIXML_INCLUDE_DIR} ${GMP_INCLUDE_DIR})
-target_link_libraries(tfs_engine PUBLIC ${MYSQL_CLIENT_LIBS} ${LUA_LIBRARIES} ${Boost_LIBRARIES} ${Boost_FILESYSTEM_LIBRARIES} ${PUGIXML_LIBRARIES} ${GMP_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+include_directories(${MYSQL_INCLUDE_DIR} ${ZEDAS_LUA_INCLUDE_DIR} ${Boost_INCLUDE_DIRS} ${PUGIXML_INCLUDE_DIR} ${GMP_INCLUDE_DIR})
+target_link_libraries(tfs_engine PUBLIC ${MYSQL_CLIENT_LIBS} ${ZEDAS_LUA_LIBRARIES} ${Boost_LIBRARIES} ${Boost_FILESYSTEM_LIBRARIES} ${PUGIXML_LIBRARIES} ${GMP_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 target_link_libraries(tfs tfs_engine)
 
 set_target_properties(tfs_engine PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "src/otpch.h")
@@ -64,6 +57,12 @@ if(BUILD_TESTING)
     add_executable(easymode_constants_test tests/easymode_constants_test.cpp)
     target_include_directories(easymode_constants_test PRIVATE src)
     add_test(NAME easymode_constants COMMAND easymode_constants_test)
+    if(NOT CMAKE_CROSSCOMPILING)
+        add_test(NAME lua_backend_selection COMMAND ${PYTHON_EXECUTABLE}
+            ${CMAKE_SOURCE_DIR}/tests/cmake/test_lua_selection.py
+            --cmake=${CMAKE_COMMAND} --source=${CMAKE_SOURCE_DIR}
+            "--prefix-path=${CMAKE_PREFIX_PATH}" --compiler=${CMAKE_CXX_COMPILER})
+    endif()
     find_program(LUAJIT_EXECUTABLE NAMES luajit)
     if(LUAJIT_EXECUTABLE)
         add_test(NAME create_item_validation COMMAND ${LUAJIT_EXECUTABLE}
