@@ -84,6 +84,7 @@ class Actions final : public BaseEvents
 
 		bool useItem(Player* player, const Position& pos, uint8_t index, Item* item);
 		bool useItemEx(Player* player, const Position& fromPos, const Position& toPos, uint8_t toStackPos, Item* item, Creature* creature = nullptr);
+		bool hasItemAction(uint16_t itemId) const { return useItemMap.count(itemId) != 0; }
 
 		ReturnValue canUse(const Player* player, const Position& pos);
 		ReturnValue canUse(const Player* player, const Position& pos, const Item* item);

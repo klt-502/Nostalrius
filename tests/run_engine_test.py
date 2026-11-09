@@ -31,7 +31,18 @@ with tempfile.TemporaryDirectory(prefix="zedas-engine-") as directory:
     ET.ElementTree(talks).write(root / "data/talkactions/talkactions.xml")
     (root / "data/actions/actions.xml").write_text(
         '<actions><action itemid="2874" script="misc/fluids.lua" /></actions>')
-    enabled = "false" if scenario == "disabled" else '"invalid"' if scenario == "invalid_config" else "true"
+    if scenario == "spill_enabled":
+        shutil.copytree(source / "data/zedas", root / "data/zedas")
+        (root / "data/actions/actions.xml").write_text(
+            '<actions><action itemid="2874" script="misc/fluids.lua" />'
+            '<action itemid="3410" script="misc/fluids.lua" /></actions>')
+        (root / "data/movements/lib").mkdir(parents=True)
+        (root / "data/movements/lib/movements.lua").write_text("")
+        (root / "data/movements/movements.xml").write_text(
+            '<movements><movevent event="AddItem" itemid="3351" function="onAddField" />'
+            '<movevent event="AddItem" itemid="3352" tileitem="1" function="onAddField" />'
+            '<movevent event="AddItem" pos="110;94;7" function="onAddField" /></movements>')
+    enabled = "false" if scenario in {"disabled", "wave2_disabled"} else '"invalid"' if scenario == "invalid_config" else "true"
     endless = "false" if scenario == "feature_disabled" else "true"
     config = (
         f'easyModeEnabled = {enabled}\n'
@@ -44,6 +55,17 @@ with tempfile.TemporaryDirectory(prefix="zedas-engine-") as directory:
         config = 'removeChargesFromRunes = true\ntimeBetweenExActions = 25\n'
     if scenario == "bag_enabled":
         config += 'easyModeGoldBag = true\n'
+    if scenario in {"spill_enabled", "spill_only", "spill_invalid_policy", "spill_missing_policy", "wave2_disabled"}:
+        config += 'easyModeLootSpill = true\n'
+    if scenario == "wave2_disabled":
+        config += 'easyModeGoldBag = true\neasyModeRespawn = true\n'
+    if scenario == "spill_only":
+        config += 'easyModeAutoGold = false\n'
+        shutil.copytree(source / "data/zedas", root / "data/zedas")
+    if scenario == "spill_invalid_policy":
+        (root / "data/zedas").mkdir(parents=True, exist_ok=True)
+        (root / "data/zedas/lootspill.xml").write_text(
+            '<lootspill><item id="3357" name="wrong identity" /></lootspill>')
     for scenario_name, key in (("commands_disabled", "easyModeCommands"),
                                ("target_disabled", "easyModeAutoTarget"),
                                ("gold_disabled", "easyModeAutoGold")):

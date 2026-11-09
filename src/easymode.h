@@ -15,6 +15,7 @@ static constexpr int64_t AUTO_TARGET_UNREACHABLE_MS = 3000;
 static constexpr int GOLD_PICKUP_RADIUS_TILES = 5;
 static constexpr size_t MAX_REGISTERED_CORPSES = 1024;
 static constexpr int64_t CORPSE_REGISTRY_TTL_MS = 300000;
+static constexpr size_t CLIENT_TILE_THING_LIMIT = 10;
 static constexpr uint16_t GOLD_BAG_ITEM_ID = 2856; // Existing 7.72 present, five slots.
 static constexpr uint16_t GOLD_BAG_ACTION_ID = 65005;
 
@@ -71,6 +72,9 @@ void updateAutoTarget(Player& player, int64_t now);
 std::vector<Item*> getCarriedItems(Player& player);
 void onLootGenerated(Container& corpse);
 uint64_t collectGold(Player& player);
+void spillLoot();
+// Invalidate generated-loot provenance before an unrelated engine mutation.
+void onLootItemMove(Item& item, const Item* mergeTarget = nullptr);
 }
 
 #endif

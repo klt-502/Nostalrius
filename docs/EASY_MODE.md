@@ -27,9 +27,8 @@ values are rejected on startup. Both master and feature switches must be true.
 `easyModeRespawnPolicyFile` is a startup-only string, default
 `"data/zedas/spawns.xml"`. The production manifest is empty; merely enabling the
 respawn switch does not accelerate the map. Unknown slots retain Classic behavior.
-Non-string paths are rejected. Wave 2 adds these switches centrally before the
-individual feature commits; enabling a switch has no effect until its feature is
-present. All remain gated by `easyModeEnabled`.
+Non-string paths are rejected. All features remain gated by `easyModeEnabled`.
+See [EASY_RESPAWN.md](EASY_RESPAWN.md) for the exact-slot policy and timing rules.
 
 To preserve the v0.5 endless functionality in an Easy deployment, explicitly
 enable the master and both endless-consumable flags. The generic example keeps
@@ -184,6 +183,18 @@ corpse. The marker persists through normal item attribute serialization.
 Only existing gold/platinum/crystal coins move. There is no denomination exchange,
 money creation, ledger, bank mutation or global stacking change. With the feature
 disabled, the marked present is simply an ordinary historical container.
+
+## Loot spill
+
+`easyModeEnabled` and `easyModeLootSpill` expose only reviewed ordinary generated
+noncurrency loot after monster loot generation. The shared corpse snapshot never
+captures later player insertions. Whole existing instances, including complete
+gem stacks, move above the corpse without merging, cloning or recreating them.
+The reviewed 46-item ID/name policy and further metadata/script checks leave
+unknown, special and scripted items in the corpse. Currency remains in the
+normal corpse tree for auto-gold/manual pickup. Unsafe or ten-thing-full tiles
+retain pending loot in the corpse. See [LOOT_SPILL.md](LOOT_SPILL.md) for safety,
+stack limits, lifecycle and persistence details.
 
 ## Automated verification
 

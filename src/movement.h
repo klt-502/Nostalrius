@@ -60,6 +60,8 @@ class MoveEvents final : public BaseEvents
 		uint32_t onPlayerEquip(Player* player, Item* item, slots_t slot, bool isCheck);
 		uint32_t onPlayerDeEquip(Player* player, Item* item, slots_t slot);
 		uint32_t onItemMove(Item* item, Tile* tile, bool isAdd);
+		bool hasItemEvent(uint16_t itemId) const { return itemIdMap.count(itemId) != 0; }
+		bool hasPositionEvent(const Position& position) const { return positionMap.count(position) != 0; }
 
 		MoveEvent* getEvent(Item* item, MoveEvent_t eventType);
 

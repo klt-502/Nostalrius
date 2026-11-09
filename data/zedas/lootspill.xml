@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Conservative identity allowlist for generated-monster-corpse loot spill.
+  Each ID and exact runtime name was reviewed against data/items/items.srv and
+  ordinary monster loot templates. Names omit the catalog's article because
+  Items::loadItems extracts it before exposing ItemType.name.
+
+  Membership never bypasses instance attributes, scripts, destination safety,
+  complete-instance movement, or client-visible tile limits. Unknown identities
+  remain in the corpse. This is not an NPC price table or sale authorization.
+
+  No containers, food, currency, runes, keys, amulets, rings, charged equipment,
+  quest-specific items, or boss-only uniques are included. Melee weapons have
+  existing MultiUse flags and misc/weapons.lua actions in this catalog and are
+  deliberately excluded pending a separate safety review. No script exception
+  is authorized by this list.
+-->
+<lootspill>
+  <!-- Stackable gems and pearls: ordinary lich, dragon, djinn, etc. loot. -->
+  <item id="3026" name="white pearl" />
+  <item id="3027" name="black pearl" />
+  <item id="3028" name="small diamond" />
+  <item id="3029" name="small sapphire" />
+  <item id="3030" name="small ruby" />
+  <item id="3032" name="small emerald" />
+  <item id="3033" name="small amethyst" />
+
+  <!-- Ordinary bows without the melee weapon action registration. -->
+  <item id="3349" name="crossbow" />
+  <item id="3350" name="bow" />
+
+  <!-- Ordinary armor; rare entries also drop from regular monster templates. -->
+  <item id="3351" name="steel helmet" />
+  <item id="3352" name="chain helmet" />
+  <item id="3353" name="iron helmet" />
+  <item id="3354" name="brass helmet" />
+  <item id="3356" name="devil helmet" />
+  <item id="3357" name="plate armor" />
+  <item id="3358" name="chain armor" />
+  <item id="3359" name="brass armor" />
+  <item id="3360" name="golden armor" />
+  <item id="3366" name="magic plate armor" />
+  <item id="3369" name="warrior helmet" />
+  <item id="3370" name="knight armor" />
+  <item id="3371" name="knight legs" />
+  <item id="3377" name="scale armor" />
+  <item id="3381" name="crown armor" />
+  <item id="3382" name="crown legs" />
+  <item id="3383" name="dark armor" />
+  <item id="3384" name="dark helmet" />
+  <item id="3385" name="crown helmet" />
+  <item id="3386" name="dragon scale mail" />
+  <item id="3391" name="crusader helmet" />
+  <item id="3392" name="royal helmet" />
+
+  <!-- Ordinary shields: includes regular dragon, demon, hero, vampire drops. -->
+  <item id="3409" name="steel shield" />
+  <item id="3410" name="plate shield" />
+  <item id="3411" name="brass shield" />
+  <item id="3413" name="battle shield" />
+  <item id="3414" name="mastermind shield" />
+  <item id="3415" name="guardian shield" />
+  <item id="3416" name="dragon shield" />
+  <item id="3418" name="beholder shield" />
+  <item id="3419" name="crown shield" />
+  <item id="3420" name="demon shield" />
+  <item id="3425" name="dwarven shield" />
+  <item id="3434" name="vampire shield" />
+
+  <!-- Ordinary legwear and boots, including behemoth steel boots. -->
+  <item id="3554" name="steel boots" />
+  <item id="3557" name="plate legs" />
+  <item id="3558" name="chain legs" />
+</lootspill>

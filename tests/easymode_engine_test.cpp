@@ -119,6 +119,7 @@ static uint64_t contentsValue(Container& container)
 }
 
 #include "gold_bag_cases.h"
+#include "loot_spill_cases.h"
 
 static void setup()
 {
@@ -176,6 +177,31 @@ int main(int argc, char** argv)
 		require(g_config.getString(ConfigManager::EASY_MODE_RESPAWN_POLICY_FILE) == "data/zedas/spawns.xml", "manifest path remains startup only");
 	}
 	setup();
+	if (scenario == "spill_only" || scenario == "spill_invalid_policy" || scenario == "spill_missing_policy" || scenario == "wave2_disabled" || scenario == "bag_disabled") {
+		Player* collector = makePlayer(100, 100);
+		Container* markedBag = carry(*collector, 2856, 65005)->getContainer();
+		Container* backpack = collector->getInventoryItem(CONST_SLOT_BACKPACK)->getContainer();
+		Item* oldGold = addCoin(*backpack, 3031, 95);
+		Container* corpse = corpseAt(100, 101);
+		Item* armor = Item::CreateItem(3357);
+		require(g_game.internalAddItem(corpse, armor) == RETURNVALUE_NOERROR, "add feature-gate armor fixture");
+		addCoin(*corpse, 3031, 10);
+		EasyMode::onLootGenerated(*corpse);
+		EasyMode::spillLoot();
+		const bool spilled = scenario == "spill_only";
+		require(armor->getParent() == (spilled ? static_cast<Cylinder*>(corpse->getTile()) : static_cast<Cylinder*>(corpse)), "spill feature/master/policy gate");
+		if (scenario == "wave2_disabled" || scenario == "spill_only") {
+			require(EasyMode::collectGold(*collector) == 0 && contentsValue(*corpse) == 10, "disabled auto-gold/master retains actual currency");
+		} else {
+			require(EasyMode::collectGold(*collector) == 10 && oldGold->getItemCount() == 100 && contentsValue(*markedBag) == 0, "disabled Gold Bag and invalid spill policy retain Wave 1 currency fallback");
+		}
+		return 0;
+	}
+	if (scenario == "spill_enabled") {
+		require(g_moveEvents->loadFromXml(), "load spill movement safety fixtures");
+		testLootSpill();
+		return 0;
+	}
 	if (scenario == "bag_enabled") {
 		testGoldBag();
 		return 0;
