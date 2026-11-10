@@ -141,7 +141,7 @@ static void testLootSpill()
 	Item* key = addGenerated(*protectedCorpse, 2968);
 	key->setIntAttr(ITEM_ATTRIBUTE_KEYNUMBER, 1234);
 	protectedItems.push_back(key);
-	for (uint16_t id : {3355, 3034, 3253, 2874, 3410, 3264}) protectedItems.push_back(addGenerated(*protectedCorpse, id));
+	for (uint16_t id : {3250, 3235, 3253, 2874, 3410, 3284}) protectedItems.push_back(addGenerated(*protectedCorpse, id));
 	EasyMode::onLootGenerated(*protectedCorpse);
 	EasyMode::spillLoot();
 	for (Item* item : protectedItems) {

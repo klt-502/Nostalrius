@@ -16,16 +16,32 @@ as tombstones until the registry's normal expiry/eviction. Generated ordinary
 unmarked bags are traversed, but the bags themselves remain in the corpse.
 An unsafe/marked nested container protects its entire subtree from spill.
 
-The reviewed identity policy covers 46 ordinary catalog items: gems/pearls,
-bows, armor, helmets, legwear, boots and shields, including rare ordinary drops
-such as dragon shields and magic plate armor. An exact item-ID/catalog-name
-match is necessary. It is never enough on its own: all instance attributes,
-Action IDs, quest markers, key/special/interactive properties and registered
-action or movement handlers disqualify an item. Unknown identities stay in the
-corpse. Charged/decaying equipment, consumables and the catalog's scripted melee
-weapons intentionally stay inside; no script exemption is made. This explicit
-policy avoids guessing whether an unmarked decorative/quest item is ordinary.
-Custom data changes need a fresh policy review; names alone do not prove safety.
+The reviewed identity policy covers **242 ordinary catalog items** (196 added
+after the original 46-item policy): melee/ranged weapons and ammunition, armor,
+helmets, legs, boots, shields, gems, ordinary creature products, passive jewelry,
+inert miscellaneous loot and normal food. An exact item-ID/catalog-name match
+is necessary. It never bypasses instance attributes, Action IDs, quest markers,
+charges, decay, transformations or unsafe movement semantics. Unknown identities
+stay inside. Only ordinary generated container shells 2853–2872 are traversed;
+special/quest/custom shells protect their entire subtree.
+
+Two narrow item-use exceptions are established: the stock `misc/weapons.lua`
+handler and normal `misc/food.lua`. Their onUse functions run only on explicit
+use, not when the existing instance moves to a tile. The loaded registration
+must have the expected script path and LF-normalized source fingerprint;
+weapons also require the stock action library. A changed/custom script is not
+approved merely because it reuses the filename. `MultiUse` is allowed only for
+reviewed ordinary melee/distance ammunition with the corresponding known handler
+or no use handler. Native equip/de-equip handlers are separately recognized:
+they do not run on container-to-ground moves. Lua equipment handlers and every
+other movement registration remain excluded.
+
+Charged amulets, ice rapiers, active/dormant transforming rings, runes, fluids,
+quest tools and unidentified items intentionally remain inside. Passive rings
+and amulets without that state can move unchanged. No charge/duration/transform
+exception is introduced. See [LOOT_SPILL_POLICY.md](LOOT_SPILL_POLICY.md) for
+category/ID details, the source audit and the exact retest checklist. Custom data
+changes need a fresh review; names alone do not establish safety.
 
 Currency remains in the corpse and its generated containers for the accepted
 auto-gold path or manual pickup. Spill never moves, credits or recreates coins.
@@ -55,7 +71,7 @@ within the current ten-thing description. Later unrelated manual drops or
 creature arrivals can still crowd a tile under historical map behavior.
 
 No spill goes to a tile without ground, blocked/hazardous/special tile flags,
-registered position movement handlers, marked/scripted resident items or
+registered position movement handlers, marked/unsafe resident items or
 collision/separation handlers. Native destination queries still run with no
 limit-bypass flags. Uncertain destinations preserve the loot in the corpse.
 
@@ -90,6 +106,11 @@ protected and subsequently inserted items, currency conservation, scripted item
 exclusion, tile overflow/retry, manual pickup, repeated processing, competing
 players, relocated/removed/decayed corpses and engine cleanup. They use real item
 definitions and the production movement code, without a database or client.
+`engine_spill_hunting` validates all 242 identities against the real item catalog,
+stock use handlers and native equipment registrations. It covers mixed nested
+weapon/armor/product/food/ammunition/jewelry loot, unchanged instances/counts,
+auto-gold in the same bag, weapon-filled tile overflow, an actual monster death,
+and refusal after custom use/movement handler reloads or stock-file changes.
 
 The original Tibia 7.72 client must verify visual ordering, click/drag behavior,
 ten-stack rendering with creatures present, container updates and relog/save.

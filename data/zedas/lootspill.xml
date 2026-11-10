@@ -1,49 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Conservative identity allowlist for generated-monster-corpse loot spill.
-  Each ID and exact runtime name was reviewed against data/items/items.srv and
-  ordinary monster loot templates. Names omit the catalog's article because
-  Items::loadItems extracts it before exposing ItemType.name.
-
-  Membership never bypasses instance attributes, scripts, destination safety,
-  complete-instance movement, or client-visible tile limits. Unknown identities
-  remain in the corpse. This is not an NPC price table or sale authorization.
-
-  No containers, food, currency, runes, keys, amulets, rings, charged equipment,
-  quest-specific items, or boss-only uniques are included. Melee weapons have
-  existing MultiUse flags and misc/weapons.lua actions in this catalog and are
-  deliberately excluded pending a separate safety review. No script exception
-  is authorized by this list.
+  Explicit reviewed ID/name policy for generated-monster loot only.
+  Unknown/custom identities are never inferred from a broad category or price.
+  Membership does not bypass provenance, instance attributes, unsafe movement
+  handlers, charges/decay/transforms, destination checks or the ten-thing limit.
+  The only approved onUse exceptions are the fingerprinted stock weapons.lua
+  and food.lua handlers, which are not invoked by a ground move. Passive native
+  equip/de-equip handlers also do not run when moving container loot to a tile.
+  No quest tools, keys, runes, special containers or active/charged jewelry are
+  authorized. Currency keeps its existing auto-gold/manual corpse path.
 -->
 <lootspill>
-  <!-- Stackable gems and pearls: ordinary lich, dragon, djinn, etc. loot. -->
-  <item id="3026" name="white pearl" />
-  <item id="3027" name="black pearl" />
-  <item id="3028" name="small diamond" />
-  <item id="3029" name="small sapphire" />
-  <item id="3030" name="small ruby" />
-  <item id="3032" name="small emerald" />
-  <item id="3033" name="small amethyst" />
-
-  <!-- Ordinary bows without the melee weapon action registration. -->
+  <!-- Ordinary melee weapons; only the fingerprinted stock weapons.lua onUse is approved -->
+  <item id="3264" name="sword" />
+  <item id="3265" name="two handed sword" />
+  <item id="3266" name="battle axe" />
+  <item id="3267" name="dagger" />
+  <item id="3268" name="hand axe" />
+  <item id="3269" name="halberd" />
+  <item id="3270" name="club" />
+  <item id="3271" name="spike sword" />
+  <item id="3272" name="rapier" />
+  <item id="3273" name="sabre" />
+  <item id="3274" name="axe" />
+  <item id="3275" name="double axe" />
+  <item id="3276" name="hatchet" />
+  <item id="3279" name="war hammer" />
+  <item id="3280" name="fire sword" />
+  <item id="3281" name="giant sword" />
+  <item id="3282" name="morning star" />
+  <item id="3283" name="carlin sword" />
+  <item id="3285" name="longsword" />
+  <item id="3286" name="mace" />
+  <item id="3289" name="staff" />
+  <item id="3290" name="silver dagger" />
+  <item id="3291" name="knife" />
+  <item id="3292" name="combat knife" />
+  <item id="3293" name="sickle" />
+  <item id="3294" name="short sword" />
+  <item id="3297" name="serpent sword" />
+  <item id="3299" name="poison dagger" />
+  <item id="3300" name="katana" />
+  <item id="3301" name="broadsword" />
+  <item id="3302" name="dragon lance" />
+  <item id="3305" name="battle hammer" />
+  <item id="3306" name="golden sickle" />
+  <item id="3307" name="scimitar" />
+  <item id="3311" name="clerical mace" />
+  <item id="3313" name="obsidian lance" />
+  <item id="3316" name="orcish axe" />
+  <item id="3318" name="knight axe" />
+  <item id="3320" name="fire axe" />
+  <item id="3322" name="dragon hammer" />
+  <item id="3324" name="skull staff" />
+  <item id="3327" name="daramanian mace" />
+  <item id="3328" name="daramanian waraxe" />
+  <item id="3332" name="hammer of wrath" />
+  <item id="3333" name="crystal mace" />
+  <item id="3335" name="twin axe" />
+  <item id="3336" name="studded club" />
+  <item id="3337" name="bone club" />
+  <item id="3338" name="bone sword" />
+  <item id="3339" name="djinn blade" />
+  <item id="3345" name="templar scytheblade" />
+  <item id="3346" name="ripper lance" />
+  <item id="3347" name="hunting spear" />
+  <item id="3348" name="banana staff" />
+  <!-- Ordinary ranged weapons, rods/wands and ammunition; no charged or transforming state -->
+  <item id="1781" name="small stone" />
+  <item id="2992" name="snowball" />
+  <item id="3065" name="quagmire rod" />
+  <item id="3066" name="snakebite rod" />
+  <item id="3067" name="tempest rod" />
+  <item id="3069" name="volcanic rod" />
+  <item id="3070" name="moonlight rod" />
+  <item id="3071" name="wand of inferno" />
+  <item id="3072" name="wand of plague" />
+  <item id="3073" name="wand of cosmic energy" />
+  <item id="3277" name="spear" />
+  <item id="3287" name="throwing star" />
+  <item id="3298" name="throwing knife" />
   <item id="3349" name="crossbow" />
   <item id="3350" name="bow" />
-
-  <!-- Ordinary armor; rare entries also drop from regular monster templates. -->
+  <item id="3446" name="bolt" />
+  <item id="3447" name="arrow" />
+  <item id="3448" name="poison arrow" />
+  <item id="3449" name="burst arrow" />
+  <item id="3450" name="power bolt" />
+  <!-- Normal armor, helmets, legs, boots and shields; native equip-only handlers are movement-safe -->
+  <item id="3079" name="boots of haste" />
   <item id="3351" name="steel helmet" />
   <item id="3352" name="chain helmet" />
   <item id="3353" name="iron helmet" />
   <item id="3354" name="brass helmet" />
+  <item id="3355" name="leather helmet" />
   <item id="3356" name="devil helmet" />
   <item id="3357" name="plate armor" />
   <item id="3358" name="chain armor" />
   <item id="3359" name="brass armor" />
   <item id="3360" name="golden armor" />
+  <item id="3361" name="leather armor" />
+  <item id="3362" name="studded legs" />
+  <item id="3364" name="golden legs" />
   <item id="3366" name="magic plate armor" />
+  <item id="3367" name="viking helmet" />
   <item id="3369" name="warrior helmet" />
   <item id="3370" name="knight armor" />
   <item id="3371" name="knight legs" />
+  <item id="3372" name="brass legs" />
+  <item id="3373" name="strange helmet" />
+  <item id="3374" name="legion helmet" />
+  <item id="3375" name="soldier helmet" />
+  <item id="3376" name="studded helmet" />
   <item id="3377" name="scale armor" />
+  <item id="3378" name="studded armor" />
   <item id="3381" name="crown armor" />
   <item id="3382" name="crown legs" />
   <item id="3383" name="dark armor" />
@@ -52,11 +122,18 @@
   <item id="3386" name="dragon scale mail" />
   <item id="3391" name="crusader helmet" />
   <item id="3392" name="royal helmet" />
-
-  <!-- Ordinary shields: includes regular dragon, demon, hero, vampire drops. -->
+  <item id="3393" name="amazon helmet" />
+  <item id="3394" name="amazon armor" />
+  <item id="3403" name="tribal mask" />
+  <item id="3404" name="leopard armor" />
+  <item id="3405" name="horseman helmet" />
+  <item id="3406" name="feather headdress" />
+  <item id="3407" name="charmer's tiara" />
+  <item id="3408" name="beholder helmet" />
   <item id="3409" name="steel shield" />
   <item id="3410" name="plate shield" />
   <item id="3411" name="brass shield" />
+  <item id="3412" name="wooden shield" />
   <item id="3413" name="battle shield" />
   <item id="3414" name="mastermind shield" />
   <item id="3415" name="guardian shield" />
@@ -65,10 +142,123 @@
   <item id="3419" name="crown shield" />
   <item id="3420" name="demon shield" />
   <item id="3425" name="dwarven shield" />
+  <item id="3426" name="studded shield" />
+  <item id="3428" name="tower shield" />
+  <item id="3429" name="black shield" />
+  <item id="3430" name="copper shield" />
+  <item id="3432" name="ancient shield" />
   <item id="3434" name="vampire shield" />
-
-  <!-- Ordinary legwear and boots, including behemoth steel boots. -->
+  <item id="3435" name="castle shield" />
+  <item id="3436" name="medusa shield" />
+  <item id="3437" name="amazon shield" />
+  <item id="3439" name="phoenix shield" />
+  <item id="3440" name="scarab shield" />
+  <item id="3441" name="bone shield" />
+  <item id="3443" name="tusk shield" />
+  <item id="3444" name="sentinel shield" />
+  <item id="3445" name="salamander shield" />
+  <item id="3551" name="sandals" />
+  <item id="3552" name="leather boots" />
+  <item id="3553" name="bunnyslippers" />
   <item id="3554" name="steel boots" />
+  <item id="3556" name="crocodile boots" />
   <item id="3557" name="plate legs" />
   <item id="3558" name="chain legs" />
+  <item id="3559" name="leather legs" />
+  <item id="3560" name="bast skirt" />
+  <item id="3562" name="coat" />
+  <item id="3563" name="green tunic" />
+  <item id="3565" name="cape" />
+  <item id="3566" name="red robe" />
+  <item id="3567" name="blue robe" />
+  <item id="3568" name="simple dress" />
+  <item id="3572" name="scarf" />
+  <item id="3573" name="magician hat" />
+  <item id="3574" name="mystic turban" />
+  <!-- Gems and pearls -->
+  <item id="3026" name="white pearl" />
+  <item id="3027" name="black pearl" />
+  <item id="3028" name="small diamond" />
+  <item id="3029" name="small sapphire" />
+  <item id="3030" name="small ruby" />
+  <item id="3032" name="small emerald" />
+  <item id="3033" name="small amethyst" />
+  <item id="3034" name="talon" />
+  <item id="3036" name="violet gem" />
+  <item id="3037" name="yellow gem" />
+  <item id="3038" name="green gem" />
+  <item id="3039" name="red gem" />
+  <item id="3041" name="blue gem" />
+  <!-- Passive rings, amulets and jewelry with no charges, decay or equip transformations -->
+  <item id="3004" name="wedding ring" />
+  <item id="3006" name="ring of the sky" />
+  <item id="3007" name="crystal ring" />
+  <item id="3008" name="crystal necklace" />
+  <item id="3010" name="emerald bangle" />
+  <item id="3012" name="wolf tooth chain" />
+  <item id="3016" name="ruby necklace" />
+  <item id="3017" name="silver brooch" />
+  <item id="3018" name="scarab amulet" />
+  <item id="3019" name="demonbone amulet" />
+  <item id="3022" name="ancient tiara" />
+  <item id="3025" name="ancient amulet" />
+  <item id="3055" name="platinum amulet" />
+  <item id="3063" name="gold ring" />
+  <!-- Ordinary creature products and inert hunting junk -->
+  <item id="3044" name="elephant tusk" />
+  <item id="3112" name="rotten meat" />
+  <item id="3114" name="skull" />
+  <item id="3115" name="bone" />
+  <item id="3116" name="big bone" />
+  <item id="3120" name="moldy cheese" />
+  <item id="3122" name="dirty cape" />
+  <item id="3130" name="twigs" />
+  <item id="3492" name="worm" />
+  <item id="4839" name="hydra egg" />
+  <!-- Other reviewed inert loot -->
+  <item id="2991" name="doll" />
+  <item id="2993" name="teddy bear" />
+  <item id="3068" name="crystal wand" />
+  <item id="3509" name="inkwell" />
+  <item id="3658" name="red rose" />
+  <item id="3659" name="blue rose" />
+  <!-- Normal food; only the fingerprinted stock food.lua onUse is approved -->
+  <item id="3577" name="meat" />
+  <item id="3578" name="fish" />
+  <item id="3579" name="salmon" />
+  <item id="3580" name="fish" />
+  <item id="3581" name="shrimp" />
+  <item id="3582" name="ham" />
+  <item id="3583" name="dragon ham" />
+  <item id="3584" name="pear" />
+  <item id="3585" name="red apple" />
+  <item id="3586" name="orange" />
+  <item id="3587" name="banana" />
+  <item id="3588" name="blueberry" />
+  <item id="3589" name="coconut" />
+  <item id="3590" name="cherry" />
+  <item id="3591" name="strawberry" />
+  <item id="3592" name="grapes" />
+  <item id="3593" name="melon" />
+  <item id="3594" name="pumpkin" />
+  <item id="3595" name="carrot" />
+  <item id="3596" name="tomato" />
+  <item id="3597" name="corncob" />
+  <item id="3598" name="cookie" />
+  <item id="3599" name="candy cane" />
+  <item id="3600" name="bread" />
+  <item id="3601" name="roll" />
+  <item id="3602" name="brown bread" />
+  <item id="3606" name="egg" />
+  <item id="3607" name="cheese" />
+  <item id="3723" name="white mushroom" />
+  <item id="3724" name="red mushroom" />
+  <item id="3725" name="brown mushroom" />
+  <item id="3726" name="orange mushroom" />
+  <item id="3727" name="wood mushroom" />
+  <item id="3728" name="dark mushroom" />
+  <item id="3729" name="some mushrooms" />
+  <item id="3730" name="some mushrooms" />
+  <item id="3731" name="fire mushroom" />
+  <item id="3732" name="green mushroom" />
 </lootspill>

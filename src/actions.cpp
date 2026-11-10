@@ -26,11 +26,35 @@
 #include "game.h"
 #include "pugicast.h"
 #include "spells.h"
+#include "tools.h"
+#include <fstream>
+#include <iterator>
 
 extern Game g_game;
 extern Spells* g_spells;
 extern Actions* g_actions;
 extern ConfigManager g_config;
+
+namespace {
+bool stockScript(const std::string& filename, const char* digest)
+{
+	std::ifstream file(filename, std::ios::binary);
+	if (!file) return false;
+	const std::string source((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+	std::string normalized;
+	for (size_t i = 0; i < source.size(); ++i) {
+		if (source[i] == '\r' && i + 1 < source.size() && source[i + 1] == '\n') continue;
+		normalized += source[i];
+	}
+	return transformToSHA1(normalized) == digest;
+}
+}
+
+Action::GroundUse Actions::getItemGroundUse(uint16_t itemId) const
+{
+	const auto it = useItemMap.find(itemId);
+	return it == useItemMap.end() ? Action::GroundUse::None : it->second->getGroundUse();
+}
 
 Actions::Actions() :
 	scriptInterface("Action Interface")
@@ -86,6 +110,18 @@ Event* Actions::getEvent(const std::string& nodeName)
 bool Actions::registerEvent(Event* event, const pugi::xml_node& node)
 {
 	Action* action = static_cast<Action*>(event); //event is guaranteed to be an Action
+	// These stock handlers only run on explicit use, never on ground movement.
+	// Fail closed for a changed/custom handler even if it reuses the filename.
+	const std::string script = node.attribute("script").value();
+	action->groundUse = Action::GroundUse::Unknown;
+	if (action->isScripted() && script == "misc/weapons.lua" &&
+	    stockScript("data/actions/scripts/" + script, "089ef11a54fd3c68e65fcfc0b5f4592e1f9fc05b") &&
+	    stockScript("data/actions/lib/actions.lua", "d765451a45fe6be35ca7805c343b28b0d3173c60")) {
+		action->groundUse = Action::GroundUse::Weapon;
+	} else if (action->isScripted() && script == "misc/food.lua" &&
+	           stockScript("data/actions/scripts/" + script, "b7cb3c821a69571ef48009314ea6ceabde0692a9")) {
+		action->groundUse = Action::GroundUse::Food;
+	}
 
 	pugi::xml_attribute attr;
 	if ((attr = node.attribute("itemid"))) {
@@ -353,7 +389,7 @@ Action::Action(LuaScriptInterface* interface) :
 	Event(interface), allowFarUse(false), checkFloor(true), checkLineOfSight(true) {}
 
 Action::Action(const Action* copy) :
-	Event(copy), allowFarUse(copy->allowFarUse), checkFloor(copy->checkFloor), checkLineOfSight(copy->checkLineOfSight) {}
+	Event(copy), allowFarUse(copy->allowFarUse), checkFloor(copy->checkFloor), checkLineOfSight(copy->checkLineOfSight), groundUse(copy->groundUse) {}
 
 bool Action::configureEvent(const pugi::xml_node& node)
 {

@@ -16,20 +16,6 @@ bool unmarked(const Item& item)
 	return !item.hasAttribute(static_cast<itemAttrTypes>(0xFFFFFFFFu));
 }
 
-bool hasItemHandler(const Item& item)
-{
-	return !g_actions || !g_moveEvents || g_actions->hasItemAction(item.getID()) || g_moveEvents->hasItemEvent(item.getID());
-}
-
-bool interactive(const ItemType& type, bool resident = false)
-{
-	return type.useEvent || type.multiUseEvent || type.collisionEvent || type.separationEvent ||
-	       type.useable || type.changeUse || type.forceUse || type.distUse || type.canReadText ||
-	       type.canWriteText || type.rotatable || type.isHangable || type.conditionDamage ||
-	       type.transformToOnUse || type.transformToFree ||
-	       (type.fluidSource != FLUID_NONE && !(resident && type.corpse));
-}
-
 class SpillPolicy {
 	public:
 		SpillPolicy() {
@@ -66,6 +52,36 @@ class SpillPolicy {
 		std::map<uint16_t, std::string> items;
 };
 
+const SpillPolicy& policy()
+{
+	static const SpillPolicy value;
+	return value;
+}
+
+bool interactive(const Item& item, bool resident = false)
+{
+	if (!g_actions || !g_moveEvents) return true;
+	const ItemType& type = Item::items[item.getID()];
+	const bool reviewed = policy().contains(item);
+	const Action::GroundUse use = g_actions->getItemGroundUse(item.getID());
+	const bool weapon = reviewed && use == Action::GroundUse::Weapon &&
+	                    (type.weaponType == WEAPON_SWORD || type.weaponType == WEAPON_AXE || type.weaponType == WEAPON_CLUB);
+	const bool ranged = reviewed && use == Action::GroundUse::None &&
+	                    (type.weaponType == WEAPON_DISTANCE || type.weaponType == WEAPON_AMMO);
+	const bool food = reviewed && use == Action::GroundUse::Food && type.nutrition > 0;
+	// MultiUse and the audited onUse handlers do not dispatch from Cylinder
+	// movement notifications. Approval never applies to unknown IDs or handlers.
+	return use == Action::GroundUse::Unknown || (use == Action::GroundUse::Weapon && !weapon) ||
+	       (use == Action::GroundUse::Food && !food) ||
+	       (type.useEvent && !food) || (type.multiUseEvent && !weapon && !ranged) ||
+	       (type.useable && !food) || type.collisionEvent || type.separationEvent ||
+	       type.changeUse || type.forceUse || type.distUse || type.canReadText || type.canWriteText ||
+	       type.rotatable || type.isHangable || type.conditionDamage || type.transformToOnUse || type.transformToFree ||
+	       type.transformEquipTo || type.transformDeEquipTo ||
+	       (type.fluidSource != FLUID_NONE && !(resident && type.corpse)) ||
+	       g_moveEvents->hasUnsafeGroundItemEvent(item.getID());
+}
+
 bool safeTile(const Tile& tile)
 {
 	if (!g_actions || !g_moveEvents || !tile.getGround() || tile.getThingCount() >= EasyMode::CLIENT_TILE_THING_LIMIT ||
@@ -82,7 +98,7 @@ bool safeTile(const Tile& tile)
 		                        (type.corpse ? ITEM_ATTRIBUTE_CORPSEOWNER : ITEM_ATTRIBUTE_NONE) |
 		                        (type.isSplash() ? ITEM_ATTRIBUTE_FLUIDTYPE : ITEM_ATTRIBUTE_NONE);
 		if (resident.hasAttribute(static_cast<itemAttrTypes>(~normal)) || resident.isChestQuest() ||
-		    interactive(type, true) || g_actions->hasItemAction(resident.getID()) || g_moveEvents->hasItemEvent(resident.getID())) return false;
+		    interactive(resident, true)) return false;
 	}
 	return true;
 }
@@ -91,23 +107,25 @@ bool safeTile(const Tile& tile)
 bool EasyMode::isSpillContainer(const Item& item)
 {
 	const ItemType& type = Item::items[item.getID()];
-	return item.getContainer() && !item.isChestQuest() && type.isContainer() && type.moveable && type.pickupable &&
-	       unmarked(item) && !interactive(type) && !hasItemHandler(item);
+	// Only the catalog's ordinary bags/backpacks/basket/present and color
+	// variants are shells. A plain-looking quest/custom container stays opaque.
+	return item.getID() >= 2853 && item.getID() <= 2872 && item.getContainer() && !item.isChestQuest() &&
+	       type.isContainer() && type.moveable && type.pickupable && unmarked(item) && !interactive(item);
 }
 
 bool EasyMode::isSpillItem(const Item& item)
 {
 	// An explicit reviewed allowlist is required. Flags alone cannot identify an
 	// unmarked semantic quest item. Unknown IDs fail closed, regardless of value.
-	static const SpillPolicy policy;
 	const ItemType& type = Item::items[item.getID()];
-	return policy.contains(item) && !item.getContainer() && item.getWorth() == 0 &&
+	return policy().contains(item) && !item.getContainer() && item.getWorth() == 0 &&
 	       item.getItemCount() > 0 && (!item.isStackable() || item.getItemCount() <= 100) &&
 	       type.moveable && type.pickupable && !type.alwaysOnTop && !type.isGroundTile() &&
 	       !type.isFluidContainer() && !type.isSplash() && !type.isMagicField() && !type.isKey() &&
 	       !type.isDoor() && !type.isChest() && !type.isDepot() && !type.isTeleport() && !type.isBed() &&
 	       !type.isRune() && !type.corpse && !type.blockSolid && !type.blockPathFind &&
-	       unmarked(item) && !interactive(type) && !hasItemHandler(item);
+	       !type.charges && !type.decayTime && type.decayTo == -1 &&
+	       unmarked(item) && !interactive(item);
 }
 
 bool EasyMode::spillItem(Container& source, Tile& tile, Item& item)

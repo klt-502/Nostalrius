@@ -190,8 +190,10 @@ disabled, the marked present is simply an ordinary historical container.
 noncurrency loot after monster loot generation. The shared corpse snapshot never
 captures later player insertions. Whole existing instances, including complete
 gem stacks, move above the corpse without merging, cloning or recreating them.
-The reviewed 46-item ID/name policy and further metadata/script checks leave
-unknown, special and scripted items in the corpse. Currency remains in the
+The reviewed 242-item ID/name policy includes ordinary weapons, equipment,
+products, food and passive jewelry, with narrowly audited stock-use/native-equip
+exceptions. Unknown, special, charged/transforming and unsafe scripted items stay
+in the corpse. Currency remains in the
 normal corpse tree for auto-gold/manual pickup. Unsafe or ten-thing-full tiles
 retain pending loot in the corpse. See [LOOT_SPILL.md](LOOT_SPILL.md) for safety,
 stack limits, lifecycle and persistence details.

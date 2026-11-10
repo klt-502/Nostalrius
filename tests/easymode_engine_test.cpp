@@ -1,5 +1,6 @@
 #include "otpch.h"
 #include "easymode.h"
+#include "easyspill.h"
 #include "actions.h"
 #include "chat.h"
 #include "configmanager.h"
@@ -121,6 +122,7 @@ static uint64_t contentsValue(Container& container)
 
 #include "gold_bag_cases.h"
 #include "loot_spill_cases.h"
+#include "hunting_spill_cases.h"
 
 static void setup()
 {
@@ -178,6 +180,11 @@ int main(int argc, char** argv)
 		require(g_config.getString(ConfigManager::EASY_MODE_RESPAWN_POLICY_FILE) == "data/zedas/spawns.xml", "manifest path remains startup only");
 	}
 	setup();
+	if (scenario == "spill_hunting") {
+		require(g_moveEvents->loadFromXml(), "load actual native equipment handlers");
+		testHuntingSpill();
+		return 0;
+	}
 	if (scenario == "spill_only" || scenario == "spill_invalid_policy" || scenario == "spill_missing_policy" || scenario == "wave2_disabled" || scenario == "bag_disabled") {
 		Player* collector = makePlayer(100, 100);
 		Container* markedBag = carry(*collector, 2856, 65005)->getContainer();

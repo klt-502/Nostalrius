@@ -61,6 +61,7 @@ class MoveEvents final : public BaseEvents
 		uint32_t onPlayerDeEquip(Player* player, Item* item, slots_t slot);
 		uint32_t onItemMove(Item* item, Tile* tile, bool isAdd);
 		bool hasItemEvent(uint16_t itemId) const { return itemIdMap.count(itemId) != 0; }
+		bool hasUnsafeGroundItemEvent(uint16_t itemId) const;
 		bool hasPositionEvent(const Position& position) const { return positionMap.count(position) != 0; }
 
 		MoveEvent* getEvent(Item* item, MoveEvent_t eventType);
@@ -102,6 +103,10 @@ class MoveEvent final : public Event
 		explicit MoveEvent(const MoveEvent* copy);
 
 		MoveEvent_t getEventType() const;
+		bool isStandardEquipmentHandler() const {
+			return !isScripted() && ((eventType == MOVE_EVENT_EQUIP && equipFunction == EquipItem) ||
+			                        (eventType == MOVE_EVENT_DEEQUIP && equipFunction == DeEquipItem));
+		}
 		void setEventType(MoveEvent_t type);
 
 		bool configureEvent(const pugi::xml_node& node) final;

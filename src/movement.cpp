@@ -328,6 +328,20 @@ uint32_t MoveEvents::onPlayerDeEquip(Player* player, Item* item, slots_t slot)
 	return moveEvent->fireEquip(player, item, slot, true);
 }
 
+bool MoveEvents::hasUnsafeGroundItemEvent(uint16_t itemId) const
+{
+	const auto it = itemIdMap.find(itemId);
+	if (it == itemIdMap.end()) return false;
+	for (const auto& events : it->second.moveEvent) {
+		for (const MoveEvent* event : events) {
+			// Native equip/de-equip runs through Player equipment changes only.
+			// Lua equipment scripts and all other movement registrations stay unsafe.
+			if (!event->isStandardEquipmentHandler()) return true;
+		}
+	}
+	return false;
+}
+
 uint32_t MoveEvents::onItemMove(Item* item, Tile* tile, bool isAdd)
 {
 	MoveEvent_t eventType1, eventType2;

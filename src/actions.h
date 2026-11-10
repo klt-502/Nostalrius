@@ -27,6 +27,7 @@
 class Action : public Event
 {
 	public:
+		enum class GroundUse { None, Unknown, Weapon, Food };
 		explicit Action(const Action* copy);
 		explicit Action(LuaScriptInterface* interface);
 
@@ -62,6 +63,7 @@ class Action : public Event
 		virtual bool hasOwnErrorHandler() {
 			return false;
 		}
+		GroundUse getGroundUse() const { return groundUse; }
 		virtual Thing* getTarget(Player* player, Creature* targetCreature, const Position& toPosition, uint8_t toStackPos) const;
 
 	protected:
@@ -70,6 +72,10 @@ class Action : public Event
 		bool allowFarUse;
 		bool checkFloor;
 		bool checkLineOfSight;
+
+	private:
+		friend class Actions;
+		GroundUse groundUse = GroundUse::Unknown;
 };
 
 class Actions final : public BaseEvents
@@ -85,6 +91,7 @@ class Actions final : public BaseEvents
 		bool useItem(Player* player, const Position& pos, uint8_t index, Item* item);
 		bool useItemEx(Player* player, const Position& fromPos, const Position& toPos, uint8_t toStackPos, Item* item, Creature* creature = nullptr);
 		bool hasItemAction(uint16_t itemId) const { return useItemMap.count(itemId) != 0; }
+		Action::GroundUse getItemGroundUse(uint16_t itemId) const;
 
 		ReturnValue canUse(const Player* player, const Position& pos);
 		ReturnValue canUse(const Player* player, const Position& pos, const Item* item);

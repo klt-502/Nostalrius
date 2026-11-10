@@ -81,12 +81,16 @@ check. Native/CI tests do not establish client rendering or live save/relog.
 11. Check one item, multiple items, a gem stack and generated nested bags.
     The generated bags may remain; approved ordinary contents can be exposed.
     A dragon shield, royal helmet or magic plate armor is eligible when it
-    actually drops and passes safety checks. Unknown items, scripted melee
-    weapons, consumables, keys, marked/quest/custom items and contents of marked
-    nested bags must stay in the corpse. See the exact 46-item reviewed list in
+    actually drops and passes safety checks. Ordinary stock-use melee weapons,
+    ammunition, products, normal food and passive jewelry now also qualify.
+    Unknown items, runes, charged/transforming items, keys, marked/quest/custom
+    items, unsafe handlers and contents of special/marked nested bags stay inside.
+    See the exact 242-item reviewed list in
     `data/zedas/lootspill.xml`. Automated fixtures cover rare/nested cases without
     changing production rates; original-client rendering of these needs a
     controlled test encounter if waiting for a drop is impractical.
+    Retest the [expanded hunting-loot cases](LOOT_SPILL_POLICY.md#local-gameplay-retest)
+    specifically; those cases address the generated-bag gameplay gap at `f83a1fd`.
 12. With auto-gold on, equipment spills while collectible coins arrive only in
     inventory. Fill capacity/bags and repeat: remaining coins stay in the corpse,
     never duplicated on the ground. Disable only auto-gold and restart:

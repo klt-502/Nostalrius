@@ -14,6 +14,7 @@ with tempfile.TemporaryDirectory(prefix="zedas-engine-") as directory:
                  "data/talkactions/lib", "data/talkactions/scripts/easymode"):
         shutil.copytree(source / path, root / path)
     for path in ("data/global.lua", "data/actions/scripts/misc/fluids.lua",
+                 "data/actions/scripts/misc/weapons.lua", "data/actions/scripts/misc/food.lua",
                  "data/spells/scripts/runes/ultimate healing.lua",
                  "data/spells/scripts/runes/great fireball.lua",
                  "data/spells/scripts/runes/explosion.lua"):
@@ -42,6 +43,21 @@ with tempfile.TemporaryDirectory(prefix="zedas-engine-") as directory:
             '<movements><movevent event="AddItem" itemid="3351" function="onAddField" />'
             '<movevent event="AddItem" itemid="3352" tileitem="1" function="onAddField" />'
             '<movevent event="AddItem" pos="110;94;7" function="onAddField" /></movements>')
+    if scenario == "spill_hunting":
+        shutil.copytree(source / "data/zedas", root / "data/zedas")
+        actions = ET.Element("actions")
+        for node in ET.parse(source / "data/actions/actions.xml").getroot():
+            if node.get("script") in {"misc/fluids.lua", "misc/weapons.lua", "misc/food.lua"}:
+                actions.append(node)
+        ET.ElementTree(actions).write(root / "data/actions/actions.xml")
+        (root / "data/movements/lib").mkdir(parents=True)
+        (root / "data/movements/scripts").mkdir()
+        (root / "data/movements/lib/movements.lua").write_text("")
+        movements = ET.Element("movements")
+        for node in ET.parse(source / "data/movements/movements.xml").getroot():
+            if node.get("event") in {"Equip", "DeEquip"}:
+                movements.append(node)
+        ET.ElementTree(movements).write(root / "data/movements/movements.xml")
     enabled = "false" if scenario in {"disabled", "wave2_disabled"} else '"invalid"' if scenario == "invalid_config" else "true"
     endless = "false" if scenario == "feature_disabled" else "true"
     config = (
@@ -55,7 +71,9 @@ with tempfile.TemporaryDirectory(prefix="zedas-engine-") as directory:
         config = 'removeChargesFromRunes = true\ntimeBetweenExActions = 25\n'
     if scenario == "bag_enabled":
         config += 'easyModeGoldBag = true\n'
-    if scenario in {"spill_enabled", "spill_only", "spill_invalid_policy", "spill_missing_policy", "wave2_disabled"}:
+    if scenario == "spill_hunting":
+        config += 'easyModeGoldBag = true\n'
+    if scenario in {"spill_enabled", "spill_hunting", "spill_only", "spill_invalid_policy", "spill_missing_policy", "wave2_disabled"}:
         config += 'easyModeLootSpill = true\n'
     if scenario == "wave2_disabled":
         config += 'easyModeGoldBag = true\neasyModeRespawn = true\n'
