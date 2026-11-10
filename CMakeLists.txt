@@ -7,7 +7,10 @@ project(tfs)
 
 list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-include(cotire)
+option(USE_COTIRE "Enable legacy cotire/PCH acceleration (can require substantial memory)" OFF)
+if(USE_COTIRE)
+    include(cotire)
+endif()
 
 add_compile_options(-Wall  -pipe -fvisibility=hidden)
 
@@ -39,9 +42,13 @@ include_directories(${MYSQL_INCLUDE_DIR} ${ZEDAS_LUA_INCLUDE_DIR} ${Boost_INCLUD
 target_link_libraries(tfs_engine PUBLIC ${MYSQL_CLIENT_LIBS} ${ZEDAS_LUA_LIBRARIES} ${Boost_LIBRARIES} ${Boost_FILESYSTEM_LIBRARIES} ${PUGIXML_LIBRARIES} ${GMP_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 target_link_libraries(tfs tfs_engine)
 
-set_target_properties(tfs_engine PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "src/otpch.h")
-set_target_properties(tfs_engine PROPERTIES COTIRE_ADD_UNITY_BUILD FALSE)
-cotire(tfs_engine)
+if(USE_COTIRE)
+    set_target_properties(tfs_engine PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "src/otpch.h")
+    set_target_properties(tfs_engine PROPERTIES COTIRE_ADD_UNITY_BUILD FALSE)
+    cotire(tfs_engine)
+else()
+    message(STATUS "Zedas low-memory build: cotire, generated prefix headers and PCH disabled")
+endif()
 
 include(CTest)
 if(BUILD_TESTING)

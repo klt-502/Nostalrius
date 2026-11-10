@@ -4,6 +4,8 @@
 pushes and pull requests targeting that branch. It also supports manual runs.
 Its matrix builds and tests both `USE_LUAJIT=ON` and `USE_LUAJIT=OFF`, with
 both development packages installed in each job to expose mixed discovery.
+Both jobs compile serially with `USE_COTIRE=OFF` and check the actual compiler
+commands for cotire, forced prefix headers and PCH flags.
 The workflow has read-only repository permissions. It requires no secrets,
 database service, runtime configuration, game map, or Tibia client.
 
@@ -12,9 +14,30 @@ To reproduce on Ubuntu 24.04:
 ```sh
 sudo apt-get update
 sudo apt-get install -y --no-install-recommends build-essential cmake ninja-build libboost-system-dev libboost-filesystem-dev libpugixml-dev libluajit-5.1-dev luajit liblua5.2-dev lua5.2 default-libmysqlclient-dev libgmp-dev python3
-cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DUSE_LUAJIT=ON
-cmake --build build --parallel 2
+cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DUSE_LUAJIT=ON -DUSE_COTIRE=OFF
+cmake --build build --parallel 1
 ctest --test-dir build --output-on-failure
+```
+
+`USE_COTIRE` defaults to **OFF**, the supported low-memory path. This bypasses
+the cotire module entirely: no generated prefix-header analysis, precompiled
+header or unity target is created. Normal `otpch.h` includes remain ordinary
+includes. The gameplay code and Lua choice are unchanged. Use serial compilation
+on memory-constrained machines; normal parallel builds are also supported.
+
+At `f83a1fd`, Ubuntu 24.04/GCC 13 was reported to exhaust roughly 13 GB in the
+legacy cotire/PCH path even with one compiler process. Serial compilation alone
+does not fix that path. This option avoids it; it does not claim to repair the
+underlying legacy cotire/compiler incompatibility. `-DUSE_COTIRE=ON` remains an
+explicit legacy opt-in for environments where it works.
+
+To recover an existing build, rerun its configure command with
+`-DUSE_COTIRE=OFF`, then build. A fresh directory such as `build-low-memory`
+also avoids stale compiler artifacts. To inspect a reused build explicitly,
+configure with `-DCMAKE_EXPORT_COMPILE_COMMANDS=ON` and run:
+
+```sh
+python3 tests/cmake/check_no_cotire.py build/compile_commands.json
 ```
 
 `USE_LUAJIT` defaults to `ON` and requires LuaJIT. `OFF` requires standard
