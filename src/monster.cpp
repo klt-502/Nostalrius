@@ -20,6 +20,7 @@
 #include "otpch.h"
 
 #include "monster.h"
+#include "npc.h"
 #include "easymode.h"
 #include "game.h"
 #include "spells.h"
@@ -1910,7 +1911,18 @@ bool Monster::canWalkTo(Position pos, Direction direction) const
 		}
 
 		Tile* tile = g_game.map.getTile(pos);
-		if (tile && tile->getTopVisibleCreature(this) == nullptr && tile->queryAdd(0, *this, 1, FLAG_PATHFINDING) == RETURNVALUE_NOERROR) {
+		bool occupied = tile && tile->getTopVisibleCreature(this) != nullptr;
+		if (occupied && tile->getTopVisibleCreature(this)->getNpc() &&
+		    tile->getTopVisibleCreature(this)->getNpc()->getBrokerOwner()) {
+			occupied = false;
+			for (const Creature *resident : *tile->getCreatures()) {
+				if (canSeeCreature(resident) && !(resident->getNpc() && resident->getNpc()->getBrokerOwner())) {
+					occupied = true;
+					break;
+				}
+			}
+		}
+		if (tile && !occupied && tile->queryAdd(0, *this, 1, FLAG_PATHFINDING) == RETURNVALUE_NOERROR) {
 			return true;
 		}
 	}

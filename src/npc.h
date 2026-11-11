@@ -52,7 +52,7 @@ class Npc final : public Creature
 		}
 
 		bool isPushable() const final {
-			return baseSpeed > 0;
+			return !brokerOwner && baseSpeed > 0;
 		}
 
 		void setID() final {
@@ -65,6 +65,8 @@ class Npc final : public Creature
 		void addList() final;
 
 		static Npc* createNpc(const std::string& name);
+		static Npc* createBroker(uint32_t owner);
+		uint32_t getBrokerOwner() const { return brokerOwner; }
 
 		bool canSee(const Position& pos) const final;
 
@@ -146,12 +148,14 @@ class Npc final : public Creature
 		int64_t conversationEndTime;
 		int64_t staticMovementTime;
 
+		uint32_t brokerOwner = 0;
 		bool loaded;
 		bool isIdle;
 
 		BehaviourDatabase* behaviourDatabase;
 
 		friend class Npcs;
+		friend struct BrokerEngineTestAccess;
 		friend class BehaviourDatabase;
 };
 

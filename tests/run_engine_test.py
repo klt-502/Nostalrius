@@ -1,4 +1,5 @@
 """Run native engine tests in a throwaway data directory, without a DB/client."""
+import os
 import pathlib
 import shutil
 import subprocess
@@ -8,6 +9,8 @@ import xml.etree.ElementTree as ET
 
 binary, source, scenario = sys.argv[1:]
 source = pathlib.Path(source)
+if scenario in {"broker", "broker_restart"} and not os.environ.get("ZEDAS_BROKER_TEST_PORT"):
+    sys.exit(77)
 with tempfile.TemporaryDirectory(prefix="zedas-engine-") as directory:
     root = pathlib.Path(directory)
     for path in ("data/lib", "data/items", "data/XML", "data/spells/lib", "data/actions/lib",
@@ -43,8 +46,10 @@ with tempfile.TemporaryDirectory(prefix="zedas-engine-") as directory:
             '<movements><movevent event="AddItem" itemid="3351" function="onAddField" />'
             '<movevent event="AddItem" itemid="3352" tileitem="1" function="onAddField" />'
             '<movevent event="AddItem" pos="110;94;7" function="onAddField" /></movements>')
-    if scenario == "spill_hunting":
+    if scenario in {"spill_hunting", "broker", "broker_catalog", "broker_restart"}:
         shutil.copytree(source / "data/zedas", root / "data/zedas")
+        (root / "data/npc").mkdir()
+        shutil.copyfile(source / "data/npc/sam.npc", root / "data/npc/sam.npc")
         actions = ET.Element("actions")
         for node in ET.parse(source / "data/actions/actions.xml").getroot():
             if node.get("script") in {"misc/fluids.lua", "misc/weapons.lua", "misc/food.lua"}:
@@ -71,12 +76,12 @@ with tempfile.TemporaryDirectory(prefix="zedas-engine-") as directory:
         config = 'removeChargesFromRunes = true\ntimeBetweenExActions = 25\n'
     if scenario == "bag_enabled":
         config += 'easyModeGoldBag = true\n'
-    if scenario == "spill_hunting":
+    if scenario in {"spill_hunting", "broker", "broker_catalog", "broker_restart"}:
         config += 'easyModeGoldBag = true\n'
-    if scenario in {"spill_enabled", "spill_hunting", "spill_only", "spill_invalid_policy", "spill_missing_policy", "wave2_disabled"}:
+    if scenario in {"spill_enabled", "spill_hunting", "spill_only", "spill_invalid_policy", "spill_missing_policy", "wave2_disabled", "broker", "broker_catalog", "broker_restart"}:
         config += 'easyModeLootSpill = true\n'
     if scenario == "wave2_disabled":
-        config += 'easyModeGoldBag = true\neasyModeRespawn = true\n'
+        config += 'easyModeGoldBag = true\neasyModeRespawn = true\neasyModeLootBroker = true\n'
     if scenario == "respawn_enabled":
         config += 'easyModeRespawn = true\n'
     if scenario == "spill_only":
@@ -91,14 +96,32 @@ with tempfile.TemporaryDirectory(prefix="zedas-engine-") as directory:
                                ("gold_disabled", "easyModeAutoGold")):
         if scenario == scenario_name:
             config = config.replace(key + " = true", key + " = false")
+    if scenario in {"broker", "broker_catalog", "broker_restart"}:
+        config += 'easyModeLootBroker = true\neasyModeBrokerGraceSeconds = 5\n'
+    if scenario in {"broker", "broker_restart"}:
+        config += ('mysqlHost="127.0.0.1"\nmysqlUser="root"\nmysqlPass="fixture-only"\n'
+                   'mysqlDatabase="zedas_broker_test"\nmysqlPort=' + os.environ["ZEDAS_BROKER_TEST_PORT"] + '\n')
     (root / "config.lua").write_text(config)
     if scenario == "invalid_config":
         # Exercise each startup setting independently, including newly reserved flags.
         valid = config.replace('"invalid"', 'false')
         for key in ("easyModeEnabled", "easyModeEndlessRunes", "easyModeEndlessManaFluid",
                     "easyModeCommands", "easyModeAutoTarget", "easyModeAutoGold",
-                    "easyModeLootSpill", "easyModeGoldBag", "easyModeRespawn"):
+                    "easyModeLootSpill", "easyModeGoldBag", "easyModeRespawn", "easyModeLootBroker"):
             (root / "config.lua").write_text(valid + f'\n{key} = "invalid"\n')
             subprocess.run([binary, scenario], cwd=root, check=True)
+        for key, values in {
+            "easyModeBrokerGraceSeconds": ["4", "241", "5.5", "'45'", "0/0"],
+            "easyModeBrokerCommissionBps": ["-1", "10001", "2.5", "'2500'"],
+            "easyModeBrokerLeashTiles": ["1", "13", "2.5", "'7'"],
+            "easyModeBrokerCatalogFile": ["123", "''"],
+        }.items():
+            for value in values:
+                (root / "config.lua").write_text(valid + f'\n{key} = {value}\n')
+                subprocess.run([binary, scenario], cwd=root, check=True)
         (root / "config.lua").write_text(valid + '\neasyModeRespawnPolicyFile = 123\n')
-    subprocess.run([binary, scenario], cwd=root, check=True)
+    if scenario == "broker_restart":
+        for stage in ("broker_seed", "broker_sale_restart", "broker_payout_restart", "broker_final_restart"):
+            subprocess.run([binary, stage], cwd=root, check=True)
+    else:
+        subprocess.run([binary, scenario], cwd=root, check=True)

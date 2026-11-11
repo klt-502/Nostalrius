@@ -20,6 +20,7 @@
 #include "otpch.h"
 
 #include "npc.h"
+#include "broker.h"
 #include "game.h"
 #include "tools.h"
 #include "position.h"
@@ -182,6 +183,8 @@ void Npc::reset()
 
 void Npc::reload()
 {
+	if (brokerOwner)
+		return;
 	loaded = false;
 
 	reset();
@@ -273,6 +276,14 @@ void Npc::onCreatureMove(Creature* creature, const Tile* newTile, const Position
 
 void Npc::onCreatureSay(Creature* creature, SpeakClasses type, const std::string& text)
 {
+	if (brokerOwner) {
+		Player *owner = creature->getPlayer();
+		if (owner && owner->getGUID() == brokerOwner && type == TALKTYPE_SAY &&
+		    Position::areInRange<3, 3, 0>(owner->getPosition(), getPosition()) &&
+		    (text == "balance" || text == "cash out" || text == "cashout"))
+			Broker::command(*owner, text);
+		return;
+	}
 	if (creature->getID() == id || type != TALKTYPE_SAY || !behaviourDatabase) {
 		return;
 	}
@@ -298,6 +309,8 @@ void Npc::onCreatureSay(Creature* creature, SpeakClasses type, const std::string
 void Npc::onThink(uint32_t interval)
 {
 	Creature::onThink(interval);
+	if (brokerOwner)
+		return;
 
 	if (!isIdle && focusCreature == 0 && baseSpeed > 0 && getTimeSinceLastMove() >= 100 + getStepDuration()) {
 		addEventWalk();
@@ -332,6 +345,15 @@ void Npc::doSay(const std::string& text)
 
 bool Npc::getNextStep(Direction& dir, uint32_t& flags)
 {
+	if (brokerOwner) {
+		if (!Creature::getNextStep(dir, flags))
+			return false;
+		if (!Broker::canStep(*this, getNextPosition(dir, getPosition()))) {
+			listWalkDir.clear();
+			return false;
+		}
+		return true;
+	}
 	if (Creature::getNextStep(dir, flags)) {
 		return true;
 	}
@@ -479,4 +501,19 @@ void Npc::setCreatureFocus(Creature* creature)
 	} else {
 		focusCreature = 0;
 	}
+}
+Npc *Npc::createBroker(uint32_t owner)
+{
+	Npc *npc = new Npc("Loot Broker");
+	npc->name = "Loot Broker";
+	npc->brokerOwner = owner;
+	npc->isIdle = false;
+	npc->lastTalkCreature = 0;
+	npc->conversationStartTime = 0;
+	npc->filename.clear();
+	npc->defaultOutfit.lookType = 69;
+	npc->currentOutfit = npc->defaultOutfit;
+	npc->baseSpeed = 100;
+	npc->loaded = true;
+	return npc;
 }

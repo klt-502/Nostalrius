@@ -30,6 +30,7 @@
 #include "iologindata.h"
 #include "configmanager.h"
 #include "easymode.h"
+#include "broker.h"
 #include "teleport.h"
 #include "databasemanager.h"
 #include "bed.h"
@@ -1558,6 +1559,11 @@ void LuaScriptInterface::registerFunctions()
 	registerEnumIn("configKeys", ConfigManager::EASY_MODE_GOLD_BAG)
 	registerEnumIn("configKeys", ConfigManager::EASY_MODE_RESPAWN)
 	registerEnumIn("configKeys", ConfigManager::EASY_MODE_RESPAWN_POLICY_FILE)
+	registerEnumIn("configKeys", ConfigManager::EASY_MODE_LOOT_BROKER)
+	registerEnumIn("configKeys", ConfigManager::EASY_MODE_BROKER_CATALOG_FILE)
+	registerEnumIn("configKeys", ConfigManager::EASY_MODE_BROKER_GRACE_SECONDS)
+	registerEnumIn("configKeys", ConfigManager::EASY_MODE_BROKER_COMMISSION_BPS)
+	registerEnumIn("configKeys", ConfigManager::EASY_MODE_BROKER_LEASH_TILES)
 	registerEnumIn("configKeys", ConfigManager::EXPERIENCE_FROM_PLAYERS)
 	registerEnumIn("configKeys", ConfigManager::FREE_PREMIUM)
 	registerEnumIn("configKeys", ConfigManager::REPLACE_KICK_ON_LOGIN)
@@ -1978,6 +1984,7 @@ void LuaScriptInterface::registerFunctions()
 	registerMethod("Player", "removeItem", LuaScriptInterface::luaPlayerRemoveItem);
 
 	registerMethod("Player", "getMoney", LuaScriptInterface::luaPlayerGetMoney);
+	registerMethod("Player", "brokerCommand", LuaScriptInterface::luaPlayerBrokerCommand);
 	registerMethod("Player", "useEasyModeItem", LuaScriptInterface::luaPlayerUseEasyModeItem);
 	registerMethod("Player", "setEasyModeAutoTarget", LuaScriptInterface::luaPlayerSetEasyModeAutoTarget);
 	registerMethod("Player", "isEasyModeAutoTargetActive", LuaScriptInterface::luaPlayerIsEasyModeAutoTargetActive);
@@ -11462,4 +11469,13 @@ void LuaEnvironment::executeTimerEvent(uint32_t eventIndex)
 	for (auto parameter : timerEventDesc.parameters) {
 		luaL_unref(luaState, LUA_REGISTRYINDEX, parameter);
 	}
+}
+
+int LuaScriptInterface::luaPlayerBrokerCommand(lua_State *L)
+{
+	Player *player = getUserdata<Player>(L, 1);
+	if (player)
+		Broker::command(*player, getString(L, 2));
+	pushBoolean(L, player != nullptr);
+	return 1;
 }

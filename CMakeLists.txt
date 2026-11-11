@@ -57,11 +57,12 @@ if(BUILD_TESTING)
     target_include_directories(easymode_engine_test PRIVATE src)
     target_link_libraries(easymode_engine_test tfs_engine)
     foreach(scenario enabled disabled feature_disabled invalid_config defaults commands_disabled target_disabled gold_disabled
-            bag_enabled bag_disabled spill_enabled spill_hunting spill_only spill_invalid_policy spill_missing_policy wave2_disabled respawn_enabled)
+            bag_enabled bag_disabled spill_enabled spill_hunting spill_only spill_invalid_policy spill_missing_policy wave2_disabled respawn_enabled broker broker_catalog broker_restart)
         add_test(NAME engine_${scenario} COMMAND ${PYTHON_EXECUTABLE}
             ${CMAKE_SOURCE_DIR}/tests/run_engine_test.py
             $<TARGET_FILE:easymode_engine_test> ${CMAKE_SOURCE_DIR} ${scenario})
     endforeach()
+    set_tests_properties(engine_broker engine_broker_restart PROPERTIES SKIP_RETURN_CODE 77)
     add_executable(easymode_constants_test tests/easymode_constants_test.cpp)
     target_include_directories(easymode_constants_test PRIVATE src)
     add_test(NAME easymode_constants COMMAND easymode_constants_test)

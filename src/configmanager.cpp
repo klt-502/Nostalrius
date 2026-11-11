@@ -21,6 +21,7 @@
 
 #include "configmanager.h"
 #include "game.h"
+#include <cmath>
 
 #if LUA_VERSION_NUM >= 502
 #undef lua_strlen
@@ -47,12 +48,14 @@ bool ConfigManager::load()
 	//parse config
 	if (!loaded) { //info that must be loaded one time (unless we reset the modules involved)
 		// Easy Mode is startup-only. Validate all values before changing configuration.
-		const char* easyNames[] = {"easyModeEnabled", "easyModeEndlessRunes", "easyModeEndlessManaFluid",
-		                          "easyModeCommands", "easyModeAutoTarget", "easyModeAutoGold",
-		                          "easyModeLootSpill", "easyModeGoldBag", "easyModeRespawn"};
-		const boolean_config_t easyKeys[] = {EASY_MODE_ENABLED, EASY_MODE_ENDLESS_RUNES, EASY_MODE_ENDLESS_MANA_FLUID,
-		                                   EASY_MODE_COMMANDS, EASY_MODE_AUTO_TARGET, EASY_MODE_AUTO_GOLD,
-		                                   EASY_MODE_LOOT_SPILL, EASY_MODE_GOLD_BAG, EASY_MODE_RESPAWN};
+		const char *easyNames[] = {"easyModeEnabled",   "easyModeEndlessRunes", "easyModeEndlessManaFluid",
+		                           "easyModeCommands",  "easyModeAutoTarget",   "easyModeAutoGold",
+		                           "easyModeLootSpill", "easyModeGoldBag",      "easyModeRespawn",
+		                           "easyModeLootBroker"};
+		const boolean_config_t easyKeys[] = {
+		    EASY_MODE_ENABLED,     EASY_MODE_ENDLESS_RUNES, EASY_MODE_ENDLESS_MANA_FLUID, EASY_MODE_COMMANDS,
+		    EASY_MODE_AUTO_TARGET, EASY_MODE_AUTO_GOLD,     EASY_MODE_LOOT_SPILL,         EASY_MODE_GOLD_BAG,
+		    EASY_MODE_RESPAWN,     EASY_MODE_LOOT_BROKER};
 		constexpr size_t easyCount = sizeof(easyKeys) / sizeof(easyKeys[0]);
 		static_assert(easyCount == sizeof(easyNames) / sizeof(easyNames[0]), "Easy Mode configuration registry mismatch");
 		bool easyValues[easyCount] = {};
@@ -74,6 +77,44 @@ bool ConfigManager::load()
 		}
 		const std::string respawnPolicy = lua_isnil(L, -1) ? "data/zedas/spawns.xml" : lua_tostring(L, -1);
 		lua_pop(L, 1);
+		struct BrokerNumber {
+			const char *name;
+			integer_config_t key;
+			int value, low, high;
+		};
+		BrokerNumber brokerNumbers[] = {
+		    {"easyModeBrokerGraceSeconds", EASY_MODE_BROKER_GRACE_SECONDS, 45, 5, 240},
+		    {"easyModeBrokerCommissionBps", EASY_MODE_BROKER_COMMISSION_BPS, 2500, 0, 10000},
+		    {"easyModeBrokerLeashTiles", EASY_MODE_BROKER_LEASH_TILES, 7, 2, 12}};
+		for (auto &option : brokerNumbers) {
+			lua_getglobal(L, option.name);
+			if (!lua_isnil(L, -1)) {
+				const double value = lua_tonumber(L, -1);
+				if (lua_type(L, -1) != LUA_TNUMBER || !std::isfinite(value) || value != std::floor(value) ||
+				    value < option.low || value > option.high) {
+					std::cout << "[Error - ConfigManager] invalid " << option.name << std::endl;
+					lua_close(L);
+					return false;
+				}
+				option.value = static_cast<int>(value);
+			}
+			lua_pop(L, 1);
+		}
+		lua_getglobal(L, "easyModeBrokerCatalogFile");
+		if (!lua_isnil(L, -1) && (lua_type(L, -1) != LUA_TSTRING || !lua_strlen(L, -1))) {
+			std::cout << "[Error - ConfigManager] invalid easyModeBrokerCatalogFile" << std::endl;
+			lua_close(L);
+			return false;
+		}
+		const std::string brokerCatalog = lua_isnil(L, -1) ? "data/zedas/broker.xml" : lua_tostring(L, -1);
+		lua_pop(L, 1);
+		if (brokerCatalog.empty()) {
+			lua_close(L);
+			return false;
+		}
+		for (const auto &option : brokerNumbers)
+			integer[option.key] = option.value;
+		string[EASY_MODE_BROKER_CATALOG_FILE] = brokerCatalog;
 		for (size_t i = 0; i < easyCount; ++i) {
 			boolean[easyKeys[i]] = easyValues[i];
 		}

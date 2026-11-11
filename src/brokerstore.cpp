@@ -87,7 +87,7 @@ std::string Store::quote(const std::string& value)
 std::string Store::key() { return session + ":" + std::to_string(++sequence); }
 void Store::begin() { execute("START TRANSACTION"); }
 void Store::abort() { if (handle) { try { execute("ROLLBACK"); } catch (...) {} } }
-void Store::commit()
+void Store::commit(const char* /*operation*/)
 {
 #ifdef ZEDAS_BROKER_FAULT_TEST
     if (fault == Fault::BeforeCommit) { fault = Fault::None; close(); throw std::runtime_error("injected before COMMIT"); }
@@ -135,7 +135,7 @@ void Store::prepare(const std::string& id, uint32_t owner, uint16_t item, unsign
                 throw std::runtime_error("broker not collecting or escrow full");
             execute("INSERT INTO zedas_broker_escrow(claim_key,owner,item,count,price) VALUES(" + quote(id) + "," + std::to_string(owner) + "," + std::to_string(item) + "," + std::to_string(count) + "," + std::to_string(price) + ")");
         }
-        commit();
+        commit("claim");
     } catch (...) { abort(); throw; }
 }
 void Store::depart(uint32_t owner, const std::string& trip, uint64_t now)
@@ -145,7 +145,7 @@ void Store::depart(uint32_t owner, const std::string& trip, uint64_t now)
         query("SELECT owner FROM zedas_broker_accounts WHERE owner=" + std::to_string(owner) + " FOR UPDATE");
         if (number(status(owner), "state") == 0 && !inventory(owner).empty())
             execute("UPDATE zedas_broker_accounts SET state=1,deadline=" + std::to_string(now + TRIP_SECONDS) + ",trip=" + quote(trip) + " WHERE owner=" + std::to_string(owner));
-        commit();
+        commit("depart");
     } catch (...) { abort(); throw; }
 }
 void Store::settle(uint32_t owner, uint64_t now, unsigned bps)
@@ -154,7 +154,7 @@ void Store::settle(uint32_t owner, uint64_t now, unsigned bps)
     try {
         query("SELECT owner FROM zedas_broker_accounts WHERE owner=" + std::to_string(owner) + " FOR UPDATE");
         auto state = status(owner);
-        if (number(state,"state") != 1 || number(state,"deadline") > now) { commit(); return; }
+        if (number(state,"state") != 1 || number(state,"deadline") > now) { commit("read"); return; }
         const auto items = inventory(owner);
         uint64_t gross = 0;
         for (const auto& item : items) {
@@ -169,7 +169,7 @@ void Store::settle(uint32_t owner, uint64_t now, unsigned bps)
         execute("INSERT INTO zedas_broker_sales(operation,owner,gross,net,commission,bps) VALUES(" + quote(state.at("trip")) + "," + std::to_string(owner) + "," + std::to_string(gross) + "," + std::to_string(net) + "," + std::to_string(fee) + "," + std::to_string(bps) + ")");
         execute("UPDATE zedas_broker_escrow SET sold=1,sale=" + quote(state.at("trip")) + " WHERE sold=0 AND owner=" + std::to_string(owner));
         execute("UPDATE zedas_broker_accounts SET pending=pending+" + std::to_string(net) + ",funds=funds+" + std::to_string(fee) + ",state=2,deadline=" + std::to_string(now+TRIP_SECONDS) + " WHERE owner=" + std::to_string(owner));
-        commit();
+        commit("sale");
     } catch (...) { abort(); throw; }
 }
 void Store::returned(uint32_t owner, uint64_t now)
@@ -208,7 +208,7 @@ Bank Store::cashout(uint32_t owner, const std::string& id, uint64_t baseline, ui
                 execute("UPDATE zedas_broker_accounts SET pending=0 WHERE owner=" + std::to_string(owner));
             }
         }
-        commit();
+        commit("payout");
         return bank;
     } catch (...) { abort(); throw; }
 }

@@ -5,6 +5,7 @@
 	<talkaction words="!explo" separator=" " script="easymode/use_consumable.lua" />
 	<talkaction words="!gfb" separator=" " script="easymode/use_consumable.lua" />
 	<talkaction words="!autotarget" separator=" " script="easymode/auto_target.lua" />
+	<talkaction words="!broker" separator=" " script="easymode/broker.lua" />
 	<!-- commands -->
 	<talkaction words="/ban" separator=" " script="ban.lua" />
 	<talkaction words="/ipban" separator=" " script="ipban.lua" />

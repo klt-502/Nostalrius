@@ -29,9 +29,8 @@ conversion, physical coin fallback or player storage keys are used.
 
 Payouts lock the player and account and atomically credit bank, append a unique
 payout ledger row and zero pending. A live bank watermark plus `savedBank()`
-protects broker credits not yet incorporated into live memory. The physical
-feature must wire that expression into IOLoginData load/save before enabling
-cashout. Existing SQL helpers with automatic reconnect must not perform broker
+protects broker credits not yet incorporated into live memory. The physical feature wires that expression into IOLoginData load/save;
+login obtains bank and payout watermark in one consistent SELECT. Existing SQL helpers with automatic reconnect must not perform broker
 transactions.
 
 CI uses a disposable MariaDB 10.11 service, public fixture credentials and the
@@ -39,6 +38,8 @@ repository schema; no live credentials, secrets or client are required. The
 `broker_store` test is skipped without `ZEDAS_BROKER_TEST_PORT`. Its connection is
 restricted in code to database `zedas_broker_test` with fixture credentials. It
 checks lost acknowledgements before/after COMMIT, replay/ownership, commission,
-capacity, overflow, bank-save expression and child-process restart. Actual
-IOLoginData/physical integration tests belong to the gameplay layer. Native fault
-hooks are compiled only into the test executable, never the server.
+capacity, overflow, bank-save expression and child-process restart. The gameplay layer additionally tests actual IOLoginData and physical claims.
+`engine_broker_restart` abruptly exits four separate engine processes around
+prepared-claim, sale and bank-payout commits, then checks one recovery/credit.
+Fault injection is a test-only Store subclass; production uses the normal
+no-replay connection and has no configurable failure hook.

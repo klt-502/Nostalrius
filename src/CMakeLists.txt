@@ -23,6 +23,7 @@ set(tfs_SRC
 	${CMAKE_CURRENT_LIST_DIR}/easymodetarget.cpp
 	${CMAKE_CURRENT_LIST_DIR}/easyloot.cpp
 	${CMAKE_CURRENT_LIST_DIR}/brokerstore.cpp
+	${CMAKE_CURRENT_LIST_DIR}/broker.cpp
 	${CMAKE_CURRENT_LIST_DIR}/easyspill.cpp
 	${CMAKE_CURRENT_LIST_DIR}/easyspawn.cpp
 	${CMAKE_CURRENT_LIST_DIR}/fileloader.cpp

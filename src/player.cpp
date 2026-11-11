@@ -22,6 +22,7 @@
 #include <bitset>
 
 #include "bed.h"
+#include "broker.h"
 #include "chat.h"
 #include "combat.h"
 #include "configmanager.h"
@@ -1144,6 +1145,7 @@ void Player::onThink(uint32_t interval)
 	EasyMode::updateAutoTarget(*this, OTSYS_TIME());
 	EasyMode::collectGold(*this);
 	EasyMode::spillLoot();
+	Broker::tick(*this);
 
 	sendPing();
 

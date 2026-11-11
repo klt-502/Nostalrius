@@ -151,6 +151,9 @@ class Player final : public Creature, public Cylinder
 			return ((50ULL * lv * lv * lv) - (150ULL * lv * lv) + (400ULL * lv)) / 3ULL;
 		}
 
+		uint64_t getBrokerBankWatermark() const { return brokerBankWatermark; }
+		void setBrokerBankWatermark(uint64_t value) { brokerBankWatermark = value; }
+
 		uint64_t getBankBalance() const {
 			return bankBalance;
 		}
@@ -980,6 +983,7 @@ class Player final : public Creature, public Cylinder
 
 		uint64_t experience = 0;
 		uint64_t manaSpent = 0;
+		uint64_t brokerBankWatermark = 0;
 		uint64_t bankBalance = 0;
 		int64_t lastAttack = 0;
 		int64_t lastFailedFollow = 0;
@@ -1095,6 +1099,7 @@ class Player final : public Creature, public Cylinder
 		friend class Map;
 		friend class Actions;
 		friend class IOLoginData;
+		friend struct BrokerEngineTestAccess;
 		friend class ProtocolGame;
 		friend class BehaviourDatabase;
 		friend class ConjureSpell;

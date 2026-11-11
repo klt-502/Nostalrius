@@ -6,6 +6,7 @@
 #include "game.h"
 #include "player.h"
 #include "tile.h"
+#include "broker.h"
 
 extern ConfigManager g_config;
 extern Game g_game;
@@ -36,6 +37,12 @@ struct CorpseEntry {
 	int64_t registeredAt;
 	std::vector<Item*> coins;
 	std::vector<Item*> spill;
+	struct Ground {
+		Item *item;
+		Tile *tile;
+		int64_t visibleAt;
+	};
+	std::vector<Ground> ground;
 	std::unordered_set<Item*> touched;
 	bool invalidated = false;
 	explicit CorpseEntry(Container& container) : corpse(&container), originalParent(container.getParent()),
@@ -45,6 +52,8 @@ struct CorpseEntry {
 	~CorpseEntry() {
 		for (Item* coin : coins) coin->decrementReferenceCounter();
 		for (Item* item : spill) item->decrementReferenceCounter();
+		for (auto &witness : ground)
+			witness.item->decrementReferenceCounter();
 		corpse->decrementReferenceCounter();
 	}
 	bool valid(int64_t now) const {
@@ -100,7 +109,10 @@ void spillEntry(CorpseEntry& entry)
 		    EasyMode::isSpillItem(*item) && !inAnyTrade(*item)) {
 			Item* sourceItem = item->getParent()->getItem();
 			Container* source = sourceItem ? sourceItem->getContainer() : nullptr;
-			if (source && tile) EasyMode::spillItem(*source, *tile, *item);
+			if (source && tile && EasyMode::spillItem(*source, *tile, *item) && Broker::enabled()) {
+				item->incrementReferenceCounter();
+				entry.ground.push_back({item, tile, OTSYS_TIME()});
+			}
 		}
 		if (entry.touched.count(item) || !inside(*item, *entry.corpse) || !safeSpillAncestors(*item, *entry.corpse) || !EasyMode::isSpillItem(*item)) {
 			entry.touched.erase(item);
@@ -205,6 +217,10 @@ void EasyMode::onLootItemMove(Item& item, const Item* mergeTarget)
 		};
 		mark(entry->coins);
 		mark(entry->spill);
+		for (const auto &ground : entry->ground)
+			if (ground.item == &item || ground.item == mergeTarget ||
+			    (movedContainer && movedContainer->isHoldingItem(ground.item)))
+				entry->touched.insert(ground.item);
 	}
 }
 
@@ -280,4 +296,26 @@ uint64_t EasyMode::collectGold(Player& player)
 	}
 	prune();
 	return collected;
+}
+
+std::vector<Item *> EasyMode::brokerCandidates(int64_t now, int64_t grace)
+{
+	std::vector<Item *> result;
+	if (!Broker::enabled() || !spillEnabled())
+		return result;
+	prune();
+	for (const auto &entry : corpses)
+		for (const auto &witness : entry->ground) {
+			Item *item = witness.item;
+			if (!entry->touched.count(item) && !Broker::locked(item) && now >= witness.visibleAt &&
+			    now - witness.visibleAt >= grace && item->getParent() == witness.tile && !item->isRemoved() &&
+			    isSpillItem(*item) && !inAnyTrade(*item) && brokerPickupTile(*witness.tile))
+				result.push_back(item);
+		}
+	return result;
+}
+bool EasyMode::isBrokerCandidate(Item &item, int64_t now, int64_t grace)
+{
+	const auto candidates = brokerCandidates(now, grace);
+	return std::find(candidates.begin(), candidates.end(), &item) != candidates.end();
 }

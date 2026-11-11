@@ -24,7 +24,7 @@ struct Bank { uint64_t balance, watermark; };
 class Store {
 public:
     explicit Store(Connection settings);
-    ~Store();
+    virtual ~Store();
     Store(const Store&) = delete;
     Store& operator=(const Store&) = delete;
     void connect(); // Also obtains the exclusive per-database broker lease.
@@ -56,7 +56,9 @@ private:
     uint64_t sequence = 0;
     std::string quote(const std::string& value);
     void begin();
-    void commit();
+protected:
+    virtual void commit(const char* operation); // Fixture subclasses can lose an acknowledgement.
+private:
     void abort();
 };
 }

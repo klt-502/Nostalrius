@@ -20,6 +20,8 @@
 #include "otpch.h"
 
 #include "iologindata.h"
+#include "broker.h"
+#include "brokerstore.h"
 #include "configmanager.h"
 #include "game.h"
 
@@ -188,7 +190,18 @@ bool IOLoginData::preloadPlayer(Player* player, const std::string& name)
 bool IOLoginData::loadPlayerById(Player* player, uint32_t id)
 {
 	std::ostringstream query;
-	query << "SELECT `id`, `name`, `account_id`, `group_id`, `sex`, `vocation`, `experience`, `level`, `maglevel`, `health`, `healthmax`, `blessings`, `mana`, `manamax`, `manaspent`, `soul`, `lookbody`, `lookfeet`, `lookhead`, `looklegs`, `looktype`, `posx`, `posy`, `posz`, `cap`, `lastlogin`, `lastlogout`, `lastip`, `conditions`, `skulltime`, `skull`, `town_id`, `balance`, `skill_fist`, `skill_fist_tries`, `skill_club`, `skill_club_tries`, `skill_sword`, `skill_sword_tries`, `skill_axe`, `skill_axe_tries`, `skill_dist`, `skill_dist_tries`, `skill_shielding`, `skill_shielding_tries`, `skill_fishing`, `skill_fishing_tries` FROM `players` WHERE `id` = " << id;
+	query << "SELECT "
+	      << (Broker::enabled()
+	              ? "(SELECT COALESCE(MAX(id),0) FROM zedas_broker_payouts WHERE owner=players.id) AS broker_watermark,"
+	              : "")
+	      << "`id`, `name`, `account_id`, `group_id`, `sex`, `vocation`, `experience`, `level`, `maglevel`, `health`, "
+	         "`healthmax`, `blessings`, `mana`, `manamax`, `manaspent`, `soul`, `lookbody`, `lookfeet`, `lookhead`, "
+	         "`looklegs`, `looktype`, `posx`, `posy`, `posz`, `cap`, `lastlogin`, `lastlogout`, `lastip`, "
+	         "`conditions`, `skulltime`, `skull`, `town_id`, `balance`, `skill_fist`, `skill_fist_tries`, "
+	         "`skill_club`, `skill_club_tries`, `skill_sword`, `skill_sword_tries`, `skill_axe`, `skill_axe_tries`, "
+	         "`skill_dist`, `skill_dist_tries`, `skill_shielding`, `skill_shielding_tries`, `skill_fishing`, "
+	         "`skill_fishing_tries` FROM `players` WHERE `id` = "
+	      << id;
 	return loadPlayer(player, Database::getInstance()->storeQuery(query.str()));
 }
 
@@ -196,7 +209,18 @@ bool IOLoginData::loadPlayerByName(Player* player, const std::string& name)
 {
 	Database* db = Database::getInstance();
 	std::ostringstream query;
-	query << "SELECT `id`, `name`, `account_id`, `group_id`, `sex`, `vocation`, `experience`, `level`, `maglevel`, `health`, `healthmax`, `blessings`, `mana`, `manamax`, `manaspent`, `soul`, `lookbody`, `lookfeet`, `lookhead`, `looklegs`, `looktype`, `posx`, `posy`, `posz`, `cap`, `lastlogin`, `lastlogout`, `lastip`, `conditions`, `skulltime`, `skull`, `town_id`, `balance`, `skill_fist`, `skill_fist_tries`, `skill_club`, `skill_club_tries`, `skill_sword`, `skill_sword_tries`, `skill_axe`, `skill_axe_tries`, `skill_dist`, `skill_dist_tries`, `skill_shielding`, `skill_shielding_tries`, `skill_fishing`, `skill_fishing_tries` FROM `players` WHERE `name` = " << db->escapeString(name);
+	query << "SELECT "
+	      << (Broker::enabled()
+	              ? "(SELECT COALESCE(MAX(id),0) FROM zedas_broker_payouts WHERE owner=players.id) AS broker_watermark,"
+	              : "")
+	      << "`id`, `name`, `account_id`, `group_id`, `sex`, `vocation`, `experience`, `level`, `maglevel`, `health`, "
+	         "`healthmax`, `blessings`, `mana`, `manamax`, `manaspent`, `soul`, `lookbody`, `lookfeet`, `lookhead`, "
+	         "`looklegs`, `looktype`, `posx`, `posy`, `posz`, `cap`, `lastlogin`, `lastlogout`, `lastip`, "
+	         "`conditions`, `skulltime`, `skull`, `town_id`, `balance`, `skill_fist`, `skill_fist_tries`, "
+	         "`skill_club`, `skill_club_tries`, `skill_sword`, `skill_sword_tries`, `skill_axe`, `skill_axe_tries`, "
+	         "`skill_dist`, `skill_dist_tries`, `skill_shielding`, `skill_shielding_tries`, `skill_fishing`, "
+	         "`skill_fishing_tries` FROM `players` WHERE `name` = "
+	      << db->escapeString(name);
 	return loadPlayer(player, db->storeQuery(query.str()));
 }
 
@@ -231,6 +255,8 @@ bool IOLoginData::loadPlayer(Player* player, DBResult_ptr result)
 	player->setGroup(group);
 
 	player->bankBalance = result->getNumber<uint64_t>("balance");
+	if (Broker::enabled())
+		player->setBrokerBankWatermark(result->getNumber<uint64_t>("broker_watermark"));
 
 	player->setSex(static_cast<PlayerSex_t>(result->getNumber<uint16_t>("sex")));
 	player->level = std::max<uint32_t>(1, result->getNumber<uint32_t>("level"));
@@ -653,7 +679,11 @@ bool IOLoginData::savePlayer(Player* player)
 	}
 
 	query << "`lastlogout` = " << player->getLastLogout() << ',';
-	query << "`balance` = " << player->bankBalance << ',';
+	query << "`balance` = "
+	      << (Broker::enabled()
+	              ? Broker::Store::savedBank(player->getGUID(), player->bankBalance, player->getBrokerBankWatermark())
+	              : std::to_string(player->bankBalance))
+	      << ',';
 
 	query << "`skill_fist` = " << player->skills[SKILL_FIST].level << ',';
 	query << "`skill_fist_tries` = " << player->skills[SKILL_FIST].tries << ',';

@@ -9,6 +9,7 @@ class Item;
 class Player;
 class Creature;
 class Container;
+class Tile;
 
 namespace EasyMode {
 static constexpr int64_t AUTO_TARGET_UNREACHABLE_MS = 3000;
@@ -73,6 +74,8 @@ std::vector<Item*> getCarriedItems(Player& player);
 void onLootGenerated(Container& corpse);
 uint64_t collectGold(Player& player);
 void spillLoot();
+std::vector<Item *> brokerCandidates(int64_t now, int64_t grace);
+bool isBrokerCandidate(Item &item, int64_t now, int64_t grace);
 // Invalidate generated-loot provenance before an unrelated engine mutation.
 void onLootItemMove(Item& item, const Item* mergeTarget = nullptr);
 }

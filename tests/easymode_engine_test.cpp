@@ -123,6 +123,7 @@ static uint64_t contentsValue(Container& container)
 #include "gold_bag_cases.h"
 #include "loot_spill_cases.h"
 #include "hunting_spill_cases.h"
+#include "broker_cases.h"
 
 static void setup()
 {
@@ -167,6 +168,13 @@ int main(int argc, char** argv)
 	}
 	require(loaded, "load test configuration");
 	if (scenario == "defaults") {
+		require(!Broker::enabled() && !g_config.getBoolean(ConfigManager::EASY_MODE_LOOT_BROKER),
+		        "broker defaults disabled");
+		require(g_config.getNumber(ConfigManager::EASY_MODE_BROKER_GRACE_SECONDS) == 45 &&
+		            g_config.getNumber(ConfigManager::EASY_MODE_BROKER_COMMISSION_BPS) == 2500 &&
+		            g_config.getNumber(ConfigManager::EASY_MODE_BROKER_LEASH_TILES) == 7,
+		        "broker validated defaults");
+		Broker::initialize(); // Disabled mode must not need a schema/DB/catalog.
 		const ConfigManager::boolean_config_t wave2[] = {ConfigManager::EASY_MODE_LOOT_SPILL,
 			ConfigManager::EASY_MODE_GOLD_BAG, ConfigManager::EASY_MODE_RESPAWN};
 		for (auto key : wave2) require(!g_config.getBoolean(key), "Wave 2 flags default disabled");
@@ -180,11 +188,27 @@ int main(int argc, char** argv)
 		require(g_config.getString(ConfigManager::EASY_MODE_RESPAWN_POLICY_FILE) == "data/zedas/spawns.xml", "manifest path remains startup only");
 	}
 	setup();
+	if (scenario == "broker_seed" || scenario == "broker_sale_restart" || scenario == "broker_payout_restart" ||
+	    scenario == "broker_final_restart") {
+		require(g_moveEvents->loadFromXml(), "restart real movement handlers");
+		testBrokerRestart(scenario);
+		return 0;
+	}
+	if (scenario == "broker" || scenario == "broker_catalog") {
+		require(g_moveEvents->loadFromXml(), "load real movement handlers");
+		if (scenario == "broker")
+			testBroker();
+		else
+			testBrokerCatalog();
+		return 0;
+	}
 	if (scenario == "spill_hunting") {
 		require(g_moveEvents->loadFromXml(), "load actual native equipment handlers");
 		testHuntingSpill();
 		return 0;
 	}
+	if (scenario == "wave2_disabled")
+		require(!Broker::enabled(), "master switch gates enabled broker flag");
 	if (scenario == "spill_only" || scenario == "spill_invalid_policy" || scenario == "spill_missing_policy" || scenario == "wave2_disabled" || scenario == "bag_disabled") {
 		Player* collector = makePlayer(100, 100);
 		Container* markedBag = carry(*collector, 2856, 65005)->getContainer();

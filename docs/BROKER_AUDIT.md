@@ -191,3 +191,20 @@ added by implementation also needs explicit bounds/default documentation.
 
 These are implementation gates, not claims that the broker or crash recovery has
 already been implemented or validated by this audit.
+
+
+## Implementation refinement after the audit
+
+The implementation retains the boundaries above with a smaller schema: one
+immutable unsold escrow image covers both PREPARED and CARRIED ownership. A separate
+READY update is unnecessary for recovery because claims only originate from
+transient non-house generated ground. Live uncertain claims are quarantined and
+reconciled before hydration; restart has no surviving ground copy. Unique
+UUID/sequence operation keys and the connection-scoped exclusive database lease
+replace a separate server-session table. Trips are durable account state/deadline/
+operation fields; commission has separate per-owner fund totals plus the immutable
+sale ledger. No fund spending is implemented. Capacity is fixed at 20 instances,
+travel at 60 seconds each way, batch idle departure at 15 seconds; no extra
+configuration knobs were needed. Commission rounding and bank watermark boundaries
+remain as audited. See `LOOT_BROKER.md` and the actual engine/SQL/restart tests for
+the resulting implementation and validation limits.

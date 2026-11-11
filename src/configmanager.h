@@ -50,6 +50,7 @@ class ConfigManager
 			EASY_MODE_LOOT_SPILL,
 			EASY_MODE_GOLD_BAG,
 			EASY_MODE_RESPAWN,
+			EASY_MODE_LOOT_BROKER,
 
 			LAST_BOOLEAN_CONFIG /* this must be the last one */
 		};
@@ -74,6 +75,7 @@ class ConfigManager
 			DEFAULT_PRIORITY,
 			MAP_AUTHOR,
 			EASY_MODE_RESPAWN_POLICY_FILE,
+			EASY_MODE_BROKER_CATALOG_FILE,
 
 			LAST_STRING_CONFIG /* this must be the last one */
 		};
@@ -114,6 +116,9 @@ class ConfigManager
 			NEWBIE_TOWN,
 			NEWBIE_LEVEL_THRESHOLD,
 			MONEY_RATE,
+			EASY_MODE_BROKER_GRACE_SECONDS,
+			EASY_MODE_BROKER_COMMISSION_BPS,
+			EASY_MODE_BROKER_LEASH_TILES,
 
 			LAST_INTEGER_CONFIG /* this must be the last one */
 		};

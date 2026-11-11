@@ -28,6 +28,8 @@
 #include "game.h"
 #include "mailbox.h"
 #include "monster.h"
+#include "npc.h"
+#include "broker.h"
 #include "movement.h"
 #include "teleport.h"
 
@@ -423,6 +425,10 @@ ReturnValue Tile::queryAdd(int32_t, const Thing& thing, uint32_t, uint32_t flags
 			return RETURNVALUE_NOERROR;
 		}
 
+		if (const Npc* npc = creature->getNpc()) {
+			if (npc->getBrokerOwner() && !Broker::canStep(*npc, getPosition())) return RETURNVALUE_NOTPOSSIBLE;
+		}
+
 		if (hasBitSet(FLAG_PATHFINDING, flags) && hasFlag(TILESTATE_IMMOVABLENOFIELDBLOCKPATH)) {
 			return RETURNVALUE_NOTPOSSIBLE;
 		}
@@ -448,6 +454,8 @@ ReturnValue Tile::queryAdd(int32_t, const Thing& thing, uint32_t, uint32_t flags
 			if (monster->canPushCreatures() && !monster->isSummon()) {
 				if (creatures) {
 					for (Creature* tileCreature : *creatures) {
+						if (tileCreature->getNpc() && tileCreature->getNpc()->getBrokerOwner())
+							continue;
 						if (tileCreature->getPlayer() && tileCreature->getPlayer()->isInGhostMode()) {
 							continue;
 						}
@@ -461,7 +469,8 @@ ReturnValue Tile::queryAdd(int32_t, const Thing& thing, uint32_t, uint32_t flags
 				}
 			} else if (creatures && !creatures->empty()) {
 				for (const Creature* tileCreature : *creatures) {
-					if (!tileCreature->isInGhostMode()) {
+					if (!tileCreature->isInGhostMode() &&
+					    !(tileCreature->getNpc() && tileCreature->getNpc()->getBrokerOwner())) {
 						return RETURNVALUE_NOTENOUGHROOM;
 					}
 				}
@@ -502,7 +511,10 @@ ReturnValue Tile::queryAdd(int32_t, const Thing& thing, uint32_t, uint32_t flags
 		const CreatureVector* creatures = getCreatures();
 		if (const Player* player = creature->getPlayer()) {
 			if (creatures && !creatures->empty() && !hasBitSet(FLAG_IGNOREBLOCKCREATURE, flags) && !player->isAccessPlayer()) {
-				return RETURNVALUE_NOTPOSSIBLE;
+				for (const Creature *resident : *creatures) {
+					if (!(resident->getNpc() && resident->getNpc()->getBrokerOwner()))
+						return RETURNVALUE_NOTPOSSIBLE;
+				}
 			}
 
 			if (hasBitSet(FLAG_PATHFINDING, flags) && hasFlag(TILESTATE_BLOCKPATH)) {
@@ -534,7 +546,8 @@ ReturnValue Tile::queryAdd(int32_t, const Thing& thing, uint32_t, uint32_t flags
 			}
 		} else if (creatures && !creatures->empty() && !hasBitSet(FLAG_IGNOREBLOCKCREATURE, flags)) {
 			for (const Creature* tileCreature : *creatures) {
-				if (!tileCreature->isInGhostMode()) {
+				if (!tileCreature->isInGhostMode() &&
+				    !(tileCreature->getNpc() && tileCreature->getNpc()->getBrokerOwner())) {
 					return RETURNVALUE_NOTENOUGHROOM;
 				}
 			}

@@ -27,6 +27,7 @@
 #include "monster.h"
 #include "game.h"
 #include "easymode.h"
+#include "broker.h"
 #include "actions.h"
 #include "iologindata.h"
 #include "talkaction.h"
@@ -56,6 +57,7 @@ Game::~Game()
 void Game::start(ServiceManager* manager)
 {
 	serviceManager = manager;
+	Broker::initialize();
 
 	g_scheduler.addEvent(createSchedulerTask(EVENT_LIGHTINTERVAL, std::bind(&Game::checkLight, this)));
 	g_scheduler.addEvent(createSchedulerTask(EVENT_CREATURE_THINK_INTERVAL, std::bind(&Game::checkCreatures, this, 0)));
@@ -524,6 +526,8 @@ bool Game::removeCreature(Creature* creature, bool isLogout/* = true*/)
 		return false;
 	}
 
+	if (Player *owner = creature->getPlayer())
+		Broker::stop(*owner);
 	Tile* tile = creature->getTile();
 
 	std::vector<int32_t> oldStackPosVector;
@@ -1005,6 +1009,8 @@ ReturnValue Game::internalMoveItem(Cylinder* fromCylinder, Cylinder* toCylinder,
 
 	//check if we can add this item
 	ReturnValue ret = toCylinder->queryAdd(index, *item, count, flags, actor);
+	if (Broker::locked(item) || Broker::locked(toItem))
+		return RETURNVALUE_NOTPOSSIBLE;
 	EasyMode::onLootItemMove(*item, toItem);
 	if (ret == RETURNVALUE_NEEDEXCHANGE) {
 		//check if we can add it to source cylinder
@@ -1187,6 +1193,8 @@ ReturnValue Game::internalAddItem(Cylinder* toCylinder, Item* item, int32_t inde
 		return RETURNVALUE_NOERROR;
 	}
 
+	if (Broker::locked(item) || Broker::locked(toItem))
+		return RETURNVALUE_NOTPOSSIBLE;
 	EasyMode::onLootItemMove(*item, toItem);
 	if (item->isStackable() && item->equals(toItem)) {
 		uint32_t m = std::min<uint32_t>(item->getItemCount(), maxQueryCount);
@@ -1254,6 +1262,8 @@ ReturnValue Game::internalRemoveItem(Item* item, int32_t count /*= -1*/, bool te
 		return RETURNVALUE_NOTPOSSIBLE;
 	}
 
+	if (Broker::locked(item))
+		return RETURNVALUE_NOTPOSSIBLE;
 	if (!test) {
 		EasyMode::onLootItemMove(*item);
 		int32_t index = cylinder->getThingIndex(item);
@@ -1463,6 +1473,8 @@ void Game::addMoney(Cylinder* cylinder, uint64_t money, uint32_t flags /*= 0*/)
 
 Item* Game::transformItem(Item* item, uint16_t newId, int32_t newCount /*= -1*/)
 {
+	if (Broker::locked(item))
+		return item;
 	EasyMode::onLootItemMove(*item);
 	if (item->getID() == newId && (newCount == -1 || (newCount == item->getSubType() && newCount != 0))) { //chargeless item placed on map = infinite
 		return item;

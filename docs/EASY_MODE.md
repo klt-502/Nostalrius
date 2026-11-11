@@ -233,3 +233,8 @@ checks correct pairs, cross-pair failures, unrelated items and wrong fluid types
 Actual-client testing: use marked and ordinary consumables with master/feature
 flags on and off, verify rune exhaustion and fluid timing, then relog and restart
 to verify Action IDs, charges and subtype persistence. Use a separate test DB.
+
+The opt-in physical scavenger is documented in [LOOT_BROKER.md](LOOT_BROKER.md),
+with an explicit additive SQL migration and [client checklist](BROKER_TEST_CHECKLIST.md).
+It defaults disabled; all five broker settings are startup-only. Worm 3492 is
+excluded from spill and broker collection, preserving classic fishing.

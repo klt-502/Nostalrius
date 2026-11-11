@@ -6,6 +6,7 @@
 #include "player.h"
 #include "movement.h"
 #include "tile.h"
+#include "housetile.h"
 
 extern Actions* g_actions;
 extern MoveEvents* g_moveEvents;
@@ -82,12 +83,14 @@ bool interactive(const Item& item, bool resident = false)
 	       g_moveEvents->hasUnsafeGroundItemEvent(item.getID());
 }
 
-bool safeTile(const Tile& tile)
+bool safeTile(const Tile &tile, bool adding = true)
 {
-	if (!g_actions || !g_moveEvents || !tile.getGround() || tile.getThingCount() >= EasyMode::CLIENT_TILE_THING_LIMIT ||
-	    tile.hasFlag(TILESTATE_TELEPORT | TILESTATE_MAGICFIELD | TILESTATE_MAILBOX | TILESTATE_BED |
-	                 TILESTATE_DEPOT | TILESTATE_BLOCKSOLID | TILESTATE_BLOCKPATH) ||
-	    g_moveEvents->hasPositionEvent(tile.getPosition())) return false;
+	if (!g_actions || !g_moveEvents || !tile.getGround() ||
+	    (adding && tile.getThingCount() >= EasyMode::CLIENT_TILE_THING_LIMIT) ||
+	    tile.hasFlag(TILESTATE_TELEPORT | TILESTATE_MAGICFIELD | TILESTATE_MAILBOX | TILESTATE_BED | TILESTATE_DEPOT |
+	                 TILESTATE_BLOCKSOLID | TILESTATE_BLOCKPATH) ||
+	    g_moveEvents->hasPositionEvent(tile.getPosition()))
+		return false;
 	// A resident ground/item can react to an added item, even if the added item has no script.
 	for (size_t i = tile.getFirstIndex(); i < tile.getLastIndex(); ++i) {
 		Thing* thing = tile.getThing(i);
@@ -154,4 +157,27 @@ bool EasyMode::spillItem(Container& source, Tile& tile, Item& item)
 	source.postRemoveNotification(&item, &tile, oldIndex);
 	tile.postAddNotification(&item, &source, newIndex);
 	return true;
+}
+
+bool EasyMode::brokerPickupTile(const Tile &tile)
+{
+	return !dynamic_cast<const HouseTile *>(&tile) && safeTile(tile, false);
+}
+bool EasyMode::takeBrokerItem(Item &item, Container &escrow)
+{
+	Tile *source = item.getTile();
+	if (!source || item.getParent() != source || !isSpillItem(item) || !brokerPickupTile(*source) ||
+	    escrow.size() >= escrow.capacity())
+		return false;
+	const uint32_t count = item.getItemCount();
+	const int32_t index = source->getThingIndex(&item);
+	if (index < 0 || source->queryRemove(item, count, 0) != RETURNVALUE_NOERROR ||
+	    escrow.queryAdd(INDEX_WHEREEVER, item, count, 0) != RETURNVALUE_NOERROR)
+		return false;
+	onLootItemMove(item);
+	source->removeThing(&item, count);
+	escrow.addThing(&item);
+	source->postRemoveNotification(&item, &escrow, index);
+	escrow.postAddNotification(&item, source, escrow.getThingIndex(&item));
+	return item.getParent() == &escrow;
 }
