@@ -191,3 +191,8 @@ checking was disabled because process-lifetime engine globals are not torn down
 by the native harness. This does not claim leak-detector or actual-client approval.
 Both Ubuntu 24.04 Lua CI variants also passed the persistence foundation; the
 physical-feature commit runs the expanded suite through the same workflow.
+
+Already-loaded escrow is revalidated against its durable ID/count/price image
+and current safety handlers before departure or settlement. A newly marked item
+or unsafe action reload pauses the operation and retains the instance and image.
+The native regression checks both changes through the actual sale command.

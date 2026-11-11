@@ -419,6 +419,28 @@ static void testBroker()
 	        "native approach ends within one tile");
 	Broker::tick(*owner, exposed + 27000);
 	require(walking->getParent() != walkingCorpse->getTile(), "native walking endpoint permits physical pickup");
+	walking->setActionId(60000);
+	Broker::command(*owner, "sell");
+	require(db->storeQuery("SELECT state FROM zedas_broker_accounts WHERE owner=1")->getNumber<unsigned>("state") ==
+	                0 &&
+	            walking->getActionId() == 60000 && walking->getParent() != walkingCorpse->getTile(),
+	        "newly protected live escrow cannot depart for sale or be consumed");
+	walking->removeAttribute(ITEM_ATTRIBUTE_ACTIONID);
+    std::ifstream originalActions("data/actions/actions.xml");
+    const std::string stockActions((std::istreambuf_iterator<char>(originalActions)), std::istreambuf_iterator<char>());
+	{
+		std::ofstream actions("data/actions/actions.xml");
+		actions << "<actions><action itemid='3264' script='misc/fluids.lua'/></actions>";
+	}
+	require(g_actions->reload(), "reload an unsafe handler for a carried identity");
+	Broker::command(*owner, "sell");
+	require(db->storeQuery("SELECT state FROM zedas_broker_accounts WHERE owner=1")->getNumber<unsigned>("state") == 0,
+	        "handler reload cannot silently sell previously collected inventory");
+	{
+		std::ofstream actions("data/actions/actions.xml");
+		actions << stockActions;
+	}
+	require(g_actions->reload(), "restore reviewed stock sword handler");
 	Container *blockedCorpse = corpseAt(103, 103);
 	Item *blocked = add(*blockedCorpse, 3357);
 	EasyMode::onLootGenerated(*blockedCorpse);

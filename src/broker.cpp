@@ -122,8 +122,14 @@ void hydrate(uint32_t owner, Context &context)
 	for (const auto &row : rows) {
 		const auto &key = row.at("claim_key");
 		unsold.insert(key);
-		if (context.carried.count(key))
+		const auto carried = context.carried.find(key);
+		if (carried != context.carried.end()) {
+			Item &item = *carried->second;
+			if (item.getParent() != context.bag.get() || item.getID() != number(row, "item") ||
+			    item.getItemCount() != number(row, "count") || !price(item) || price(item) != number(row, "price"))
+				throw std::runtime_error("live broker escrow changed; inventory retained");
 			continue;
+		}
 		for (const auto &pending : uncertain)
 			if (pending.second.key == key)
 				throw std::runtime_error("broker claim awaiting reconciliation");
@@ -407,7 +413,7 @@ void tick(Player &owner, int64_t now)
 		npc = actor(context);
 		if (!npc)
 			return;
-		const int32_t desiredSpeed = std::max(82, static_cast<const Creature&>(owner).getStepSpeed() + 20);
+		const int32_t desiredSpeed = std::max(82, static_cast<const Creature &>(owner).getStepSpeed() + 20);
 		if (npc->getSpeed() != desiredSpeed)
 			g_game.changeSpeed(npc, (desiredSpeed - npc->getSpeed()) / 2);
 		// Bounded batches depart automatically after 15 seconds without a pickup.
