@@ -7,7 +7,11 @@ both development packages installed in each job to expose mixed discovery.
 Both jobs compile serially with `USE_COTIRE=OFF` and check the actual compiler
 commands for cotire, forced prefix headers and PCH flags.
 The workflow has read-only repository permissions. It requires no secrets,
-database service, runtime configuration, game map, or Tibia client.
+live database credentials, runtime configuration, game map, or Tibia client.
+Broker SQL tests use an isolated MariaDB 10.11 CI service initialized from the
+repository schema and additive migration, with public fixture-only credentials.
+Local builds need no database; `broker_store` skips unless its explicit fixture
+port is provided. See `BROKER_PERSISTENCE.md`.
 
 To reproduce on Ubuntu 24.04:
 

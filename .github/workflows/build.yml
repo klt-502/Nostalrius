@@ -14,6 +14,16 @@ jobs:
   build:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: fixture-only
+          MARIADB_DATABASE: zedas_broker_test
+        ports: ["3306:3306"]
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s --health-timeout=5s --health-retries=20
     strategy:
       fail-fast: false
       matrix:
@@ -24,12 +34,20 @@ jobs:
       - name: Install build dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends build-essential cmake ninja-build libboost-system-dev libboost-filesystem-dev libpugixml-dev libluajit-5.1-dev luajit liblua5.2-dev lua5.2 default-libmysqlclient-dev libgmp-dev python3
+          sudo apt-get install -y --no-install-recommends build-essential cmake ninja-build libboost-system-dev libboost-filesystem-dev libpugixml-dev libluajit-5.1-dev luajit liblua5.2-dev lua5.2 default-libmysqlclient-dev libgmp-dev python3 default-mysql-client
       - name: Configure
         run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DUSE_LUAJIT=${{ matrix.use_luajit }} -DUSE_COTIRE=OFF -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
       - name: Verify cotire and PCH are absent
         run: python3 tests/cmake/check_no_cotire.py build/compile_commands.json
       - name: Compile
         run: cmake --build build --parallel 1
+      - name: Initialize disposable broker fixture
+        env:
+          MYSQL_PWD: fixture-only
+        run: |
+          mysql -h127.0.0.1 -uroot zedas_broker_test < nostalrius.sql
+          mysql -h127.0.0.1 -uroot zedas_broker_test < migrations/001_broker.sql
       - name: Test
+        env:
+          ZEDAS_BROKER_TEST_PORT: 3306
         run: ctest --test-dir build --output-on-failure
