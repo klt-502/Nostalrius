@@ -1,7 +1,7 @@
 # Expanded hunting-loot spill policy
 
-The source audit revises the 46-ID policy at `f83a1fd` to **242 explicit ID/name
-pairs**, adding **196 identities**. This is an identity list, not a global item
+The source audit revises the 46-ID policy at `f83a1fd` to **241 explicit ID/name
+pairs**, adding **195 identities**. This is an identity list, not a global item
 category exemption, NPC valuation table or sale feature. The authoritative names
 are in `data/zedas/lootspill.xml`; custom/unknown identities are not inferred.
 No monster loot tables, probabilities, item definitions or client IDs change.
@@ -13,7 +13,7 @@ No monster loot tables, probabilities, item definitions or client IDs change.
 | Normal armor, helmets, legs, boots and shields | 87 | 3079, 3351, 3352, 3353, 3354, 3355, 3356, 3357, 3358, 3359, 3360, 3361, 3362, 3364, 3366, 3367, 3369, 3370, 3371, 3372, 3373, 3374, 3375, 3376, 3377, 3378, 3381, 3382, 3383, 3384, 3385, 3386, 3391, 3392, 3393, 3394, 3403, 3404, 3405, 3406, 3407, 3408, 3409, 3410, 3411, 3412, 3413, 3414, 3415, 3416, 3418, 3419, 3420, 3425, 3426, 3428, 3429, 3430, 3432, 3434, 3435, 3436, 3437, 3439, 3440, 3441, 3443, 3444, 3445, 3551, 3552, 3553, 3554, 3556, 3557, 3558, 3559, 3560, 3562, 3563, 3565, 3566, 3567, 3568, 3572, 3573, 3574 |
 | Gems and pearls | 13 | 3026, 3027, 3028, 3029, 3030, 3032, 3033, 3034, 3036, 3037, 3038, 3039, 3041 |
 | Passive rings, amulets and jewelry with no charges, decay or equip transformations | 14 | 3004, 3006, 3007, 3008, 3010, 3012, 3016, 3017, 3018, 3019, 3022, 3025, 3055, 3063 |
-| Ordinary creature products and inert hunting junk | 10 | 3044, 3112, 3114, 3115, 3116, 3120, 3122, 3130, 3492, 4839 |
+| Ordinary creature products and inert hunting junk | 9 | 3044, 3112, 3114, 3115, 3116, 3120, 3122, 3130, 4839 |
 | Other reviewed inert loot | 6 | 2991, 2993, 3068, 3509, 3658, 3659 |
 | Normal food | 38 | 3577, 3578, 3579, 3580, 3581, 3582, 3583, 3584, 3585, 3586, 3587, 3588, 3589, 3590, 3591, 3592, 3593, 3594, 3595, 3596, 3597, 3598, 3599, 3600, 3601, 3602, 3606, 3607, 3723, 3724, 3725, 3726, 3727, 3728, 3729, 3730, 3731, 3732 |
 
@@ -86,7 +86,7 @@ ID is added. Classic/master-off behavior is preserved.
 
 ## Automated coverage
 
-`engine_spill_hunting` validates all 242 entries against actual engine item
+`engine_spill_hunting` validates all 241 entries against actual engine item
 state, stock weapon/food actions and native equipment registrations. Mixed nested
 fixtures cover sword 3264, leather helmet 3355, elephant tusks 3044, meat 3577,
 crystal ring 3007, arrows 3447 and boots of haste 3079, with actual currency in
@@ -131,3 +131,6 @@ Restart after updating the binary and `data/zedas/lootspill.xml`.
 
 Original-client rendering, clickability, food/manual weapon use and live
 save/relog still require these checks. Native/CI tests do not replace them.
+
+Worms (3492) deliberately remain inside corpses/generated bags for classic fishing.
+No fishing action or consumption behavior is changed.

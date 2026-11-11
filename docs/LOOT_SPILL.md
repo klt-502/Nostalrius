@@ -16,7 +16,7 @@ as tombstones until the registry's normal expiry/eviction. Generated ordinary
 unmarked bags are traversed, but the bags themselves remain in the corpse.
 An unsafe/marked nested container protects its entire subtree from spill.
 
-The reviewed identity policy covers **242 ordinary catalog items** (196 added
+The reviewed identity policy covers **241 ordinary catalog items** (195 added
 after the original 46-item policy): melee/ranged weapons and ammunition, armor,
 helmets, legs, boots, shields, gems, ordinary creature products, passive jewelry,
 inert miscellaneous loot and normal food. An exact item-ID/catalog-name match
@@ -106,7 +106,7 @@ protected and subsequently inserted items, currency conservation, scripted item
 exclusion, tile overflow/retry, manual pickup, repeated processing, competing
 players, relocated/removed/decayed corpses and engine cleanup. They use real item
 definitions and the production movement code, without a database or client.
-`engine_spill_hunting` validates all 242 identities against the real item catalog,
+`engine_spill_hunting` validates all 241 identities against the real item catalog,
 stock use handlers and native equipment registrations. It covers mixed nested
 weapon/armor/product/food/ammunition/jewelry loot, unchanged instances/counts,
 auto-gold in the same bag, weapon-filled tile overflow, an actual monster death,
@@ -115,3 +115,6 @@ and refusal after custom use/movement handler reloads or stock-file changes.
 The original Tibia 7.72 client must verify visual ordering, click/drag behavior,
 ten-stack rendering with creatures present, container updates and relog/save.
 Use the complete [Wave 2 checklist](WAVE2_TEST_CHECKLIST.md) before deployment.
+
+Worms (3492) deliberately remain inside corpses/generated bags for classic fishing.
+No fishing action or consumption behavior is changed.

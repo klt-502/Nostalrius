@@ -21,12 +21,12 @@ static void testHuntingSpill()
 		item->decrementReferenceCounter();
 		++identities;
 	}
-	require(identities == 242, "validate every reviewed hunting identity");
+	require(identities == 241, "validate every reviewed hunting identity");
 	require(g_actions->getItemGroundUse(3264) == Action::GroundUse::Weapon &&
 	        g_actions->getItemGroundUse(3577) == Action::GroundUse::Food, "real stock handlers are fingerprinted and recognized");
 	require(g_moveEvents->hasItemEvent(3079) && !g_moveEvents->hasUnsafeGroundItemEvent(3079),
 	        "native equipment-only boots handler is safe for ground movement");
-	for (uint16_t id : {2968, 3105, 3147, 3160, 3191, 3200, 3235, 3244, 3250, 3284, 3045, 3048, 3050, 3051, 3081, 3094}) {
+	for (uint16_t id : {3492, 2968, 3105, 3147, 3160, 3191, 3200, 3235, 3244, 3250, 3284, 3045, 3048, 3050, 3051, 3081, 3094}) {
 		Item* item = Item::CreateItem(id, 1);
 		require(item && !EasyMode::isSpillItem(*item), "quest, key, rune, charged or transforming identity stays excluded");
 		item->decrementReferenceCounter();
@@ -43,6 +43,7 @@ static void testHuntingSpill()
 	Item* tusks = add(*nested, 3044, 3);
 	Item* meat = add(*nested, 3577, 3);
 	Item* ring = add(*nested, 3007);
+	Item* worms = add(*nested, 3492, 12);
 	Item* arrows = add(*nested, 3447, 20);
 	Item* boots = add(*bag, 3079);
 	addCoin(*nested, 3031, 30);
@@ -66,7 +67,7 @@ static void testHuntingSpill()
 	        collector->getSpeed() == initialSpeed && !ring->hasAttribute(static_cast<itemAttrTypes>(0xFFFFFFFFu)),
 	        "stack counts, passive jewelry state and player equipment stats stay unchanged; food is not consumed");
 	require(marked->getParent() == bag && rune->getParent() == bag && iceRapier->getParent() == bag &&
-	        protectedChild->getParent() == specialBag, "mixed protected contents and quest-container subtree remain inside");
+	        protectedChild->getParent() == specialBag && worms->getParent() == nested && worms->getItemCount() == 12, "mixed protected contents and quest-container subtree remain inside");
 	require(money == 10230 && contentsValue(*corpse) == money && EasyMode::collectGold(*collector) == money &&
 	        contentsValue(*goldBag) == money && contentsValue(*corpse) == 0,
 	        "currency in the same generated bag uses existing auto-gold and the marked Gold Bag only");
