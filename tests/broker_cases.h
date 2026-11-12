@@ -5,9 +5,21 @@
 #include "npc.h"
 #include "iologindata.h"
 #include "house.h"
+#include "outputmessage.h"
 #include <thread>
 
 struct BrokerEngineTestAccess {
+	static void clearOutput(Player &player)
+	{
+		player.client->getCurrentBuffer().reset();
+	}
+	static std::vector<uint8_t> output(Player &player)
+	{
+		auto buffer = player.client->getCurrentBuffer();
+		return buffer ? std::vector<uint8_t>(buffer->getBuffer() + 4, buffer->getBuffer() + 4 + buffer->getLength())
+		              : std::vector<uint8_t>();
+	}
+
 	static void session(Player &player)
 	{
 		player.lastLoginSaved = time(nullptr);
@@ -26,11 +38,25 @@ static void testBrokerCatalog()
 	require(Broker::loadCatalog("data/zedas/broker.xml", error), error.c_str());
 	Item *sword = Item::CreateItem(3264);
 	Item *plate = Item::CreateItem(3357);
-    for (const auto entry : std::vector<std::pair<uint16_t,uint64_t>>{{3276,25},{3354,30},{3353,145},{3367,66},{3372,49},{3557,115},{3410,31},{3411,16},{3425,100},{3349,160},{3350,130},{3376,20},{3559,1},{3577,2},{3044,100}}) {
-        Item* item=Item::CreateItem(entry.first,1);
-        require(Broker::price(*item)==entry.second,"expanded ordinary price matches fixed reviewed source");
-        item->decrementReferenceCounter();
-    }
+	for (const auto &entry : std::vector<std::pair<uint16_t, uint64_t>>{{3276, 25},
+	                                                                    {3354, 30},
+	                                                                    {3353, 145},
+	                                                                    {3367, 66},
+	                                                                    {3372, 49},
+	                                                                    {3557, 115},
+	                                                                    {3410, 31},
+	                                                                    {3411, 16},
+	                                                                    {3425, 100},
+	                                                                    {3349, 160},
+	                                                                    {3350, 130},
+	                                                                    {3376, 20},
+	                                                                    {3559, 1},
+	                                                                    {3577, 2},
+	                                                                    {3044, 100}}) {
+		Item *item = Item::CreateItem(entry.first, 1);
+		require(Broker::price(*item) == entry.second, "expanded ordinary price matches fixed reviewed source");
+		item->decrementReferenceCounter();
+	}
 	require(Broker::price(*sword) == 25 && Broker::price(*plate) == 400, "reviewed unconditional Sam purchase prices");
 	for (uint16_t id : {3492, 3031, 3160, 3244, 3366, 3375, 3362, 3378, 3446, 3447, 3370, 2994, 3232}) {
 		Item *excluded = Item::CreateItem(id, 1);
@@ -123,7 +149,7 @@ static void testBrokerRestart(const std::string &stage)
 	BrokerFaultConnection *faults = new BrokerFaultConnection(settings);
 	Broker::initialize(std::unique_ptr<Broker::Store>(faults));
 	if (stage == "broker_seed") {
-        Broker::command(*owner,"hire");
+		Broker::command(*owner, "hire");
 		Container *corpse = corpseAt(100, 101);
 		Item *helmet = Item::CreateItem(3355);
 		require(g_game.internalAddItem(corpse, helmet) == RETURNVALUE_NOERROR, "restart generated helmet");
@@ -254,7 +280,7 @@ static void testBroker()
 	require(!EasyMode::isBrokerCandidate(*sword, exposed + 60000, 5000), "manual pickup invalidates witness");
 	require(EasyMode::collectGold(*owner) == 10 && coin->getParent() != bag,
 	        "auto-gold remains responsible for currency");
-	// Hire through the actual Lua talkaction; it must not collect before grace.
+	// The real Lua command may collect adjacent fodder immediately despite legacy grace.
 	require(g_talkActions->playerSaySpell(owner, TALKTYPE_SAY, "!broker hire") == TALKACTION_BREAK,
 	        "broker talkaction bridge");
 	Npc *npc = brokerFor(*owner);
@@ -431,8 +457,8 @@ static void testBroker()
 	            walking->getActionId() == 60000 && walking->getParent() != walkingCorpse->getTile(),
 	        "newly protected live escrow cannot depart for sale or be consumed");
 	walking->removeAttribute(ITEM_ATTRIBUTE_ACTIONID);
-    std::ifstream originalActions("data/actions/actions.xml");
-    const std::string stockActions((std::istreambuf_iterator<char>(originalActions)), std::istreambuf_iterator<char>());
+	std::ifstream originalActions("data/actions/actions.xml");
+	const std::string stockActions((std::istreambuf_iterator<char>(originalActions)), std::istreambuf_iterator<char>());
 	{
 		std::ofstream actions("data/actions/actions.xml");
 		actions << "<actions><action itemid='3264' script='misc/fluids.lua'/></actions>";

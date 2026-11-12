@@ -9,7 +9,7 @@ import xml.etree.ElementTree as ET
 
 binary, source, scenario = sys.argv[1:]
 source = pathlib.Path(source)
-if scenario in {"broker", "broker_restart"} and not os.environ.get("ZEDAS_BROKER_TEST_PORT"):
+if scenario in {"broker", "broker_restart", "broker_feedback"} and not os.environ.get("ZEDAS_BROKER_TEST_PORT"):
     sys.exit(77)
 with tempfile.TemporaryDirectory(prefix="zedas-engine-") as directory:
     root = pathlib.Path(directory)
@@ -46,7 +46,7 @@ with tempfile.TemporaryDirectory(prefix="zedas-engine-") as directory:
             '<movements><movevent event="AddItem" itemid="3351" function="onAddField" />'
             '<movevent event="AddItem" itemid="3352" tileitem="1" function="onAddField" />'
             '<movevent event="AddItem" pos="110;94;7" function="onAddField" /></movements>')
-    if scenario in {"spill_hunting", "broker", "broker_catalog", "broker_restart", "loot_classes"}:
+    if scenario in {"spill_hunting", "broker", "broker_catalog", "broker_restart", "loot_classes", "broker_feedback", "broker_feedback_disabled"}:
         shutil.copytree(source / "data/zedas", root / "data/zedas")
         (root / "data/npc").mkdir()
         for buyer in ET.parse(source / "data/zedas/broker.xml").getroot():
@@ -78,9 +78,9 @@ with tempfile.TemporaryDirectory(prefix="zedas-engine-") as directory:
         config = 'removeChargesFromRunes = true\ntimeBetweenExActions = 25\n'
     if scenario == "bag_enabled":
         config += 'easyModeGoldBag = true\n'
-    if scenario in {"spill_hunting", "broker", "broker_catalog", "broker_restart", "loot_classes"}:
+    if scenario in {"spill_hunting", "broker", "broker_catalog", "broker_restart", "loot_classes", "broker_feedback", "broker_feedback_disabled"}:
         config += 'easyModeGoldBag = true\n'
-    if scenario in {"spill_enabled", "spill_hunting", "spill_only", "spill_invalid_policy", "spill_missing_policy", "wave2_disabled", "broker", "broker_catalog", "broker_restart", "loot_classes"}:
+    if scenario in {"spill_enabled", "spill_hunting", "spill_only", "spill_invalid_policy", "spill_missing_policy", "wave2_disabled", "broker", "broker_catalog", "broker_restart", "loot_classes", "broker_feedback", "broker_feedback_disabled"}:
         config += 'easyModeLootSpill = true\n'
     if scenario == "wave2_disabled":
         config += 'easyModeGoldBag = true\neasyModeRespawn = true\neasyModeLootBroker = true\n'
@@ -98,11 +98,13 @@ with tempfile.TemporaryDirectory(prefix="zedas-engine-") as directory:
                                ("gold_disabled", "easyModeAutoGold")):
         if scenario == scenario_name:
             config = config.replace(key + " = true", key + " = false")
-    if scenario in {"broker", "broker_catalog", "broker_restart", "loot_classes"}:
+    if scenario in {"broker", "broker_catalog", "broker_restart", "loot_classes", "broker_feedback", "broker_feedback_disabled"}:
         config += 'easyModeLootBroker = true\neasyModeBrokerGraceSeconds = 5\n'
-    if scenario in {"broker", "broker_restart"}:
+    if scenario in {"broker", "broker_restart", "broker_feedback"}:
         config += ('mysqlHost="127.0.0.1"\nmysqlUser="root"\nmysqlPass="fixture-only"\n'
                    'mysqlDatabase="zedas_broker_test"\nmysqlPort=' + os.environ["ZEDAS_BROKER_TEST_PORT"] + '\n')
+    if scenario == "broker_feedback_disabled":
+        config += "easyModeLootBroker = false\n"
     (root / "config.lua").write_text(config)
     if scenario == "invalid_config":
         # Exercise each startup setting independently, including newly reserved flags.

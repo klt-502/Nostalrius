@@ -124,6 +124,7 @@ static uint64_t contentsValue(Container& container)
 #include "loot_spill_cases.h"
 #include "hunting_spill_cases.h"
 #include "broker_cases.h"
+#include "broker_feedback_cases.h"
 #include "loot_class_cases.h"
 
 static void setup()
@@ -189,6 +190,10 @@ int main(int argc, char** argv)
 		require(g_config.getString(ConfigManager::EASY_MODE_RESPAWN_POLICY_FILE) == "data/zedas/spawns.xml", "manifest path remains startup only");
 	}
 	setup();
+    if (scenario=="broker_feedback" || scenario=="broker_feedback_disabled") {
+        require(g_moveEvents->loadFromXml(),"feedback real movement handlers");
+        testBrokerFeedback(scenario=="broker_feedback_disabled"); return 0;
+    }
     if (scenario=="loot_classes") {
         require(g_moveEvents->loadFromXml(), "load class fixture movement handlers");
         testLootClasses(); return 0;

@@ -26,6 +26,8 @@ std::unique_ptr<Store> database;
 struct Context {
 	uint32_t session = 0, actor = 0;
 	bool hired = false;
+	bool returnSpeechPending = false;
+	int64_t nextPickupSpeech = 0;
 	int64_t nextThink = 0, targetSince = 0, lastPickup = 0;
 	Item *target = nullptr;
 	std::unique_ptr<Container> bag{new Container(2854, INVENTORY_LIMIT)};
@@ -69,6 +71,16 @@ bool near(const Position &a, const Position &b, int distance)
 Npc *actor(Context &context)
 {
 	return g_game.getNpcByID(context.actor);
+}
+// Use classic monster-noise speech: no NPC SAY/channel/status-text substitute.
+void noise(Context &context, const std::string &text, int64_t now, bool pickup)
+{
+	Npc *npc = actor(context);
+	if (!npc || (pickup && now < context.nextPickupSpeech))
+		return;
+	g_game.internalCreatureSay(npc, TALKTYPE_MONSTER_SAY, text, false);
+	if (pickup)
+		context.nextPickupSpeech = now + 3000;
 }
 void removeActor(Context &context)
 {
@@ -207,8 +219,7 @@ bool reconnect()
 void claim(Player &owner, Context &context, Item &item, int64_t now)
 {
 	if (context.bag->size() >= INVENTORY_LIMIT || !price(item) ||
-	    !EasyMode::isBrokerCandidate(item, now,
-	                                 FODDER_GRACE_MS))
+	    !EasyMode::isBrokerCandidate(item, now, FODDER_GRACE_MS))
 		return;
 	Npc *npc = actor(context);
 	if (!npc || !near(npc->getPosition(), item.getPosition(), 1) ||
@@ -225,6 +236,7 @@ void claim(Player &owner, Context &context, Item &item, int64_t now)
 	complete(uncertain.at(&item));
 	uncertain.erase(&item);
 	item.decrementReferenceCounter();
+	noise(context, "Got " + item.getNameDescription() + ".", now, true);
 	context.lastPickup = now;
 	context.clearTarget();
 }
@@ -252,74 +264,104 @@ bool locked(const Item *item)
 {
 	return item && uncertain.count(const_cast<Item *>(item));
 }
-namespace {
-std::string readNormalized(const std::string& path) {
-    std::ifstream file(path,std::ios::binary);
-    if (!file) throw std::runtime_error("reviewed broker source unavailable");
-    const std::string raw((std::istreambuf_iterator<char>(file)),std::istreambuf_iterator<char>());
-    std::string result;
-    for (size_t i=0;i<raw.size();++i) if (raw[i]!='\r' || i+1==raw.size() || raw[i+1]!='\n') result+=raw[i];
-    return result;
+namespace
+{
+std::string readNormalized(const std::string &path)
+{
+	std::ifstream file(path, std::ios::binary);
+	if (!file)
+		throw std::runtime_error("reviewed broker source unavailable");
+	const std::string raw((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+	std::string result;
+	for (size_t i = 0; i < raw.size(); ++i)
+		if (raw[i] != '\r' || i + 1 == raw.size() || raw[i + 1] != '\n')
+			result += raw[i];
+	return result;
 }
-bool sameAttributes(const pugi::xml_node& node,const pugi::xml_node& approved) {
-    size_t count=0,other=0;
-    for (const auto attribute:node.attributes()) {
-        ++count;
-        if (!approved.attribute(attribute.name()) || std::string(approved.attribute(attribute.name()).value())!=attribute.value()) return false;
-    }
-    for (const auto attribute:approved.attributes()) {
-        ++other;
-        if (!node.attribute(attribute.name()) || std::string(node.attribute(attribute.name()).value())!=attribute.value()) return false;
-    }
-    return count==other;
+bool sameAttributes(const pugi::xml_node &node, const pugi::xml_node &approved)
+{
+	size_t count = 0, other = 0;
+	for (const auto attribute : node.attributes()) {
+		++count;
+		if (!approved.attribute(attribute.name()) ||
+		    std::string(approved.attribute(attribute.name()).value()) != attribute.value())
+			return false;
+	}
+	for (const auto attribute : approved.attributes()) {
+		++other;
+		if (!node.attribute(attribute.name()) ||
+		    std::string(node.attribute(attribute.name()).value()) != attribute.value())
+			return false;
+	}
+	return count == other;
 }
-}
-bool loadCatalog(const std::string& path,std::string& error) {
-    catalog.clear();
-    try {
-        // One reviewed data authority, pinned after the source/access/tier audit.
-        // A configured subset may remove entries; it cannot invent buyers/prices.
-        static const char* REVIEWED_CATALOG_SHA1 = "803c1f1177937feade139fd78c2bef10abea366b";
-        const std::string canonical=readNormalized("data/zedas/broker.xml");
-        if (transformToSHA1(canonical)!=REVIEWED_CATALOG_SHA1) throw std::runtime_error("canonical broker review changed; re-audit required");
-        pugi::xml_document reviewed,configured;
-        if (!reviewed.load_string(canonical.c_str()) || !configured.load_file(path.c_str())) throw std::runtime_error("broker XML unavailable");
-        const auto root=configured.document_element(), reference=reviewed.document_element();
-        if (std::string(root.name())!="broker" || !sameAttributes(root,reference)) throw std::runtime_error("invalid broker catalog version");
-        std::map<uint16_t,uint64_t> checked; std::set<std::string> buyers;
-        for (const auto buyer:root.children()) {
-            const std::string id=buyer.attribute("id").value();
-            const auto approvedBuyer=reference.find_child_by_attribute("buyer","id",id.c_str());
-            if (std::string(buyer.name())!="buyer" || !approvedBuyer || !buyers.insert(id).second || !sameAttributes(buyer,approvedBuyer))
-                throw std::runtime_error("unreviewed/duplicate broker buyer or access");
-            const auto source=readNormalized(buyer.attribute("source").value());
-            const std::string confirmation=buyer.attribute("confirmation").value();
-            if (transformToSHA1(source)!=buyer.attribute("sha1").value() || source.find("\n"+confirmation+"\n")==std::string::npos ||
-                confirmation.find("Count(Type)>=Amount")==std::string::npos || confirmation.find("Delete(Type)")==std::string::npos || confirmation.find("CreateMoney")==std::string::npos)
-                throw std::runtime_error("NPC purchase source/confirmation changed; review required");
-            for (const auto node:buyer.children()) {
-                Row fields{{"id",node.attribute("id").value()},{"price",node.attribute("price").value()},{"subtype",node.attribute("subtype").value()}};
-                const auto itemId=number(fields,"id"), value=number(fields,"price");
-                const auto approvedItem=approvedBuyer.find_child_by_attribute("item","id",node.attribute("id").value());
-                const std::string rule=node.attribute("rule").value();
-                if (std::string(node.name())!="item" || !approvedItem || !sameAttributes(node,approvedItem) || !itemId || itemId>65535 || itemId>=Item::items.size() ||
-                    !value || value>MONEY_LIMIT || number(fields,"subtype") || Item::items[itemId].name!=node.attribute("name").value() ||
-                    source.find("\n"+rule+"\n")==std::string::npos || !checked.emplace(itemId,value).second)
-                    throw std::runtime_error("unreviewed/duplicate broker item or price");
-                std::unique_ptr<Item> probe(Item::CreateItem(itemId,1));
-                if (!probe || EasyMode::lootClass(*probe)!=EasyMode::LootClass::BrokerFodder) throw std::runtime_error("broker class/state is not safe fodder");
-            }
-        }
-        if (checked.empty()) throw std::runtime_error("empty sale catalog");
-        catalog.swap(checked); return true;
-    } catch (const std::exception& e) { error=e.what(); return false; }
+} // namespace
+bool loadCatalog(const std::string &path, std::string &error)
+{
+	catalog.clear();
+	try {
+		// One reviewed data authority, pinned after the source/access/tier audit.
+		// A configured subset may remove entries; it cannot invent buyers/prices.
+		static const char *REVIEWED_CATALOG_SHA1 = "803c1f1177937feade139fd78c2bef10abea366b";
+		const std::string canonical = readNormalized("data/zedas/broker.xml");
+		if (transformToSHA1(canonical) != REVIEWED_CATALOG_SHA1)
+			throw std::runtime_error("canonical broker review changed; re-audit required");
+		pugi::xml_document reviewed, configured;
+		if (!reviewed.load_string(canonical.c_str()) || !configured.load_file(path.c_str()))
+			throw std::runtime_error("broker XML unavailable");
+		const auto root = configured.document_element(), reference = reviewed.document_element();
+		if (std::string(root.name()) != "broker" || !sameAttributes(root, reference))
+			throw std::runtime_error("invalid broker catalog version");
+		std::map<uint16_t, uint64_t> checked;
+		std::set<std::string> buyers;
+		for (const auto buyer : root.children()) {
+			const std::string id = buyer.attribute("id").value();
+			const auto approvedBuyer = reference.find_child_by_attribute("buyer", "id", id.c_str());
+			if (std::string(buyer.name()) != "buyer" || !approvedBuyer || !buyers.insert(id).second ||
+			    !sameAttributes(buyer, approvedBuyer))
+				throw std::runtime_error("unreviewed/duplicate broker buyer or access");
+			const auto source = readNormalized(buyer.attribute("source").value());
+			const std::string confirmation = buyer.attribute("confirmation").value();
+			if (transformToSHA1(source) != buyer.attribute("sha1").value() ||
+			    source.find("\n" + confirmation + "\n") == std::string::npos ||
+			    confirmation.find("Count(Type)>=Amount") == std::string::npos ||
+			    confirmation.find("Delete(Type)") == std::string::npos ||
+			    confirmation.find("CreateMoney") == std::string::npos)
+				throw std::runtime_error("NPC purchase source/confirmation changed; review required");
+			for (const auto node : buyer.children()) {
+				Row fields{{"id", node.attribute("id").value()},
+				           {"price", node.attribute("price").value()},
+				           {"subtype", node.attribute("subtype").value()}};
+				const auto itemId = number(fields, "id"), value = number(fields, "price");
+				const auto approvedItem =
+				    approvedBuyer.find_child_by_attribute("item", "id", node.attribute("id").value());
+				const std::string rule = node.attribute("rule").value();
+				if (std::string(node.name()) != "item" || !approvedItem || !sameAttributes(node, approvedItem) ||
+				    !itemId || itemId > 65535 || itemId >= Item::items.size() || !value || value > MONEY_LIMIT ||
+				    number(fields, "subtype") || Item::items[itemId].name != node.attribute("name").value() ||
+				    source.find("\n" + rule + "\n") == std::string::npos || !checked.emplace(itemId, value).second)
+					throw std::runtime_error("unreviewed/duplicate broker item or price");
+				std::unique_ptr<Item> probe(Item::CreateItem(itemId, 1));
+				if (!probe || EasyMode::lootClass(*probe) != EasyMode::LootClass::BrokerFodder)
+					throw std::runtime_error("broker class/state is not safe fodder");
+			}
+		}
+		if (checked.empty())
+			throw std::runtime_error("empty sale catalog");
+		catalog.swap(checked);
+		return true;
+	} catch (const std::exception &e) {
+		error = e.what();
+		return false;
+	}
 }
 
 uint64_t price(const Item &item)
 {
 	auto entry = catalog.find(item.getID());
 	return entry != catalog.end() && item.getID() != 3492 && !item.getWorth() &&
-	               (item.isStackable() || item.getItemCount() == 1) && EasyMode::lootClass(item) == EasyMode::LootClass::BrokerFodder
+	               (item.isStackable() || item.getItemCount() == 1) &&
+	               EasyMode::lootClass(item) == EasyMode::LootClass::BrokerFodder
 	           ? entry->second
 	           : 0;
 }
@@ -397,6 +439,8 @@ void tick(Player &owner, int64_t now)
 		hydrate(owner.getGUID(), context); // Validate recovered images before any sale.
 		database->settle(owner.getGUID(), time(nullptr),
 		                 g_config.getNumber(ConfigManager::EASY_MODE_BROKER_COMMISSION_BPS));
+		if (number(database->status(owner.getGUID()), "state") == 2)
+			context.returnSpeechPending = true;
 		database->returned(owner.getGUID(), time(nullptr));
 		hydrate(owner.getGUID(), context);
 		const auto state = database->status(owner.getGUID());
@@ -415,13 +459,17 @@ void tick(Player &owner, int64_t now)
 		npc = actor(context);
 		if (!npc)
 			return;
+		if (context.returnSpeechPending) {
+			noise(context, "Back from town.", now, false);
+			context.returnSpeechPending = false;
+		}
 		const int32_t desiredSpeed = std::max(82, static_cast<const Creature &>(owner).getStepSpeed() + 20);
 		if (npc->getSpeed() != desiredSpeed)
 			g_game.changeSpeed(npc, (desiredSpeed - npc->getSpeed()) / 2);
 		// Bounded batches depart automatically after 15 seconds without a pickup.
 		if (!context.carried.empty() && (context.bag->size() >= INVENTORY_LIMIT || now - context.lastPickup >= 15000)) {
 			database->depart(owner.getGUID(), database->key(), time(nullptr));
-			message(owner, "Your broker is travelling its reviewed town route (60 seconds each way).");
+			noise(context, "Off to town!", now, false);
 			removeActor(context);
 			return;
 		}
@@ -483,9 +531,13 @@ void command(Player &owner, const std::string &text)
 			removeActor(context);
 			message(owner, "Broker dismissed. Inventory and balances remain saved.");
 		} else if (text == "sell") {
+			if (context.carried.empty()) {
+				message(owner, "No carried loot to sell.");
+				return;
+			}
 			database->depart(owner.getGUID(), database->key(), time(nullptr));
+			noise(context, "Off to town!", OTSYS_TIME(), false);
 			removeActor(context);
-			message(owner, "Any carried loot is on its way to the reviewed town buyers.");
 		} else if (text == "cashout" || text == "cash out") {
 			const Bank bank = database->cashout(owner.getGUID(), database->key(), owner.getBankBalance(),
 			                                    owner.getBrokerBankWatermark());

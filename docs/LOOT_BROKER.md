@@ -55,6 +55,18 @@ player's dialogue cannot access your account. Commands have no target GUID.
 Hiring is session-only; after relog, explicitly hire again. Durable inventory,
 pending proceeds, commission and town-trip deadlines survive restart.
 
+Routine pickup uses `TALKTYPE_MONSTER_SAY`, the same positional speech packet as
+classic troll/orc noises. It says `Got a hatchet.` (using the actual item
+description), at most once every **3000 ms per broker**. Additional pickups still
+succeed silently; no captions are queued for later spam. `Off to town!` is sent
+before departure removal and `Back from town.` after successful return placement.
+Departure/return bypass pickup throttling and occur once per visible transition;
+return speech waits if placement is blocked. There is no pickup/departure/return
+status/chat text. Explicit hire/dismiss/balance/cashout responses and recovery
+errors still use normal feedback. The original client controls noise lifetime and
+rendering; no new opcode or executable change is introduced. Speech timers are
+session-only and never gate item or money operations.
+
 The dwarf uses existing look type 69 and NPC walking/scheduling, with its
 walking pace following the owner through the normal speed API. It has no master,
 summon slot, attack, damage, XP role or push interaction. Its body permits player
@@ -163,7 +175,7 @@ exactly-once guarantees. No remote live-database migration was performed here.
 ## Automated and client acceptance
 
 `engine_broker` uses the real engine and a disposable MariaDB: actual generated
-nested loot, grace, manual/two-broker races, currency/worm/protected exclusions,
+nested loot, immediate fodder pickup, manual/two-broker races, currency/worm/protected exclusions,
 instance identity, native path steps, unreachable/disappearing loot, floor/leash,
 corpse removal, house exclusion, sale travel, exact prices, commission, replay,
 prepare/sale/payout lost acknowledgements, source quarantine and actual
@@ -179,15 +191,19 @@ clicking overlapping creatures, smooth following, helpful diversion/feedback and
 travel pacing still require that client. Automated tests do not establish those
 visual/gameplay judgments. No broader economy phase is authorized by this feature.
 
-Local delivery verification: full no-cotire GCC build and **25/25 CTest cases**
-passed, including the isolated MariaDB 10.11 engine/ledger/restart cases. The same
-25 cases passed with AddressSanitizer and UndefinedBehaviorSanitizer; fixture leak
-checking was disabled because process-lifetime engine globals are not torn down
-by the native harness. This does not claim leak-detector or actual-client approval.
-Both Ubuntu 24.04 Lua CI variants also passed the persistence foundation; the
-physical-feature commit runs the expanded suite through the same workflow.
+Local verification uses a full no-cotire GCC build and isolated MariaDB 10.11.
+ASan/UBSan fixture leak checking is disabled because process-lifetime engine
+globals are not torn down by the harness. This does not claim leak-detector or
+actual-client approval. Both Ubuntu 24.04 Lua variants run the full suite through
+the same secret-free workflow and disposable SQL fixture.
 
 Already-loaded escrow is revalidated against its durable ID/count/price image
 and current safety handlers before departure or settlement. A newly marked item
 or unsafe action reload pauses the operation and retains the instance and image.
 The native regression checks both changes through the actual sale command.
+
+The expanded delivery passes **29/29** native/source/SQL tests normally and with
+ASan/UBSan (fixture leak checking disabled). `engine_broker_feedback` inspects
+actual outgoing positional monster speech and verifies no routine status/chat
+packet, pickup throttling, departure, return and explicit balance replies.
+Floor reappearance remains audit-only; see `NPC_BUY_AUDIT.md`.

@@ -22,6 +22,7 @@ values are rejected on startup. Both master and feature switches must be true.
 | `easyModeAutoGold` | Nearby generated-corpse currency collection, as implemented below |
 | `easyModeLootSpill` | Conservatively expose generated ordinary corpse loot on its tile |
 | `easyModeGoldBag` | Prefer an exact marked carried Gold Bag for auto-gold |
+| `easyModeLootBroker` | Opt-in physical collection/sale of reviewed ordinary town fodder |
 | `easyModeRespawn` | Permit only explicitly classified ordinary spawn slots to use adjusted deadlines |
 
 `easyModeRespawnPolicyFile` is a startup-only string, default
@@ -238,3 +239,8 @@ The opt-in physical scavenger is documented in [LOOT_BROKER.md](LOOT_BROKER.md),
 with an explicit additive SQL migration and [client checklist](BROKER_TEST_CHECKLIST.md).
 It defaults disabled; all five broker settings are startup-only. Worm 3492 is
 excluded from spill and broker collection, preserving classic fishing.
+
+The current loot policy separates 58 routine broker identities, 189 player-interest
+spill identities and 7 corpse-junk identities. Routine fodder ignores the retained
+legacy broker grace setting. See [NPC_BUY_AUDIT.md](NPC_BUY_AUDIT.md) for all prices,
+source/access exclusions, safe quest metadata and the audit-only floor proposal.
