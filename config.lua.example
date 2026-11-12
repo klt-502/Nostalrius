@@ -122,7 +122,7 @@ location = "Sweden"
 -- Physical scavenger; startup-only, requires master and visible loot spill.
 -- Apply migrations/001_broker.sql explicitly to the Easy Mode database first.
 easyModeLootBroker = false
-easyModeBrokerGraceSeconds = 45 -- integer 5..240, from actual visible spill
+easyModeBrokerGraceSeconds = 45 -- retained for future classes; reviewed routine fodder always has zero grace
 easyModeBrokerCommissionBps = 2500 -- integer 0..10000, retained economy funds
 easyModeBrokerLeashTiles = 7 -- integer 2..12, same floor
 easyModeBrokerCatalogFile = "data/zedas/broker.xml"

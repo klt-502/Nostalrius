@@ -95,3 +95,8 @@ if(BUILD_TESTING)
     add_test(NAME broker_store COMMAND brokerstore_test)
     set_tests_properties(broker_store PROPERTIES SKIP_RETURN_CODE 77)
 endif()
+
+if(BUILD_TESTING)
+    add_test(NAME npc_catalog_source_audit COMMAND ${PYTHON_EXECUTABLE}
+        ${CMAKE_SOURCE_DIR}/tests/audit/check_broker_catalog.py ${CMAKE_SOURCE_DIR})
+endif()

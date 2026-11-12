@@ -12,7 +12,7 @@
 #include "player.h"
 #include "tools.h"
 #include <fstream>
-#include <regex>
+#include <set>
 
 extern Game g_game;
 extern ConfigManager g_config;
@@ -208,7 +208,7 @@ void claim(Player &owner, Context &context, Item &item, int64_t now)
 {
 	if (context.bag->size() >= INVENTORY_LIMIT || !price(item) ||
 	    !EasyMode::isBrokerCandidate(item, now,
-	                                 g_config.getNumber(ConfigManager::EASY_MODE_BROKER_GRACE_SECONDS) * 1000LL))
+	                                 FODDER_GRACE_MS))
 		return;
 	Npc *npc = actor(context);
 	if (!npc || !near(npc->getPosition(), item.getPosition(), 1) ||
@@ -252,67 +252,69 @@ bool locked(const Item *item)
 {
 	return item && uncertain.count(const_cast<Item *>(item));
 }
-bool loadCatalog(const std::string &path, std::string &error)
-{
-	catalog.clear();
-	try {
-		pugi::xml_document document;
-		if (!document.load_file(path.c_str()))
-			throw std::runtime_error("catalog XML unavailable");
-		const auto root = document.document_element();
-		const std::set<std::string> rootAttributes{"buyer", "town", "station", "source", "sha1", "access"};
-		const std::set<std::string> itemAttributes{"id", "subtype", "name", "price", "rule"};
-		for (const auto attribute : root.attributes())
-			if (!rootAttributes.count(attribute.name()))
-				throw std::runtime_error("unknown catalog buyer attribute");
-		const std::string digest = "3db8996153f564baf26df2c8a70250873a53dd7d";
-		if (std::string(root.name()) != "broker" ||
-		    std::string(root.attribute("source").value()) != "data/npc/sam.npc" ||
-		    std::string(root.attribute("sha1").value()) != digest ||
-		    std::string(root.attribute("buyer").value()) != "Sam" ||
-		    std::string(root.attribute("town").value()) != "Thais" ||
-		    std::string(root.attribute("station").value()) != "32360;32199;7" ||
-		    std::string(root.attribute("access").value()) != "unconditional-topic-2")
-			throw std::runtime_error("unreviewed catalog buyer/access");
-		std::ifstream file("data/npc/sam.npc", std::ios::binary);
-		const std::string raw((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
-		std::string source;
-		for (char c : raw)
-			if (c != '\r')
-				source += c;
-		if (transformToSHA1(source) != digest)
-			throw std::runtime_error("NPC purchase source changed; review required");
-		const std::regex rule("^\\\"sell\\\".*-> Type=([0-9]+), Amount=1, Price=([0-9]+),.*Topic=2$");
-		std::map<uint16_t, uint64_t> checked;
-		for (const auto node : root.children()) {
-			for (const auto attribute : node.attributes())
-				if (!itemAttributes.count(attribute.name()))
-					throw std::runtime_error("unknown catalog item attribute");
-			Row fields{{"id", node.attribute("id").value()},
-			           {"price", node.attribute("price").value()},
-			           {"subtype", node.attribute("subtype").value()}};
-			const uint64_t id = number(fields, "id"), value = number(fields, "price");
-			const std::string line = node.attribute("rule").value();
-			std::smatch match;
-			if (std::string(node.name()) != "item" || !id || id >= Item::items.size() || id > 65535 || !value ||
-			    value > MONEY_LIMIT || number(fields, "subtype") ||
-			    Item::items[id].name != node.attribute("name").value() || !std::regex_match(line, match, rule) ||
-			    std::stoul(match[1]) != id || std::stoull(match[2]) != value ||
-			    source.find("\n" + line + "\n") == std::string::npos || !checked.emplace(id, value).second)
-				throw std::runtime_error("invalid/duplicate/unreviewed catalog rule");
-			std::unique_ptr<Item> probe(Item::CreateItem(id, 1));
-			if (!probe || !EasyMode::isSpillItem(*probe) || id == 3492 || probe->getWorth())
-				throw std::runtime_error("unsafe sale identity");
-		}
-		if (checked.empty())
-			throw std::runtime_error("empty sale catalog");
-		catalog.swap(checked);
-		return true;
-	} catch (const std::exception &e) {
-		error = e.what();
-		return false;
-	}
+namespace {
+std::string readNormalized(const std::string& path) {
+    std::ifstream file(path,std::ios::binary);
+    if (!file) throw std::runtime_error("reviewed broker source unavailable");
+    const std::string raw((std::istreambuf_iterator<char>(file)),std::istreambuf_iterator<char>());
+    std::string result;
+    for (size_t i=0;i<raw.size();++i) if (raw[i]!='\r' || i+1==raw.size() || raw[i+1]!='\n') result+=raw[i];
+    return result;
 }
+bool sameAttributes(const pugi::xml_node& node,const pugi::xml_node& approved) {
+    size_t count=0,other=0;
+    for (const auto attribute:node.attributes()) {
+        ++count;
+        if (!approved.attribute(attribute.name()) || std::string(approved.attribute(attribute.name()).value())!=attribute.value()) return false;
+    }
+    for (const auto attribute:approved.attributes()) {
+        ++other;
+        if (!node.attribute(attribute.name()) || std::string(node.attribute(attribute.name()).value())!=attribute.value()) return false;
+    }
+    return count==other;
+}
+}
+bool loadCatalog(const std::string& path,std::string& error) {
+    catalog.clear();
+    try {
+        // One reviewed data authority, pinned after the source/access/tier audit.
+        // A configured subset may remove entries; it cannot invent buyers/prices.
+        static const char* REVIEWED_CATALOG_SHA1 = "803c1f1177937feade139fd78c2bef10abea366b";
+        const std::string canonical=readNormalized("data/zedas/broker.xml");
+        if (transformToSHA1(canonical)!=REVIEWED_CATALOG_SHA1) throw std::runtime_error("canonical broker review changed; re-audit required");
+        pugi::xml_document reviewed,configured;
+        if (!reviewed.load_string(canonical.c_str()) || !configured.load_file(path.c_str())) throw std::runtime_error("broker XML unavailable");
+        const auto root=configured.document_element(), reference=reviewed.document_element();
+        if (std::string(root.name())!="broker" || !sameAttributes(root,reference)) throw std::runtime_error("invalid broker catalog version");
+        std::map<uint16_t,uint64_t> checked; std::set<std::string> buyers;
+        for (const auto buyer:root.children()) {
+            const std::string id=buyer.attribute("id").value();
+            const auto approvedBuyer=reference.find_child_by_attribute("buyer","id",id.c_str());
+            if (std::string(buyer.name())!="buyer" || !approvedBuyer || !buyers.insert(id).second || !sameAttributes(buyer,approvedBuyer))
+                throw std::runtime_error("unreviewed/duplicate broker buyer or access");
+            const auto source=readNormalized(buyer.attribute("source").value());
+            const std::string confirmation=buyer.attribute("confirmation").value();
+            if (transformToSHA1(source)!=buyer.attribute("sha1").value() || source.find("\n"+confirmation+"\n")==std::string::npos ||
+                confirmation.find("Count(Type)>=Amount")==std::string::npos || confirmation.find("Delete(Type)")==std::string::npos || confirmation.find("CreateMoney")==std::string::npos)
+                throw std::runtime_error("NPC purchase source/confirmation changed; review required");
+            for (const auto node:buyer.children()) {
+                Row fields{{"id",node.attribute("id").value()},{"price",node.attribute("price").value()},{"subtype",node.attribute("subtype").value()}};
+                const auto itemId=number(fields,"id"), value=number(fields,"price");
+                const auto approvedItem=approvedBuyer.find_child_by_attribute("item","id",node.attribute("id").value());
+                const std::string rule=node.attribute("rule").value();
+                if (std::string(node.name())!="item" || !approvedItem || !sameAttributes(node,approvedItem) || !itemId || itemId>65535 || itemId>=Item::items.size() ||
+                    !value || value>MONEY_LIMIT || number(fields,"subtype") || Item::items[itemId].name!=node.attribute("name").value() ||
+                    source.find("\n"+rule+"\n")==std::string::npos || !checked.emplace(itemId,value).second)
+                    throw std::runtime_error("unreviewed/duplicate broker item or price");
+                std::unique_ptr<Item> probe(Item::CreateItem(itemId,1));
+                if (!probe || EasyMode::lootClass(*probe)!=EasyMode::LootClass::BrokerFodder) throw std::runtime_error("broker class/state is not safe fodder");
+            }
+        }
+        if (checked.empty()) throw std::runtime_error("empty sale catalog");
+        catalog.swap(checked); return true;
+    } catch (const std::exception& e) { error=e.what(); return false; }
+}
+
 uint64_t price(const Item &item)
 {
 	auto entry = catalog.find(item.getID());
@@ -419,11 +421,11 @@ void tick(Player &owner, int64_t now)
 		// Bounded batches depart automatically after 15 seconds without a pickup.
 		if (!context.carried.empty() && (context.bag->size() >= INVENTORY_LIMIT || now - context.lastPickup >= 15000)) {
 			database->depart(owner.getGUID(), database->key(), time(nullptr));
-			message(owner, "Your broker is travelling to Sam in Thais (60 seconds each way).");
+			message(owner, "Your broker is travelling its reviewed town route (60 seconds each way).");
 			removeActor(context);
 			return;
 		}
-		const int64_t grace = g_config.getNumber(ConfigManager::EASY_MODE_BROKER_GRACE_SECONDS) * 1000LL;
+		const int64_t grace = FODDER_GRACE_MS;
 		if (context.target &&
 		    (!EasyMode::isBrokerCandidate(*context.target, now, grace) || !price(*context.target) ||
 		     !near(owner.getPosition(), context.target->getPosition(), leash()) || now - context.targetSince >= 5000))
@@ -475,7 +477,7 @@ void command(Player &owner, const std::string &text)
 			context.nextThink = 0;
 			context.lastPickup = OTSYS_TIME();
 			tick(owner);
-			message(owner, "Broker hired. Visible leftovers have a player-first grace period.");
+			message(owner, "Broker hired. Approved routine leftovers can be collected immediately.");
 		} else if (text == "dismiss") {
 			context.hired = false;
 			removeActor(context);
@@ -483,7 +485,7 @@ void command(Player &owner, const std::string &text)
 		} else if (text == "sell") {
 			database->depart(owner.getGUID(), database->key(), time(nullptr));
 			removeActor(context);
-			message(owner, "Any carried loot is on its way to Sam in Thais.");
+			message(owner, "Any carried loot is on its way to the reviewed town buyers.");
 		} else if (text == "cashout" || text == "cash out") {
 			const Bank bank = database->cashout(owner.getGUID(), database->key(), owner.getBankBalance(),
 			                                    owner.getBrokerBankWatermark());

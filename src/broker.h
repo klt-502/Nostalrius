@@ -11,6 +11,7 @@ struct Position;
 namespace Broker
 {
 class Store;
+static constexpr int64_t FODDER_GRACE_MS = 0; // The legacy configurable grace is reserved for future categories.
 bool enabled();
 void initialize();
 void initialize(std::unique_ptr<Store> connection);

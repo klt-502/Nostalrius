@@ -49,7 +49,9 @@ with tempfile.TemporaryDirectory(prefix="zedas-engine-") as directory:
     if scenario in {"spill_hunting", "broker", "broker_catalog", "broker_restart", "loot_classes"}:
         shutil.copytree(source / "data/zedas", root / "data/zedas")
         (root / "data/npc").mkdir()
-        shutil.copyfile(source / "data/npc/sam.npc", root / "data/npc/sam.npc")
+        for buyer in ET.parse(source / "data/zedas/broker.xml").getroot():
+            path = buyer.get("source")
+            shutil.copyfile(source / path, root / path)
         actions = ET.Element("actions")
         for node in ET.parse(source / "data/actions/actions.xml").getroot():
             if node.get("script") in {"misc/fluids.lua", "misc/weapons.lua", "misc/food.lua"}:

@@ -1,8 +1,8 @@
 # Physical loot broker
 
 The first opt-in broker follows one online player GUID, approaches visible
-leftover loot, carries the actual items in private escrow, represents a trip to
-Sam in Thais, and settles reviewed NPC purchase values. Worms 3492 stay inside
+routine leftover loot immediately, carries the actual items in private escrow, represents a trip to
+the reviewed town buyers, and settles their actual purchase values. Worms 3492 stay inside
 corpses/generated bags. Classic fishing scripts and consumption are unchanged.
 
 The preceding audit is in `BROKER_AUDIT.md`; SQL details are in
@@ -27,7 +27,7 @@ values reject configuration, including numeric strings, fractions and NaN.
 | Key | Default | Validation / effect |
 | --- | --- | --- |
 | `easyModeLootBroker` | `false` | Actual boolean; requires `easyModeEnabled=true` and `easyModeLootSpill=true` to start |
-| `easyModeBrokerGraceSeconds` | `45` | Integer 5–240; measured separately from each actual visible spill |
+| `easyModeBrokerGraceSeconds` | `45` | Legacy integer 5–240 retained for future categories; approved routine fodder always uses zero grace |
 | `easyModeBrokerCommissionBps` | `2500` | Integer 0–10000; retained economy share of each sale batch |
 | `easyModeBrokerLeashTiles` | `7` | Integer 2–12; Chebyshev distance on the owner's floor |
 | `easyModeBrokerCatalogFile` | `data/zedas/broker.xml` | Nonempty actual string; the whole catalog must pass validation |
@@ -68,8 +68,7 @@ It can retry eligible leftovers, without remote pickup or teleporting to loot.
 Manual pickup wins if processed first. Multiple brokers are first completed
 claim wins. Only witnessed generated items actually exposed by spill qualify;
 manual movement/merge, trade, corpse movement/decay/removal, disappearance or the
-five-minute/1024-corpse registry bound retire unclaimed eligibility. Overflow gets
-its grace only when exposed. Later corpse insertions, dropped player items and
+five-minute/1024-corpse registry bound retire unclaimed eligibility. Overflow becomes a candidate only when exposed; routine fodder then has zero grace. Later corpse insertions, dropped player items and
 special-container subtrees are never discovered by ground scanning.
 
 The live state model is FOLLOW/APPROACH, bounded COLLECT, OUTBOUND/SELL/RETURNING,
@@ -89,37 +88,33 @@ collection and offline invisible sales are not performed.
 
 ## Reviewed sale catalog
 
-The initial catalog contains these **25** explicit unconditional Sam Topic 2
-purchase offers. Prices are GP per ordinary unit, subtype 0 (no stateful subtype):
+The full audit scans 337 NPC files plus includes. The fixed catalog now contains
+**58 routine identities from nine ordinary merchants**, with **33 additions**.
+See `NPC_BUY_AUDIT.md` and `NPC_BUY_AUDIT.json` for every ID, exact name, buyer,
+town, GP price, literal offer/confirmation, source line and access decision.
+Sam's original 25 identities/prices remain, preserving existing escrow images.
 
-| ID | Price | ID | Price | ID | Price |
-| --- | ---: | --- | ---: | --- | ---: |
-| 3265 | 450 | 3266 | 80 | 3267 | 2 |
-| 3268 | 4 | 3269 | 400 | 3272 | 5 |
-| 3273 | 12 | 3274 | 7 | 3277 | 3 |
-| 3282 | 90 | 3286 | 30 | 3294 | 10 |
-| 3305 | 120 | 3264 | 25 | 3361 | 12 |
-| 3358 | 70 | 3359 | 150 | 3357 | 400 |
-| 3558 | 25 | 3355 | 4 | 3352 | 17 |
-| 3351 | 190 | 3412 | 5 | 3413 | 95 |
-| 3409 | 80 | | | | |
+The explicit route covers Sam, Shanar, Kroox, Timur, Uzgod, Al Dee, Willard,
+Willie and Zaidal. A canonical fingerprint binds the reviewed XML; each buyer's
+actual NPC file is separately fingerprinted, including its purchase confirmation.
+A custom configured catalog may narrow that version-2 data, but may not invent
+buyers/prices or promote player-interest items. Old custom version-1 catalogs
+need conversion to the reviewed version-2 subset format. Never choose maximum
+NPC prices automatically. The represented 60-second town trip covers this reviewed
+route; it is not a claim of full-map walking or live NPC dialogue.
 
-`data/zedas/broker.xml` records each exact name, price, subtype, source rule,
-buyer/town/station `[32360,32199,7]` and unconditional access assertion. Runtime
-checks each literal rule and an engine-pinned LF-normalized SHA-1 of
-`data/npc/sam.npc`; editing its rules requires review and fingerprint renewal.
-The confirmed source operation deletes the player's Type and creates money.
-The service represents that town buyer; it does not invoke live dialogue against
-escrow. It does not select maximum prices across NPCs. Catalogs can safely narrow
-this reviewed set; adding a buyer/conditional offer requires a source audit.
+Approved fodder has **zero grace**, even if the legacy grace setting is 45.
+The normal one-second decision tick and native approach provide only a technical
+delay. Approach reserves nothing; a manual pickup completed first still wins.
+The grace-aware witness API remains available for future categories.
 
-Most spill items intentionally have **no sale price yet**: gems, products, food,
-jewelry, rare weapons and armor outside these 25 remain visible for the player.
-Magic plate armor's separate dialogue, Sam's backpack quest, ambiguous generic
-shield confirmation rules and every conditional/unknown offer stay excluded.
-Currency, worms, marked/quest/scripted items, keys/runes, special containers and
-unsafe state never enter broker escrow. House-ground items are excluded because
-house persistence could otherwise retain an additional source copy.
+Djinn/faction/quest/premium-gated and high-value/specialty items remain entirely
+player-controlled. Generic gem/jewelry offers do not turn pretty loot into fodder.
+Studded helmet 3376 and leather legs 3559 have proven ordinary purchase offers;
+studded armor 3378, studded legs 3362 and soldier helmet 3375 have only gated/non-town
+paths and are excluded. Bow/crossbow have valid Timur offers; arrows/bolts have
+no proven ordinary buyback offer and remain player-only. Price evidence alone
+does not bypass movement/script/state safety. Worms and corpse junk stay inside.
 
 ## Money, durability and recovery
 
