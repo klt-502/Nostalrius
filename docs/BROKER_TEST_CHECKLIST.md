@@ -51,7 +51,12 @@ original client's console, viewport or movement presentation.
 11. Test blocked routes, removed loot mid-approach, house tiles, player insertion,
     protected state/handler changes and two competing owners. Existing provenance,
     tile visibility budget, capacity and first completed claim protections remain.
-12. Test floor transitions as documented in BROKER_LOGISTICS; far same-floor travel,
+12. Change floor: immediate disappearance, then safe adjacent collector rejoin
+    after roughly two seconds. Rapid floor changes reset the wait; blocked placement
+    must wait, and hire during the delay must report status without bypassing it.
+    Test while a runner is in handoff/travel: the assigned trip continues off-scene
+    and the collector resumes on the new floor. Verify no absent/cross-floor pickup.
+    Also test far same-floor travel,
     logout, death and dismiss must stop visible collection and preserve all durable
     state. No full stair/rope/hole pathfinding or teleport-to-loot is provided.
 13. Disable broker, then master, and restart. Historical bank, loot, consumables,

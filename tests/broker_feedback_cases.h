@@ -153,4 +153,85 @@ static void testBrokerFeedback(bool disabled)
 
 	Broker::stop(*owner);
 }
+static void testBrokerFloor()
+{
+	require(Database::getInstance()->connect(), "floor fixture DB");
+	auto *db = Database::getInstance();
+	for (const char *table :
+	     {"zedas_broker_escrow", "zedas_broker_sales", "zedas_broker_payouts", "zedas_broker_accounts"})
+		require(db->executeQuery(std::string("DELETE FROM ") + table), "reset floor fixture");
+	const auto ground = g_game.map.getTile(100, 100, 7)->getGround()->getID();
+	for (int z : {5, 6})
+		for (int x = 98; x <= 102; ++x)
+			for (int y = 98; y <= 102; ++y) {
+				auto *tile = new StaticTile(x, y, z);
+				tile->internalAddThing(Item::CreateItem(ground));
+				g_game.map.setTile(Position(x, y, z), tile);
+			}
+	Broker::initialize();
+	auto *owner = makePlayer(100, 100);
+	owner->setGUID(1);
+	Broker::command(*owner, "hire");
+	Container *corpse = corpseAt(99, 100);
+	Item *helmet = Item::CreateItem(3355);
+	require(g_game.internalAddItem(corpse, helmet) == RETURNVALUE_NOERROR, "floor escrow fixture");
+	EasyMode::onLootGenerated(*corpse);
+	Broker::tick(*owner, OTSYS_TIME() + 1100);
+	Broker::command(*owner, "sell");
+	require(brokerFor(*owner) && runnerFor(*owner), "floor change starts during handoff");
+	require(g_game.internalTeleport(owner, Position(100, 100, 6)) == RETURNVALUE_NOERROR, "first floor change");
+	const auto first = OTSYS_TIME();
+	require(!brokerFor(*owner) && !runnerFor(*owner), "floor hook immediately removes both visible actors");
+	Broker::tick(*owner, first + 1000);
+	require(!brokerFor(*owner), "collector absent before stable-floor delay");
+	BrokerEngineTestAccess::clearOutput(*owner);
+	Broker::command(*owner, "hire");
+	require(!brokerFor(*owner) && BrokerWire(*owner).chat.back().find("Broker is paused after a floor change.") == 0,
+	        "hire reports pending floor rejoin without bypassing delay");
+	// Repeated floor changes reset the due time; no old-floor callbacks or loot claims.
+	require(g_game.internalTeleport(owner, Position(100, 100, 5)) == RETURNVALUE_NOERROR, "second floor change");
+	const auto second = OTSYS_TIME();
+	Broker::tick(*owner, second + 1000);
+	require(!brokerFor(*owner), "changed floor resets delay");
+	for (int x = 99; x <= 101; ++x)
+		for (int y = 99; y <= 101; ++y)
+			if (x != 100 || y != 100)
+				g_game.map.getTile(x, y, 5)->setFlag(TILESTATE_BLOCKSOLID);
+	Broker::tick(*owner, second + 2000);
+	require(!brokerFor(*owner), "no safe placement leaves collector absent");
+	g_game.map.getTile(99, 99, 5)->resetFlag(TILESTATE_BLOCKSOLID);
+	Broker::tick(*owner, second + 3000);
+	require(brokerFor(*owner) && brokerFor(*owner)->getPosition() == Position(99, 99, 5) && !runnerFor(*owner),
+	        "delayed safe adjacent reappearance with active trip off-scene");
+	auto *collector = brokerFor(*owner);
+	Broker::command(*owner, "hire");
+	require(brokerFor(*owner) == collector, "hire after floor rejoin is idempotent");
+	require(
+	    db->storeQuery("SELECT COUNT(*) AS n FROM zedas_broker_escrow WHERE owner=1 AND trip IS NOT NULL AND sold=0")
+	            ->getNumber<unsigned>("n") == 1,
+	    "floor changes preserve trip batch");
+	Container *oldFloor = Item::CreateItem(3994)->getContainer();
+	require(g_game.internalAddItem(g_game.map.getTile(101, 100, 6), oldFloor) == RETURNVALUE_NOERROR,
+	        "old-floor corpse");
+	Item *brass = Item::CreateItem(3354);
+	require(g_game.internalAddItem(oldFloor, brass) == RETURNVALUE_NOERROR, "old-floor brass helmet");
+	EasyMode::onLootGenerated(*oldFloor);
+	Broker::tick(*owner, second + 4000);
+	require(brass->getParent() == oldFloor->getTile(), "no cross-floor remote claims");
+	require(g_game.internalTeleport(owner, Position(100, 100, 6)) == RETURNVALUE_NOERROR, "return to witnessed floor");
+	const auto third = OTSYS_TIME();
+	Broker::tick(*owner, third + 1000);
+	require(brass->getParent() == oldFloor->getTile() && !brokerFor(*owner), "no collection while absent");
+	Broker::tick(*owner, third + 2000);
+	collector = brokerFor(*owner);
+	require(collector && collector->getPosition().z == 6, "collector returns on correct floor");
+	require(g_game.internalTeleport(collector, Position(100, 99, 6)) == RETURNVALUE_NOERROR,
+	        "floor native pickup endpoint");
+	Broker::tick(*owner, third + 3000);
+	require(brass->getParent() != oldFloor->getTile(), "collection resumes locally while original courier still away");
+	require(g_game.internalTeleport(owner, Position(100, 100, 5)) == RETURNVALUE_NOERROR, "floor change before death");
+	owner->changeHealth(-owner->getHealth());
+	Broker::tick(*owner, OTSYS_TIME() + 3000);
+	require(!brokerFor(*owner) && !runnerFor(*owner), "dead owner cannot spawn delayed actors");
+}
 #endif

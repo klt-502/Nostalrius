@@ -565,8 +565,9 @@ static void testBroker()
 	        "floor change retains collected escrow");
 	require(g_game.internalTeleport(owner, Position(100, 100, 7)) == RETURNVALUE_NOERROR,
 	        "return owner to supported floor");
-	Broker::command(*owner, "hire");
-	require(g_game.internalTeleport(owner, Position(112, 108, 7)) == RETURNVALUE_NOERROR,
+    Broker::tick(*owner, OTSYS_TIME() + Broker::FLOOR_REJOIN_DELAY_MS + 1000);
+    Broker::command(*owner, "hire");
+    require(g_game.internalTeleport(owner, Position(112, 108, 7)) == RETURNVALUE_NOERROR,
 	        "owner teleports beyond leash");
 	Broker::tick(*owner, exposed + 40000);
 	require(!brokerFor(*owner), "far travel abandons work without teleporting to loot");

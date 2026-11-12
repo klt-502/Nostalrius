@@ -126,3 +126,26 @@ escrow, trips or balances. Travel can reconcile on a later command/session.
 Collector/courier validation: full native suite 30/30, including six real engine
 processes for prepare, handoff, travel, sale, payout and final restart, independent
 field claims, batch-only settlement, original wire feedback and repeated hire.
+
+## Floor presentation
+
+`Player::onCreatureMove` notifies `Broker::ownerMoved` only for the owner's floor
+change. It immediately removes collector/scene runner, clears approach, and
+sets a session-only 1,500 ms stable-floor delay. Every subsequent floor change
+resets it. The normal one-second decision tick rechecks the same GUID/session,
+alive/hired state, DB/escrow validity and safe adjacent placement. Typical
+reappearance is 1.5–2.5 seconds depending on tick phase; blocked placement waits
+rather than forcing or visibly teleporting an actor. No stair/rope/hole pathfinding
+is added. `!broker hire` reports `Broker is paused after a floor change. Rejoining
+shortly.` during this delay and cannot bypass it. Courier travel and all durable
+ownership/balances remain unchanged; a scene courier removed by a floor change
+continues its already assigned trip off-scene. New claims require the physically
+present same-floor collector. Reconciliation may finish ownership already prepared
+before a pause; it never qualifies new cross-floor loot.
+
+Far same-floor travel beyond the leash still pauses collection until explicit
+hire. Logout, death or dismiss cancels delayed presentation. There is no scheduled
+callback holding a player pointer: a mismatched/stopped session cannot reappear.
+The `engine_broker_floor` test covers resets, blocked placement, hire during delay,
+active courier batch preservation, no absent/cross-floor claims, local collection
+after rejoin and death before reappearance. Full native suite: 31/31 passed.

@@ -190,6 +190,10 @@ int main(int argc, char** argv)
 		require(g_config.getString(ConfigManager::EASY_MODE_RESPAWN_POLICY_FILE) == "data/zedas/spawns.xml", "manifest path remains startup only");
 	}
 	setup();
+    if (scenario=="broker_floor") {
+        require(g_moveEvents->loadFromXml(), "floor real movement handlers");
+        testBrokerFloor(); return 0;
+    }
     if (scenario=="broker_witness") {
         require(g_moveEvents->loadFromXml(), "witness real movement handlers");
         testBrokerWitness(); return 0;

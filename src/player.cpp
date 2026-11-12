@@ -967,6 +967,8 @@ void Player::onCreatureMove(Creature* creature, const Tile* newTile, const Posit
 		return;
 	}
 
+    Broker::ownerMoved(*this, oldPos, newPos);
+
 	if (tradeState != TRADE_TRANSFER) {
 		//check if we should close trade
 		if (tradeItem && !Position::areInRange<1, 1, 0>(tradeItem->getPosition(), getPosition())) {

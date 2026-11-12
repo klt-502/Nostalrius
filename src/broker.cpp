@@ -27,6 +27,8 @@ struct Context {
 	uint32_t session = 0, actor = 0, runner = 0;
 	bool hired = false;
 	int64_t runnerUntil = 0;
+	bool floorPaused = false;
+	int64_t floorReady = 0;
 	std::set<std::string> field;
 	int64_t nextPickupSpeech = 0;
 	int64_t nextThink = 0, targetSince = 0, lastPickup = 0;
@@ -288,7 +290,10 @@ void notices(Player &owner)
 }
 bool dispatch(Player &owner, Context &context, int64_t now)
 {
-    if (context.hired && !actor(context)) spawn(owner, context);
+	if (context.floorPaused)
+		return false;
+	if (context.hired && !actor(context))
+		spawn(owner, context);
 	if (!context.hired || !actor(context) || context.field.empty() ||
 	    number(database->status(owner.getGUID()), "state"))
 		return false;
@@ -310,10 +315,12 @@ bool dispatch(Player &owner, Context &context, int64_t now)
 std::string operationalStatus(Player &owner, Context &context)
 {
 	const auto state = database->status(owner.getGUID());
-	std::string text = actor(context)
-	                       ? "Broker is with you. Carrying " + std::to_string(context.field.size()) + "/20 items."
-	                       : (context.hired ? "Broker is waiting for safe placement."
-	                                        : "Broker collection is paused. Use !broker hire to resume.");
+	std::string text =
+	    actor(context)
+	        ? "Broker is with you. Carrying " + std::to_string(context.field.size()) + "/20 items."
+	        : (context.floorPaused ? "Broker is paused after a floor change. Rejoining shortly."
+	                               : (context.hired ? "Broker is waiting for safe placement."
+	                                                : "Broker collection is paused. Use !broker hire to resume."));
 	if (number(state, "state")) {
 		const auto rows = database->batchSummary(owner.getGUID());
 		text += " Runner is " +
@@ -492,7 +499,23 @@ void stop(Player &owner)
 		return;
 	removeActors(*found->second);
 	found->second->hired = false;
+	found->second->floorPaused = false;
 	found->second->session = 0;
+}
+void ownerMoved(Player &owner, const Position &oldPos, const Position &newPos)
+{
+	if (!enabled() || oldPos.z == newPos.z)
+		return;
+	const auto found = contexts.find(owner.getGUID());
+	if (found == contexts.end() || found->second->session != owner.getID() || !found->second->hired)
+		return;
+	Context &context = *found->second;
+	// Presentation only. No pathfinding across floors, no forced placement and no
+	// delayed callback holding a stale owner pointer. Every later tick revalidates the session.
+	removeActors(context);
+	context.floorPaused = true;
+	context.floorReady = OTSYS_TIME() + FLOOR_REJOIN_DELAY_MS;
+	context.nextThink = 0;
 }
 bool canStep(const Npc &npc, const Position &destination)
 {
@@ -500,8 +523,8 @@ bool canStep(const Npc &npc, const Position &destination)
 	if (found == contexts.end())
 		return false;
 	Player *owner = g_game.getPlayerByID(found->second->session);
-	return owner && !owner->isRemoved() && owner->getHealth() > 0 && safeWalk(destination) &&
-	       near(owner->getPosition(), destination, leash()) &&
+	return !found->second->floorPaused && owner && !owner->isRemoved() && owner->getHealth() > 0 &&
+	       safeWalk(destination) && near(owner->getPosition(), destination, leash()) &&
 	       (!npc.getParent() ||
 	        (near(owner->getPosition(), npc.getPosition(), leash()) && safeWalk(npc.getPosition(), false)));
 }
@@ -550,10 +573,16 @@ void tick(Player &owner, int64_t now)
 			message(owner, "Broker collection paused after travel. Use !broker hire to resume; escrow is safe.");
 			return;
 		}
+		if (context.floorPaused && now < context.floorReady)
+			return;
+		const bool rejoining = context.floorPaused;
+		context.floorPaused = false;
 		spawn(owner, context);
 		npc = actor(context);
-		if (!npc)
+		if (!npc) {
+			context.floorPaused = rejoining;
 			return;
+		}
 		const int32_t desiredSpeed = std::max(82, static_cast<const Creature &>(owner).getStepSpeed() + 20);
 		if (npc->getSpeed() != desiredSpeed)
 			g_game.changeSpeed(npc, (desiredSpeed - npc->getSpeed()) / 2);
@@ -623,6 +652,7 @@ void command(Player &owner, const std::string &text)
 			message(owner, operationalStatus(owner, context));
 		} else if (text == "dismiss") {
 			context.hired = false;
+			context.floorPaused = false;
 			removeActors(context);
 			message(owner, "Broker dismissed. Inventory and balances remain saved.");
 		} else if (text == "sell") {
