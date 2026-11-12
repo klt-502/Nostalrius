@@ -9,9 +9,14 @@ Inspected `zedas-easy-mode` at `328bf7b`. This report precedes catalog/policy ch
 
 The extractor scans all **337 NPC files**, recursively expands `.ndb` includes, and finds **2598** single-unit item/price/topic offers. **762** reach a matching `Count(Type)>=Amount -> Delete(Type), CreateMoney` confirmation. These are evidence candidates, not automatically approved offers. It distinguishes purchases from `DeleteMoney, Create(Type)` sales to players. Bulk-only/unusual/gated rules are not inferred into unit prices. All ammunition references were also searched, including bundles and quest hand-ins.
 
-The reviewed routine catalog is **58 identities** (33 added to the Sam baseline). Buyer selection uses a fixed reviewed route: retain Sam prices, then Shanar, Kroox, Timur, Uzgod, Al Dee, Willard, Willie and Zaidal for uncovered identities. It is never a maximum-price search. For example plate shield stays at Shanar 31 GP rather than maximizing to another merchant. Each entry below is an exact literal unit offer with Topic 2, an unconditional greeting route and a matching item-deletion/money-creation confirmation. NPC file fingerprints will bind the default catalog to this review.
+The original purchase-evidence audit reviewed **58 identities** (33 added to the Sam baseline).
+Current broker gameplay approval is **52 non-food identities**: meat 3577, salmon
+3579, ham 3582, cherry 3590, bread 3600 and cheese 3607 are now excluded. Willie
+is removed from the automated route. Their valid NPC purchase evidence below is
+retained as historical evidence, not current broker approval. See
+[BROKER_PICKUP_POLICY.md](BROKER_PICKUP_POLICY.md). Buyer selection uses a fixed reviewed route: retain Sam prices, then Shanar, Kroox, Timur, Uzgod, Al Dee, Willard, Willie and Zaidal for uncovered identities. It is never a maximum-price search. For example plate shield stays at Shanar 31 GP rather than maximizing to another merchant. Each entry below is an exact literal unit offer with Topic 2, an unconditional greeting route and a matching item-deletion/money-creation confirmation. NPC file fingerprints will bind the default catalog to this review.
 
-## Approved ordinary-town broker catalog
+## Reviewed ordinary-town purchase evidence (food now excluded)
 
 | ID | Exact name | Buyer | Town | GP | Offer source |
 | --- | --- | --- | --- | ---: | --- |

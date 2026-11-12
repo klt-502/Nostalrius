@@ -111,13 +111,15 @@ broker command/session; no offline collection or background world sale loop runs
 ## Reviewed sale catalog
 
 The full audit scans 337 NPC files plus includes. The fixed catalog now contains
-**58 routine identities from nine ordinary merchants**, with **33 additions**.
+**52 non-food routine identities from eight ordinary merchants**.
+The six previously priced foods were removed by gameplay policy; their literal
+NPC purchase evidence remains recorded separately in `NPC_BUY_AUDIT.json`.
 See `NPC_BUY_AUDIT.md` and `NPC_BUY_AUDIT.json` for every ID, exact name, buyer,
 town, GP price, literal offer/confirmation, source line and access decision.
 Sam's original 25 identities/prices remain, preserving existing escrow images.
 
 The explicit route covers Sam, Shanar, Kroox, Timur, Uzgod, Al Dee, Willard,
-Willie and Zaidal. A canonical fingerprint binds the reviewed XML; each buyer's
+and Zaidal. Willie is no longer part of the broker route. A canonical fingerprint binds the reviewed XML; each buyer's
 actual NPC file and all transitive `.ndb` includes are separately fingerprinted,
 including its purchase confirmation. Zaidal's furniture include is explicitly
 covered even though the selected tusk rule is in his main file.
@@ -214,8 +216,13 @@ and current safety handlers before departure or settlement. A newly marked item
 or unsafe action reload pauses the operation and retains the instance and image.
 The native regression checks both changes through the actual sale command.
 
-The expanded delivery passes **29/29** native/source/SQL tests normally and with
+The current delivery passes **35/35** native/source/SQL tests normally and with
 ASan/UBSan (fixture leak checking disabled). `engine_broker_feedback` inspects
 actual outgoing positional monster speech and verifies no routine status/chat
 packet, rapid per-pickup captions, departure, return and explicit balance replies.
-Floor reappearance remains audit-only; see `NPC_BUY_AUDIT.md`.
+Floor reappearance retains the accepted implementation in `BROKER_LOGISTICS.md`.
+
+Food and all rings are excluded from broker stock. See
+[BROKER_PICKUP_POLICY.md](BROKER_PICKUP_POLICY.md) for exact IDs, the ring audit,
+per-pickup captions and the **pre-upgrade check for old unsold food escrow**.
+There is no new schema migration or logistics change in this policy update.

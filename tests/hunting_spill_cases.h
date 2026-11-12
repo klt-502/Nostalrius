@@ -59,13 +59,13 @@ static void testHuntingSpill()
 	const uint64_t money = contentsValue(*corpse);
 	EasyMode::onLootGenerated(*corpse);
 	Tile* tile = corpse->getTile();
-	for (Item* item : {sword, armor, tusks, meat, ring, arrows, boots}) {
+	for (Item* item : {sword, armor, tusks, ring, arrows, boots}) {
 		require(item->getParent() == tile && tile->getThingIndex(item) >= 0,
 		        "ordinary nested hunting loot moves the exact existing instance onto the corpse tile");
 	}
 	require(tusks->getItemCount() == 3 && meat->getItemCount() == 3 && arrows->getItemCount() == 20 &&
-	        collector->getSpeed() == initialSpeed && !ring->hasAttribute(static_cast<itemAttrTypes>(0xFFFFFFFFu)),
-	        "stack counts, passive jewelry state and player equipment stats stay unchanged; food is not consumed");
+	        meat->getParent() == nested && collector->getSpeed() == initialSpeed && !ring->hasAttribute(static_cast<itemAttrTypes>(0xFFFFFFFFu)),
+	        "stack counts, passive jewelry state and player equipment stats stay unchanged; food remains inside without consumption");
 	require(marked->getParent() == bag && rune->getParent() == bag && iceRapier->getParent() == bag &&
 	        protectedChild->getParent() == specialBag && worms->getParent() == nested && worms->getItemCount() == 12, "mixed protected contents and quest-container subtree remain inside");
 	require(money == 10230 && contentsValue(*corpse) == money && EasyMode::collectGold(*collector) == money &&

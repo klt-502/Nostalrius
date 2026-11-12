@@ -52,14 +52,13 @@ static void testBrokerCatalog()
 	                                                                    {3350, 130},
 	                                                                    {3376, 20},
 	                                                                    {3559, 1},
-	                                                                    {3577, 2},
-	                                                                    {3044, 100}}) {
+		                                                                    {3044, 100}}) {
 		Item *item = Item::CreateItem(entry.first, 1);
 		require(Broker::price(*item) == entry.second, "expanded ordinary price matches fixed reviewed source");
 		item->decrementReferenceCounter();
 	}
 	require(Broker::price(*sword) == 25 && Broker::price(*plate) == 400, "reviewed unconditional Sam purchase prices");
-	for (uint16_t id : {3492, 3031, 3160, 3244, 3366, 3375, 3362, 3378, 3446, 3447, 3370, 2994, 3232}) {
+	for (uint16_t id : {3577, 3579, 3582, 3590, 3600, 3607, 3004, 3006, 3007, 3063, 3492, 3031, 3160, 3244, 3366, 3375, 3362, 3378, 3446, 3447, 3370, 2994, 3232}) {
 		Item *excluded = Item::CreateItem(id, 1);
 		require(Broker::price(*excluded) == 0,
 		        "currency/worm/protected/conditional/unreviewed identities have no sale price");

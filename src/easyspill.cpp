@@ -173,17 +173,23 @@ bool EasyMode::isSpillItem(const Item &item)
 	const ItemType &type = Item::items[item.getID()];
 	return policy().contains(item) && !item.getContainer() && item.getWorth() == 0 && item.getItemCount() > 0 &&
 	       (!item.isStackable() || item.getItemCount() <= 100) && type.moveable && type.pickupable &&
-	       !type.alwaysOnTop && !type.isGroundTile() && !type.isFluidContainer() && !type.isSplash() &&
-	       !type.isMagicField() && !type.isKey() && !type.isDoor() && !type.isChest() && !type.isDepot() &&
-	       !type.isTeleport() && !type.isBed() && !type.isRune() && !type.corpse && !type.blockSolid &&
-	       !type.blockPathFind && !type.charges && !type.decayTime && type.decayTo == -1 &&
+	       type.nutrition == 0 && !type.alwaysOnTop && !type.isGroundTile() && !type.isFluidContainer() &&
+	       !type.isSplash() && !type.isMagicField() && !type.isKey() && !type.isDoor() && !type.isChest() &&
+	       !type.isDepot() && !type.isTeleport() && !type.isBed() && !type.isRune() && !type.corpse &&
+	       !type.blockSolid && !type.blockPathFind && !type.charges && !type.decayTime && type.decayTo == -1 &&
 	       !item.hasAttribute(static_cast<itemAttrTypes>(~policy().allowedState(item))) && !interactive(item);
 }
 
 EasyMode::LootClass EasyMode::lootClass(const Item &item)
 {
 	const LootClass kind = policy().category(item);
-	return kind == LootClass::CorpseJunk ? kind : isSpillItem(item) ? kind : LootClass::Protected;
+	if (kind == LootClass::CorpseJunk)
+		return kind;
+	if (!isSpillItem(item))
+		return LootClass::Protected;
+	// Ring-slot identities are always player-controlled, even if a future
+	// reviewed policy accidentally labels a passive ring as broker fodder.
+	return (Item::items[item.getID()].slotPosition & SLOTP_RING) ? LootClass::PlayerInterest : kind;
 }
 
 bool EasyMode::spillItem(Container &source, Tile &tile, Item &item)

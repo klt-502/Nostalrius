@@ -783,7 +783,9 @@
       "unconditional": true,
       "kind": "ordinary-town",
       "access": "normal greeting; no quest/faction/vocation/gender/premium condition on these offers"
-    },
+    }
+  ],
+  "excluded_by_gameplay_policy": [
     {
       "id": 3577,
       "name": "meat",
@@ -797,7 +799,8 @@
       "confirmation_line": 78,
       "unconditional": true,
       "kind": "ordinary-town",
-      "access": "normal greeting; no quest/faction/vocation/gender/premium condition on these offers"
+      "access": "normal greeting; no quest/faction/vocation/gender/premium condition on these offers",
+      "exclusion": "Food stays in corpses and is player-controlled; literal NPC purchase evidence remains valid."
     },
     {
       "id": 3579,
@@ -812,7 +815,8 @@
       "confirmation_line": 78,
       "unconditional": true,
       "kind": "ordinary-town",
-      "access": "normal greeting; no quest/faction/vocation/gender/premium condition on these offers"
+      "access": "normal greeting; no quest/faction/vocation/gender/premium condition on these offers",
+      "exclusion": "Food stays in corpses and is player-controlled; literal NPC purchase evidence remains valid."
     },
     {
       "id": 3582,
@@ -827,7 +831,8 @@
       "confirmation_line": 78,
       "unconditional": true,
       "kind": "ordinary-town",
-      "access": "normal greeting; no quest/faction/vocation/gender/premium condition on these offers"
+      "access": "normal greeting; no quest/faction/vocation/gender/premium condition on these offers",
+      "exclusion": "Food stays in corpses and is player-controlled; literal NPC purchase evidence remains valid."
     },
     {
       "id": 3590,
@@ -842,7 +847,8 @@
       "confirmation_line": 78,
       "unconditional": true,
       "kind": "ordinary-town",
-      "access": "normal greeting; no quest/faction/vocation/gender/premium condition on these offers"
+      "access": "normal greeting; no quest/faction/vocation/gender/premium condition on these offers",
+      "exclusion": "Food stays in corpses and is player-controlled; literal NPC purchase evidence remains valid."
     },
     {
       "id": 3600,
@@ -857,7 +863,8 @@
       "confirmation_line": 78,
       "unconditional": true,
       "kind": "ordinary-town",
-      "access": "normal greeting; no quest/faction/vocation/gender/premium condition on these offers"
+      "access": "normal greeting; no quest/faction/vocation/gender/premium condition on these offers",
+      "exclusion": "Food stays in corpses and is player-controlled; literal NPC purchase evidence remains valid."
     },
     {
       "id": 3607,
@@ -872,7 +879,8 @@
       "confirmation_line": 78,
       "unconditional": true,
       "kind": "ordinary-town",
-      "access": "normal greeting; no quest/faction/vocation/gender/premium condition on these offers"
+      "access": "normal greeting; no quest/faction/vocation/gender/premium condition on these offers",
+      "exclusion": "Food stays in corpses and is player-controlled; literal NPC purchase evidence remains valid."
     }
   ]
 }

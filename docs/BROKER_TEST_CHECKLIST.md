@@ -64,3 +64,20 @@ original client's console, viewport or movement presentation.
     broker DB migration is required when disabled. Retain tables for later recovery.
 
 No simulated purchases, market or broker-fund spending is included.
+
+Food/ring policy retest additions:
+
+- Generate meat 3577, ham 3582, bread 3600, cheese 3607 and other reviewed food.
+  All stay inside ordinary generated bags; the collector uses no slots for them.
+  Retrieve and eat manually to verify unchanged historical consumption.
+- Generate wedding/crystal/gold/sky rings: safe passive instances spill but remain
+  player-controlled. Charged, active/dormant transforming and special rings stay
+  protected; none is collected or sold.
+- Generate three adjacent equipment drops: each successful pickup emits its own
+  floating caption request within the old three-second interval. Check native
+  client overlap/replacement/lifetime; no pickup text should enter the console.
+- A failed approach, marked item, manual pickup winning a race or failed prepare
+  must produce no successful-pickup caption.
+- Recheck collector coverage, runner dispatch/summaries, floor rejoin and restart
+  recovery unchanged. Before upgrading, drain old food escrow as described in
+  `BROKER_PICKUP_POLICY.md`; do not delete or rewrite ledger rows.

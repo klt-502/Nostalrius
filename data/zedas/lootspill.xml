@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <!-- Reviewed exact identities. Class never overrides provenance, state, handlers or tile safety. -->
 <lootspill version="2">
+  <!-- Ordinary food uses the legacy non-spill corpse-junk class: corpse contents, never broker stock. -->
   <item id="1781" name="small stone" category="player-interest" />
   <item id="2991" name="doll" category="player-interest" />
   <item id="2992" name="snowball" category="player-interest" />
@@ -214,45 +215,45 @@
   <item id="3572" name="scarf" category="player-interest" />
   <item id="3573" name="magician hat" category="player-interest" />
   <item id="3574" name="mystic turban" category="player-interest" />
-  <item id="3577" name="meat" category="broker-fodder" />
-  <item id="3578" name="fish" category="player-interest" />
-  <item id="3579" name="salmon" category="broker-fodder" />
-  <item id="3580" name="fish" category="player-interest" />
-  <item id="3581" name="shrimp" category="player-interest" />
-  <item id="3582" name="ham" category="broker-fodder" />
-  <item id="3583" name="dragon ham" category="player-interest" />
-  <item id="3584" name="pear" category="player-interest" />
-  <item id="3585" name="red apple" category="player-interest" />
-  <item id="3586" name="orange" category="player-interest" />
-  <item id="3587" name="banana" category="player-interest" />
-  <item id="3588" name="blueberry" category="player-interest" />
-  <item id="3589" name="coconut" category="player-interest" />
-  <item id="3590" name="cherry" category="broker-fodder" />
-  <item id="3591" name="strawberry" category="player-interest" />
-  <item id="3592" name="grapes" category="player-interest" />
-  <item id="3593" name="melon" category="player-interest" />
-  <item id="3594" name="pumpkin" category="player-interest" />
-  <item id="3595" name="carrot" category="player-interest" />
-  <item id="3596" name="tomato" category="player-interest" />
-  <item id="3597" name="corncob" category="player-interest" />
-  <item id="3598" name="cookie" category="player-interest" />
-  <item id="3599" name="candy cane" category="player-interest" />
-  <item id="3600" name="bread" category="broker-fodder" />
-  <item id="3601" name="roll" category="player-interest" />
-  <item id="3602" name="brown bread" category="player-interest" />
-  <item id="3606" name="egg" category="player-interest" />
-  <item id="3607" name="cheese" category="broker-fodder" />
+  <item id="3577" name="meat" category="corpse-junk" />
+  <item id="3578" name="fish" category="corpse-junk" />
+  <item id="3579" name="salmon" category="corpse-junk" />
+  <item id="3580" name="fish" category="corpse-junk" />
+  <item id="3581" name="shrimp" category="corpse-junk" />
+  <item id="3582" name="ham" category="corpse-junk" />
+  <item id="3583" name="dragon ham" category="corpse-junk" />
+  <item id="3584" name="pear" category="corpse-junk" />
+  <item id="3585" name="red apple" category="corpse-junk" />
+  <item id="3586" name="orange" category="corpse-junk" />
+  <item id="3587" name="banana" category="corpse-junk" />
+  <item id="3588" name="blueberry" category="corpse-junk" />
+  <item id="3589" name="coconut" category="corpse-junk" />
+  <item id="3590" name="cherry" category="corpse-junk" />
+  <item id="3591" name="strawberry" category="corpse-junk" />
+  <item id="3592" name="grapes" category="corpse-junk" />
+  <item id="3593" name="melon" category="corpse-junk" />
+  <item id="3594" name="pumpkin" category="corpse-junk" />
+  <item id="3595" name="carrot" category="corpse-junk" />
+  <item id="3596" name="tomato" category="corpse-junk" />
+  <item id="3597" name="corncob" category="corpse-junk" />
+  <item id="3598" name="cookie" category="corpse-junk" />
+  <item id="3599" name="candy cane" category="corpse-junk" />
+  <item id="3600" name="bread" category="corpse-junk" />
+  <item id="3601" name="roll" category="corpse-junk" />
+  <item id="3602" name="brown bread" category="corpse-junk" />
+  <item id="3606" name="egg" category="corpse-junk" />
+  <item id="3607" name="cheese" category="corpse-junk" />
   <item id="3658" name="red rose" category="player-interest" />
   <item id="3659" name="blue rose" category="player-interest" />
-  <item id="3723" name="white mushroom" category="player-interest" />
-  <item id="3724" name="red mushroom" category="player-interest" />
-  <item id="3725" name="brown mushroom" category="player-interest" />
-  <item id="3726" name="orange mushroom" category="player-interest" />
-  <item id="3727" name="wood mushroom" category="player-interest" />
-  <item id="3728" name="dark mushroom" category="player-interest" />
-  <item id="3729" name="some mushrooms" category="player-interest" />
-  <item id="3730" name="some mushrooms" category="player-interest" />
-  <item id="3731" name="fire mushroom" category="player-interest" />
-  <item id="3732" name="green mushroom" category="player-interest" />
+  <item id="3723" name="white mushroom" category="corpse-junk" />
+  <item id="3724" name="red mushroom" category="corpse-junk" />
+  <item id="3725" name="brown mushroom" category="corpse-junk" />
+  <item id="3726" name="orange mushroom" category="corpse-junk" />
+  <item id="3727" name="wood mushroom" category="corpse-junk" />
+  <item id="3728" name="dark mushroom" category="corpse-junk" />
+  <item id="3729" name="some mushrooms" category="corpse-junk" />
+  <item id="3730" name="some mushrooms" category="corpse-junk" />
+  <item id="3731" name="fire mushroom" category="corpse-junk" />
+  <item id="3732" name="green mushroom" category="corpse-junk" />
   <item id="4839" name="hydra egg" category="player-interest" />
 </lootspill>

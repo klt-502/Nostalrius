@@ -390,7 +390,7 @@ bool loadCatalog(const std::string &path, std::string &error)
 	try {
 		// One reviewed data authority, pinned after the source/access/tier audit.
 		// A configured subset may remove entries; it cannot invent buyers/prices.
-		static const char *REVIEWED_CATALOG_SHA1 = "a5e8020c3a2484f48f50a25e0170647e00d1d5e6";
+		static const char *REVIEWED_CATALOG_SHA1 = "b0a248fb66638466fece5effecf875f2f5295487";
 		const std::string canonical = readNormalized("data/zedas/broker.xml");
 		if (transformToSHA1(canonical) != REVIEWED_CATALOG_SHA1)
 			throw std::runtime_error("canonical broker review changed; re-audit required");

@@ -69,12 +69,4 @@
   <buyer id="kroox" name="Kroox" town="Kazordoon" station="32650;31887;9" source="data/npc/kroox.npc" sha1="4e42050f946ff696c5fac833f54aa61c78097296" access="unconditional" kind="ordinary-town" topic="2" confirmation="Topic=2,&quot;yes&quot;,Count(Type)&gt;=Amount -&gt; &quot;Ok. Here is your money.&quot;, Delete(Type), CreateMoney">
     <item id="3425" subtype="0" name="dwarven shield" price="100" line="89" rule="&quot;sell&quot;,&quot;dwarven&quot;,&quot;shield&quot; -&gt; Type=3425, Amount=1, Price=100, &quot;You want sell a dwarven shield for %P gold?&quot;, Topic=2" />
   </buyer>
-  <buyer id="willie" name="Willie" town="Rookgaard" station="32047;32204;7" source="data/npc/willie.npc" sha1="1dc43cf7f9b2be6138e9b4147ebb93e76dff9b2b" access="unconditional" kind="ordinary-town" topic="2" confirmation="Topic=2,&quot;yes&quot;,Count(Type)&gt;=Amount -&gt; &quot;Here you are.&quot;, Delete(Type), CreateMoney">
-    <item id="3577" subtype="0" name="meat" price="2" line="61" rule="&quot;sell&quot;,&quot;meat&quot;      -&gt; Type=3577, Amount=1,  Price=2,  &quot;So, you want to sell meat? Hmm, I give you %P gold, ok?&quot;, Topic=2" />
-    <item id="3579" subtype="0" name="salmon" price="2" line="63" rule="&quot;sell&quot;,&quot;salmon&quot;    -&gt; Type=3579, Amount=1,  Price=2,  &quot;So, you want to sell a salmon? Hmm, I give you %P gold, ok?&quot;, Topic=2" />
-    <item id="3582" subtype="0" name="ham" price="4" line="62" rule="&quot;sell&quot;,&quot;ham&quot;       -&gt; Type=3582, Amount=1,  Price=4,  &quot;So, you want to sell a ham? Hmm, I give you %P gold, ok?&quot;, Topic=2" />
-    <item id="3590" subtype="0" name="cherry" price="1" line="65" rule="&quot;sell&quot;,&quot;cherry&quot;    -&gt; Type=3590, Amount=1,  Price=1,  &quot;So, you want to sell a cherry? Hmm, I give you %P gold, ok?&quot;, Topic=2" />
-    <item id="3600" subtype="0" name="bread" price="1" line="59" rule="&quot;sell&quot;,&quot;bread&quot;     -&gt; Type=3600, Amount=1,  Price=1,  &quot;So, you want to sell a bread? Hmm, I give you %P gold, ok?&quot;, Topic=2" />
-    <item id="3607" subtype="0" name="cheese" price="2" line="60" rule="&quot;sell&quot;,&quot;cheese&quot;    -&gt; Type=3607, Amount=1,  Price=2,  &quot;So, you want to sell a cheese? Hmm, I give you %P gold, ok?&quot;, Topic=2" />
-  </buyer>
 </broker>

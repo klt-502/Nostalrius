@@ -16,10 +16,10 @@ as tombstones until the registry's normal expiry/eviction. Generated ordinary
 unmarked bags are traversed, but the bags themselves remain in the corpse.
 An unsafe/marked nested container protects its entire subtree from spill.
 
-The version-2 identity policy reviews **254 identities**: **58 broker fodder**,
-**189 player-interest** and **7 corpse junk**. The 247 spill identities still
+The version-2 identity policy reviews **254 identities**: **52 broker fodder**,
+**157 player-interest** and **45 corpse contents** (legacy XML class `corpse-junk`). The 209 spill identities still
 require exact ID/name, safe state, safe handlers and tile room. A class does not
-bypass provenance or native movement checks. Corpse junk stays inside. Only
+bypass provenance or native movement checks. Food, worms and corpse junk stay inside. Only
 ordinary generated shells 2853–2872 are traversed; special/quest/custom shells
 protect their entire subtree.
 
@@ -29,16 +29,15 @@ writer attributes. All Action IDs, Movement IDs, quest chest/key/charge/decay
 state and Easy Mode markings remain protected. See `NPC_BUY_AUDIT.md` for exact
 source mechanics; these additions create no quest/drop-table entries.
 
-Two narrow item-use exceptions are established: the stock `misc/weapons.lua`
-handler and normal `misc/food.lua`. Their onUse functions run only on explicit
-use, not when the existing instance moves to a tile. The loaded registration
-must have the expected script path and LF-normalized source fingerprint;
-weapons also require the stock action library. A changed/custom script is not
-approved merely because it reuses the filename. `MultiUse` is allowed only for
-reviewed ordinary melee/distance ammunition with the corresponding known handler
-or no use handler. Native equip/de-equip handlers are separately recognized:
-they do not run on container-to-ground moves. Lua equipment handlers and every
-other movement registration remain excluded.
+The narrowly reviewed stock `misc/weapons.lua` handler may be compatible with
+ground movement; its onUse function does not dispatch from this transfer. Loaded
+registration and the action library must retain their expected fingerprints.
+`MultiUse` remains limited to reviewed ordinary melee/distance/ammunition with
+known compatible handlers. Ordinary food is explicitly non-spill, including the
+broader reviewed food list. Native nutrition is also a hard exclusion, so a data
+misclassification cannot re-enable food spill. `misc/food.lua`, food registrations,
+item nutrition and fishing/worm mechanics are unchanged. Native equipment-only
+handlers retain their existing safety rules; no other movement handler is relaxed.
 
 Charged amulets, ice rapiers, active/dormant transforming rings, runes, fluids,
 unsafe quest tools and unidentified items intentionally remain inside. Passive rings
@@ -112,7 +111,7 @@ players, relocated/removed/decayed corpses and engine cleanup. They use real ite
 definitions and the production movement code, without a database or client.
 `engine_spill_hunting` validates all 254 classified identities against the real item catalog,
 stock use handlers and native equipment registrations. It covers mixed nested
-weapon/armor/product/food/ammunition/jewelry loot, unchanged instances/counts,
+weapon/armor/product/ammunition/jewelry loot and retained food, unchanged instances/counts,
 auto-gold in the same bag, weapon-filled tile overflow, an actual monster death,
 and refusal after custom use/movement handler reloads or stock-file changes.
 
