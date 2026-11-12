@@ -46,7 +46,7 @@ with tempfile.TemporaryDirectory(prefix="zedas-engine-") as directory:
             '<movements><movevent event="AddItem" itemid="3351" function="onAddField" />'
             '<movevent event="AddItem" itemid="3352" tileitem="1" function="onAddField" />'
             '<movevent event="AddItem" pos="110;94;7" function="onAddField" /></movements>')
-    if scenario in {"spill_hunting", "broker", "broker_catalog", "broker_restart"}:
+    if scenario in {"spill_hunting", "broker", "broker_catalog", "broker_restart", "loot_classes"}:
         shutil.copytree(source / "data/zedas", root / "data/zedas")
         (root / "data/npc").mkdir()
         shutil.copyfile(source / "data/npc/sam.npc", root / "data/npc/sam.npc")
@@ -76,9 +76,9 @@ with tempfile.TemporaryDirectory(prefix="zedas-engine-") as directory:
         config = 'removeChargesFromRunes = true\ntimeBetweenExActions = 25\n'
     if scenario == "bag_enabled":
         config += 'easyModeGoldBag = true\n'
-    if scenario in {"spill_hunting", "broker", "broker_catalog", "broker_restart"}:
+    if scenario in {"spill_hunting", "broker", "broker_catalog", "broker_restart", "loot_classes"}:
         config += 'easyModeGoldBag = true\n'
-    if scenario in {"spill_enabled", "spill_hunting", "spill_only", "spill_invalid_policy", "spill_missing_policy", "wave2_disabled", "broker", "broker_catalog", "broker_restart"}:
+    if scenario in {"spill_enabled", "spill_hunting", "spill_only", "spill_invalid_policy", "spill_missing_policy", "wave2_disabled", "broker", "broker_catalog", "broker_restart", "loot_classes"}:
         config += 'easyModeLootSpill = true\n'
     if scenario == "wave2_disabled":
         config += 'easyModeGoldBag = true\neasyModeRespawn = true\neasyModeLootBroker = true\n'
@@ -96,7 +96,7 @@ with tempfile.TemporaryDirectory(prefix="zedas-engine-") as directory:
                                ("gold_disabled", "easyModeAutoGold")):
         if scenario == scenario_name:
             config = config.replace(key + " = true", key + " = false")
-    if scenario in {"broker", "broker_catalog", "broker_restart"}:
+    if scenario in {"broker", "broker_catalog", "broker_restart", "loot_classes"}:
         config += 'easyModeLootBroker = true\neasyModeBrokerGraceSeconds = 5\n'
     if scenario in {"broker", "broker_restart"}:
         config += ('mysqlHost="127.0.0.1"\nmysqlUser="root"\nmysqlPass="fixture-only"\n'

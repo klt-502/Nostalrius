@@ -16,14 +16,18 @@ as tombstones until the registry's normal expiry/eviction. Generated ordinary
 unmarked bags are traversed, but the bags themselves remain in the corpse.
 An unsafe/marked nested container protects its entire subtree from spill.
 
-The reviewed identity policy covers **241 ordinary catalog items** (195 added
-after the original 46-item policy): melee/ranged weapons and ammunition, armor,
-helmets, legs, boots, shields, gems, ordinary creature products, passive jewelry,
-inert miscellaneous loot and normal food. An exact item-ID/catalog-name match
-is necessary. It never bypasses instance attributes, Action IDs, quest markers,
-charges, decay, transformations or unsafe movement semantics. Unknown identities
-stay inside. Only ordinary generated container shells 2853–2872 are traversed;
-special/quest/custom shells protect their entire subtree.
+The version-2 identity policy reviews **254 identities**: **58 broker fodder**,
+**189 player-interest** and **7 corpse junk**. The 247 spill identities still
+require exact ID/name, safe state, safe handlers and tile room. A class does not
+bypass provenance or native movement checks. Corpse junk stays inside. Only
+ordinary generated shells 2853–2872 are traversed; special/quest/custom shells
+protect their entire subtree.
+
+Eight reviewed decorative/quest identities were added: 2994, 3001, 3002, 3231,
+3232, 3233, 3234 and 3243. The last five may preserve inert description/text/date/
+writer attributes. All Action IDs, Movement IDs, quest chest/key/charge/decay
+state and Easy Mode markings remain protected. See `NPC_BUY_AUDIT.md` for exact
+source mechanics; these additions create no quest/drop-table entries.
 
 Two narrow item-use exceptions are established: the stock `misc/weapons.lua`
 handler and normal `misc/food.lua`. Their onUse functions run only on explicit
@@ -37,7 +41,7 @@ they do not run on container-to-ground moves. Lua equipment handlers and every
 other movement registration remain excluded.
 
 Charged amulets, ice rapiers, active/dormant transforming rings, runes, fluids,
-quest tools and unidentified items intentionally remain inside. Passive rings
+unsafe quest tools and unidentified items intentionally remain inside. Passive rings
 and amulets without that state can move unchanged. No charge/duration/transform
 exception is introduced. See [LOOT_SPILL_POLICY.md](LOOT_SPILL_POLICY.md) for
 category/ID details, the source audit and the exact retest checklist. Custom data
@@ -106,7 +110,7 @@ protected and subsequently inserted items, currency conservation, scripted item
 exclusion, tile overflow/retry, manual pickup, repeated processing, competing
 players, relocated/removed/decayed corpses and engine cleanup. They use real item
 definitions and the production movement code, without a database or client.
-`engine_spill_hunting` validates all 241 identities against the real item catalog,
+`engine_spill_hunting` validates all 254 classified identities against the real item catalog,
 stock use handlers and native equipment registrations. It covers mixed nested
 weapon/armor/product/food/ammunition/jewelry loot, unchanged instances/counts,
 auto-gold in the same bag, weapon-filled tile overflow, an actual monster death,

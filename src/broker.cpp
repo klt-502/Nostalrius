@@ -317,7 +317,7 @@ uint64_t price(const Item &item)
 {
 	auto entry = catalog.find(item.getID());
 	return entry != catalog.end() && item.getID() != 3492 && !item.getWorth() &&
-	               (item.isStackable() || item.getItemCount() == 1) && EasyMode::isSpillItem(item)
+	               (item.isStackable() || item.getItemCount() == 1) && EasyMode::lootClass(item) == EasyMode::LootClass::BrokerFodder
 	           ? entry->second
 	           : 0;
 }

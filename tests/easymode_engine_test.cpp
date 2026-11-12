@@ -124,6 +124,7 @@ static uint64_t contentsValue(Container& container)
 #include "loot_spill_cases.h"
 #include "hunting_spill_cases.h"
 #include "broker_cases.h"
+#include "loot_class_cases.h"
 
 static void setup()
 {
@@ -188,6 +189,10 @@ int main(int argc, char** argv)
 		require(g_config.getString(ConfigManager::EASY_MODE_RESPAWN_POLICY_FILE) == "data/zedas/spawns.xml", "manifest path remains startup only");
 	}
 	setup();
+    if (scenario=="loot_classes") {
+        require(g_moveEvents->loadFromXml(), "load class fixture movement handlers");
+        testLootClasses(); return 0;
+    }
 	if (scenario == "broker_seed" || scenario == "broker_sale_restart" || scenario == "broker_payout_restart" ||
 	    scenario == "broker_final_restart") {
 		require(g_moveEvents->loadFromXml(), "restart real movement handlers");

@@ -17,11 +17,11 @@ static void testHuntingSpill()
 	for (const auto node : policy.child("lootspill").children("item")) {
 		const uint16_t id = node.attribute("id").as_uint();
 		Item* item = Item::CreateItem(id, 1);
-		require(item && EasyMode::isSpillItem(*item), ("reviewed hunting identity is actually eligible: " + std::to_string(id)).c_str());
+		require(item && EasyMode::isSpillItem(*item) == (std::string(node.attribute("category").value()) != "corpse-junk"), ("reviewed hunting identity is actually eligible: " + std::to_string(id)).c_str());
 		item->decrementReferenceCounter();
 		++identities;
 	}
-	require(identities == 241, "validate every reviewed hunting identity");
+	require(identities == 254, "validate every reviewed hunting identity");
 	require(g_actions->getItemGroundUse(3264) == Action::GroundUse::Weapon &&
 	        g_actions->getItemGroundUse(3577) == Action::GroundUse::Food, "real stock handlers are fingerprinted and recognized");
 	require(g_moveEvents->hasItemEvent(3079) && !g_moveEvents->hasUnsafeGroundItemEvent(3079),
@@ -161,11 +161,11 @@ static void testHuntingSpill()
 	}
 	{
 		std::ofstream file("data/movements/movements.xml");
-		file << "<movements><movevent event='StepIn' itemid='3116' function='onStepInField'/>"
+		file << "<movements><movevent event='StepIn' itemid='3114' function='onStepInField'/>"
 		        "<movevent event='Equip' itemid='3079' slot='feet' script='custom.lua'/></movements>";
 	}
-	require(g_moveEvents->reload() && g_moveEvents->hasUnsafeGroundItemEvent(3116), "other movement registrations remain unsafe");
-	retained(3116, 96);
+	require(g_moveEvents->reload() && g_moveEvents->hasUnsafeGroundItemEvent(3114), "other movement registrations remain unsafe");
+	retained(3114, 96);
 	require(g_moveEvents->hasUnsafeGroundItemEvent(3079), "Lua equipment scripts never inherit native equipment approval");
 	retained(3079, 98);
 }
