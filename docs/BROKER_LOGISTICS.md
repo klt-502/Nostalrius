@@ -35,3 +35,21 @@ coverage failures; neither justifies scanning arbitrary ground items.
 
 Foundation validation: full native suite 29/29, including rollback/lost handoff
 acknowledgement, key reuse, continued field claims, batch-only sale and notice replay.
+
+## Qualified fodder lifetime
+
+Exact, already-spilled, priced `BrokerFodder` now has an independent registry of
+at most 8,192 item witnesses, each retaining the original item and source corpse.
+There is no visibility or age timeout. The five-minute/1,024-entry currency and
+unspilled-loot snapshot bounds remain unchanged. A genuine witness-cap overflow
+retires the oldest witness; it never rescans generic ground items. Server restart
+still clears transient world witnesses (and transient generated ground loot).
+Source corpse move/removal/transform, item move/merge/transform, identity/count
+change or newly unsafe item state/handler retires eligibility. The original source
+corpse relationship and safe pickup tile remain required. References protect
+against pointer reuse; neither leaving visibility nor corpse-snapshot eviction
+loses an otherwise valid witness. The regression leaves visibility, advances past
+five minutes, exceeds the old corpse bound, returns, and claims the real brass
+helmet once; moving another helmet away and back still invalidates it.
+
+Witness validation: full native suite 30/30, including the real-engine visibility/TTL/eviction and manual-mutation regression.

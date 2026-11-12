@@ -74,6 +74,7 @@ std::vector<Item*> getCarriedItems(Player& player);
 void onLootGenerated(Container& corpse);
 uint64_t collectGold(Player& player);
 void spillLoot();
+constexpr size_t MAX_FODDER_WITNESSES = 8192;
 std::vector<Item *> brokerCandidates(int64_t now, int64_t grace);
 bool isBrokerCandidate(Item &item, int64_t now, int64_t grace);
 // Invalidate generated-loot provenance before an unrelated engine mutation.

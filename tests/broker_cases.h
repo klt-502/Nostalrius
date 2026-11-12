@@ -410,6 +410,7 @@ static void testBroker()
 	        "manual pickup wins after rollback reconciliation");
 	Container *committedCorpse = corpseAt(100, 103);
 	Item *committed = add(*committedCorpse, 3267);
+    committed->incrementReferenceCounter(); // Test observes this instance after committed disposal.
 	EasyMode::onLootGenerated(*committedCorpse);
 	Broker::command(*owner, "hire");
 	require(g_game.internalTeleport(brokerFor(*owner), Position(99, 102, 7)) == RETURNVALUE_NOERROR,
@@ -438,6 +439,7 @@ static void testBroker()
 	        db->storeQuery("SELECT pending FROM zedas_broker_accounts WHERE owner=1")->getNumber<unsigned>("pending") ==
 	            2,
 	    "confirmed sale reconciliation consumes once and preserves rounded net");
+    committed->decrementReferenceCounter();
 	require(db->executeQuery("UPDATE zedas_broker_accounts SET deadline=0 WHERE owner=1"), "advance second return");
 	Broker::tick(*owner, exposed + 24000);
 	// A generated corpse decayed/removed before collection retires ground provenance.
@@ -547,5 +549,51 @@ static void testBroker()
 	require(g_game.removeCreature(owner, true) && !brokerFor(*owner), "actual logout removes the physical broker");
 	Broker::stop(*owner);
 	Broker::stop(*other);
+}
+static void testBrokerWitness()
+{
+    require(Database::getInstance()->connect(), "visibility fixture DB");
+    auto *db = Database::getInstance();
+    for (const char *table : {"zedas_broker_escrow", "zedas_broker_sales", "zedas_broker_payouts", "zedas_broker_accounts"})
+        require(db->executeQuery(std::string("DELETE FROM ") + table), "reset witness fixture");
+    Broker::initialize();
+    Player *owner = makePlayer(100, 100);
+    owner->setGUID(1);
+    Broker::command(*owner, "hire");
+    Container *corpse = corpseAt(99, 100);
+    Container *bag = Item::CreateItem(2853)->getContainer();
+    require(g_game.internalAddItem(corpse, bag) == RETURNVALUE_NOERROR, "generated witness bag");
+    Item *helmet = Item::CreateItem(3354);
+    require(g_game.internalAddItem(bag, helmet) == RETURNVALUE_NOERROR, "generated brass helmet");
+    EasyMode::onLootGenerated(*corpse);
+    const auto base = OTSYS_TIME();
+    require(EasyMode::isBrokerCandidate(*helmet, base, 0), "exact brass helmet qualifies after spill");
+    require(g_game.internalTeleport(owner, Position(112, 108, 7)) == RETURNVALUE_NOERROR, "leave visibility");
+    Broker::tick(*owner, base + 1000);
+    require(helmet->getParent() == corpse->getTile(), "no remote claim while owner away");
+    // Retire both the five-minute snapshot and its bounded corpse registry entry.
+    require(EasyMode::isBrokerCandidate(*helmet, base + EasyMode::CORPSE_REGISTRY_TTL_MS + 1, 0),
+            "snapshot TTL cannot retire valid qualified fodder");
+    for (unsigned i = 0; i <= EasyMode::MAX_REGISTERED_CORPSES; ++i) {
+        Container *other = corpseAt(110, 106);
+        EasyMode::onLootGenerated(*other);
+    }
+    require(EasyMode::isBrokerCandidate(*helmet, base + 1, 0), "snapshot eviction preserves qualified fodder");
+    require(g_game.internalTeleport(owner, Position(100, 100, 7)) == RETURNVALUE_NOERROR, "return to helmet");
+    Broker::command(*owner, "hire");
+    require(helmet->getParent() != corpse->getTile() &&
+            db->storeQuery("SELECT COUNT(*) AS n FROM zedas_broker_escrow WHERE owner=1 AND item=3354")->getNumber<unsigned>("n") == 1,
+            "return collects the exact untouched brass helmet once");
+    Container *mutationCorpse = corpseAt(101, 100);
+    Item *mutated = Item::CreateItem(3354);
+    require(g_game.internalAddItem(mutationCorpse, mutated) == RETURNVALUE_NOERROR, "mutation fixture");
+    EasyMode::onLootGenerated(*mutationCorpse);
+    auto *tile = mutated->getTile();
+    require(g_game.internalMoveItem(tile, owner->getTile(), INDEX_WHEREEVER, mutated, 1, nullptr) == RETURNVALUE_NOERROR,
+            "player or actor moves witnessed helmet");
+    require(g_game.internalMoveItem(owner->getTile(), tile, INDEX_WHEREEVER, mutated, 1, nullptr) == RETURNVALUE_NOERROR,
+            "drop exact helmet back");
+    require(!EasyMode::isBrokerCandidate(*mutated, OTSYS_TIME(), 0), "move away and back permanently invalidates witness");
+    Broker::stop(*owner);
 }
 #endif
