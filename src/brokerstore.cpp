@@ -48,7 +48,7 @@ void Store::connect()
         if (tables.size() != 5) throw std::runtime_error("apply explicit broker migration first");
         for (const auto& table : tables) if (table.at("engine") != "InnoDB") throw std::runtime_error("broker requires InnoDB tables");
         auto version = query("SELECT version FROM zedas_broker_schema WHERE id=1");
-        if (version.size() != 1 || number(version[0], "version") != 1) throw std::runtime_error("broker schema version mismatch");
+        if (version.size() != 1 || number(version[0], "version") != 2) throw std::runtime_error("broker schema version mismatch");
         if (session.empty()) session = query("SELECT UUID() AS id").at(0).at("id");
     } catch (...) { close(); throw; }
 }
@@ -107,6 +107,10 @@ Row Store::status(uint32_t owner)
     if (rows.size() != 1) throw std::runtime_error("missing broker owner");
     return rows[0];
 }
+Rows Store::fieldInventory(uint32_t owner)
+{
+    return query("SELECT * FROM zedas_broker_escrow WHERE sold=0 AND trip IS NULL AND owner=" + std::to_string(owner) + " ORDER BY claim_key");
+}
 Rows Store::inventory(uint32_t owner)
 {
     return query("SELECT * FROM zedas_broker_escrow WHERE sold=0 AND owner=" + std::to_string(owner) + " ORDER BY claim_key");
@@ -131,8 +135,8 @@ void Store::prepare(const std::string& id, uint32_t owner, uint16_t item, unsign
             if (number(row,"owner") != owner || number(row,"item") != item || number(row,"count") != count || number(row,"price") != price)
                 throw std::runtime_error("broker operation identity mismatch");
         } else {
-            if (inventory(owner).size() >= INVENTORY_LIMIT || number(status(owner), "state") != 0)
-                throw std::runtime_error("broker not collecting or escrow full");
+            if (fieldInventory(owner).size() >= INVENTORY_LIMIT)
+                throw std::runtime_error("broker field escrow full");
             execute("INSERT INTO zedas_broker_escrow(claim_key,owner,item,count,price) VALUES(" + quote(id) + "," + std::to_string(owner) + "," + std::to_string(item) + "," + std::to_string(count) + "," + std::to_string(price) + ")");
         }
         commit("claim");
@@ -140,11 +144,18 @@ void Store::prepare(const std::string& id, uint32_t owner, uint16_t item, unsign
 }
 void Store::depart(uint32_t owner, const std::string& trip, uint64_t now)
 {
+    if (trip.empty() || trip.size() > 80) throw std::runtime_error("invalid courier trip identity");
     begin();
     try {
         query("SELECT owner FROM zedas_broker_accounts WHERE owner=" + std::to_string(owner) + " FOR UPDATE");
-        if (number(status(owner), "state") == 0 && !inventory(owner).empty())
-            execute("UPDATE zedas_broker_accounts SET state=1,deadline=" + std::to_string(now + TRIP_SECONDS) + ",trip=" + quote(trip) + " WHERE owner=" + std::to_string(owner));
+        const auto previous = query("SELECT owner FROM zedas_broker_escrow WHERE trip=" + quote(trip) + " LIMIT 1");
+        if (!previous.empty() && number(previous[0], "owner") != owner)
+            throw std::runtime_error("courier trip owner mismatch");
+        // A stable handoff key is never reused for a different batch, including after return.
+        if (previous.empty() && number(status(owner), "state") == 0 && !fieldInventory(owner).empty()) {
+            execute("UPDATE zedas_broker_escrow SET trip=" + quote(trip) + " WHERE sold=0 AND trip IS NULL AND owner=" + std::to_string(owner));
+            execute("UPDATE zedas_broker_accounts SET state=1,departure_notified=0,sale_notified=0,deadline=" + std::to_string(now + TRIP_SECONDS) + ",trip=" + quote(trip) + " WHERE owner=" + std::to_string(owner));
+        }
         commit("depart");
     } catch (...) { abort(); throw; }
 }
@@ -155,7 +166,8 @@ void Store::settle(uint32_t owner, uint64_t now, unsigned bps)
         query("SELECT owner FROM zedas_broker_accounts WHERE owner=" + std::to_string(owner) + " FOR UPDATE");
         auto state = status(owner);
         if (number(state,"state") != 1 || number(state,"deadline") > now) { commit("read"); return; }
-        const auto items = inventory(owner);
+        const auto items = query("SELECT * FROM zedas_broker_escrow WHERE sold=0 AND owner=" + std::to_string(owner) + " AND trip=" + quote(state.at("trip")));
+        if (items.empty()) throw std::runtime_error("courier batch missing; settlement paused");
         uint64_t gross = 0;
         for (const auto& item : items) {
             const uint64_t price = number(item,"price"), count = number(item,"count");
@@ -167,7 +179,7 @@ void Store::settle(uint32_t owner, uint64_t now, unsigned bps)
         if (number(state,"pending") > MONEY_LIMIT-net || number(state,"funds") > MONEY_LIMIT-fee)
             throw std::runtime_error("broker balance full; inventory retained");
         execute("INSERT INTO zedas_broker_sales(operation,owner,gross,net,commission,bps) VALUES(" + quote(state.at("trip")) + "," + std::to_string(owner) + "," + std::to_string(gross) + "," + std::to_string(net) + "," + std::to_string(fee) + "," + std::to_string(bps) + ")");
-        execute("UPDATE zedas_broker_escrow SET sold=1,sale=" + quote(state.at("trip")) + " WHERE sold=0 AND owner=" + std::to_string(owner));
+        execute("UPDATE zedas_broker_escrow SET sold=1,sale=" + quote(state.at("trip")) + " WHERE sold=0 AND owner=" + std::to_string(owner) + " AND trip=" + quote(state.at("trip")));
         execute("UPDATE zedas_broker_accounts SET pending=pending+" + std::to_string(net) + ",funds=funds+" + std::to_string(fee) + ",state=2,deadline=" + std::to_string(now+TRIP_SECONDS) + " WHERE owner=" + std::to_string(owner));
         commit("sale");
     } catch (...) { abort(); throw; }
@@ -175,6 +187,31 @@ void Store::settle(uint32_t owner, uint64_t now, unsigned bps)
 void Store::returned(uint32_t owner, uint64_t now)
 {
     execute("UPDATE zedas_broker_accounts SET state=0 WHERE owner=" + std::to_string(owner) + " AND state=2 AND deadline<=" + std::to_string(now));
+}
+Row Store::claimNotice(uint32_t owner, bool sale)
+{
+    begin();
+    try {
+        query("SELECT owner FROM zedas_broker_accounts WHERE owner=" + std::to_string(owner) + " FOR UPDATE");
+        const auto state = status(owner);
+        const std::string flag = sale ? "sale_notified" : "departure_notified";
+        Row result;
+        if (!number(state, flag)) {
+            Rows rows;
+            if (sale)
+                rows = query("SELECT gross,net,commission FROM zedas_broker_sales WHERE owner=" + std::to_string(owner) + " AND operation=" + quote(state.at("trip")));
+            else
+                rows = query("SELECT COUNT(*) AS instances,COALESCE(SUM(count),0) AS items,COALESCE(SUM(price*count),0) AS gross FROM zedas_broker_escrow WHERE owner=" + std::to_string(owner) + " AND trip=" + quote(state.at("trip")));
+            if (!rows.empty() && (sale || number(rows[0], "instances"))) {
+                result = rows[0];
+                execute("UPDATE zedas_broker_accounts SET " + flag + "=1 WHERE owner=" + std::to_string(owner));
+            }
+        }
+        // Claim before sending: a lost acknowledgement never causes duplicate chat.
+        // A crash between this commit and network send can omit a message; balances remain queryable.
+        commit("notice");
+        return result;
+    } catch (...) { abort(); throw; }
 }
 std::string Store::savedBank(uint32_t owner, uint64_t baseline, uint64_t watermark)
 {

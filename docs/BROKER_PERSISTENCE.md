@@ -1,7 +1,7 @@
 # Broker persistence foundation
 
 This foundation is inactive until the physical broker is enabled and connected.
-Apply `migrations/001_broker.sql` explicitly to a backed-up **Easy Mode** database;
+Apply `migrations/001_broker.sql`, then `migrations/002_broker_courier.sql`, explicitly to a backed-up **Easy Mode** database;
 never apply it to Classic. The migration intentionally fails on repeat application.
 The original `players` schema/data are unchanged. All participating tables must
 be InnoDB. Startup checks schema version and takes one connection-scoped broker
@@ -43,3 +43,6 @@ capacity, overflow, bank-save expression and child-process restart. The gameplay
 prepared-claim, sale and bank-payout commits, then checks one recovery/credit.
 Fault injection is a test-only Store subclass; production uses the normal
 no-replay connection and has no configurable failure hook.
+
+Schema v2 separates immutable courier batches from new field claims; see
+[BROKER_LOGISTICS.md](BROKER_LOGISTICS.md) for handoff and notification guarantees.
