@@ -108,7 +108,9 @@ Sam's original 25 identities/prices remain, preserving existing escrow images.
 
 The explicit route covers Sam, Shanar, Kroox, Timur, Uzgod, Al Dee, Willard,
 Willie and Zaidal. A canonical fingerprint binds the reviewed XML; each buyer's
-actual NPC file is separately fingerprinted, including its purchase confirmation.
+actual NPC file and all transitive `.ndb` includes are separately fingerprinted,
+including its purchase confirmation. Zaidal's furniture include is explicitly
+covered even though the selected tusk rule is in his main file.
 A custom configured catalog may narrow that version-2 data, but may not invent
 buyers/prices or promote player-interest items. Old custom version-1 catalogs
 need conversion to the reviewed version-2 subset format. Never choose maximum

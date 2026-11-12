@@ -302,7 +302,7 @@ bool loadCatalog(const std::string &path, std::string &error)
 	try {
 		// One reviewed data authority, pinned after the source/access/tier audit.
 		// A configured subset may remove entries; it cannot invent buyers/prices.
-		static const char *REVIEWED_CATALOG_SHA1 = "803c1f1177937feade139fd78c2bef10abea366b";
+		static const char *REVIEWED_CATALOG_SHA1 = "a5e8020c3a2484f48f50a25e0170647e00d1d5e6";
 		const std::string canonical = readNormalized("data/zedas/broker.xml");
 		if (transformToSHA1(canonical) != REVIEWED_CATALOG_SHA1)
 			throw std::runtime_error("canonical broker review changed; re-audit required");
@@ -320,6 +320,15 @@ bool loadCatalog(const std::string &path, std::string &error)
 			if (std::string(buyer.name()) != "buyer" || !approvedBuyer || !buyers.insert(id).second ||
 			    !sameAttributes(buyer, approvedBuyer))
 				throw std::runtime_error("unreviewed/duplicate broker buyer or access");
+			std::istringstream dependencies(buyer.attribute("dependencies").value());
+			std::string dependency;
+			while (std::getline(dependencies, dependency, ';')) {
+				const auto separator = dependency.find('|');
+				if (separator == std::string::npos ||
+				    transformToSHA1(readNormalized(dependency.substr(0, separator))) !=
+				        dependency.substr(separator + 1))
+					throw std::runtime_error("included NPC source changed; review required");
+			}
 			const auto source = readNormalized(buyer.attribute("source").value());
 			const std::string confirmation = buyer.attribute("confirmation").value();
 			if (transformToSHA1(source) != buyer.attribute("sha1").value() ||

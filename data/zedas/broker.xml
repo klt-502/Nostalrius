@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!-- Fixed reviewed route; not a best-price market. See docs/NPC_BUY_AUDIT.md. -->
 <broker version="2">
-  <buyer id="zaidal" name="Zaidal" town="Port Hope" station="32621;32747;5" source="data/npc/zaidal.npc" sha1="7d1edf08c64bf4434f0d0e9916a823c3253ec16a" access="unconditional" kind="ordinary-town" topic="2" confirmation="Topic=2,&quot;yes&quot;,Count(Type)&gt;=Amount -&gt; &quot;Ok. Here is your money.&quot;, Delete(Type), CreateMoney">
+  <buyer id="zaidal" name="Zaidal" town="Port Hope" station="32621;32747;5" source="data/npc/zaidal.npc" sha1="7d1edf08c64bf4434f0d0e9916a823c3253ec16a" access="unconditional" kind="ordinary-town" topic="2" confirmation="Topic=2,&quot;yes&quot;,Count(Type)&gt;=Amount -&gt; &quot;Ok. Here is your money.&quot;, Delete(Type), CreateMoney" dependencies="data/npc/gen-t-furniture-jungle-s.ndb|d41e783fcebd2aacd847e1e4b1321c3aa6c053e9">
     <item id="3044" subtype="0" name="elephant tusk" price="100" line="58" rule="&quot;sell&quot;,&quot;tusk&quot;            -&gt; Type=3044, Amount=1, Price=100, &quot;Do you want to sell a tusk for %P gold?&quot;, Topic=2" />
   </buyer>
   <buyer id="sam" name="Sam" town="Thais" station="32360;32199;7" source="data/npc/sam.npc" sha1="3db8996153f564baf26df2c8a70250873a53dd7d" access="unconditional" kind="ordinary-town" topic="2" confirmation="Topic=2,&quot;yes&quot;,Count(Type)&gt;=Amount -&gt; &quot;Ok. Here is your money.&quot;, Delete(Type), CreateMoney">

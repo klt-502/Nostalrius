@@ -52,6 +52,9 @@ with tempfile.TemporaryDirectory(prefix="zedas-engine-") as directory:
         for buyer in ET.parse(source / "data/zedas/broker.xml").getroot():
             path = buyer.get("source")
             shutil.copyfile(source / path, root / path)
+            for dependency in filter(None, buyer.get("dependencies", "").split(";")):
+                path = dependency.split("|", 1)[0]
+                shutil.copyfile(source / path, root / path)
         actions = ET.Element("actions")
         for node in ET.parse(source / "data/actions/actions.xml").getroot():
             if node.get("script") in {"misc/fluids.lua", "misc/weapons.lua", "misc/food.lua"}:

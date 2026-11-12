@@ -78,6 +78,33 @@ static void testBrokerCatalog()
 	file.save_file("bad-broker.xml");
 	require(!Broker::loadCatalog("bad-broker.xml", error), "unknown access/quest attributes fail closed");
 	require(Broker::loadCatalog("data/zedas/broker.xml", error), "restore reviewed catalog");
+	{
+		pugi::xml_document subset;
+		require(subset.load_file("data/zedas/broker.xml"), "subset fixture source");
+		auto root = subset.child("broker");
+		for (auto buyer = root.first_child(); buyer;) {
+			auto next = buyer.next_sibling();
+			if (std::string(buyer.attribute("id").value()) != "sam")
+				root.remove_child(buyer);
+			buyer = next;
+		}
+		subset.save_file("subset-broker.xml");
+		require(Broker::loadCatalog("subset-broker.xml", error) && Broker::price(*plate) == 400,
+		        "configured catalog may narrow the reviewed route");
+	}
+	const std::string dependency = "data/npc/gen-t-furniture-jungle-s.ndb";
+	std::ifstream included(dependency, std::ios::binary);
+	const std::string original((std::istreambuf_iterator<char>(included)), std::istreambuf_iterator<char>());
+	{
+		std::ofstream edited(dependency, std::ios::app | std::ios::binary);
+		edited << "\n# changed include\n";
+	}
+	require(!Broker::loadCatalog("data/zedas/broker.xml", error), "changed transitive NPC include fails closed");
+	{
+		std::ofstream restore(dependency, std::ios::binary);
+		restore << original;
+	}
+	require(Broker::loadCatalog("data/zedas/broker.xml", error), "restore reviewed transitive source");
 	std::ofstream changed("data/npc/sam.npc", std::ios::app);
 	changed << "\n// changed offer\n";
 	changed.close();

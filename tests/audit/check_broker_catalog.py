@@ -13,6 +13,10 @@ seen=set()
 for buyer in E.fromstring(raw):
  source=(root/buyer.get('source')).read_bytes().replace(b'\r\n',b'\n')
  assert hashlib.sha1(source).hexdigest()==buyer.get('sha1')
+ dependencies=dict(x.split('|',1) for x in filter(None,buyer.get('dependencies','').split(';')))
+ npc=next(x for x in result['npcs'] if x['file']==buyer.get('source'))
+ assert set(dependencies)==set(npc['includes'])
+ for path,digest in dependencies.items(): assert hashlib.sha1((root/path).read_bytes().replace(b'\r\n',b'\n')).hexdigest()==digest
  text=source.decode('latin1')
  assert re.search(r'^Name\s*=\s*"'+re.escape(buyer.get('name'))+'"',text,re.M)
  assert re.search(r'^Home\s*=\s*\['+re.escape(buyer.get('station').replace(';',','))+r'\]',text,re.M)

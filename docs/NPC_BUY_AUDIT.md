@@ -117,3 +117,8 @@ Still protected: 3235–3242 pharaoh pieces (Expire/decay state), 3244 Sam's old
 A simple presentation pause is feasible without stair/rope/hole pathfinding. A future owner movement hook can despawn on floor change, clear only the session approach target, and arm a session-bound 1.5–2-second settling timer. Revalidate owner GUID/session, health, stable floor, native safe adjacent placement and hunting/travel state before reappearing. Restart the timer if the owner moves floors again. Do not spawn during an outbound/returning sale trip; do not collect while absent or across floors. Already durable uncertain claims must reconcile under existing escrow rules, rather than being silently cancelled by a presentation transition. Escrow/trip/bank state must remain unchanged.
 
 Implement separately with original-client visibility tests and logout/death/teleport cancellation tests. No floor-transition behavior is changed in this pass.
+
+Runtime source validation also pins all included `.ndb` dependencies. Among the
+nine selected buyers, Zaidal includes `gen-t-furniture-jungle-s.ndb` (Topic 81);
+its currently disjoint furniture rules cannot silently change after review.
+Native regression checks changed includes and a valid narrowed Sam-only catalog.
