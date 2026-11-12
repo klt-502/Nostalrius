@@ -11,8 +11,8 @@ original client's console, viewport or movement presentation.
    and pending/travel status. Hunt normally: the collector uses native walking,
    approaches within one tile and takes approved actual generated fodder only.
 2. Pick up several nearby hatchets/brass helmets quickly. `Got a hatchet.` floats
-   like monster speech at most once per three seconds. It never enters the console;
-   suppressed captions do not suppress pickup. Currency still goes through Gold
+   like monster speech for every successful pickup, including several within three
+   seconds. It never enters the console. Currency still goes through Gold
    Bag/auto-gold. Gems/ammo/quest/marked loot and worms keep their accepted behavior.
 3. Leave one generated brass helmet untouched after spill. Leave visibility for
    more than five minutes (before its source corpse changes/decays), then return

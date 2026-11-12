@@ -58,8 +58,8 @@ Hiring is session-only; after relog, explicitly hire again. Durable inventory,
 pending proceeds, commission and town-trip deadlines survive restart.
 
 Routine pickup uses `TALKTYPE_MONSTER_SAY`, the same positional speech packet as
-classic troll/orc noises: `Got a hatchet.`, at most once per **3000 ms per collector**.
-Additional pickups succeed silently; nothing is queued into chat. The runner says
+classic troll/orc noises: `Got a hatchet.`, once after every successfully completed field pickup.
+There is no custom speech suppression or queue; nothing is copied into chat. The runner says
 `Pickup!` at handoff and `Off to town!` before disappearing. It completes the return
 off-scene. Departure and confirmed sale each produce one durable-claimed summary
 using `MESSAGE_STATUS_DEFAULT`, visible in the original console. See
@@ -217,5 +217,5 @@ The native regression checks both changes through the actual sale command.
 The expanded delivery passes **29/29** native/source/SQL tests normally and with
 ASan/UBSan (fixture leak checking disabled). `engine_broker_feedback` inspects
 actual outgoing positional monster speech and verifies no routine status/chat
-packet, pickup throttling, departure, return and explicit balance replies.
+packet, rapid per-pickup captions, departure, return and explicit balance replies.
 Floor reappearance remains audit-only; see `NPC_BUY_AUDIT.md`.

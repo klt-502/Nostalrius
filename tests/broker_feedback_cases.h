@@ -32,7 +32,7 @@ struct BrokerWire {
 	{
 		require(chat.empty(), "routine broker feedback never uses a chat/status text packet");
 		if (text.empty())
-			require(speech.empty(), "throttled/absent broker emits no speech");
+			require(speech.empty(), "absent pickup/event emits no speech");
 		else
 			require(speech.size() == 1 && speech[0].first == TALKTYPE_MONSTER_SAY && speech[0].second == text,
 			        "classic floating monster-noise packet carries exact broker speech");
@@ -62,9 +62,13 @@ static void testBrokerFeedback(bool disabled)
 	for (const char *table :
 	     {"zedas_broker_escrow", "zedas_broker_sales", "zedas_broker_payouts", "zedas_broker_accounts"})
 		require(db->executeQuery(std::string("DELETE FROM ") + table), "reset feedback ledger fixture");
-	Broker::initialize();
-	Broker::command(*owner, "hire");
-	require(brokerFor(*owner), "feedback actor hired");
+    Broker::Connection settings;
+    settings.host = "127.0.0.1"; settings.user = "root"; settings.password = "fixture-only";
+    settings.database = "zedas_broker_test"; settings.port = g_config.getNumber(ConfigManager::SQL_PORT);
+    auto *faults = new BrokerFaultConnection(settings);
+    Broker::initialize(std::unique_ptr<Broker::Store>(faults));
+    Broker::command(*owner, "hire");
+    require(brokerFor(*owner), "feedback actor hired");
 	const uint16_t ids[] = {3276, 3354, 3350};
 	const Position positions[] = {{99, 100, 7}, {98, 99, 7}, {98, 100, 7}};
 	std::vector<Item *> items;
@@ -82,11 +86,29 @@ static void testBrokerFeedback(bool disabled)
 	require(items[0]->getParent()->getItem()->getContainer(), "speech follows actual pickup");
 	BrokerEngineTestAccess::clearOutput(*owner);
 	Broker::tick(*owner, base + 2100);
-	BrokerWire(*owner).expect("");
-	require(items[1]->getParent()->getItem()->getContainer(), "throttle suppresses speech, not actual collection");
+	BrokerWire(*owner).expect("Got a brass helmet.");
+	require(items[1]->getParent()->getItem()->getContainer(), "second rapid pickup has its own speech event after actual collection");
 	BrokerEngineTestAccess::clearOutput(*owner);
-	Broker::tick(*owner, base + 4200);
+	Broker::tick(*owner, base + 3100);
 	BrokerWire(*owner).expect("Got a bow.");
+    // Invalid claims and a manual pickup that wins the race emit no success speech.
+    auto *raceCorpse = corpseAt(99,100);
+    auto *marked = Item::CreateItem(3354);
+    auto *lost = Item::CreateItem(3286);
+    require(g_game.internalAddItem(raceCorpse,marked)==RETURNVALUE_NOERROR &&
+            g_game.internalAddItem(raceCorpse,lost)==RETURNVALUE_NOERROR, "failed pickup fixtures");
+    EasyMode::onLootGenerated(*raceCorpse);
+    marked->setActionId(60000);
+    auto *manualBag=Item::CreateItem(2854)->getContainer();
+    require(g_game.internalAddItem(owner,manualBag,CONST_SLOT_BACKPACK)==RETURNVALUE_NOERROR &&
+            g_game.internalMoveItem(lost->getParent(),manualBag,INDEX_WHEREEVER,lost,1,nullptr)==RETURNVALUE_NOERROR,
+            "manual pickup wins before broker claim");
+    BrokerEngineTestAccess::clearOutput(*owner);
+    Broker::tick(*owner,base+4100);
+    BrokerWire(*owner).expect("");
+    require(marked->getParent()==raceCorpse->getTile() && lost->getParent()==manualBag,
+            "invalid and lost claims produce no false pickup");
+    require(g_game.internalRemoveItem(marked)==RETURNVALUE_NOERROR,"remove invalid feedback fixture");
 	Npc *collector = brokerFor(*owner);
 	BrokerEngineTestAccess::clearOutput(*owner);
 	Broker::tick(*owner, base + 121000);
@@ -150,6 +172,22 @@ static void testBrokerFeedback(bool disabled)
 	                    "Broker is with you. Carrying 1/20 items. Broker has 139 gp waiting for cashout."},
 	        "repeated hire reports live status without creating an actor or repeating notices");
 	require(brokerFor(*owner) == collector && !runnerFor(*owner), "repeated hire preserves one collector");
+
+    // A failed durable prepare does not announce success while the original is quarantined.
+    auto *failedCorpse=corpseAt(99,101);
+    auto *failed=Item::CreateItem(3354);
+    require(g_game.internalAddItem(failedCorpse,failed)==RETURNVALUE_NOERROR,"failed prepare speech fixture");
+    EasyMode::onLootGenerated(*failedCorpse);
+    faults->stage="claim";faults->failure=BrokerFaultConnection::Failure::BeforeCommit;
+    BrokerEngineTestAccess::clearOutput(*owner);
+    Broker::tick(*owner,base+131000);
+    require(BrokerWire(*owner).speech.empty() && failed->getParent()==failedCorpse->getTile() && Broker::locked(failed),
+            "failed claim has no floating success caption before physical escrow transfer");
+    const auto failureMessages=BrokerWire(*owner).chat;
+    require(std::none_of(failureMessages.begin(),failureMessages.end(),[](const std::string &text){return text.find("Got ")==0;}),
+            "recovery error is not a routine pickup chat copy");
+    Broker::command(*owner,"balance");
+    require(!Broker::locked(failed),"failed speech fixture reconciles without consuming original");
 
 	Broker::stop(*owner);
 }

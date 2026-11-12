@@ -30,7 +30,6 @@ struct Context {
 	bool floorPaused = false;
 	int64_t floorReady = 0;
 	std::set<std::string> field;
-	int64_t nextPickupSpeech = 0;
 	int64_t nextThink = 0, targetSince = 0, lastPickup = 0;
 	Item *target = nullptr;
 	std::unique_ptr<Container> bag{new Container(2854, INVENTORY_LIMIT * 2)};
@@ -76,14 +75,12 @@ Npc *actor(Context &context)
 	return g_game.getNpcByID(context.actor);
 }
 // Use classic monster-noise speech: no NPC SAY/channel/status-text substitute.
-void noise(Context &context, const std::string &text, int64_t now, bool pickup)
+void noise(Context &context, const std::string &text)
 {
 	Npc *npc = actor(context);
-	if (!npc || (pickup && now < context.nextPickupSpeech))
+	if (!npc)
 		return;
 	g_game.internalCreatureSay(npc, TALKTYPE_MONSTER_SAY, text, false);
-	if (pickup)
-		context.nextPickupSpeech = now + 3000;
 }
 void removeActor(Context &context)
 {
@@ -261,7 +258,7 @@ void claim(Player &owner, Context &context, Item &item, int64_t now)
 	complete(uncertain.at(&item));
 	uncertain.erase(&item);
 	item.decrementReferenceCounter();
-	noise(context, "Got " + item.getNameDescription() + ".", now, true);
+	noise(context, "Got " + item.getNameDescription() + ".");
 	context.lastPickup = now;
 	context.clearTarget();
 }

@@ -103,7 +103,7 @@ unchanged. Durable travel remains 60 seconds outbound plus 60 seconds return.
 
 ## Messages and hire
 
-Pickups remain floating `TALKTYPE_MONSTER_SAY` only, at most once per 3 seconds:
+Pickups remain floating `TALKTYPE_MONSTER_SAY` only, once per successful field pickup:
 `Got a hatchet.` Runner captions use the same classic mode. Operational summaries
 use `MESSAGE_STATUS_DEFAULT` (0x15, white bottom text **and console**), unlike
 `MESSAGE_STATUS_SMALL` (0x17, bottom text only). No new opcode is introduced.
@@ -118,7 +118,7 @@ use `MESSAGE_STATUS_DEFAULT` (0x15, white bottom text **and console**), unlike
   `Broker runner is already on a trip. Field collection continues.`
 
 Repeated `!broker hire` reports operational status without replacing actors,
-resetting pickup/idle timers or resetting a trip. Hiring resumes paused collection
+resetting idle timers or resetting a trip. Hiring resumes paused collection
 safely. Balance also shows the retained fund; cashout keeps the original atomic
 bank-payout path. Dismiss/logout/death remove both visible actors without losing
 escrow, trips or balances. Travel can reconcile on a later command/session.
