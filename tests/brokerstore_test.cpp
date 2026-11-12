@@ -79,6 +79,15 @@ int main()
     db.connect(); assert(db.inventory(2).size()==1);
     for (unsigned i=1;i<INVENTORY_LIMIT;++i) db.prepare(db.key(),2,3355,1,4);
     fails([&]{db.prepare(db.key(),2,3355,1,4);}); assert(db.inventory(2).size()==INVENTORY_LIMIT);
+    // Notification failures cannot produce a replay even when commit acknowledgement is lost.
+    db.depart(2,db.key(),300);
+    db.fault=Store::Fault::AfterCommit; fails([&]{db.claimNotice(2,false);});
+    db.connect(); assert(db.claimNotice(2,false).empty());
+    db.settle(2,360,2500);
+    db.fault=Store::Fault::BeforeCommit; fails([&]{db.claimNotice(2,true);});
+    db.connect(); assert(!db.claimNotice(2,true).empty() && db.claimNotice(2,true).empty());
+    db.returned(2,420);
+    for (unsigned i=0;i<INVENTORY_LIMIT;++i) db.prepare(db.key(),2,3355,1,4);
     // Overflow retains all unsold images and does not produce a sale ledger.
     db.execute("UPDATE zedas_broker_accounts SET pending="+std::to_string(MONEY_LIMIT)+" WHERE owner=2");
     db.depart(2,db.key(),300); fails([&]{db.settle(2,360,2500);});

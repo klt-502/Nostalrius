@@ -35,6 +35,7 @@ public:
     Row status(uint32_t owner);
     Rows inventory(uint32_t owner);
     Rows fieldInventory(uint32_t owner);
+    Rows batchSummary(uint32_t owner);
     Row claimNotice(uint32_t owner, bool sale);
     void prepare(const std::string& key, uint32_t owner, uint16_t item, unsigned count, uint64_t price);
     bool prepared(const std::string& key, uint32_t owner);

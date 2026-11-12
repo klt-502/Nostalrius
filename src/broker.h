@@ -12,6 +12,9 @@ namespace Broker
 {
 class Store;
 static constexpr int64_t FODDER_GRACE_MS = 0; // The legacy configurable grace is reserved for future categories.
+static constexpr size_t AUTO_BATCH_MIN_INSTANCES = 10;
+static constexpr uint64_t AUTO_BATCH_MIN_GROSS = 250;
+static constexpr int64_t AUTO_BATCH_IDLE_MS = 120000;
 bool enabled();
 void initialize();
 void initialize(std::unique_ptr<Store> connection);

@@ -202,7 +202,7 @@ int main(int argc, char** argv)
         require(g_moveEvents->loadFromXml(), "load class fixture movement handlers");
         testLootClasses(); return 0;
     }
-	if (scenario == "broker_seed" || scenario == "broker_sale_restart" || scenario == "broker_payout_restart" ||
+	if (scenario == "broker_seed" || scenario == "broker_handoff_restart" || scenario == "broker_travel_restart" || scenario == "broker_sale_restart" || scenario == "broker_payout_restart" ||
 	    scenario == "broker_final_restart") {
 		require(g_moveEvents->loadFromXml(), "restart real movement handlers");
 		testBrokerRestart(scenario);

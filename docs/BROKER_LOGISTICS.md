@@ -53,3 +53,76 @@ five minutes, exceeds the old corpse bound, returns, and claims the real brass
 helmet once; moving another helmet away and back still invalidates it.
 
 Witness validation: full native suite 30/30, including the real-engine visibility/TTL/eviction and manual-mutation regression.
+
+## Actor and batch model
+
+```mermaid
+stateDiagram-v2
+    state "Collector (session)" as Field {
+        [*] --> Follow
+        Follow --> Approach: witnessed approved fodder
+        Approach --> Follow: adjacent durable claim
+        Follow --> Follow: runner departs / sells / returns
+    }
+    state "Courier slot (durable account)" as Courier {
+        [*] --> Available
+        Available --> Outbound: atomic handoff of unassigned rows
+        Outbound --> Returning: 60 seconds / batch-only committed sale
+        Returning --> Available: 60 seconds / off-scene completion
+    }
+```
+
+Both actors use NPC look 69, are noncombatants, consume no summon slots and use
+the existing safe placement/body/path rules. The collector is the only actor
+passed to pickup/approach logic. The runner appears safely adjacent to the
+collector for a two-second handoff, says `Pickup!`, then `Off to town!` and
+disappears for represented travel. It has no independent loot search or pickup.
+Return completes off-scene; there is no teleport, duplicate collector or forced
+placement. If no safe handoff placement exists, dispatch waits with escrow intact.
+A restarted trip resumes off-scene instead of spawning a second runner.
+
+The collector holds up to 20 unassigned whole instances, while one active courier
+batch holds up to 20. They share one inaccessible 40-slot backing container; the
+immutable SQL assignment defines ownership. Handoff neither copies nor recreates
+instances. New field rows never join the existing trip. Recovery creates each
+unsold image once only when no real live instance/quarantined original exists.
+Settlement consumes only confirmed sold instances. At full field capacity during
+a trip, additional loot stays on the ground until capacity becomes available.
+
+Automatic dispatch uses fixed centralized defaults in `broker.h`:
+
+- Full 20-instance field batch: immediately on the next decision tick.
+- Otherwise: at least 10 instances, at least 250 gp gross, and at least 120 seconds
+  since the last pickup. All three conditions are required.
+- `!broker sell`: any nonempty field batch, with no active trip, hired collector
+  and safe runner placement. An existing trip is never replaced or duplicated.
+
+One cheap hatchet never causes an idle automatic trip. These are bounded policy
+constants, not new configuration keys. Existing commission configuration applies
+unchanged. Durable travel remains 60 seconds outbound plus 60 seconds return.
+
+## Messages and hire
+
+Pickups remain floating `TALKTYPE_MONSTER_SAY` only, at most once per 3 seconds:
+`Got a hatchet.` Runner captions use the same classic mode. Operational summaries
+use `MESSAGE_STATUS_DEFAULT` (0x15, white bottom text **and console**), unlike
+`MESSAGE_STATUS_SMALL` (0x17, bottom text only). No new opcode is introduced.
+
+- `Broker runner left for town with <count> items (estimated <gross> gp).`
+- `Broker sale complete: <gross> gp gross. Your share: <net> gp. Broker fund: <fee> gp.`
+- `Broker is with you. Carrying <instances>/20 items.`
+- When traveling, append `Runner is in town with <count> items.` or
+  `Runner is returning after delivering <count> items.`
+- When pending is nonzero, append `Broker has <pending> gp waiting for cashout.`
+- An already active trip answers explicit sell with
+  `Broker runner is already on a trip. Field collection continues.`
+
+Repeated `!broker hire` reports operational status without replacing actors,
+resetting pickup/idle timers or resetting a trip. Hiring resumes paused collection
+safely. Balance also shows the retained fund; cashout keeps the original atomic
+bank-payout path. Dismiss/logout/death remove both visible actors without losing
+escrow, trips or balances. Travel can reconcile on a later command/session.
+
+Collector/courier validation: full native suite 30/30, including six real engine
+processes for prepare, handoff, travel, sale, payout and final restart, independent
+field claims, batch-only settlement, original wire feedback and repeated hire.

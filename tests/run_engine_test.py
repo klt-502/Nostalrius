@@ -128,7 +128,7 @@ with tempfile.TemporaryDirectory(prefix="zedas-engine-") as directory:
                 subprocess.run([binary, scenario], cwd=root, check=True)
         (root / "config.lua").write_text(valid + '\neasyModeRespawnPolicyFile = 123\n')
     if scenario == "broker_restart":
-        for stage in ("broker_seed", "broker_sale_restart", "broker_payout_restart", "broker_final_restart"):
+        for stage in ("broker_seed", "broker_handoff_restart", "broker_travel_restart", "broker_sale_restart", "broker_payout_restart", "broker_final_restart"):
             subprocess.run([binary, stage], cwd=root, check=True)
     else:
         subprocess.run([binary, scenario], cwd=root, check=True)

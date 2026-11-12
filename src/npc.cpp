@@ -278,7 +278,7 @@ void Npc::onCreatureSay(Creature* creature, SpeakClasses type, const std::string
 {
 	if (brokerOwner) {
 		Player *owner = creature->getPlayer();
-		if (owner && owner->getGUID() == brokerOwner && type == TALKTYPE_SAY &&
+		if (!brokerCourier && owner && owner->getGUID() == brokerOwner && type == TALKTYPE_SAY &&
 		    Position::areInRange<3, 3, 0>(owner->getPosition(), getPosition()) &&
 		    (text == "balance" || text == "cash out" || text == "cashout"))
 			Broker::command(*owner, text);
@@ -502,10 +502,11 @@ void Npc::setCreatureFocus(Creature* creature)
 		focusCreature = 0;
 	}
 }
-Npc *Npc::createBroker(uint32_t owner)
+Npc *Npc::createBroker(uint32_t owner, bool courier)
 {
-	Npc *npc = new Npc("Loot Broker");
-	npc->name = "Loot Broker";
+	Npc *npc = new Npc(courier ? "Broker Runner" : "Loot Broker");
+	npc->name = courier ? "Broker Runner" : "Loot Broker";
+    npc->brokerCourier = courier;
 	npc->brokerOwner = owner;
 	npc->isIdle = false;
 	npc->lastTalkCreature = 0;

@@ -1,5 +1,10 @@
 # Loot broker implementation audit
 
+Historical audit: the current collector/courier architecture, batch policy and
+qualified-witness lifetime are documented in [BROKER_LOGISTICS.md](BROKER_LOGISTICS.md).
+The older single-actor trip/floor proposals below are retained as audit history.
+
+
 Inspected `zedas-easy-mode` at `ce1fed2169e6bcc330b67cfd74ea6c55a18e22bf`.
 This audit precedes broker gameplay/database changes. It establishes the required
 ownership transitions and the checks that must pass before enabling the service.

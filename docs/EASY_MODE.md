@@ -243,4 +243,5 @@ excluded from spill and broker collection, preserving classic fishing.
 The current loot policy separates 58 routine broker identities, 189 player-interest
 spill identities and 7 corpse-junk identities. Routine fodder ignores the retained
 legacy broker grace setting. See [NPC_BUY_AUDIT.md](NPC_BUY_AUDIT.md) for all prices,
-source/access exclusions, safe quest metadata and the audit-only floor proposal.
+source/access exclusions and safe quest metadata. Current collector/courier logistics
+and witness lifetime are in [BROKER_LOGISTICS.md](BROKER_LOGISTICS.md).

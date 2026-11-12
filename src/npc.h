@@ -65,8 +65,9 @@ class Npc final : public Creature
 		void addList() final;
 
 		static Npc* createNpc(const std::string& name);
-		static Npc* createBroker(uint32_t owner);
+		static Npc* createBroker(uint32_t owner, bool courier = false);
 		uint32_t getBrokerOwner() const { return brokerOwner; }
+        bool isBrokerCourier() const { return brokerCourier; }
 
 		bool canSee(const Position& pos) const final;
 
@@ -149,6 +150,7 @@ class Npc final : public Creature
 		int64_t staticMovementTime;
 
 		uint32_t brokerOwner = 0;
+        bool brokerCourier = false;
 		bool loaded;
 		bool isIdle;
 

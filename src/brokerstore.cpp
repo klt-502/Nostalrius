@@ -107,6 +107,11 @@ Row Store::status(uint32_t owner)
     if (rows.size() != 1) throw std::runtime_error("missing broker owner");
     return rows[0];
 }
+Rows Store::batchSummary(uint32_t owner)
+{
+    const auto state = status(owner);
+    return query("SELECT COALESCE(SUM(count),0) AS items FROM zedas_broker_escrow WHERE owner=" + std::to_string(owner) + " AND trip=" + quote(state.at("trip")));
+}
 Rows Store::fieldInventory(uint32_t owner)
 {
     return query("SELECT * FROM zedas_broker_escrow WHERE sold=0 AND trip IS NULL AND owner=" + std::to_string(owner) + " ORDER BY claim_key");

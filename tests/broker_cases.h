@@ -116,9 +116,15 @@ static void testBrokerCatalog()
 static Npc *brokerFor(Player &owner)
 {
 	for (const auto &entry : g_game.getNpcs())
-		if (entry.second->getBrokerOwner() == owner.getGUID())
+		if (entry.second->getBrokerOwner() == owner.getGUID() && !entry.second->isBrokerCourier())
 			return entry.second;
 	return nullptr;
+}
+static Npc *runnerFor(Player &owner)
+{
+    for (const auto &entry : g_game.getNpcs())
+        if (entry.second->getBrokerOwner() == owner.getGUID() && entry.second->isBrokerCourier()) return entry.second;
+    return nullptr;
 }
 class BrokerFaultConnection : public Broker::Store
 {
@@ -191,8 +197,31 @@ static void testBrokerRestart(const std::string &stage)
 		std::_Exit(0);
 	}
 	Broker::command(*owner, "hire");
+    if (stage == "broker_handoff_restart") {
+        faults->stage = "depart";
+        faults->failure = BrokerFaultConnection::Failure::AfterCommit;
+        Broker::command(*owner, "sell");
+        require(db->storeQuery("SELECT COUNT(*) AS n FROM zedas_broker_escrow WHERE owner=1 AND sold=0 AND trip IS NOT NULL")->getNumber<unsigned>("n") == 1 &&
+                db->storeQuery("SELECT state FROM zedas_broker_accounts WHERE owner=1")->getNumber<unsigned>("state") == 1,
+                "restart after atomic handoff commit with unknown acknowledgement");
+        std::_Exit(0);
+    }
+    if (stage == "broker_travel_restart") {
+        require(brokerFor(*owner) && !runnerFor(*owner), "restart resumes collector and existing trip off-scene");
+        require(db->storeQuery("SELECT departure_notified FROM zedas_broker_accounts WHERE owner=1")->getNumber<unsigned>("departure_notified") == 1,
+                "recovered departure notification durably claimed");
+        Container *corpse = corpseAt(99, 100);
+        Item *hatchet = Item::CreateItem(3276);
+        require(g_game.internalAddItem(corpse, hatchet) == RETURNVALUE_NOERROR, "travel restart hunting loot");
+        EasyMode::onLootGenerated(*corpse);
+        Broker::tick(*owner, OTSYS_TIME() + 2000);
+        require(hatchet->getParent() != corpse->getTile() &&
+                db->storeQuery("SELECT COUNT(*) AS n FROM zedas_broker_escrow WHERE owner=1 AND sold=0 AND trip IS NULL")->getNumber<unsigned>("n") == 1,
+                "new field batch persists independently during travel");
+        std::_Exit(0);
+    }
 	if (stage == "broker_sale_restart") {
-		require(db->storeQuery("SELECT COUNT(*) AS n FROM zedas_broker_escrow WHERE sold=0 AND owner=1")
+		require(db->storeQuery("SELECT COUNT(*) AS n FROM zedas_broker_escrow WHERE sold=0 AND trip IS NOT NULL AND owner=1")
 		                ->getNumber<unsigned>("n") == 1,
 		        "restart recovers one prepared image");
 		Broker::command(*owner, "sell");
@@ -207,9 +236,12 @@ static void testBrokerRestart(const std::string &stage)
 		    "restart after sale commit before consumption acknowledgement");
 		std::_Exit(0);
 	}
-	require(db->storeQuery("SELECT COUNT(*) AS n FROM zedas_broker_escrow WHERE sold=0 AND owner=1")
-	                ->getNumber<unsigned>("n") == 0,
-	        "sold images never restore inventory");
+	require(db->storeQuery("SELECT COUNT(*) AS n FROM zedas_broker_escrow WHERE sold=0 AND trip IS NOT NULL AND owner=1")
+                    ->getNumber<unsigned>("n") == 0 &&
+            db->storeQuery("SELECT COUNT(*) AS n FROM zedas_broker_escrow WHERE sold=0 AND trip IS NULL AND owner=1")->getNumber<unsigned>("n") == 1,
+            "sold trip never restores, independent field batch survives restart");
+    require(db->storeQuery("SELECT sale_notified FROM zedas_broker_accounts WHERE owner=1")->getNumber<unsigned>("sale_notified") == 1,
+            "confirmed recovered sale summary is durably claimed once");
 	if (stage == "broker_payout_restart") {
 		faults->stage = "payout";
 		faults->failure = BrokerFaultConnection::Failure::AfterCommit;
@@ -342,7 +374,7 @@ static void testBroker()
 	            0,
 	        "collection is not a death-time sale");
 	Broker::command(*owner, "sell");
-	require(!brokerFor(*owner), "represented outbound trip removes dwarf from hunting scene");
+	require(brokerFor(*owner) == npc, "field collector remains throughout represented courier trip");
 	require(db->executeQuery("UPDATE zedas_broker_accounts SET deadline=0 WHERE owner=1"),
 	        "advance fixture outbound deadline");
 	Broker::tick(*owner, exposed + 9000);

@@ -1,5 +1,10 @@
 # NPC purchase and loot classification audit
 
+Historical audit: the current collector/courier architecture, batch policy and
+qualified-witness lifetime are documented in [BROKER_LOGISTICS.md](BROKER_LOGISTICS.md).
+The older single-actor trip/floor proposals below are retained as audit history.
+
+
 Inspected `zedas-easy-mode` at `328bf7b`. This report precedes catalog/policy changes.
 
 The extractor scans all **337 NPC files**, recursively expands `.ndb` includes, and finds **2598** single-unit item/price/topic offers. **762** reach a matching `Count(Type)>=Amount -> Delete(Type), CreateMoney` confirmation. These are evidence candidates, not automatically approved offers. It distinguishes purchases from `DeleteMoney, Create(Type)` sales to players. Bulk-only/unusual/gated rules are not inferred into unit prices. All ammunition references were also searched, including bundles and quest hand-ins.

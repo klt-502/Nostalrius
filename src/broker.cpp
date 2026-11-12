@@ -24,13 +24,14 @@ namespace
 std::map<uint16_t, uint64_t> catalog;
 std::unique_ptr<Store> database;
 struct Context {
-	uint32_t session = 0, actor = 0;
+	uint32_t session = 0, actor = 0, runner = 0;
 	bool hired = false;
-	bool returnSpeechPending = false;
+	int64_t runnerUntil = 0;
+	std::set<std::string> field;
 	int64_t nextPickupSpeech = 0;
 	int64_t nextThink = 0, targetSince = 0, lastPickup = 0;
 	Item *target = nullptr;
-	std::unique_ptr<Container> bag{new Container(2854, INVENTORY_LIMIT)};
+	std::unique_ptr<Container> bag{new Container(2854, INVENTORY_LIMIT * 2)};
 	std::map<std::string, Item *> carried;
 	void clearTarget()
 	{
@@ -58,7 +59,7 @@ std::map<Item *, Pending> uncertain;
 int64_t nextReconnect = 0;
 void message(Player &owner, const std::string &text)
 {
-	owner.sendTextMessage(MESSAGE_STATUS_SMALL, text);
+	owner.sendTextMessage(MESSAGE_STATUS_DEFAULT, text);
 }
 unsigned leash()
 {
@@ -89,6 +90,23 @@ void removeActor(Context &context)
 		g_game.removeCreature(npc);
 	context.actor = 0;
 }
+void removeRunner(Context &context)
+{
+	if (Npc *npc = g_game.getNpcByID(context.runner))
+		g_game.removeCreature(npc);
+	context.runner = 0;
+	context.runnerUntil = 0;
+}
+void removeActors(Context &context)
+{
+	removeActor(context);
+	removeRunner(context);
+}
+void runnerNoise(Context &context, const std::string &text)
+{
+	if (Npc *npc = g_game.getNpcByID(context.runner))
+		g_game.internalCreatureSay(npc, TALKTYPE_MONSTER_SAY, text, false);
+}
 bool safeWalk(const Position &pos, bool entering = true)
 {
 	Tile *tile = g_game.map.getTile(pos);
@@ -108,21 +126,23 @@ bool safeWalk(const Position &pos, bool entering = true)
 	}
 	return true;
 }
-void spawn(Player &owner, Context &context)
+void spawn(Player &owner, Context &context, bool courier = false)
 {
-	if (actor(context))
+	if (courier ? g_game.getNpcByID(context.runner) != nullptr : actor(context) != nullptr)
 		return;
+	const Position anchor = courier && actor(context) ? actor(context)->getPosition() : owner.getPosition();
 	for (int dx = -1; dx <= 1; ++dx)
 		for (int dy = -1; dy <= 1; ++dy) {
 			if (!dx && !dy)
 				continue;
-			Position pos(owner.getPosition().x + dx, owner.getPosition().y + dy, owner.getPosition().z);
+			Position pos(anchor.x + dx, anchor.y + dy, anchor.z);
 			Tile *tile = g_game.map.getTile(pos);
-			if (!safeWalk(pos) || (tile->getCreatures() && !tile->getCreatures()->empty()))
+			if (!safeWalk(pos) || !near(owner.getPosition(), pos, leash()) ||
+			    (tile->getCreatures() && !tile->getCreatures()->empty()))
 				continue;
-			std::unique_ptr<Npc> npc(Npc::createBroker(owner.getGUID()));
+			std::unique_ptr<Npc> npc(Npc::createBroker(owner.getGUID(), courier));
 			if (g_game.placeCreature(npc.get(), pos)) {
-				context.actor = npc.release()->getID();
+				(courier ? context.runner : context.actor) = npc.release()->getID();
 				return;
 			}
 		}
@@ -131,9 +151,12 @@ void hydrate(uint32_t owner, Context &context)
 {
 	auto rows = database->inventory(owner);
 	std::set<std::string> unsold;
+	context.field.clear();
 	for (const auto &row : rows) {
 		const auto &key = row.at("claim_key");
 		unsold.insert(key);
+		if (row.at("trip") == "0")
+			context.field.insert(key);
 		const auto carried = context.carried.find(key);
 		if (carried != context.carried.end()) {
 			Item &item = *carried->second;
@@ -146,7 +169,7 @@ void hydrate(uint32_t owner, Context &context)
 			if (pending.second.key == key)
 				throw std::runtime_error("broker claim awaiting reconciliation");
 		const uint64_t id = number(row, "item"), count = number(row, "count");
-		if (id > 65535 || !count || count > 100 || context.bag->size() >= INVENTORY_LIMIT)
+		if (id > 65535 || !count || count > 100 || context.bag->size() >= INVENTORY_LIMIT * 2)
 			throw std::runtime_error("invalid broker recovery image");
 		std::unique_ptr<Item> item(Item::CreateItem(id, count));
 		if (!item || item->getItemCount() != count || !price(*item) || price(*item) != number(row, "price"))
@@ -173,7 +196,7 @@ Context &getContext(Player &owner)
 	if (!context)
 		context.reset(new Context);
 	if (context->session && context->session != owner.getID())
-		removeActor(*context);
+		removeActors(*context);
 	context->session = owner.getID();
 	return *context;
 }
@@ -218,7 +241,7 @@ bool reconnect()
 }
 void claim(Player &owner, Context &context, Item &item, int64_t now)
 {
-	if (context.bag->size() >= INVENTORY_LIMIT || !price(item) ||
+	if (context.field.size() >= INVENTORY_LIMIT || !price(item) ||
 	    !EasyMode::isBrokerCandidate(item, now, FODDER_GRACE_MS))
 		return;
 	Npc *npc = actor(context);
@@ -239,6 +262,67 @@ void claim(Player &owner, Context &context, Item &item, int64_t now)
 	noise(context, "Got " + item.getNameDescription() + ".", now, true);
 	context.lastPickup = now;
 	context.clearTarget();
+}
+uint64_t fieldGross(Context &context)
+{
+	uint64_t gross = 0;
+	for (const auto &key : context.field) {
+		const Item &item = *context.carried.at(key);
+		const auto unit = price(item);
+		if (!unit || unit > (MONEY_LIMIT - gross) / item.getItemCount())
+			throw std::runtime_error("invalid field batch value");
+		gross += unit * item.getItemCount();
+	}
+	return gross;
+}
+void notices(Player &owner)
+{
+	const auto departure = database->claimNotice(owner.getGUID(), false);
+	if (!departure.empty())
+		message(owner, "Broker runner left for town with " + departure.at("items") + " items (estimated " +
+		                   departure.at("gross") + " gp).");
+	const auto sale = database->claimNotice(owner.getGUID(), true);
+	if (!sale.empty())
+		message(owner, "Broker sale complete: " + sale.at("gross") + " gp gross. Your share: " + sale.at("net") +
+		                   " gp. Broker fund: " + sale.at("commission") + " gp.");
+}
+bool dispatch(Player &owner, Context &context, int64_t now)
+{
+    if (context.hired && !actor(context)) spawn(owner, context);
+	if (!context.hired || !actor(context) || context.field.empty() ||
+	    number(database->status(owner.getGUID()), "state"))
+		return false;
+	spawn(owner, context, true);
+	if (!g_game.getNpcByID(context.runner))
+		return false;
+	try {
+		database->depart(owner.getGUID(), database->key(), time(nullptr));
+		hydrate(owner.getGUID(), context);
+		runnerNoise(context, "Pickup!");
+		context.runnerUntil = now + 2000;
+		// Ownership has changed in SQL, not by cloning/recreating private items.
+		return true;
+	} catch (...) {
+		removeRunner(context);
+		throw;
+	}
+}
+std::string operationalStatus(Player &owner, Context &context)
+{
+	const auto state = database->status(owner.getGUID());
+	std::string text = actor(context)
+	                       ? "Broker is with you. Carrying " + std::to_string(context.field.size()) + "/20 items."
+	                       : (context.hired ? "Broker is waiting for safe placement."
+	                                        : "Broker collection is paused. Use !broker hire to resume.");
+	if (number(state, "state")) {
+		const auto rows = database->batchSummary(owner.getGUID());
+		text += " Runner is " +
+		        std::string(number(state, "state") == 1 ? "in town with " : "returning after delivering ") +
+		        rows.at(0).at("items") + " items.";
+	}
+	if (number(state, "pending"))
+		text += " Broker has " + state.at("pending") + " gp waiting for cashout.";
+	return text;
 }
 bool walk(Npc &npc, const Position &goal)
 {
@@ -406,7 +490,7 @@ void stop(Player &owner)
 	auto found = contexts.find(owner.getGUID());
 	if (found == contexts.end() || found->second->session != owner.getID())
 		return;
-	removeActor(*found->second);
+	removeActors(*found->second);
 	found->second->hired = false;
 	found->second->session = 0;
 }
@@ -433,33 +517,35 @@ void tick(Player &owner, int64_t now)
 		stop(owner);
 		return;
 	}
-	if (!context.hired)
-		return;
 	if (!now)
 		now = OTSYS_TIME();
 	if (now < context.nextThink)
 		return;
 	context.nextThink = now + 1000;
 	if (!reconnect()) {
-		removeActor(context);
+		removeActors(context);
 		return;
 	}
 	try {
-		hydrate(owner.getGUID(), context); // Validate recovered images before any sale.
+		hydrate(owner.getGUID(), context);
+		if (context.runner && now >= context.runnerUntil) {
+			runnerNoise(context, "Off to town!");
+			removeRunner(context);
+		}
+		// After restart the committed trip continues off-scene. No second runner is spawned.
+		if (!context.runner)
+			notices(owner);
 		database->settle(owner.getGUID(), time(nullptr),
 		                 g_config.getNumber(ConfigManager::EASY_MODE_BROKER_COMMISSION_BPS));
-		if (number(database->status(owner.getGUID()), "state") == 2)
-			context.returnSpeechPending = true;
+		if (!context.runner)
+			notices(owner);
 		database->returned(owner.getGUID(), time(nullptr));
 		hydrate(owner.getGUID(), context);
-		const auto state = database->status(owner.getGUID());
-		if (number(state, "state")) {
-			removeActor(context);
+		if (!context.hired)
 			return;
-		}
 		Npc *npc = actor(context);
 		if (npc && !near(owner.getPosition(), npc->getPosition(), leash())) {
-			removeActor(context);
+			removeActors(context);
 			context.hired = false;
 			message(owner, "Broker collection paused after travel. Use !broker hire to resume; escrow is safe.");
 			return;
@@ -468,26 +554,22 @@ void tick(Player &owner, int64_t now)
 		npc = actor(context);
 		if (!npc)
 			return;
-		if (context.returnSpeechPending) {
-			noise(context, "Back from town.", now, false);
-			context.returnSpeechPending = false;
-		}
 		const int32_t desiredSpeed = std::max(82, static_cast<const Creature &>(owner).getStepSpeed() + 20);
 		if (npc->getSpeed() != desiredSpeed)
 			g_game.changeSpeed(npc, (desiredSpeed - npc->getSpeed()) / 2);
-		// Bounded batches depart automatically after 15 seconds without a pickup.
-		if (!context.carried.empty() && (context.bag->size() >= INVENTORY_LIMIT || now - context.lastPickup >= 15000)) {
-			database->depart(owner.getGUID(), database->key(), time(nullptr));
-			noise(context, "Off to town!", now, false);
-			removeActor(context);
-			return;
-		}
+		if (!number(database->status(owner.getGUID()), "state") &&
+		    (context.field.size() >= INVENTORY_LIMIT ||
+		     (context.field.size() >= AUTO_BATCH_MIN_INSTANCES && fieldGross(context) >= AUTO_BATCH_MIN_GROSS &&
+		      now - context.lastPickup >= AUTO_BATCH_IDLE_MS)))
+			dispatch(owner, context, now);
 		const int64_t grace = FODDER_GRACE_MS;
+		if (context.field.size() >= INVENTORY_LIMIT)
+			context.clearTarget();
 		if (context.target &&
 		    (!EasyMode::isBrokerCandidate(*context.target, now, grace) || !price(*context.target) ||
 		     !near(owner.getPosition(), context.target->getPosition(), leash()) || now - context.targetSince >= 5000))
 			context.clearTarget();
-		if (!context.target)
+		if (!context.target && context.field.size() < INVENTORY_LIMIT)
 			for (Item *item : EasyMode::brokerCandidates(now, grace)) {
 				if (price(*item) && near(owner.getPosition(), item->getPosition(), leash()) &&
 				    npc->canSee(item->getPosition()) &&
@@ -508,7 +590,7 @@ void tick(Player &owner, int64_t now)
 		} else if (!near(npc->getPosition(), owner.getPosition(), 1))
 			walk(*npc, owner.getPosition());
 	} catch (const std::exception &e) {
-		removeActor(context);
+		removeActors(context);
 		message(owner, "Broker paused for database/inventory recovery. Your ledger and escrow are retained.");
 		std::cout << "[Broker paused] " << e.what() << std::endl;
 	}
@@ -530,23 +612,28 @@ void command(Player &owner, const std::string &text)
 		Context &context = getContext(owner);
 		hydrate(owner.getGUID(), context);
 		if (text == "hire") {
+			const bool resume = !context.hired;
 			context.hired = true;
-			context.nextThink = 0;
-			context.lastPickup = OTSYS_TIME();
-			tick(owner);
-			message(owner, "Broker hired. Approved routine leftovers can be collected immediately.");
+			if (!context.lastPickup)
+				context.lastPickup = OTSYS_TIME();
+			if (resume || !actor(context)) {
+				context.nextThink = 0;
+				tick(owner);
+			}
+			message(owner, operationalStatus(owner, context));
 		} else if (text == "dismiss") {
 			context.hired = false;
-			removeActor(context);
+			removeActors(context);
 			message(owner, "Broker dismissed. Inventory and balances remain saved.");
 		} else if (text == "sell") {
-			if (context.carried.empty()) {
+			if (number(database->status(owner.getGUID()), "state")) {
+				message(owner, "Broker runner is already on a trip. Field collection continues.");
+			} else if (context.field.empty()) {
 				message(owner, "No carried loot to sell.");
-				return;
+			} else if (!dispatch(owner, context, OTSYS_TIME())) {
+				message(owner,
+				        "Runner needs a safely placed field broker. Use !broker hire to resume; loot is retained.");
 			}
-			database->depart(owner.getGUID(), database->key(), time(nullptr));
-			noise(context, "Off to town!", OTSYS_TIME(), false);
-			removeActor(context);
 		} else if (text == "cashout" || text == "cash out") {
 			const Bank bank = database->cashout(owner.getGUID(), database->key(), owner.getBankBalance(),
 			                                    owner.getBrokerBankWatermark());
@@ -555,11 +642,10 @@ void command(Player &owner, const std::string &text)
 			message(owner,
 			        "Broker pending proceeds deposited to your bank. Bank: " + std::to_string(bank.balance) + " gp.");
 		} else if (text.empty() || text == "status" || text == "balance") {
-			const auto state = database->status(owner.getGUID());
-			message(owner, "Broker: " + std::string(context.hired ? "hired" : "dismissed") + ", escrow " +
-			                   std::to_string(context.carried.size()) + "/20, pending " + state.at("pending") +
-			                   " gp, retained economy funds " + state.at("funds") + " gp, travel state " +
-			                   state.at("state") + ".");
+			if (!context.runner)
+				notices(owner);
+			message(owner, operationalStatus(owner, context) +
+			                   " Broker fund: " + database->status(owner.getGUID()).at("funds") + " gp.");
 		} else
 			message(owner, "Use !broker hire, dismiss, sell, balance, or cashout. Travel is 60 seconds each way.");
 	} catch (const std::exception &e) {

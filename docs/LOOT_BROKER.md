@@ -1,8 +1,9 @@
 # Physical loot broker
 
-The first opt-in broker follows one online player GUID, approaches visible
-routine leftover loot immediately, carries the actual items in private escrow, represents a trip to
-the reviewed town buyers, and settles their actual purchase values. Worms 3492 stay inside
+The opt-in field collector follows one online player GUID, approaches visible
+routine leftover loot immediately and carries actual items in private escrow.
+A separate temporary courier transports an assigned batch through represented
+town travel while the collector continues hunting. Worms 3492 stay inside
 corpses/generated bags. Classic fishing scripts and consumption are unchanged.
 
 The preceding audit is in `BROKER_AUDIT.md`; SQL details are in
@@ -13,7 +14,8 @@ XP/skill/stat/drop-rate changes or client executable modifications.
 ## Enable on an Easy Mode database
 
 Back up the Easy Mode database and stop that world. Apply
-`migrations/001_broker.sql` explicitly to that database using your normal database
+`migrations/001_broker.sql` and then `migrations/002_broker_courier.sql` explicitly
+(skip 001 if already applied) to that database using your normal database
 administration tool, then configure and restart. Never apply it to Classic.
 Do not re-import `nostalrius.sql` into a live world; CI imports that only into an
 empty disposable fixture. The additive migration leaves `players` unchanged and
@@ -43,7 +45,7 @@ No new Action IDs, storage keys, client opcodes or items are reserved.
 
 Use normal local speech, not a channel message:
 
-- `!broker hire`: opt into collection and resume after logout/travel/death.
+- `!broker hire`: opt into/resume collection; repeated hire reports status and keeps the same actors.
 - `!broker balance` or `!broker status`: inspect carried slots, pending proceeds,
   retained economy funds and travel state (0 hunting, 1 outbound, 2 returning).
 - `!broker sell`: send a nonempty carried batch on its represented town trip.
@@ -56,16 +58,14 @@ Hiring is session-only; after relog, explicitly hire again. Durable inventory,
 pending proceeds, commission and town-trip deadlines survive restart.
 
 Routine pickup uses `TALKTYPE_MONSTER_SAY`, the same positional speech packet as
-classic troll/orc noises. It says `Got a hatchet.` (using the actual item
-description), at most once every **3000 ms per broker**. Additional pickups still
-succeed silently; no captions are queued for later spam. `Off to town!` is sent
-before departure removal and `Back from town.` after successful return placement.
-Departure/return bypass pickup throttling and occur once per visible transition;
-return speech waits if placement is blocked. There is no pickup/departure/return
-status/chat text. Explicit hire/dismiss/balance/cashout responses and recovery
-errors still use normal feedback. The original client controls noise lifetime and
-rendering; no new opcode or executable change is introduced. Speech timers are
-session-only and never gate item or money operations.
+classic troll/orc noises: `Got a hatchet.`, at most once per **3000 ms per collector**.
+Additional pickups succeed silently; nothing is queued into chat. The runner says
+`Pickup!` at handoff and `Off to town!` before disappearing. It completes the return
+off-scene. Departure and confirmed sale each produce one durable-claimed summary
+using `MESSAGE_STATUS_DEFAULT`, visible in the original console. See
+[BROKER_LOGISTICS.md](BROKER_LOGISTICS.md) for exact messages and the at-most-once
+network-emission guarantee. Hire/status/cashout/recovery responses also use that
+console-visible channel. No opcode or executable change is introduced.
 
 The dwarf uses existing look type 69 and NPC walking/scheduling, with its
 walking pace following the owner through the normal speed API. It has no master,
@@ -80,18 +80,24 @@ It can retry eligible leftovers, without remote pickup or teleporting to loot.
 Manual pickup wins if processed first. Multiple brokers are first completed
 claim wins. Only witnessed generated items actually exposed by spill qualify;
 manual movement/merge, trade, corpse movement/decay/removal, disappearance or the
-five-minute/1024-corpse registry bound retire unclaimed eligibility. Overflow becomes a candidate only when exposed; routine fodder then has zero grace. Later corpse insertions, dropped player items and
+genuine 8192-fodder-witness bound retire unclaimed eligibility. Qualified fodder
+has no visibility/age timeout; the short-lived gold/spill snapshot retains its
+original five-minute/1024-corpse bounds. Overflow becomes a candidate only when exposed; routine fodder then has zero grace. Later corpse insertions, dropped player items and
 special-container subtrees are never discovered by ground scanning.
 
-The live state model is FOLLOW/APPROACH, bounded COLLECT, OUTBOUND/SELL/RETURNING,
-DISMISSED and RECOVERY_PAUSED. Pickup requires an adjacent dwarf, clear sight,
-owner leash, exact witness and current eligibility. The private escrow has 20
-whole-instance slots: no split, clone, autostack, conversion or bag dropped on the
-map. A full batch or 15 seconds without another pickup automatically departs.
-`!broker sell` can depart sooner. Town travel is explicitly represented, not a
-claim that an NPC walked the entire map: the dwarf leaves, a durable 60-second
-outbound deadline elapses, the sale settles, and a separate 60-second return
-precedes reappearance near the owner. It does not collect during travel.
+The collector stays in FOLLOW/APPROACH/COLLECT while the independent durable
+courier slot advances OUTBOUND/SELL/RETURNING. Pickup requires an adjacent collector,
+clear sight, owner leash, exact witness and current eligibility. The field batch
+has 20 whole-instance slots and one in-flight batch has at most 20. A private
+40-slot backing container stores their actual instances with immutable per-row SQL
+trip assignments; handoff does not copy items. No split, clone, autostack,
+conversion or map bag occurs. A full field batch dispatches on the next tick.
+Otherwise automatic dispatch needs at least 10 instances worth at least 250 gp
+and 120 seconds without pickup. `!broker sell` allows smaller explicit batches.
+The runner appears beside the collector for two seconds, then disappears for
+represented 60-second outbound travel, batch-only settlement and 60-second
+return availability. No full-map travel is claimed. Only one courier trip per
+owner is allowed; the collector continues a new field batch throughout travel.
 
 Far teleport/floor change pauses collection and despawns the actor; it does not
 teleport to loot. Logout/death/dismiss stops collection. Already collected escrow
