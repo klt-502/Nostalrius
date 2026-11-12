@@ -149,3 +149,35 @@ callback holding a player pointer: a mismatched/stopped session cannot reappear.
 The `engine_broker_floor` test covers resets, blocked placement, hire during delay,
 active courier batch preservation, no absent/cross-floor claims, local collection
 after rejoin and death before reappearance. Full native suite: 31/31 passed.
+
+## Source map and verification
+
+| Responsibility | Source |
+| --- | --- |
+| Session roles, follow/claim, batching, handoff, status and notices | `src/broker.cpp`: Context, hydrate, claim, dispatch, notices, tick, command |
+| Locked batch assignment, batch-only sale, durable notice claim | `src/brokerstore.cpp`: prepare, depart, settle, claimNotice; schema v2 in migration 002 |
+| Exact fodder witness independent of snapshot TTL/eviction | `src/easyloot.cpp`: FodderWitness, prune, onLootItemMove, brokerCandidates |
+| Native dwarf construction and runner dialogue isolation | `src/npc.cpp`: Npc::createBroker, onCreatureSay |
+| Immediate floor pause and guarded rejoin | `src/player.cpp`: Player::onCreatureMove; Broker::ownerMoved/tick |
+
+Final local validation: **33/33 normal**, **33/33 AddressSanitizer + UndefinedBehaviorSanitizer**,
+including the real MariaDB fixture, six-process restart sequence, snapshot
+visibility regression, field capacity during travel, runner noncollection,
+explicit/automatic dispatch and wire-level notice replay/failure checks.
+ASan uses `detect_leaks=0` for existing process-lifetime engine fixtures; UBSan
+uses `halt_on_error=1`. Leak detection is not claimed. All 81 compile commands
+are free of cotire/prefix/PCH paths. GitHub's Ubuntu 24.04 matrix runs both
+`USE_LUAJIT=ON` and `OFF`, including the full suite and the migration fixture.
+
+`tests/migrate_broker_fixture.py` exercises **the actual migration SQL** with
+legacy outbound/returning accounts, verifies exact claim identity, batch binding,
+original deadlines, pending/fund totals, sale values and muted historical notices,
+then removes only its disposable fixture rows. It ran successfully locally using
+the container's MariaDB client. CI runs it before the gameplay suite. Never use
+this fixture helper or the base SQL import on a live database.
+
+No new configuration options, Action IDs, item identities, prices, market buying
+or fund-spending behavior are added in this redesign. Existing reserved IDs and
+all catalog/state/handler/provenance protections remain unchanged. Original-client
+presentation and real hunting-route feel require the manual checklist in
+[BROKER_TEST_CHECKLIST.md](BROKER_TEST_CHECKLIST.md).

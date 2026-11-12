@@ -46,8 +46,7 @@ jobs:
           MYSQL_PWD: fixture-only
         run: |
           mysql -h127.0.0.1 -uroot zedas_broker_test < nostalrius.sql
-          mysql -h127.0.0.1 -uroot zedas_broker_test < migrations/001_broker.sql
-          mysql -h127.0.0.1 -uroot zedas_broker_test < migrations/002_broker_courier.sql
+          ZEDAS_BROKER_TEST_PORT=3306 python3 tests/migrate_broker_fixture.py
       - name: Test
         env:
           ZEDAS_BROKER_TEST_PORT: 3306

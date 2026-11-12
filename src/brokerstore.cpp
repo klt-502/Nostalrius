@@ -214,7 +214,7 @@ Row Store::claimNotice(uint32_t owner, bool sale)
         }
         // Claim before sending: a lost acknowledgement never causes duplicate chat.
         // A crash between this commit and network send can omit a message; balances remain queryable.
-        commit("notice");
+        commit(result.empty() ? "read" : "notice");
         return result;
     } catch (...) { abort(); throw; }
 }

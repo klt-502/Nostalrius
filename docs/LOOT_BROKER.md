@@ -104,8 +104,9 @@ immediately despawn visible actors, then rejoin after a 1,500 ms stable-floor
 delay and safe adjacent placement (normally the next one-second decision tick).
 No stair/rope/hole pathfinding or teleport-to-loot is added. Repeated floor changes
 reset the delay; blocked placement waits. Logout/death/dismiss stops collection. Already collected escrow
-remains owned and saved. Trip progress resumes when the owner hires again; offline
-collection and offline invisible sales are not performed.
+remains owned and saved. A bound online owner session can continue an assigned courier trip even when
+collection is dismissed. After logout/restart, progress reconciles on the next
+broker command/session; no offline collection or background world sale loop runs.
 
 ## Reviewed sale catalog
 

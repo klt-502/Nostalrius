@@ -122,3 +122,7 @@ Use the complete [Wave 2 checklist](WAVE2_TEST_CHECKLIST.md) before deployment.
 
 Worms (3492) deliberately remain inside corpses/generated bags for classic fishing.
 No fishing action or consumption behavior is changed.
+
+Current optional broker integration is documented in [BROKER_LOGISTICS.md](BROKER_LOGISTICS.md).
+Qualified generated fodder has a separate bounded witness lifetime; this does not
+change the short-lived currency/spill snapshots or the spill eligibility policy.

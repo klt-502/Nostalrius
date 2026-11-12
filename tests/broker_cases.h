@@ -9,6 +9,7 @@
 #include <thread>
 
 struct BrokerEngineTestAccess {
+    static void think(Npc &npc) { npc.onThink(1000); }
 	static void clearOutput(Player &player)
 	{
 		player.client->getCurrentBuffer().reset();

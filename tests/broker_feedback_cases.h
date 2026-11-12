@@ -234,4 +234,175 @@ static void testBrokerFloor()
 	Broker::tick(*owner, OTSYS_TIME() + 3000);
 	require(!brokerFor(*owner) && !runnerFor(*owner), "dead owner cannot spawn delayed actors");
 }
+static void testBrokerBatch()
+{
+	require(Database::getInstance()->connect(), "batch fixture DB");
+	auto *db = Database::getInstance();
+	for (const char *table :
+	     {"zedas_broker_escrow", "zedas_broker_sales", "zedas_broker_payouts", "zedas_broker_accounts"})
+		require(db->executeQuery(std::string("DELETE FROM ") + table), "reset batch fixture");
+	Broker::initialize();
+	auto *owner = makePlayer(100, 100);
+	owner->setGUID(1);
+	Broker::command(*owner, "hire");
+	auto *collector = brokerFor(*owner);
+	unsigned generated = 0;
+	auto generate = [&]() {
+		const int offsets[][2] = {{98, 98}, {98, 99}, {98, 100}, {99, 98}, {99, 100}, {100, 98}, {100, 99}, {100, 100}};
+		const auto *pos = offsets[generated++ % 8];
+		auto *corpse = corpseAt(pos[0], pos[1]);
+		auto *item = Item::CreateItem(3276);
+		require(g_game.internalAddItem(corpse, item) == RETURNVALUE_NOERROR, "generated batch hatchet");
+		EasyMode::onLootGenerated(*corpse);
+		require(item->getParent() == corpse->getTile(), "batch loot actually spilled");
+		return item;
+	};
+	auto base = OTSYS_TIME();
+	auto *single = generate();
+	Broker::tick(*owner, base + 1100);
+	require(single->getParent() != single->getTile(), "single low-value item collected");
+	Broker::tick(*owner, base + Broker::AUTO_BATCH_IDLE_MS + 2000);
+	require(!runnerFor(*owner) && brokerFor(*owner) == collector &&
+	            db->storeQuery("SELECT state FROM zedas_broker_accounts WHERE owner=1")->getNumber<unsigned>("state") ==
+	                0,
+	        "one cheap hatchet never triggers automatic idle trip");
+	int64_t now = base + Broker::AUTO_BATCH_IDLE_MS + 3000;
+	for (unsigned i = 1; i < Broker::AUTO_BATCH_MIN_INSTANCES; ++i) {
+		generate();
+		Broker::tick(*owner, now);
+		now += 1000;
+	}
+	const int64_t last = now - 1000;
+	Broker::tick(*owner, last + Broker::AUTO_BATCH_IDLE_MS - 1000);
+	require(!runnerFor(*owner), "minimum count and gross still require full idle interval");
+	Broker::tick(*owner, last + Broker::AUTO_BATCH_IDLE_MS);
+	auto *runner = runnerFor(*owner);
+	require(runner && brokerFor(*owner) == collector, "qualified idle batch dispatches runner only");
+	require(
+	    db->storeQuery("SELECT COUNT(*) AS n FROM zedas_broker_escrow WHERE owner=1 AND trip IS NOT NULL AND sold=0")
+	            ->getNumber<unsigned>("n") == 10,
+	    "idle batch assigns exactly ten instances");
+	Broker::command(*owner, "sell");
+	require(runnerFor(*owner) == runner, "explicit sell while busy cannot create second runner");
+	auto *fresh = generate();
+	auto *source = fresh->getParent();
+	const auto rowsBefore =
+	    db->storeQuery("SELECT COUNT(*) AS n FROM zedas_broker_escrow WHERE owner=1")->getNumber<unsigned>("n");
+	BrokerEngineTestAccess::think(*runner);
+	require(
+	    fresh->getParent() == source &&
+	        db->storeQuery("SELECT COUNT(*) AS n FROM zedas_broker_escrow WHERE owner=1")->getNumber<unsigned>("n") ==
+	            rowsBefore,
+	    "courier think cannot collect adjacent generated ground loot");
+	now = last + Broker::AUTO_BATCH_IDLE_MS + 1000;
+	Broker::tick(*owner, now);
+	now += 1000;
+	for (unsigned i = 1; i < Broker::INVENTORY_LIMIT; ++i) {
+		generate();
+		Broker::tick(*owner, now);
+		now += 1000;
+	}
+	require(
+	    brokerFor(*owner) == collector &&
+	        db->storeQuery("SELECT COUNT(*) AS n FROM zedas_broker_escrow WHERE owner=1 AND trip IS NULL AND sold=0")
+	                ->getNumber<unsigned>("n") == 20,
+	    "field fills independent twenty slots while runner travels");
+	auto *overflow = generate();
+	source = overflow->getParent();
+	Broker::tick(*owner, now);
+	now += 1000;
+	require(overflow->getParent() == source && !Broker::locked(overflow),
+	        "full field leaves excess loot visible and unreserved");
+	require(db->executeQuery("UPDATE zedas_broker_accounts SET deadline=0 WHERE owner=1"), "finish first outbound");
+	Broker::tick(*owner, now);
+	now += 1000;
+	require(db->executeQuery("UPDATE zedas_broker_accounts SET deadline=0 WHERE owner=1"), "finish first return");
+	Broker::tick(*owner, now);
+	require(runnerFor(*owner) && brokerFor(*owner) == collector &&
+	            db->storeQuery("SELECT COUNT(DISTINCT trip) AS n FROM zedas_broker_escrow WHERE owner=1")
+	                    ->getNumber<unsigned>("n") == 2 &&
+	            db->storeQuery(
+	                  "SELECT COUNT(*) AS n FROM zedas_broker_escrow WHERE owner=1 AND trip IS NOT NULL AND sold=0")
+	                    ->getNumber<unsigned>("n") == 20,
+	        "full field dispatches immediately into a distinct batch when courier slot becomes available");
+	Broker::stop(*owner);
+}
+static void testBrokerNotices()
+{
+	require(Database::getInstance()->connect(), "notice fixture DB");
+	auto *db = Database::getInstance();
+	for (const char *table :
+	     {"zedas_broker_escrow", "zedas_broker_sales", "zedas_broker_payouts", "zedas_broker_accounts"})
+		require(db->executeQuery(std::string("DELETE FROM ") + table), "reset notice fixture");
+	Broker::Connection settings;
+	settings.host = "127.0.0.1";
+	settings.user = "root";
+	settings.password = "fixture-only";
+	settings.database = "zedas_broker_test";
+	settings.port = g_config.getNumber(ConfigManager::SQL_PORT);
+	auto *faults = new BrokerFaultConnection(settings);
+	Broker::initialize(std::unique_ptr<Broker::Store>(faults));
+	auto *owner = makePlayer(100, 100);
+	owner->setGUID(1);
+	Broker::command(*owner, "hire");
+	auto saleMessages = [&]() {
+		const auto messages = BrokerWire(*owner).chat;
+		return std::count_if(messages.begin(), messages.end(),
+		                     [](const std::string &s) { return s.find("Broker sale complete:") == 0; });
+	};
+	int64_t now = OTSYS_TIME() + 1100;
+	for (unsigned trial = 0; trial < 3; ++trial) {
+		if (trial) {
+			require(db->executeQuery("UPDATE zedas_broker_accounts SET deadline=0 WHERE owner=1"),
+			        "finish prior return");
+			Broker::tick(*owner, now);
+			now += 2000;
+			Broker::command(*owner, "hire");
+		}
+		auto *corpse = corpseAt(99, 100);
+		auto *helmet = Item::CreateItem(3355);
+		require(g_game.internalAddItem(corpse, helmet) == RETURNVALUE_NOERROR, "notice generated helmet");
+		EasyMode::onLootGenerated(*corpse);
+		Broker::tick(*owner, now);
+		now += 2000;
+		Broker::command(*owner, "sell");
+		Broker::tick(*owner, now);
+		now += 2000;
+		BrokerEngineTestAccess::clearOutput(*owner);
+		require(db->executeQuery("UPDATE zedas_broker_accounts SET deadline=0 WHERE owner=1"),
+		        "notice advance outbound");
+		faults->stage = trial == 2 ? "notice" : "sale";
+		faults->failure =
+		    trial == 0 ? BrokerFaultConnection::Failure::BeforeCommit : BrokerFaultConnection::Failure::AfterCommit;
+		Broker::tick(*owner, now);
+		now += 2000;
+		require(saleMessages() == 0, "failed/unacknowledged commit never emits sale completion prematurely");
+		if (trial == 0) {
+			require(db->storeQuery("SELECT COUNT(*) AS n FROM zedas_broker_sales WHERE owner=1")
+			                ->getNumber<unsigned>("n") == 0,
+			        "rolled-back sale has no ledger or completion notice");
+			BrokerEngineTestAccess::clearOutput(*owner);
+			Broker::command(*owner, "hire"); // Reconcile, settle successfully and then announce.
+		} else {
+			BrokerEngineTestAccess::clearOutput(*owner);
+			Broker::command(*owner, "balance"); // Only committed ledger is eligible.
+		}
+		require(saleMessages() == (trial == 2 ? 0 : 1),
+		        "confirmed sale announces once, lost notice acknowledgement emits nothing");
+		require(db->storeQuery("SELECT sale_notified FROM zedas_broker_accounts WHERE owner=1")
+		                ->getNumber<unsigned>("sale_notified") == 1,
+		        "sale notice durable claim survives reconciliation");
+		BrokerEngineTestAccess::clearOutput(*owner);
+		Broker::command(*owner, "balance");
+		Broker::command(*owner, "hire");
+		Broker::tick(*owner, now);
+		now += 2000;
+		require(saleMessages() == 0, "replayed settlement/hire/status cannot duplicate summary");
+		require(
+		    db->storeQuery("SELECT COUNT(*) AS n FROM zedas_broker_sales WHERE owner=1")->getNumber<unsigned>("n") ==
+		        trial + 1,
+		    "one committed ledger per trial batch");
+	}
+	Broker::stop(*owner);
+}
 #endif
