@@ -1,0 +1,30 @@
+{
+  "audit_data_sha256": {
+    "config.lua.example": "847cbd118352491b1a4ce03d0e19730f60a737a2ff20d763f56d8819f7c85d7a",
+    "data/world/map.otbm": "4afa6b85543df78989a123172aea9d2c57b4be1c0b3c0e4860233305157cdb22",
+    "data/world/spawns.xml": "b6e9419e05c5eab19f2101feec1964cae15f2583ca731acff750ba30599015ac",
+    "data/zedas/spawns.xml": "793b55a2c0818de0bbac9995462ab178835fa34f52072b67a91d029cf772b3d4"
+  },
+  "audited_runtime_commit": "9100ddf015aac7b57a69ba46af3a1c273861a607",
+  "purpose": "Fail closed if audited runtime or map/config/manifest snapshot changes; re-review architecture, data-specific prose and pilot before deliberately refreshing this contract.",
+  "sha256": {
+    "src/configmanager.cpp": "2223837898b9a8991de3b84f0f79088f1f92581efe974634f2190fae11f3c8c3",
+    "src/easyspawn.cpp": "a50af6b647f1959fa33295d68da078fe4a58b562cdf9cfdaa11c0578fccd228a",
+    "src/easyspawn.h": "8669ff39efe3c632c8166a5c56362340e1cfa3d5be11050912cbcf21315234f7",
+    "src/game.cpp": "a9c97fd2115adfeee4ea27e1a7660e3ce4f9aef710cff6891395d13685139c1a",
+    "src/iomap.cpp": "8962c092d4b7e701cc1c32cdc66bf3102b944c4875c43b7e1bf5a6d66b6c5c8e",
+    "src/iomap.h": "3b4c76bf2e2823d4165ce8672a7e14116de5dc2a2c943c90106ebf2ee904a14b",
+    "src/map.cpp": "c42ffabc00ab5b9a5204a61bad0afc6e7e3088ae7690f3fc41238f2e75bc8686",
+    "src/map.h": "fee71165533a14bde311a4fc99198c9cd7fe3077e58f4d62f37ef1a126073b03",
+    "src/monster.cpp": "8e5febd8a5f5c63a670ce8acc75427425c173176a0a2b337a088debc3ae25987",
+    "src/monsters.cpp": "57626858d913ccec6c5caeb3654d77dd7220089311cbcbc75913691464a917c3",
+    "src/monsters.h": "7ce604d51d1f0656be2f0c9e56c3a638a72f813b27896312f2314819f381df3e",
+    "src/position.h": "9c44aeee2db84d95e263dc1bebe611f10b8ce7f2a101dc49e1bffd938e7594fb",
+    "src/pugicast.h": "86d187312df9649f332ca911ea7698eb37adc08651d5a2d11faa51466d25fdc0",
+    "src/scheduler.cpp": "bc4b85f436af9d0ebb1633dc3b6a88401036f1e4021b7a1e3400cea126af8ccd",
+    "src/scheduler.h": "fa10e8db18944ae3aee23a890e6af0fd854de5d8f66d978d7b870639c2121bf4",
+    "src/spawn.cpp": "b854f2dc6c36296a5673fe247377a590a2562f8c8bc6d525a8f73dda95160251",
+    "src/spawn.h": "b6d2bc1410b46599d6bcea2952ea027651cce4680bde99e28bff657a5bfdaf76",
+    "src/tools.cpp": "963303cddbfaa8f1d7a804e9a09ac9c96028650694818bcfcb9f263a7c79b27b"
+  }
+}
