@@ -1100,6 +1100,7 @@ class Player final : public Creature, public Cylinder
 		friend class Actions;
 		friend class IOLoginData;
 		friend struct BrokerEngineTestAccess;
+        friend struct RespawnCommandTestAccess;
 		friend class ProtocolGame;
 		friend class BehaviourDatabase;
 		friend class ConjureSpell;

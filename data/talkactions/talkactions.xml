@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <talkactions>
+    <talkaction words="!respawn" separator=" " script="easymode/respawn.lua" />
 	<talkaction words="!uh" separator=" " script="easymode/use_consumable.lua" />
 	<talkaction words="!mana" separator=" " script="easymode/use_consumable.lua" />
 	<talkaction words="!explo" separator=" " script="easymode/use_consumable.lua" />

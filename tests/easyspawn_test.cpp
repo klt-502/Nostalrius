@@ -64,8 +64,25 @@ int main(int argc, char** argv)
 	require(timer.nextCheck(100000, 60000) == 30000 && timer.nextCheck(129999, 60000) == 1, "polling reaches adjusted deadline rather than waiting Classic interval");
 	require(timer.isDue(130000), "eligible precisely at sampled deadline");
 	timer.postpone(130000);
-	require(timer.eligibleAt() == 160000 && !timer.isDue(159999) && samples == 0, "nearby player restarts same sampled delay");
+	require(timer.eligibleAt() == 160000 && !timer.isDue(159999) && samples == 0, "explicit test anchor uses sampled delay");
 	require(timer.nextCheck(160001, 60000) == 1000, "obstructed placement cannot create tight retry loop");
+    timer.retry(160000);
+    require(timer.eligibleAt()==165000 && timer.delay()==30000 && samples==0, "blocked player/placement retries in five seconds without resampling");
+    RespawnPolicy globalPolicy;
+    globalPolicy.minimumMs=120000;
+    respawnSettings().percent=50;
+    timer.begin(globalPolicy,600000,1,0,noRandom);
+    require(timer.delay()==300000,"reviewed slot inherits global 50 percent");
+    respawnSettings().percent=33;
+    require(timer.eligibleAt()==300000,"runtime percentage leaves already sampled deadline unchanged");
+    timer.begin(globalPolicy,600000,1,0,noRandom);
+    require(timer.delay()==198000,"next empty cycle inherits new runtime percentage");
+    respawnSettings().percent=1;
+    timer.begin(globalPolicy,600000,1,0,noRandom);
+    require(timer.delay()==120000,"normal minimum is 120 seconds");
+    timer.begin(globalPolicy,60000,1,0,noRandom);
+    require(timer.delay()==60000,"minimum never lengthens a historical interval");
+    respawnSettings().percent=50;
 	timer.clear();
 	require(!timer.isDue(999999) && timer.nextCheck(999999, 60000) == 60000, "successful spawn clears pending state");
 
@@ -125,6 +142,9 @@ int main(int argc, char** argv)
 	}
 	file.write(prefix + validEntry + changed(validEntry, "Rat", "Troll") + suffix);
 	require(manifest.load(file.name, error) && manifest.size() == 2, "different species at same location are independently reviewed");
+    file.write(prefix + changed(validEntry, " intervalPercent=\"50\"", "") + suffix);
+    require(manifest.load(file.name,error) && manifest.find("rat",101,102,7,60000)->intervalPercent==0,
+            "omitted per-slot percentage inherits global; explicit zero remains invalid");
 	file.write(prefix + suffix);
 	require(manifest.load(file.name, error) && manifest.size() == 0, "empty production policy enables no acceleration");
 	require(!manifest.load("/this/manifest/does/not/exist", error) && manifest.size() == 0, "missing policy fails closed");

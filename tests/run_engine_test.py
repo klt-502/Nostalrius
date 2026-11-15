@@ -118,6 +118,7 @@ with tempfile.TemporaryDirectory(prefix="zedas-engine-") as directory:
             (root / "config.lua").write_text(valid + f'\n{key} = "invalid"\n')
             subprocess.run([binary, scenario], cwd=root, check=True)
         for key, values in {
+            "easyModeRespawnPercent": ["0", "101", "1.5", "'50'", "0/0", "true"],
             "easyModeBrokerGraceSeconds": ["4", "241", "5.5", "'45'", "0/0"],
             "easyModeBrokerCommissionBps": ["-1", "10001", "2.5", "'2500'"],
             "easyModeBrokerLeashTiles": ["1", "13", "2.5", "'7'"],

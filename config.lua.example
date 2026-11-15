@@ -11,6 +11,7 @@ easyModeLootSpill = false
 easyModeGoldBag = false
 -- No world spawns change without an exact reviewed manifest entry.
 easyModeRespawn = false
+easyModeRespawnPercent = 50 -- integer 1..100; session overrides do not rewrite this file
 easyModeRespawnPolicyFile = "data/zedas/spawns.xml"
 
 -- NOTE: valid values for worldType are: "pvp", "no-pvp" and "pvp-enforced"

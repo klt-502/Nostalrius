@@ -27,6 +27,7 @@
 class Monster;
 class MonsterType;
 class Npc;
+class Player;
 
 struct spawnBlock_t {
 	Position pos;
@@ -64,6 +65,8 @@ class Spawn
 
 	private:
 		friend struct SpawnTestAccess;
+        friend class Spawns;
+        bool usesEasy() const;
 		//map of the spawned creatures
 		typedef std::multimap<uint32_t, Monster*> SpawnedMap;
 		typedef SpawnedMap::value_type spawned_pair;
@@ -91,6 +94,7 @@ class Spawns
 		static bool isInZone(const Position& centerPos, int32_t radius, const Position& pos);
 
 		bool loadFromXml(const std::string& filename);
+        void command(Player& player, const std::string& text);
 		void startup();
 		void clear();
 

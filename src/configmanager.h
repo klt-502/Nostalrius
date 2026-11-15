@@ -120,6 +120,7 @@ class ConfigManager
 			EASY_MODE_BROKER_COMMISSION_BPS,
 			EASY_MODE_BROKER_LEASH_TILES,
 
+			EASY_MODE_RESPAWN_PERCENT,
 			LAST_INTEGER_CONFIG /* this must be the last one */
 		};
 

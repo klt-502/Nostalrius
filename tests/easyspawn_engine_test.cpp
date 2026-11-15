@@ -108,7 +108,10 @@ static void writeFixture(const std::string& filename, const std::string& text)
 	check(file.good(), "write native respawn fixture in throwaway data directory");
 }
 
-static void testActualSpawnLoading()
+struct RespawnCommandTestAccess {
+    static void account(Player& player, AccountType_t type) { player.accountType=type; }
+};
+static void testActualSpawnLoading(Player& observer)
 {
 	// The legacy ConfigManager default overrides XML times with one second.
 	// Exercise matching against the actual 60-second XML interval explicitly.
@@ -145,7 +148,24 @@ static void testActualSpawnLoading()
 		check(getRandomGenerator() == beforeLoad, "manifest/world loading consumes no respawn RNG");
 		check(diagnostics.str().find(policy == 0 ? "policy disabled" : policy == 1 ? "contains 0" : "contains 1") != std::string::npos,
 		      "actual world loader reads and diagnoses configured missing/empty/exact manifest");
-		world.startup();
+        check(EasyMode::respawnSettings().reviewed==size_t(policy==2),"loader counts exact reviewed slots only");
+        if (policy==2) {
+            auto& runtime=EasyMode::respawnSettings();
+            world.command(observer,"33");
+            check(runtime.percent==50,"ordinary player cannot change global percentage");
+            Group admin={"Admin",0,0,0,9,true};
+            auto oldGroup=observer.getGroup();
+            observer.setGroup(&admin); RespawnCommandTestAccess::account(observer,ACCOUNT_TYPE_GAMEMASTER);
+            for (const std::string& bad : {"0","101","-1","33.5","1e1"," 50","50 on","999999999"}) {
+                world.command(observer,bad); check(runtime.percent==50,"malformed runtime percentage rejected");
+            }
+            world.command(observer,"33"); check(runtime.percent==33,"admin runtime percentage accepted");
+            world.command(observer,"off"); check(!runtime.enabled,"admin off disables Easy machinery");
+            world.command(observer,"on"); check(runtime.enabled,"admin on reenables reviewed machinery");
+            world.command(observer,"50"); check(runtime.percent==50,"restore test global percentage");
+            observer.setGroup(oldGroup); RespawnCommandTestAccess::account(observer,ACCOUNT_TYPE_NORMAL);
+        }
+        world.startup();
 		CreatureVector* creatures = g_game.map.getTile(106, 104, 7)->getCreatures();
 		Monster* monster = nullptr;
 		if (creatures) for (Creature* creature : *creatures) if (creature->getMonster()) monster = creature->getMonster();
@@ -160,6 +180,7 @@ static void testActualSpawnLoading()
 	Spawn reviewed(Position(106, 104, 7), 1);
 	check(reviewed.addMonster("Fixture Rat", Position(106, 104, 7), DIRECTION_NORTH, 60000, &timing) &&
 	      SpawnTestAccess::block(reviewed).easyRespawn, "actual addMonster accepts explicit ordinary hostile policy");
+    check(SpawnTestAccess::block(reviewed).easyPolicy.minimumMs==120000,"real reviewed slots enforce 120-second minimum");
 	Spawn unsafe(Position(107, 104, 7), 1);
 	check(unsafe.addMonster("Fixture Passive", Position(107, 104, 7), DIRECTION_NORTH, 60000, &timing) &&
 	      !SpawnTestAccess::block(unsafe).easyRespawn, "actual addMonster refuses non-hostile slot despite explicit policy");
@@ -195,6 +216,8 @@ void testRespawnEngine(Player& observer)
 	SpawnTestAccess::poll(eligible);
 	check(!SpawnTestAccess::creature(eligible) && block.easyDeadline.eligibleAt() > OTSYS_TIME(),
 	      "real nearby player suppresses an eligible replacement");
+    check(block.easyDeadline.eligibleAt()-OTSYS_TIME()<=5000 && block.easyDeadline.eligibleAt()-OTSYS_TIME()>4000,
+          "actual nearby player retries in five seconds rather than full sampled duration");
 	check(block.easyDeadline.delay() == 30000,
 	      "nearby player suppression preserves already sampled duration");
 	check(g_game.internalTeleport(&observer, Position(88, 100, 7)) == RETURNVALUE_NOERROR,
@@ -232,5 +255,5 @@ void testRespawnEngine(Player& observer)
 	classic.cleanup();
 	testClassicRandomCalls(classic);
 	g_game.cleanup();
-	testActualSpawnLoading();
+	testActualSpawnLoading(observer);
 }

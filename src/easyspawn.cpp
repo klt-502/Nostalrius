@@ -8,6 +8,7 @@
 #include <pugixml.hpp>
 
 namespace EasyMode {
+RespawnSettings& respawnSettings() { static RespawnSettings value; return value; }
 namespace {
 std::string normalizedName(std::string name)
 {
@@ -110,7 +111,7 @@ bool RespawnManifest::load(const std::string& filename, std::string& error)
 		    !number(node, "y", 0, 65535, y, error) ||
 		    !number(node, "z", 0, 15, z, error) ||
 		    !number(node, "baseSeconds", 2, std::numeric_limits<int32_t>::max() / 1000, seconds, error) ||
-		    !number(node, "intervalPercent", 1, 100, entry.policy.intervalPercent, error) ||
+		    !number(node, "intervalPercent", 1, 100, entry.policy.intervalPercent, error, true) ||
 		    !number(node, "minSeconds", 2, seconds, entry.policy.minimumMs, error) ||
 		    !number(node, "populationFloor", 0, 10000, entry.policy.populationFloor, error, true)) {
 			return false;
@@ -149,7 +150,7 @@ void RespawnDeadline::begin(const RespawnPolicy& policy, uint32_t interval, size
 		duration = populationRespawnInterval(interval, std::max(playersOnline, static_cast<size_t>(policy.populationFloor)));
 		duration = random(duration / 2, duration);
 	}
-	duration = static_cast<uint64_t>(duration) * policy.intervalPercent / 100;
+	duration = static_cast<uint64_t>(duration) * (policy.intervalPercent ? policy.intervalPercent : respawnSettings().percent) / 100;
 	sampledDelay = std::min(interval, std::max(duration, policy.minimumMs));
 	pending = true;
 	deadline = after(now, sampledDelay);

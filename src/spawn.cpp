@@ -24,6 +24,7 @@
 #include "monster.h"
 #include "configmanager.h"
 #include "scheduler.h"
+#include "player.h"
 
 #include "pugicast.h"
 
@@ -50,10 +51,16 @@ bool Spawns::loadFromXml(const std::string& filename)
 	loaded = true;
 
 	EasyMode::RespawnManifest easyManifest;
-	if (g_config.getBoolean(ConfigManager::EASY_MODE_ENABLED) && g_config.getBoolean(ConfigManager::EASY_MODE_RESPAWN)) {
+    std::map<const EasyMode::RespawnPolicy*, size_t> matchedPolicies;
+    auto& settings = EasyMode::respawnSettings();
+    settings = {};
+    settings.enabled = g_config.getBoolean(ConfigManager::EASY_MODE_ENABLED) && g_config.getBoolean(ConfigManager::EASY_MODE_RESPAWN);
+    settings.percent = g_config.getNumber(ConfigManager::EASY_MODE_RESPAWN_PERCENT);
+	if (g_config.getBoolean(ConfigManager::EASY_MODE_ENABLED)) {
 		std::string error;
 		const std::string& policyFile = g_config.getString(ConfigManager::EASY_MODE_RESPAWN_POLICY_FILE);
 		if (!easyManifest.load(policyFile, error)) {
+            settings.valid = false; settings.enabled = false; settings.rejected = 1;
 			std::cout << "[Warning - Spawns::loadFromXml] Easy respawn policy disabled: " << policyFile << ": " << error << std::endl;
 		} else {
 			std::cout << "[Spawns::loadFromXml] Easy respawn policy contains " << easyManifest.size() << " explicitly classified slots." << std::endl;
@@ -103,13 +110,10 @@ bool Spawns::loadFromXml(const std::string& filename)
 				uint32_t interval = pugi::cast<uint32_t>(childNode.attribute("spawntime").value()) * 1000;
 				if (interval > MINSPAWN_INTERVAL) {
 					uint32_t exInterval = g_config.getNumber(ConfigManager::RATE_SPAWN);
-					if (exInterval) {
-						spawn.addMonster(nameAttribute.as_string(), pos, dir, exInterval * 1000,
-						    easyManifest.find(nameAttribute.as_string(), pos.x, pos.y, pos.z, exInterval * 1000));
-					} else {
-						spawn.addMonster(nameAttribute.as_string(), pos, dir, interval,
-						    easyManifest.find(nameAttribute.as_string(), pos.x, pos.y, pos.z, interval));
-					}
+                    const uint32_t base = exInterval ? exInterval * 1000 : interval;
+                    const auto* policy = easyManifest.find(nameAttribute.as_string(),pos.x,pos.y,pos.z,base);
+                    if (spawn.addMonster(nameAttribute.as_string(),pos,dir,base,policy) && policy &&
+                        spawn.spawnMap.rbegin()->second.easyRespawn) ++matchedPolicies[policy];
 				} else {
 					std::cout << "[Warning - Spawns::loadFromXml] " << nameAttribute.as_string() << ' ' << pos << " spawntime can not be less than " << MINSPAWN_INTERVAL / 1000 << " seconds." << std::endl;
 				}
@@ -138,6 +142,21 @@ bool Spawns::loadFromXml(const std::string& filename)
 			}
 		}
 	}
+    if (settings.valid) {
+        for (const auto& match : matchedPolicies) {
+            if (match.second != 1) { settings.valid=false; settings.enabled=false; }
+        }
+        if (settings.valid) {
+            settings.reviewed=matchedPolicies.size();
+            settings.rejected=easyManifest.size()-settings.reviewed;
+        } else {
+            settings.reviewed=0; settings.rejected=easyManifest.size();
+            std::cout << "[Warning - Spawns::loadFromXml] Ambiguous duplicate source slots; Easy policy disabled." << std::endl;
+        }
+    }
+    std::cout << "[Easy respawn] " << (settings.enabled ? "ON" : "OFF") << "; rate " << settings.percent
+              << "% of historical; normal minimum 120 sec; reviewed " << settings.reviewed
+              << "; rejected/errors " << settings.rejected << "; valid " << settings.valid << std::endl;
 	return true;
 }
 
@@ -186,7 +205,7 @@ void Spawn::startSpawnCheck()
 	if (checkSpawnEvent == 0) {
 		// The disappearance callback precedes isRemoved(). Inspect eligible slots
 		// promptly; Classic slots retain exactly their historical first poll.
-		const uint32_t delay = hasEasyRespawn ? std::min(getInterval(), static_cast<uint32_t>(1000)) : getInterval();
+		const uint32_t delay = usesEasy() ? std::min(getInterval(), static_cast<uint32_t>(1000)) : getInterval();
 		checkSpawnEvent = g_scheduler.addEvent(createSchedulerTask(delay, std::bind(&Spawn::checkSpawn, this)));
 	}
 }
@@ -285,17 +304,17 @@ void Spawn::checkSpawn()
 		}
 
 		spawnBlock_t& sb = it.second;
-		if (sb.easyRespawn) {
+		if (sb.easyRespawn && usesEasy()) {
 			if (!sb.easyDeadline.isPending()) {
 				sb.easyDeadline.begin(sb.easyPolicy, sb.interval, g_game.getPlayersOnline(), OTSYS_TIME(), normal_random);
 			}
 			if (sb.easyDeadline.isDue(OTSYS_TIME())) {
 				if (findPlayer(sb.pos)) {
 					sb.lastSpawn = OTSYS_TIME();
-					sb.easyDeadline.postpone(sb.lastSpawn);
+					sb.easyDeadline.retry(sb.lastSpawn);
 				} else {
-					spawnMonster(spawnId, sb.mType, sb.pos, sb.direction);
-				}
+                    if (!spawnMonster(spawnId, sb.mType, sb.pos, sb.direction)) sb.easyDeadline.retry(OTSYS_TIME());
+                }
 			}
 			continue;
 		}
@@ -318,7 +337,7 @@ uint32_t Spawn::nextSpawnCheck() const
 {
 	// Preserve getInterval's call count and RNG use for every Classic-only Spawn.
 	uint32_t delay = getInterval();
-	if (hasEasyRespawn) {
+	if (usesEasy()) {
 		const int64_t now = OTSYS_TIME();
 		for (const auto& it : spawnMap) {
 			if (it.second.easyRespawn && spawnedMap.find(it.first) == spawnedMap.end()) {
@@ -339,7 +358,7 @@ void Spawn::cleanup()
 			if (spawnId != 0) {
 				spawnBlock_t& sb = spawnMap[spawnId];
 				sb.lastSpawn = OTSYS_TIME();
-				if (sb.easyRespawn && !sb.easyDeadline.isPending()) {
+				if (sb.easyRespawn && usesEasy() && !sb.easyDeadline.isPending()) {
 					sb.easyDeadline.begin(sb.easyPolicy, sb.interval, g_game.getPlayersOnline(), sb.lastSpawn, normal_random);
 				}
 			}
@@ -374,6 +393,7 @@ bool Spawn::addMonster(const std::string& name, const Position& pos, Direction d
 	if (easyPolicy && mType->info.isHostile && mType->info.isAttackable) {
 		sb.easyRespawn = true;
 		sb.easyPolicy = *easyPolicy;
+        sb.easyPolicy.minimumMs = std::max(sb.easyPolicy.minimumMs, uint32_t(120000));
 		hasEasyRespawn = true;
 	}
 
@@ -389,7 +409,7 @@ void Spawn::removeMonster(Monster* monster)
 			const auto block = spawnMap.find(it->first);
 			monster->decrementReferenceCounter();
 			spawnedMap.erase(it);
-			if (hasEasyRespawn && block != spawnMap.end() && block->second.easyRespawn) {
+			if (usesEasy() && block != spawnMap.end() && block->second.easyRespawn) {
 				spawnBlock_t& sb = block->second;
 				sb.lastSpawn = OTSYS_TIME();
 				sb.easyDeadline.begin(sb.easyPolicy, sb.interval, g_game.getPlayersOnline(), sb.lastSpawn, normal_random);
@@ -406,4 +426,55 @@ void Spawn::stopEvent()
 		g_scheduler.stopEvent(checkSpawnEvent);
 		checkSpawnEvent = 0;
 	}
+}
+
+bool Spawn::usesEasy() const
+{
+    const auto& settings = EasyMode::respawnSettings();
+    return hasEasyRespawn && settings.enabled && settings.valid && g_config.getBoolean(ConfigManager::EASY_MODE_ENABLED);
+}
+void Spawns::command(Player& player, const std::string& text)
+{
+    auto reply = [&](const std::string& value) { player.sendTextMessage(MESSAGE_STATUS_DEFAULT, value); };
+    if (!g_config.getBoolean(ConfigManager::EASY_MODE_ENABLED) || !g_config.getBoolean(ConfigManager::EASY_MODE_COMMANDS)) {
+        reply("Easy Mode commands are disabled."); return;
+    }
+    auto& settings = EasyMode::respawnSettings();
+    if (text == "status" || text.empty()) {
+        reply(std::string("Easy respawn: ") + (settings.enabled && settings.valid ? "ON" : "OFF") +
+              ". Rate: " + std::to_string(settings.percent) + "% of historical interval. Reviewed slots: " +
+              std::to_string(settings.reviewed) + ". Rejected/errors: " + std::to_string(settings.rejected) +
+              ". Normal minimum: 120 sec. Session settings; restart restores config defaults."); return;
+    }
+    if (!player.getGroup()->access || player.getAccountType() < ACCOUNT_TYPE_GAMEMASTER) {
+        reply("Only GM/admin accounts may modify Easy respawn."); return;
+    }
+    if (!loaded || !settings.valid) { reply("Easy respawn policy unavailable/invalid; restart with a valid manifest."); return; }
+    if (text == "on" || text == "off") {
+        const bool enabled = text == "on";
+        if (enabled != settings.enabled) {
+            settings.enabled = enabled;
+            for (auto& spawn : spawnList) {
+                if (!spawn.hasEasyRespawn) continue;
+                spawn.stopEvent();
+                for (auto& entry : spawn.spawnMap) {
+                    auto& sb = entry.second;
+                    if (sb.easyRespawn && spawn.spawnedMap.find(entry.first) == spawn.spawnedMap.end()) {
+                        sb.easyDeadline.clear(); sb.lastSpawn = OTSYS_TIME();
+                    }
+                }
+                if (spawn.spawnedMap.size() < spawn.spawnMap.size()) spawn.startSpawnCheck();
+            }
+        }
+    } else {
+        unsigned value = 0;
+        if (text.empty() || text.size() > 3) { reply("Use !respawn status, on, off, or an integer 1-100."); return; }
+        for (char c : text) {
+            if (c < '0' || c > '9') { reply("Respawn percentage must be an integer 1-100."); return; }
+            value = value*10+c-'0';
+        }
+        if (!value || value > 100) { reply("Respawn percentage must be an integer 1-100."); return; }
+        settings.percent = value;
+    }
+    reply("Easy respawn session setting updated. Existing monsters and sampled percentage deadlines are retained; mode transitions rearm missing slots. Restart restores config defaults.");
 }

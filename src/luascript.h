@@ -863,6 +863,7 @@ class LuaScriptInterface
 
 		static int luaPlayerGetMoney(lua_State* L);
 		static int luaPlayerBrokerCommand(lua_State* L);
+        static int luaPlayerRespawnCommand(lua_State* L);
 		static int luaPlayerUseEasyModeItem(lua_State* L);
 		static int luaPlayerSetEasyModeAutoTarget(lua_State* L);
 		static int luaPlayerIsEasyModeAutoTargetActive(lua_State* L);

@@ -83,6 +83,7 @@ bool ConfigManager::load()
 			int value, low, high;
 		};
 		BrokerNumber brokerNumbers[] = {
+            {"easyModeRespawnPercent", EASY_MODE_RESPAWN_PERCENT, 50, 1, 100},
 		    {"easyModeBrokerGraceSeconds", EASY_MODE_BROKER_GRACE_SECONDS, 45, 5, 240},
 		    {"easyModeBrokerCommissionBps", EASY_MODE_BROKER_COMMISSION_BPS, 2500, 0, 10000},
 		    {"easyModeBrokerLeashTiles", EASY_MODE_BROKER_LEASH_TILES, 7, 2, 12}};

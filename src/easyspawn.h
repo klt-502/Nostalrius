@@ -11,10 +11,17 @@ namespace EasyMode {
 
 // Policies are opt-in for one reviewed world-spawn slot, never a monster species.
 struct RespawnPolicy {
-	uint32_t intervalPercent = 100;
-	uint32_t minimumMs = 2000;
+	uint32_t intervalPercent = 0; // Zero inherits the runtime global percentage.
+	uint32_t minimumMs = 120000;
 	uint32_t populationFloor = 0; // Zero leaves population scaling/randomness disabled.
 };
+
+struct RespawnSettings {
+    bool enabled = true, valid = true;
+    uint32_t percent = 50;
+    size_t reviewed = 0, rejected = 0;
+};
+RespawnSettings& respawnSettings();
 
 class RespawnManifest
 {
@@ -48,7 +55,8 @@ class RespawnDeadline
 		using Random = std::function<int32_t(int32_t, int32_t)>;
 		void begin(const RespawnPolicy& policy, uint32_t interval, size_t playersOnline,
 		           int64_t now, const Random& random);
-		void postpone(int64_t now);
+		void postpone(int64_t now); // Test/manual deadline anchor using sampled delay.
+        void retry(int64_t now) { if (pending) deadline = now > INT64_MAX-5000 ? INT64_MAX : now+5000; }
 		void clear() { pending = false; }
 		bool isPending() const { return pending; }
 		bool isDue(int64_t now) const { return pending && now >= deadline; }
