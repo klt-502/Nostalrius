@@ -33,7 +33,7 @@ Insufficient capacity/space fails with no ground fallback. GM creation:
 /i 3046,1,65006
 ```
 
-Normal NPCs buy ordinary Magic Light Wands (e.g. 35 gp in Haroun/Alesar data).
+Normal NPCs buy ordinary Magic Light Wands (35 gp in `data/npc/haroun.npc`; its sale uses `Count(Type)` before `Delete(Type)`).
 A free grant must not become a repeated sale source. While the light feature is
 enabled, native NPC Count/Delete paths exclude only exact marked wands, and remove
 ordinary wands explicitly. Both checks are necessary: counting only ordinary
