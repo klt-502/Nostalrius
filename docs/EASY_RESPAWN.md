@@ -5,6 +5,12 @@ shipped policy, `data/zedas/spawns.xml`, is empty: enabling the feature alone
 accelerates nothing. It changes no monster definitions, world-spawn data, raids,
 loot rates, experience, or skills.
 
+The current world data and the distinction between slot eligibility and polling
+are audited in [SPAWN_AUDIT.md](SPAWN_AUDIT.md), with regenerable CSV/JSON matrices.
+In particular, ordinary loading caps the polling member at 60 seconds, making
+the Classic `getInterval()` population branch unreachable for this world.
+That audit activates no policy.
+
 ## Startup configuration
 
 | Option | Default | Meaning |

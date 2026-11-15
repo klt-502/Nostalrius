@@ -97,6 +97,10 @@ if(BUILD_TESTING)
 endif()
 
 if(BUILD_TESTING)
+    add_test(NAME spawn_matrix_extraction COMMAND ${PYTHON_EXECUTABLE} -B -m unittest
+        discover -s ${CMAKE_SOURCE_DIR}/tests/audit -p test_spawn_matrix.py)
+    add_test(NAME spawn_matrix_regeneration COMMAND ${PYTHON_EXECUTABLE} -B
+        ${CMAKE_SOURCE_DIR}/tests/audit/spawn_matrix.py --check)
     add_test(NAME npc_catalog_source_audit COMMAND ${PYTHON_EXECUTABLE}
         ${CMAKE_SOURCE_DIR}/tests/audit/check_broker_catalog.py ${CMAKE_SOURCE_DIR})
 endif()
