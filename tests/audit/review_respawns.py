@@ -54,12 +54,18 @@ def draft(rows, ids, evidence):
     if len(ids) != len(set(ids)) or not ids:
         raise ValueError("provide distinct explicit source-slot IDs")
     selected = {r["slot_id"]: r for r in rows}
+    def key(row):
+        return (row["monster"].lower(), row["x"], row["y"], row["z"], row["spawntime_seconds"])
+    from collections import Counter
+    matches = Counter(key(row) for row in rows)
     xml = ET.Element("easyspawns", version="1")
     xml.append(ET.Comment(" DRAFT ONLY: requires separate encounter review and production promotion "))
     for slot in sorted(ids):
         if not re.fullmatch(r"G[0-9]{5}/C[0-9]{2,}", slot) or slot not in selected:
             raise ValueError("unknown source slot: " + slot)
         row = selected[slot]
+        if matches[key(row)] != 1:
+            raise ValueError("ambiguous exact world slot requires separate review: " + slot)
         # Necessary safety conditions, never evidence of ordinariness.
         if not row["hostile"] or not row["attackable"]:
             raise ValueError("non-hostile/non-attackable source slot: " + slot)

@@ -24,7 +24,8 @@ even for marked wands. Duration/Action-ID persistence uses existing item storage
 
 `!light` in local chat, without parameters, grants one unlit marked wand when
 `easyModeCommands` is also enabled. It is a convenience grant, not a light spell
-or auto-use. Exact marked lit/unlit wands anywhere in carried nested containers
+or auto-use. Equip and use the wand as usual: native player light scans direct
+inventory slots, not items inside bags. Exact marked lit/unlit wands anywhere in carried nested containers
 (including trade inventory) suppress another grant. Ordinary wands never qualify.
 Insufficient capacity/space fails with no ground fallback. GM creation:
 

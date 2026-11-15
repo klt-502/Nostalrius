@@ -42,7 +42,9 @@ Runtime changes are **session-only**; restart restores `config.lua`. No file is
 rewritten. Percentage changes apply when the next missing-slot deadline is
 sampled; existing sampled deadlines and live monsters are untouched. Mode changes
 rearm missing reviewed slots once from the transition time; repeated on/off with
-no state change does nothing. Unclassified slot timestamps remain untouched.
+no state change does nothing. Unclassified slot timestamps remain untouched. Transitions first clean removed
+occupants before checking missing slot IDs, so a death awaiting its queued check
+cannot leave a slot unscheduled.
 
 ## Exact-slot policies and timing
 

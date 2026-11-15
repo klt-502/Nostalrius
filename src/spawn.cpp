@@ -457,13 +457,17 @@ void Spawns::command(Player& player, const std::string& text)
             for (auto& spawn : spawnList) {
                 if (!spawn.hasEasyRespawn) continue;
                 spawn.stopEvent();
+                // A death callback may be queued before cleanup releases the occupant.
+                spawn.cleanup();
+                bool missing = false;
                 for (auto& entry : spawn.spawnMap) {
                     auto& sb = entry.second;
-                    if (sb.easyRespawn && spawn.spawnedMap.find(entry.first) == spawn.spawnedMap.end()) {
-                        sb.easyDeadline.clear(); sb.lastSpawn = OTSYS_TIME();
+                    if (spawn.spawnedMap.find(entry.first) == spawn.spawnedMap.end()) {
+                        missing = true;
+                        if (sb.easyRespawn) { sb.easyDeadline.clear(); sb.lastSpawn = OTSYS_TIME(); }
                     }
                 }
-                if (spawn.spawnedMap.size() < spawn.spawnMap.size()) spawn.startSpawnCheck();
+                if (missing) spawn.startSpawnCheck();
             }
         }
     } else {

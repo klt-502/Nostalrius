@@ -103,6 +103,7 @@ class Spawns
 		}
 
 	private:
+		friend struct SpawnTestAccess;
 		std::forward_list<Npc*> npcList;
 		std::forward_list<Spawn> spawnList;
 		std::string filename;

@@ -23,6 +23,7 @@ static void check(bool condition, const char* message)
 }
 
 struct SpawnTestAccess {
+    static Spawn& first(Spawns& world) { return world.spawnList.front(); }
 	static void insert(Spawn& spawn, MonsterType& type, const Position& position,
 	                   const EasyMode::RespawnPolicy* policy)
 	{
@@ -156,7 +157,7 @@ static void testActualSpawnLoading(Player& observer)
             Group admin={"Admin",0,0,0,9,true};
             auto oldGroup=observer.getGroup();
             observer.setGroup(&admin); RespawnCommandTestAccess::account(observer,ACCOUNT_TYPE_GAMEMASTER);
-            for (const std::string& bad : {"0","101","-1","33.5","1e1"," 50","50 on","999999999"}) {
+            for (const std::string bad : {"0","101","-1","33.5","1e1"," 50","50 on","999999999"}) {
                 world.command(observer,bad); check(runtime.percent==50,"malformed runtime percentage rejected");
             }
             world.command(observer,"33"); check(runtime.percent==33,"admin runtime percentage accepted");
@@ -171,6 +172,32 @@ static void testActualSpawnLoading(Player& observer)
 		if (creatures) for (Creature* creature : *creatures) if (creature->getMonster()) monster = creature->getMonster();
 		check(monster && monster->getName() == "Fixture Rat", "actual XML world slot creates intended monster");
 		check(g_game.removeCreature(monster), "remove actual XML-loaded fixture monster");
+        if (policy==2) {
+            Spawn& slot=SpawnTestAccess::first(world);
+            check(SpawnTestAccess::creature(slot) && SpawnTestAccess::creature(slot)->isRemoved(),
+                  "death is still awaiting queued cleanup before runtime transition");
+            Group admin={"Admin",0,0,0,9,true}; auto oldGroup=observer.getGroup();
+            observer.setGroup(&admin); RespawnCommandTestAccess::account(observer,ACCOUNT_TYPE_GAMEMASTER);
+            world.command(observer,"off");
+            check(!SpawnTestAccess::creature(slot),"off transition cleans removed occupant before deciding whether to reschedule");
+            world.command(observer,"on");
+            auto& sb=SpawnTestAccess::block(slot); sb.interval=600000; sb.easyPolicy.intervalPercent=0;
+            SpawnTestAccess::poll(slot);
+            check(sb.easyDeadline.isPending() && sb.easyDeadline.delay()==300000,"transition rearms empty reviewed slot");
+            const auto pending=sb.easyDeadline.eligibleAt();
+            world.command(observer,"on"); world.command(observer,"33");
+            check(sb.easyDeadline.eligibleAt()==pending && sb.easyDeadline.delay()==300000,
+                  "idempotent on and runtime percentage retain actual pending deadline");
+            sb.easyDeadline.postpone(OTSYS_TIME()-300001); SpawnTestAccess::poll(slot);
+            Monster* next=SpawnTestAccess::creature(slot);
+            check(next && !next->isRemoved(),"mode transition produces one replacement");
+            world.command(observer,"50"); world.command(observer,"33"); SpawnTestAccess::poll(slot);
+            check(SpawnTestAccess::creature(slot)==next,"percentage changes do not replace or duplicate live monster");
+            check(g_game.removeCreature(next),"remove runtime fixture replacement"); SpawnTestAccess::poll(slot);
+            check(sb.easyDeadline.delay()==198000,"next real empty cycle uses new global 33 percent");
+            observer.setGroup(oldGroup); RespawnCommandTestAccess::account(observer,ACCOUNT_TYPE_NORMAL);
+        }
+
 		world.clear();
 		g_game.cleanup();
 	}

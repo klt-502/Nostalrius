@@ -20,5 +20,10 @@ class ReviewTests(unittest.TestCase):
         self.assertEqual(slot.get('minSeconds'), '120')
         for ids in (['G99999/C01'], ['G08455/C01'] * 2):
             with self.assertRaises(ValueError): review.draft(self.rows, ids, 'TEST ONLY')
+    def test_ambiguous_source_slots_cannot_be_promoted(self):
+        first = dict(next(r for r in self.rows if r['slot_id'] == 'G08455/C01'))
+        second = dict(first, slot_id='G99999/C01')
+        with self.assertRaises(ValueError):
+            review.draft([first, second], ['G08455/C01'], 'TEST ONLY')
     def test_production_is_empty(self):
         self.assertEqual(len(ET.parse(review.ROOT/'data/zedas/spawns.xml').getroot()), 0)
