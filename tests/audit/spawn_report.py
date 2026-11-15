@@ -11,15 +11,18 @@ def render(b):
         return "| "+" | ".join(headers)+" |\n| "+" | ".join("---" for _ in headers)+" |\n"+"".join("| "+" | ".join(str(v).replace('|','\\|') for v in row)+" |\n" for row in data)+"\n"
     text=f'''# Historical world-spawn matrix and respawn audit
 
-**Data audit only. No spawn definitions, map, configuration defaults, runtime code or
-Easy manifest were changed. No proposed policy below is active.**
+**Historical snapshot audit at 9100ddf. The original audit changed no gameplay.
+Later runtime mechanics are documented in [EASY_RESPAWN.md](EASY_RESPAWN.md).
+No proposed area below has been encounter-verified or activated.**
 
 The runtime source was inspected at `{b['audited_runtime_commit']}` on
 `zedas-easy-mode`. Input SHA-256 hashes, all source groups, monster definitions,
 flag provenance, diagnostics, cluster membership and proposed pilot membership
 are recorded in [SPAWN_MATRIX.json](SPAWN_MATRIX.json). The runtime contract makes
-regeneration fail if the inspected engine or audited map/config/manifest snapshot
-changes without a new review of source semantics, data-specific prose and pilot.
+default regeneration fail if the inspected snapshot changes. Use
+`python3 tests/audit/spawn_matrix.py --historical --check` to regenerate this frozen
+audit from its pinned Git source/config snapshot; world map/XML hashes must still
+match. This does not describe subsequent runtime modifications.
 There is no generated timestamp or moving HEAD hash, so unchanged inputs produce
 byte-identical artifacts.
 

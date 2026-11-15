@@ -16,6 +16,9 @@ import re
 import statistics
 import struct
 import sys
+import subprocess
+import tarfile
+import tempfile
 sys.dont_write_bytecode = True
 from xml.parsers import expat
 
@@ -387,6 +390,28 @@ def collect(root):
             "groups":groups,"summary":summary,"rows":[[r[c] for c in COLUMNS] for r in rows]}
 
 
+def collect_historical(root):
+    """Regenerate the frozen 9100ddf audit, never reinterpret changed runtime code."""
+    contract=json.loads((root/"tests/audit/spawn_runtime_contract.json").read_text())
+    revision=contract["audited_runtime_commit"]
+    paths=sorted(set(contract["sha256"]) | {"config.lua.example", "data/monster", "data/zedas/spawns.xml"})
+    archive=subprocess.run(["git", "-C", str(root), "archive", revision, "--", *paths],
+                           check=True, stdout=subprocess.PIPE).stdout
+    with tempfile.TemporaryDirectory(prefix="zedas-historical-spawns-") as directory:
+        snapshot=Path(directory)
+        with tarfile.open(fileobj=io.BytesIO(archive)) as stream:
+            for member in stream.getmembers():
+                if member.issym() or member.islnk() or not (snapshot/member.name).resolve().is_relative_to(snapshot):
+                    raise AuditError("unsafe historical archive entry")
+            stream.extractall(snapshot, filter="data")
+        (snapshot/"tests/audit").mkdir(parents=True)
+        (snapshot/"tests/audit/spawn_runtime_contract.json").write_text(json.dumps(contract))
+        (snapshot/"data/world").mkdir()
+        for name in ("map.otbm", "spawns.xml"):
+            (snapshot/"data/world"/name).symlink_to((root/"data/world"/name).resolve())
+        return collect(snapshot)
+
+
 def outputs(bundle):
     out=io.StringIO(newline="");writer=csv.writer(out,lineterminator="\n");writer.writerow(COLUMNS)
     for row in bundle["rows"]:writer.writerow([str(x).lower() if isinstance(x,bool) else x for x in row])
@@ -413,9 +438,10 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root",type=Path,default=ROOT)
     parser.add_argument("--check",action="store_true",help="validate/rebuild in memory and reject stale checked-in artifacts")
+    parser.add_argument("--historical", action="store_true", help="rebuild frozen audit using its pinned Git runtime/config snapshot; world hashes must still match")
     args=parser.parse_args()
     try:
-        bundle=collect(args.root.resolve());generated=outputs(bundle);validate_encoded(bundle,generated)
+        bundle=(collect_historical if args.historical else collect)(args.root.resolve());generated=outputs(bundle);validate_encoded(bundle,generated)
         for name,text in generated.items():
             path=args.root/name
             if args.check:

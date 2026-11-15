@@ -1,0 +1,955 @@
+slot_id,review_status,verification_priority,monster,x,y,z,spawntime_seconds,source_file,source_group_index,source_child_index,hold_reason
+G08455/C01,UNVERIFIED_DO_NOT_ACTIVATE,first proposed room,dwarf,32597,31925,14,600,data/world/spawns.xml,8455,1,encounter-level verification required
+G08455/C02,UNVERIFIED_DO_NOT_ACTIVATE,first proposed room,dwarf,32598,31926,14,600,data/world/spawns.xml,8455,2,encounter-level verification required
+G08455/C03,UNVERIFIED_DO_NOT_ACTIVATE,first proposed room,dwarf soldier,32596,31927,14,600,data/world/spawns.xml,8455,3,encounter-level verification required
+G08455/C04,UNVERIFIED_DO_NOT_ACTIVATE,first proposed room,dwarf,32597,31927,14,600,data/world/spawns.xml,8455,4,encounter-level verification required
+G08455/C05,UNVERIFIED_DO_NOT_ACTIVATE,first proposed room,dwarf guard,32601,31928,14,600,data/world/spawns.xml,8455,5,encounter-level verification required
+G08455/C06,UNVERIFIED_DO_NOT_ACTIVATE,first proposed room,dwarf guard,32603,31929,14,600,data/world/spawns.xml,8455,6,encounter-level verification required
+G08455/C07,UNVERIFIED_DO_NOT_ACTIVATE,first proposed room,dwarf,32598,31930,14,600,data/world/spawns.xml,8455,7,encounter-level verification required
+G08455/C08,UNVERIFIED_DO_NOT_ACTIVATE,first proposed room,dwarf soldier,32600,31930,14,600,data/world/spawns.xml,8455,8,encounter-level verification required
+G08455/C09,UNVERIFIED_DO_NOT_ACTIVATE,first proposed room,dwarf soldier,32598,31931,14,600,data/world/spawns.xml,8455,9,encounter-level verification required
+G08455/C10,UNVERIFIED_DO_NOT_ACTIVATE,first proposed room,dwarf,32601,31932,14,600,data/world/spawns.xml,8455,10,encounter-level verification required
+G00003/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32588,31926,1,600,data/world/spawns.xml,3,1,encounter-level verification required
+G00003/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32586,31927,1,600,data/world/spawns.xml,3,2,encounter-level verification required
+G00003/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32587,31927,1,600,data/world/spawns.xml,3,3,encounter-level verification required
+G00003/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32589,31927,1,600,data/world/spawns.xml,3,4,encounter-level verification required
+G00003/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32584,31928,1,600,data/world/spawns.xml,3,5,encounter-level verification required
+G00022/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32588,31924,2,600,data/world/spawns.xml,22,1,encounter-level verification required
+G00022/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32587,31925,2,600,data/world/spawns.xml,22,2,encounter-level verification required
+G00022/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32589,31926,2,600,data/world/spawns.xml,22,3,encounter-level verification required
+G00022/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32586,31928,2,600,data/world/spawns.xml,22,4,encounter-level verification required
+G00023/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32585,31928,2,600,data/world/spawns.xml,23,1,encounter-level verification required
+G00051/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32631,31934,3,600,data/world/spawns.xml,51,1,encounter-level verification required
+G00051/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32633,31934,3,600,data/world/spawns.xml,51,2,encounter-level verification required
+G00051/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32629,31935,3,600,data/world/spawns.xml,51,3,encounter-level verification required
+G00051/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32633,31935,3,600,data/world/spawns.xml,51,4,encounter-level verification required
+G00112/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32567,31899,4,600,data/world/spawns.xml,112,1,encounter-level verification required
+G00112/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32565,31901,4,600,data/world/spawns.xml,112,2,encounter-level verification required
+G00112/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32570,31902,4,600,data/world/spawns.xml,112,3,encounter-level verification required
+G00112/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32566,31905,4,600,data/world/spawns.xml,112,4,encounter-level verification required
+G00112/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32567,31905,4,600,data/world/spawns.xml,112,5,encounter-level verification required
+G00112/C06,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32568,31906,4,600,data/world/spawns.xml,112,6,encounter-level verification required
+G00112/C07,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32569,31906,4,600,data/world/spawns.xml,112,7,encounter-level verification required
+G00224/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32573,31901,5,600,data/world/spawns.xml,224,1,encounter-level verification required
+G00224/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32567,31902,5,600,data/world/spawns.xml,224,2,encounter-level verification required
+G00224/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32571,31903,5,600,data/world/spawns.xml,224,3,encounter-level verification required
+G00224/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32562,31905,5,600,data/world/spawns.xml,224,4,encounter-level verification required
+G00224/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32571,31906,5,600,data/world/spawns.xml,224,5,encounter-level verification required
+G00224/C06,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32572,31906,5,600,data/world/spawns.xml,224,6,encounter-level verification required
+G00426/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32613,31962,6,600,data/world/spawns.xml,426,1,encounter-level verification required
+G00426/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32620,31962,6,600,data/world/spawns.xml,426,2,encounter-level verification required
+G00426/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32616,31964,6,600,data/world/spawns.xml,426,3,encounter-level verification required
+G00426/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32618,31964,6,600,data/world/spawns.xml,426,4,encounter-level verification required
+G00987/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32539,31913,7,600,data/world/spawns.xml,987,1,encounter-level verification required
+G00987/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32540,31914,7,600,data/world/spawns.xml,987,2,encounter-level verification required
+G01052/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32524,31991,7,600,data/world/spawns.xml,1052,1,encounter-level verification required
+G01052/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32527,31992,7,600,data/world/spawns.xml,1052,2,encounter-level verification required
+G01052/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32526,31993,7,600,data/world/spawns.xml,1052,3,encounter-level verification required
+G01055/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32482,31989,7,750,data/world/spawns.xml,1055,1,encounter-level verification required; exceptional historical timer
+G01055/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32488,31989,7,750,data/world/spawns.xml,1055,2,encounter-level verification required; exceptional historical timer
+G01055/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32478,31993,7,750,data/world/spawns.xml,1055,3,encounter-level verification required; exceptional historical timer
+G01055/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32483,31994,7,750,data/world/spawns.xml,1055,4,encounter-level verification required; exceptional historical timer
+G01055/C06,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32484,31998,7,750,data/world/spawns.xml,1055,6,encounter-level verification required; exceptional historical timer
+G01055/C07,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32479,31999,7,750,data/world/spawns.xml,1055,7,encounter-level verification required; exceptional historical timer
+G01964/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32935,32646,7,600,data/world/spawns.xml,1964,1,encounter-level verification required
+G01965/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32939,32646,7,600,data/world/spawns.xml,1965,1,encounter-level verification required
+G01965/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32940,32647,7,600,data/world/spawns.xml,1965,2,encounter-level verification required
+G01965/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32936,32649,7,600,data/world/spawns.xml,1965,3,encounter-level verification required
+G01969/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32929,32648,7,600,data/world/spawns.xml,1969,1,encounter-level verification required
+G01969/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32928,32650,7,600,data/world/spawns.xml,1969,2,encounter-level verification required
+G01973/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32938,32651,7,600,data/world/spawns.xml,1973,1,encounter-level verification required
+G01981/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32930,32652,7,600,data/world/spawns.xml,1981,1,encounter-level verification required
+G01981/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32929,32654,7,600,data/world/spawns.xml,1981,2,encounter-level verification required
+G02656/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32588,31639,8,600,data/world/spawns.xml,2656,1,encounter-level verification required
+G02722/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,33210,31683,8,600,data/world/spawns.xml,2722,1,encounter-level verification required
+G02722/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,33210,31684,8,600,data/world/spawns.xml,2722,2,encounter-level verification required
+G02723/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,33238,31684,8,600,data/world/spawns.xml,2723,1,encounter-level verification required
+G02723/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,33239,31685,8,600,data/world/spawns.xml,2723,2,encounter-level verification required
+G02725/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,33238,31682,8,600,data/world/spawns.xml,2725,1,encounter-level verification required
+G02725/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,33238,31686,8,600,data/world/spawns.xml,2725,2,encounter-level verification required
+G02732/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,33215,31690,8,600,data/world/spawns.xml,2732,1,encounter-level verification required
+G02732/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,33216,31690,8,600,data/world/spawns.xml,2732,2,encounter-level verification required
+G02733/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,33219,31691,8,600,data/world/spawns.xml,2733,1,encounter-level verification required
+G02733/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,33220,31691,8,600,data/world/spawns.xml,2733,2,encounter-level verification required
+G02734/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,33221,31692,8,600,data/world/spawns.xml,2734,1,encounter-level verification required
+G02735/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,33223,31693,8,600,data/world/spawns.xml,2735,1,encounter-level verification required
+G02735/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,33221,31695,8,600,data/world/spawns.xml,2735,2,encounter-level verification required
+G02738/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,33210,31696,8,600,data/world/spawns.xml,2738,1,encounter-level verification required
+G02738/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,33210,31697,8,600,data/world/spawns.xml,2738,2,encounter-level verification required
+G02738/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,33210,31698,8,600,data/world/spawns.xml,2738,3,encounter-level verification required
+G02739/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,33239,31696,8,600,data/world/spawns.xml,2739,1,encounter-level verification required
+G02739/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,33239,31697,8,600,data/world/spawns.xml,2739,2,encounter-level verification required
+G02741/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,33241,31695,8,600,data/world/spawns.xml,2741,1,encounter-level verification required
+G02741/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,33242,31696,8,600,data/world/spawns.xml,2741,2,encounter-level verification required
+G02756/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,33221,31711,8,600,data/world/spawns.xml,2756,1,encounter-level verification required
+G02756/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,33223,31712,8,600,data/world/spawns.xml,2756,2,encounter-level verification required
+G02862/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32722,31826,8,600,data/world/spawns.xml,2862,1,encounter-level verification required
+G02863/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32729,31825,8,600,data/world/spawns.xml,2863,1,encounter-level verification required
+G02863/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32730,31826,8,600,data/world/spawns.xml,2863,2,encounter-level verification required
+G02863/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32727,31828,8,600,data/world/spawns.xml,2863,3,encounter-level verification required
+G02891/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32531,31874,8,600,data/world/spawns.xml,2891,1,encounter-level verification required
+G02891/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32529,31875,8,600,data/world/spawns.xml,2891,2,encounter-level verification required
+G02894/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32501,31879,8,600,data/world/spawns.xml,2894,3,encounter-level verification required
+G02894/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32502,31879,8,600,data/world/spawns.xml,2894,4,encounter-level verification required
+G02894/C06,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32502,31880,8,600,data/world/spawns.xml,2894,6,encounter-level verification required
+G02896/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32481,31879,8,600,data/world/spawns.xml,2896,1,encounter-level verification required
+G02896/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32482,31879,8,600,data/world/spawns.xml,2896,2,encounter-level verification required
+G02897/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32498,31879,8,600,data/world/spawns.xml,2897,1,encounter-level verification required
+G02898/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32547,31881,8,600,data/world/spawns.xml,2898,1,encounter-level verification required
+G02898/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32547,31882,8,600,data/world/spawns.xml,2898,2,encounter-level verification required
+G02903/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32489,31897,8,600,data/world/spawns.xml,2903,1,encounter-level verification required
+G02907/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32541,31897,8,600,data/world/spawns.xml,2907,1,encounter-level verification required
+G02907/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32542,31897,8,600,data/world/spawns.xml,2907,2,encounter-level verification required
+G02907/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32543,31899,8,600,data/world/spawns.xml,2907,3,encounter-level verification required
+G02912/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32485,31907,8,600,data/world/spawns.xml,2912,1,encounter-level verification required
+G02912/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32485,31909,8,600,data/world/spawns.xml,2912,2,encounter-level verification required
+G02921/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32518,31913,8,600,data/world/spawns.xml,2921,1,encounter-level verification required
+G02921/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32520,31915,8,600,data/world/spawns.xml,2921,2,encounter-level verification required
+G02928/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32495,31919,8,600,data/world/spawns.xml,2928,1,encounter-level verification required
+G02931/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32554,31927,8,600,data/world/spawns.xml,2931,3,encounter-level verification required
+G02937/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32558,31928,8,600,data/world/spawns.xml,2937,1,encounter-level verification required
+G02937/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32557,31929,8,600,data/world/spawns.xml,2937,2,encounter-level verification required
+G02938/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32573,31929,8,600,data/world/spawns.xml,2938,1,encounter-level verification required
+G02939/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32584,31929,8,600,data/world/spawns.xml,2939,1,encounter-level verification required
+G02940/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32514,31930,8,600,data/world/spawns.xml,2940,1,encounter-level verification required
+G02940/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32513,31933,8,600,data/world/spawns.xml,2940,4,encounter-level verification required
+G02940/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32516,31933,8,600,data/world/spawns.xml,2940,5,encounter-level verification required
+G02947/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32578,31933,8,600,data/world/spawns.xml,2947,1,encounter-level verification required
+G02950/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32493,31935,8,600,data/world/spawns.xml,2950,1,encounter-level verification required
+G02950/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32494,31935,8,600,data/world/spawns.xml,2950,2,encounter-level verification required
+G02950/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32491,31937,8,600,data/world/spawns.xml,2950,3,encounter-level verification required
+G02951/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32540,31935,8,600,data/world/spawns.xml,2951,1,encounter-level verification required
+G02964/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32506,31956,8,600,data/world/spawns.xml,2964,1,encounter-level verification required
+G02964/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32505,31957,8,600,data/world/spawns.xml,2964,2,encounter-level verification required
+G02966/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32522,31958,8,600,data/world/spawns.xml,2966,1,encounter-level verification required
+G02966/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32521,31959,8,600,data/world/spawns.xml,2966,2,encounter-level verification required
+G02968/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32534,31961,8,600,data/world/spawns.xml,2968,1,encounter-level verification required
+G02968/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32535,31963,8,600,data/world/spawns.xml,2968,2,encounter-level verification required
+G02968/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32534,31964,8,600,data/world/spawns.xml,2968,3,encounter-level verification required
+G02976/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32532,31973,8,600,data/world/spawns.xml,2976,1,encounter-level verification required
+G02976/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32532,31974,8,600,data/world/spawns.xml,2976,2,encounter-level verification required
+G02978/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32497,31977,8,600,data/world/spawns.xml,2978,1,encounter-level verification required
+G02978/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32499,31979,8,600,data/world/spawns.xml,2978,2,encounter-level verification required
+G02981/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32552,31976,8,600,data/world/spawns.xml,2981,1,encounter-level verification required
+G02981/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32552,31978,8,600,data/world/spawns.xml,2981,2,encounter-level verification required
+G02985/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32512,31983,8,600,data/world/spawns.xml,2985,1,encounter-level verification required
+G02990/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32524,31989,8,600,data/world/spawns.xml,2990,1,encounter-level verification required
+G02990/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32525,31989,8,600,data/world/spawns.xml,2990,2,encounter-level verification required
+G02995/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32508,31990,8,600,data/world/spawns.xml,2995,1,encounter-level verification required
+G02995/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32508,31992,8,600,data/world/spawns.xml,2995,2,encounter-level verification required
+G02996/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32481,31994,8,600,data/world/spawns.xml,2996,1,encounter-level verification required
+G02998/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32549,31994,8,600,data/world/spawns.xml,2998,1,encounter-level verification required
+G02998/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32547,31995,8,600,data/world/spawns.xml,2998,2,encounter-level verification required
+G03947/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,33230,31648,9,600,data/world/spawns.xml,3947,3,encounter-level verification required
+G03947/C06,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,33233,31650,9,600,data/world/spawns.xml,3947,6,encounter-level verification required
+G03947/C07,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,33230,31652,9,600,data/world/spawns.xml,3947,7,encounter-level verification required
+G04083/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,33332,31829,9,900,data/world/spawns.xml,4083,1,encounter-level verification required; exceptional historical timer
+G04120/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32509,31874,9,600,data/world/spawns.xml,4120,1,encounter-level verification required
+G04120/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32506,31875,9,600,data/world/spawns.xml,4120,2,encounter-level verification required
+G04120/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32507,31875,9,600,data/world/spawns.xml,4120,3,encounter-level verification required
+G04121/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32526,31874,9,600,data/world/spawns.xml,4121,1,encounter-level verification required
+G04121/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32530,31874,9,600,data/world/spawns.xml,4121,2,encounter-level verification required
+G04121/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32529,31875,9,600,data/world/spawns.xml,4121,3,encounter-level verification required
+G04121/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32533,31875,9,600,data/world/spawns.xml,4121,4,encounter-level verification required
+G04123/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32440,31876,9,600,data/world/spawns.xml,4123,1,encounter-level verification required
+G04123/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32441,31876,9,600,data/world/spawns.xml,4123,2,encounter-level verification required
+G04123/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32443,31877,9,600,data/world/spawns.xml,4123,3,encounter-level verification required
+G04123/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32441,31879,9,600,data/world/spawns.xml,4123,4,encounter-level verification required
+G04125/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32550,31876,9,600,data/world/spawns.xml,4125,1,encounter-level verification required
+G04125/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32554,31879,9,600,data/world/spawns.xml,4125,5,encounter-level verification required
+G04125/C06,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32551,31880,9,600,data/world/spawns.xml,4125,6,encounter-level verification required
+G04125/C07,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32552,31880,9,600,data/world/spawns.xml,4125,7,encounter-level verification required
+G04128/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32481,31878,9,600,data/world/spawns.xml,4128,1,encounter-level verification required
+G04128/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32478,31881,9,600,data/world/spawns.xml,4128,2,encounter-level verification required
+G04128/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32477,31882,9,600,data/world/spawns.xml,4128,3,encounter-level verification required
+G04129/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32514,31880,9,600,data/world/spawns.xml,4129,1,encounter-level verification required
+G04129/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32515,31881,9,600,data/world/spawns.xml,4129,2,encounter-level verification required
+G04129/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32513,31882,9,600,data/world/spawns.xml,4129,3,encounter-level verification required
+G04129/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32514,31883,9,600,data/world/spawns.xml,4129,4,encounter-level verification required
+G04129/C07,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32509,31886,9,600,data/world/spawns.xml,4129,7,encounter-level verification required
+G04133/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32550,31885,9,600,data/world/spawns.xml,4133,1,encounter-level verification required
+G04133/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32551,31887,9,600,data/world/spawns.xml,4133,2,encounter-level verification required
+G04133/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32551,31888,9,600,data/world/spawns.xml,4133,3,encounter-level verification required
+G04135/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32470,31889,9,600,data/world/spawns.xml,4135,1,encounter-level verification required
+G04135/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32471,31889,9,600,data/world/spawns.xml,4135,2,encounter-level verification required
+G04135/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32468,31890,9,600,data/world/spawns.xml,4135,3,encounter-level verification required
+G04136/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32487,31889,9,600,data/world/spawns.xml,4136,3,encounter-level verification required
+G04136/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32487,31890,9,600,data/world/spawns.xml,4136,5,encounter-level verification required
+G04136/C06,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32487,31891,9,600,data/world/spawns.xml,4136,6,encounter-level verification required
+G04138/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32487,31894,9,600,data/world/spawns.xml,4138,1,encounter-level verification required
+G04142/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32424,31891,9,600,data/world/spawns.xml,4142,1,encounter-level verification required
+G04142/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32426,31892,9,600,data/world/spawns.xml,4142,2,encounter-level verification required
+G04142/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32426,31895,9,600,data/world/spawns.xml,4142,3,encounter-level verification required
+G04148/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32524,31895,9,600,data/world/spawns.xml,4148,1,encounter-level verification required
+G04148/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32526,31896,9,600,data/world/spawns.xml,4148,2,encounter-level verification required
+G04148/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32527,31896,9,600,data/world/spawns.xml,4148,3,encounter-level verification required
+G04148/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32526,31899,9,600,data/world/spawns.xml,4148,4,encounter-level verification required
+G04149/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32541,31898,9,600,data/world/spawns.xml,4149,1,encounter-level verification required
+G04149/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32542,31898,9,600,data/world/spawns.xml,4149,2,encounter-level verification required
+G04149/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32540,31901,9,600,data/world/spawns.xml,4149,3,encounter-level verification required
+G04149/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32537,31902,9,600,data/world/spawns.xml,4149,4,encounter-level verification required
+G04149/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32546,31903,9,600,data/world/spawns.xml,4149,5,encounter-level verification required
+G04157/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32443,31903,9,600,data/world/spawns.xml,4157,1,encounter-level verification required
+G04157/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32442,31906,9,600,data/world/spawns.xml,4157,2,encounter-level verification required
+G04157/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32443,31906,9,600,data/world/spawns.xml,4157,3,encounter-level verification required
+G04159/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32510,31904,9,600,data/world/spawns.xml,4159,1,encounter-level verification required
+G04159/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32511,31904,9,600,data/world/spawns.xml,4159,2,encounter-level verification required
+G04159/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32507,31905,9,600,data/world/spawns.xml,4159,3,encounter-level verification required
+G04159/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32507,31906,9,600,data/world/spawns.xml,4159,4,encounter-level verification required
+G04161/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32493,31910,9,600,data/world/spawns.xml,4161,4,encounter-level verification required
+G04166/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32493,31912,9,600,data/world/spawns.xml,4166,1,encounter-level verification required
+G04166/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32494,31913,9,600,data/world/spawns.xml,4166,2,encounter-level verification required
+G04168/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32528,31909,9,600,data/world/spawns.xml,4168,1,encounter-level verification required
+G04168/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32526,31913,9,600,data/world/spawns.xml,4168,2,encounter-level verification required
+G04168/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32527,31913,9,600,data/world/spawns.xml,4168,3,encounter-level verification required
+G04168/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32526,31917,9,600,data/world/spawns.xml,4168,4,encounter-level verification required
+G04170/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32419,31914,9,600,data/world/spawns.xml,4170,1,encounter-level verification required
+G04170/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32417,31915,9,600,data/world/spawns.xml,4170,2,encounter-level verification required
+G04170/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32418,31916,9,600,data/world/spawns.xml,4170,3,encounter-level verification required
+G04183/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32484,31925,9,600,data/world/spawns.xml,4183,1,encounter-level verification required
+G04183/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32485,31925,9,600,data/world/spawns.xml,4183,2,encounter-level verification required
+G04183/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32484,31928,9,600,data/world/spawns.xml,4183,3,encounter-level verification required
+G04189/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32504,31930,9,600,data/world/spawns.xml,4189,1,encounter-level verification required
+G04189/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32504,31931,9,600,data/world/spawns.xml,4189,2,encounter-level verification required
+G04189/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32504,31934,9,600,data/world/spawns.xml,4189,3,encounter-level verification required
+G04189/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32506,31934,9,600,data/world/spawns.xml,4189,4,encounter-level verification required
+G04194/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32539,31930,9,600,data/world/spawns.xml,4194,1,encounter-level verification required
+G04194/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32540,31932,9,600,data/world/spawns.xml,4194,2,encounter-level verification required
+G04194/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32539,31934,9,600,data/world/spawns.xml,4194,3,encounter-level verification required
+G04202/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32493,31946,9,600,data/world/spawns.xml,4202,3,encounter-level verification required
+G04206/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32496,31945,9,600,data/world/spawns.xml,4206,1,encounter-level verification required
+G04206/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32496,31946,9,600,data/world/spawns.xml,4206,2,encounter-level verification required
+G04209/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32555,31949,9,600,data/world/spawns.xml,4209,1,encounter-level verification required
+G04209/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32556,31950,9,600,data/world/spawns.xml,4209,2,encounter-level verification required
+G04209/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32552,31951,9,600,data/world/spawns.xml,4209,4,encounter-level verification required
+G04210/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32511,31949,9,600,data/world/spawns.xml,4210,1,encounter-level verification required
+G04210/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32511,31950,9,600,data/world/spawns.xml,4210,2,encounter-level verification required
+G04210/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32512,31950,9,600,data/world/spawns.xml,4210,3,encounter-level verification required
+G04210/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32506,31952,9,600,data/world/spawns.xml,4210,4,encounter-level verification required
+G04210/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32514,31952,9,600,data/world/spawns.xml,4210,5,encounter-level verification required
+G04221/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32485,31964,9,600,data/world/spawns.xml,4221,1,encounter-level verification required
+G04221/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32485,31965,9,600,data/world/spawns.xml,4221,2,encounter-level verification required
+G04221/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32485,31967,9,600,data/world/spawns.xml,4221,3,encounter-level verification required
+G04221/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32485,31968,9,600,data/world/spawns.xml,4221,4,encounter-level verification required
+G04231/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32503,31973,9,600,data/world/spawns.xml,4231,1,encounter-level verification required
+G04231/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32505,31973,9,600,data/world/spawns.xml,4231,2,encounter-level verification required
+G04231/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32506,31974,9,600,data/world/spawns.xml,4231,3,encounter-level verification required
+G04231/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32502,31975,9,600,data/world/spawns.xml,4231,4,encounter-level verification required
+G04291/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32597,32068,9,600,data/world/spawns.xml,4291,1,encounter-level verification required
+G04291/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32599,32068,9,600,data/world/spawns.xml,4291,2,encounter-level verification required
+G05419/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32470,31878,10,600,data/world/spawns.xml,5419,1,encounter-level verification required
+G05419/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32472,31880,10,600,data/world/spawns.xml,5419,2,encounter-level verification required
+G05424/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32486,31889,10,600,data/world/spawns.xml,5424,1,encounter-level verification required
+G05424/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32487,31889,10,600,data/world/spawns.xml,5424,2,encounter-level verification required
+G05425/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32654,31893,10,600,data/world/spawns.xml,5425,4,encounter-level verification required
+G05427/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32458,31892,10,600,data/world/spawns.xml,5427,1,encounter-level verification required
+G05427/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32457,31893,10,600,data/world/spawns.xml,5427,2,encounter-level verification required
+G05428/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32655,31894,10,600,data/world/spawns.xml,5428,1,encounter-level verification required
+G05439/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32630,31902,10,600,data/world/spawns.xml,5439,1,encounter-level verification required
+G05439/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32629,31905,10,600,data/world/spawns.xml,5439,2,encounter-level verification required
+G05439/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32628,31906,10,600,data/world/spawns.xml,5439,3,encounter-level verification required
+G05443/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32474,31905,10,600,data/world/spawns.xml,5443,1,encounter-level verification required
+G05443/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32472,31907,10,600,data/world/spawns.xml,5443,2,encounter-level verification required
+G05443/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32474,31907,10,600,data/world/spawns.xml,5443,3,encounter-level verification required
+G05452/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32451,31914,10,600,data/world/spawns.xml,5452,1,encounter-level verification required
+G05452/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32452,31917,10,600,data/world/spawns.xml,5452,2,encounter-level verification required
+G05452/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32449,31920,10,600,data/world/spawns.xml,5452,3,encounter-level verification required
+G05453/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32477,31916,10,600,data/world/spawns.xml,5453,1,encounter-level verification required
+G05453/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32476,31917,10,600,data/world/spawns.xml,5453,2,encounter-level verification required
+G05453/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32476,31918,10,600,data/world/spawns.xml,5453,3,encounter-level verification required
+G05453/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32476,31919,10,600,data/world/spawns.xml,5453,4,encounter-level verification required
+G05454/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32644,31917,10,600,data/world/spawns.xml,5454,1,encounter-level verification required
+G05463/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32622,31925,10,500,data/world/spawns.xml,5463,1,encounter-level verification required; exceptional historical timer
+G05463/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32623,31925,10,500,data/world/spawns.xml,5463,2,encounter-level verification required; exceptional historical timer
+G05463/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32623,31927,10,500,data/world/spawns.xml,5463,3,encounter-level verification required; exceptional historical timer
+G05468/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32428,31928,10,600,data/world/spawns.xml,5468,1,encounter-level verification required
+G05468/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32425,31929,10,600,data/world/spawns.xml,5468,2,encounter-level verification required
+G05468/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32427,31929,10,600,data/world/spawns.xml,5468,3,encounter-level verification required
+G05468/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32429,31929,10,600,data/world/spawns.xml,5468,4,encounter-level verification required
+G05468/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32430,31929,10,600,data/world/spawns.xml,5468,5,encounter-level verification required
+G05468/C06,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32424,31931,10,600,data/world/spawns.xml,5468,6,encounter-level verification required
+G05469/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32524,31926,10,600,data/world/spawns.xml,5469,1,encounter-level verification required
+G05469/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32523,31928,10,600,data/world/spawns.xml,5469,2,encounter-level verification required
+G05469/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32527,31928,10,600,data/world/spawns.xml,5469,3,encounter-level verification required
+G05469/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32525,31929,10,600,data/world/spawns.xml,5469,4,encounter-level verification required
+G05469/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32526,31931,10,600,data/world/spawns.xml,5469,5,encounter-level verification required
+G05470/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32423,31931,10,600,data/world/spawns.xml,5470,1,encounter-level verification required
+G05475/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32474,31934,10,600,data/world/spawns.xml,5475,1,encounter-level verification required
+G05475/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32475,31935,10,600,data/world/spawns.xml,5475,2,encounter-level verification required
+G05475/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32476,31937,10,600,data/world/spawns.xml,5475,3,encounter-level verification required
+G05478/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32519,31940,10,600,data/world/spawns.xml,5478,1,encounter-level verification required
+G05478/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32519,31941,10,600,data/world/spawns.xml,5478,2,encounter-level verification required
+G05480/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32470,31941,10,600,data/world/spawns.xml,5480,1,encounter-level verification required
+G05480/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32468,31943,10,600,data/world/spawns.xml,5480,2,encounter-level verification required
+G05480/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32466,31944,10,600,data/world/spawns.xml,5480,3,encounter-level verification required
+G05482/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32638,31945,10,600,data/world/spawns.xml,5482,1,encounter-level verification required
+G05482/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32638,31946,10,600,data/world/spawns.xml,5482,2,encounter-level verification required
+G05482/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32638,31947,10,600,data/world/spawns.xml,5482,3,encounter-level verification required
+G05484/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32496,31946,10,600,data/world/spawns.xml,5484,1,encounter-level verification required
+G05484/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32496,31947,10,600,data/world/spawns.xml,5484,2,encounter-level verification required
+G05484/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32497,31949,10,600,data/world/spawns.xml,5484,3,encounter-level verification required
+G05485/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32658,31947,10,700,data/world/spawns.xml,5485,1,encounter-level verification required; exceptional historical timer
+G05485/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32660,31947,10,700,data/world/spawns.xml,5485,2,encounter-level verification required; exceptional historical timer
+G05486/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32434,31947,10,600,data/world/spawns.xml,5486,1,encounter-level verification required
+G05486/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32434,31949,10,600,data/world/spawns.xml,5486,2,encounter-level verification required
+G05486/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32436,31950,10,600,data/world/spawns.xml,5486,3,encounter-level verification required
+G05489/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32557,31965,10,600,data/world/spawns.xml,5489,1,encounter-level verification required
+G05489/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32560,31966,10,600,data/world/spawns.xml,5489,2,encounter-level verification required
+G05489/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32561,31968,10,600,data/world/spawns.xml,5489,3,encounter-level verification required
+G05490/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32453,31967,10,600,data/world/spawns.xml,5490,1,encounter-level verification required
+G05490/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32455,31967,10,600,data/world/spawns.xml,5490,2,encounter-level verification required
+G05490/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32454,31968,10,600,data/world/spawns.xml,5490,3,encounter-level verification required
+G05490/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32455,31968,10,600,data/world/spawns.xml,5490,4,encounter-level verification required
+G05490/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32448,31969,10,600,data/world/spawns.xml,5490,5,encounter-level verification required
+G05490/C06,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32452,31969,10,600,data/world/spawns.xml,5490,6,encounter-level verification required
+G05490/C07,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32454,31969,10,600,data/world/spawns.xml,5490,7,encounter-level verification required
+G05490/C08,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32452,31971,10,600,data/world/spawns.xml,5490,8,encounter-level verification required
+G05492/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32534,31970,10,600,data/world/spawns.xml,5492,1,encounter-level verification required
+G05492/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32534,31971,10,600,data/world/spawns.xml,5492,2,encounter-level verification required
+G05492/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32535,31973,10,600,data/world/spawns.xml,5492,3,encounter-level verification required
+G05495/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32499,31978,10,600,data/world/spawns.xml,5495,1,encounter-level verification required
+G05495/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32499,31979,10,600,data/world/spawns.xml,5495,2,encounter-level verification required
+G05495/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32496,31980,10,600,data/world/spawns.xml,5495,3,encounter-level verification required
+G05497/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32445,31981,10,600,data/world/spawns.xml,5497,3,encounter-level verification required
+G05497/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32442,31983,10,600,data/world/spawns.xml,5497,5,encounter-level verification required
+G05497/C06,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32443,31983,10,600,data/world/spawns.xml,5497,6,encounter-level verification required
+G05500/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32492,31987,10,600,data/world/spawns.xml,5500,1,encounter-level verification required
+G05500/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32493,31988,10,600,data/world/spawns.xml,5500,2,encounter-level verification required
+G05500/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32490,31989,10,600,data/world/spawns.xml,5500,3,encounter-level verification required
+G05501/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32532,31987,10,600,data/world/spawns.xml,5501,1,encounter-level verification required
+G05501/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32531,31989,10,600,data/world/spawns.xml,5501,2,encounter-level verification required
+G05501/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32527,31990,10,600,data/world/spawns.xml,5501,3,encounter-level verification required
+G05501/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32533,31990,10,600,data/world/spawns.xml,5501,4,encounter-level verification required
+G05502/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32557,31989,10,600,data/world/spawns.xml,5502,1,encounter-level verification required
+G05502/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32557,31990,10,600,data/world/spawns.xml,5502,2,encounter-level verification required
+G05502/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32559,31990,10,600,data/world/spawns.xml,5502,3,encounter-level verification required
+G05503/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32524,31990,10,600,data/world/spawns.xml,5503,1,encounter-level verification required
+G05503/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32524,31993,10,600,data/world/spawns.xml,5503,2,encounter-level verification required
+G05504/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32618,31990,10,600,data/world/spawns.xml,5504,3,encounter-level verification required
+G05505/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32621,31988,10,600,data/world/spawns.xml,5505,1,encounter-level verification required
+G05505/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32619,31990,10,600,data/world/spawns.xml,5505,2,encounter-level verification required
+G05505/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32620,31990,10,600,data/world/spawns.xml,5505,3,encounter-level verification required
+G05505/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32622,31990,10,600,data/world/spawns.xml,5505,4,encounter-level verification required
+G05505/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32624,31990,10,600,data/world/spawns.xml,5505,5,encounter-level verification required
+G05505/C06,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32623,31991,10,600,data/world/spawns.xml,5505,6,encounter-level verification required
+G05505/C07,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32622,31992,10,600,data/world/spawns.xml,5505,7,encounter-level verification required
+G05508/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32583,31992,10,600,data/world/spawns.xml,5508,1,encounter-level verification required
+G05508/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32578,31993,10,600,data/world/spawns.xml,5508,2,encounter-level verification required
+G05508/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32580,31993,10,600,data/world/spawns.xml,5508,3,encounter-level verification required
+G05509/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32468,31994,10,600,data/world/spawns.xml,5509,1,encounter-level verification required
+G05509/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32469,31994,10,600,data/world/spawns.xml,5509,2,encounter-level verification required
+G05516/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32366,32038,10,600,data/world/spawns.xml,5516,1,encounter-level verification required
+G05516/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32365,32040,10,600,data/world/spawns.xml,5516,2,encounter-level verification required
+G06293/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,33312,31666,11,550,data/world/spawns.xml,6293,2,encounter-level verification required; exceptional historical timer
+G06299/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,33314,31669,11,550,data/world/spawns.xml,6299,1,encounter-level verification required; exceptional historical timer
+G06299/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,33312,31672,11,550,data/world/spawns.xml,6299,2,encounter-level verification required; exceptional historical timer
+G06302/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,33261,31682,11,600,data/world/spawns.xml,6302,1,encounter-level verification required
+G06302/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,33263,31683,11,600,data/world/spawns.xml,6302,2,encounter-level verification required
+G06309/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32403,31721,11,900,data/world/spawns.xml,6309,1,encounter-level verification required; exceptional historical timer
+G06309/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32406,31721,11,900,data/world/spawns.xml,6309,2,encounter-level verification required; exceptional historical timer
+G06309/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32407,31722,11,900,data/world/spawns.xml,6309,3,encounter-level verification required; exceptional historical timer
+G06309/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32408,31723,11,900,data/world/spawns.xml,6309,4,encounter-level verification required; exceptional historical timer
+G06343/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32440,31879,11,600,data/world/spawns.xml,6343,1,encounter-level verification required
+G06343/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32443,31880,11,600,data/world/spawns.xml,6343,2,encounter-level verification required
+G06343/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32446,31883,11,600,data/world/spawns.xml,6343,3,encounter-level verification required
+G06343/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32444,31884,11,600,data/world/spawns.xml,6343,4,encounter-level verification required
+G06344/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32539,31880,11,600,data/world/spawns.xml,6344,1,encounter-level verification required
+G06344/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32536,31881,11,600,data/world/spawns.xml,6344,2,encounter-level verification required
+G06344/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32539,31882,11,600,data/world/spawns.xml,6344,3,encounter-level verification required
+G06345/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32511,31881,11,600,data/world/spawns.xml,6345,1,encounter-level verification required
+G06348/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32520,31879,11,600,data/world/spawns.xml,6348,1,encounter-level verification required
+G06348/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32522,31882,11,600,data/world/spawns.xml,6348,2,encounter-level verification required
+G06348/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32523,31882,11,600,data/world/spawns.xml,6348,3,encounter-level verification required
+G06349/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32492,31879,11,600,data/world/spawns.xml,6349,1,encounter-level verification required
+G06349/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32494,31883,11,600,data/world/spawns.xml,6349,2,encounter-level verification required
+G06349/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32494,31884,11,600,data/world/spawns.xml,6349,3,encounter-level verification required
+G06349/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32496,31884,11,600,data/world/spawns.xml,6349,4,encounter-level verification required
+G06349/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32493,31886,11,600,data/world/spawns.xml,6349,5,encounter-level verification required
+G06350/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32516,31889,11,600,data/world/spawns.xml,6350,1,encounter-level verification required
+G06355/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32426,31895,11,600,data/world/spawns.xml,6355,1,encounter-level verification required
+G06356/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32488,31893,11,600,data/world/spawns.xml,6356,1,encounter-level verification required
+G06356/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32489,31895,11,600,data/world/spawns.xml,6356,2,encounter-level verification required
+G06358/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32460,31895,11,600,data/world/spawns.xml,6358,1,encounter-level verification required
+G06358/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32460,31898,11,600,data/world/spawns.xml,6358,2,encounter-level verification required
+G06358/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32461,31899,11,600,data/world/spawns.xml,6358,3,encounter-level verification required
+G06358/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32459,31901,11,600,data/world/spawns.xml,6358,4,encounter-level verification required
+G06359/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32467,31898,11,600,data/world/spawns.xml,6359,1,encounter-level verification required
+G06359/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32468,31898,11,600,data/world/spawns.xml,6359,2,encounter-level verification required
+G06359/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32469,31898,11,600,data/world/spawns.xml,6359,3,encounter-level verification required
+G06359/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32468,31899,11,600,data/world/spawns.xml,6359,4,encounter-level verification required
+G06360/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32423,31899,11,600,data/world/spawns.xml,6360,1,encounter-level verification required
+G06360/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32422,31900,11,600,data/world/spawns.xml,6360,2,encounter-level verification required
+G06360/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32422,31902,11,600,data/world/spawns.xml,6360,3,encounter-level verification required
+G06362/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32497,31902,11,600,data/world/spawns.xml,6362,1,encounter-level verification required
+G06363/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32507,31900,11,600,data/world/spawns.xml,6363,1,encounter-level verification required
+G06363/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32509,31901,11,600,data/world/spawns.xml,6363,2,encounter-level verification required
+G06363/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32506,31902,11,600,data/world/spawns.xml,6363,3,encounter-level verification required
+G06366/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32532,31907,11,600,data/world/spawns.xml,6366,1,encounter-level verification required
+G06366/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32532,31908,11,600,data/world/spawns.xml,6366,2,encounter-level verification required
+G06367/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32531,31905,11,600,data/world/spawns.xml,6367,1,encounter-level verification required
+G06367/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32534,31907,11,600,data/world/spawns.xml,6367,2,encounter-level verification required
+G06367/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32535,31907,11,600,data/world/spawns.xml,6367,3,encounter-level verification required
+G06372/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32513,31912,11,600,data/world/spawns.xml,6372,1,encounter-level verification required
+G06378/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32487,31916,11,600,data/world/spawns.xml,6378,1,encounter-level verification required
+G06378/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32487,31917,11,600,data/world/spawns.xml,6378,2,encounter-level verification required
+G06378/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32488,31918,11,600,data/world/spawns.xml,6378,3,encounter-level verification required
+G06378/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32488,31919,11,600,data/world/spawns.xml,6378,4,encounter-level verification required
+G06378/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32485,31921,11,600,data/world/spawns.xml,6378,5,encounter-level verification required
+G06383/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32496,31920,11,600,data/world/spawns.xml,6383,1,encounter-level verification required
+G06383/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32497,31921,11,600,data/world/spawns.xml,6383,2,encounter-level verification required
+G06385/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32531,31924,11,600,data/world/spawns.xml,6385,1,encounter-level verification required
+G06393/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32457,31929,11,600,data/world/spawns.xml,6393,1,encounter-level verification required
+G06393/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32451,31931,11,600,data/world/spawns.xml,6393,2,encounter-level verification required
+G06393/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32453,31931,11,600,data/world/spawns.xml,6393,3,encounter-level verification required
+G06393/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32450,31932,11,600,data/world/spawns.xml,6393,4,encounter-level verification required
+G06395/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32476,31934,11,600,data/world/spawns.xml,6395,1,encounter-level verification required
+G06400/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32666,31938,11,600,data/world/spawns.xml,6400,1,encounter-level verification required
+G06400/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32666,31939,11,600,data/world/spawns.xml,6400,2,encounter-level verification required
+G06400/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32668,31941,11,600,data/world/spawns.xml,6400,3,encounter-level verification required
+G06403/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32426,31935,11,600,data/world/spawns.xml,6403,1,encounter-level verification required
+G06403/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32422,31939,11,600,data/world/spawns.xml,6403,2,encounter-level verification required
+G06403/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32421,31943,11,600,data/world/spawns.xml,6403,3,encounter-level verification required
+G06403/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32423,31943,11,600,data/world/spawns.xml,6403,4,encounter-level verification required
+G06404/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32516,31939,11,600,data/world/spawns.xml,6404,1,encounter-level verification required
+G06404/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32514,31941,11,600,data/world/spawns.xml,6404,2,encounter-level verification required
+G06406/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32465,31940,11,600,data/world/spawns.xml,6406,1,encounter-level verification required
+G06406/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32466,31941,11,600,data/world/spawns.xml,6406,2,encounter-level verification required
+G06406/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32464,31943,11,600,data/world/spawns.xml,6406,3,encounter-level verification required
+G06406/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32463,31945,11,600,data/world/spawns.xml,6406,4,encounter-level verification required
+G06407/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32491,31943,11,600,data/world/spawns.xml,6407,1,encounter-level verification required
+G06407/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32492,31944,11,600,data/world/spawns.xml,6407,2,encounter-level verification required
+G06407/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32493,31947,11,600,data/world/spawns.xml,6407,3,encounter-level verification required
+G06408/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32482,31945,11,600,data/world/spawns.xml,6408,1,encounter-level verification required
+G06413/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32451,31948,11,600,data/world/spawns.xml,6413,1,encounter-level verification required
+G06413/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32447,31949,11,600,data/world/spawns.xml,6413,2,encounter-level verification required
+G06413/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32450,31950,11,600,data/world/spawns.xml,6413,3,encounter-level verification required
+G06415/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32422,31951,11,600,data/world/spawns.xml,6415,1,encounter-level verification required
+G06416/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32527,31949,11,600,data/world/spawns.xml,6416,1,encounter-level verification required
+G06416/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32525,31953,11,600,data/world/spawns.xml,6416,2,encounter-level verification required
+G06416/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32527,31953,11,600,data/world/spawns.xml,6416,3,encounter-level verification required
+G06416/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32525,31955,11,600,data/world/spawns.xml,6416,4,encounter-level verification required
+G06417/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32422,31954,11,600,data/world/spawns.xml,6417,1,encounter-level verification required
+G06417/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32423,31954,11,600,data/world/spawns.xml,6417,2,encounter-level verification required
+G06417/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32422,31956,11,600,data/world/spawns.xml,6417,3,encounter-level verification required
+G06417/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32421,31958,11,600,data/world/spawns.xml,6417,4,encounter-level verification required
+G06418/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32539,31959,11,600,data/world/spawns.xml,6418,1,encounter-level verification required
+G06418/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32540,31960,11,600,data/world/spawns.xml,6418,2,encounter-level verification required
+G06418/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32540,31962,11,600,data/world/spawns.xml,6418,3,encounter-level verification required
+G06418/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32540,31963,11,600,data/world/spawns.xml,6418,4,encounter-level verification required
+G06419/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32487,31962,11,600,data/world/spawns.xml,6419,1,encounter-level verification required
+G06419/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32487,31964,11,600,data/world/spawns.xml,6419,2,encounter-level verification required
+G06419/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32483,31965,11,600,data/world/spawns.xml,6419,3,encounter-level verification required
+G06419/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32483,31967,11,600,data/world/spawns.xml,6419,4,encounter-level verification required
+G06420/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32511,31972,11,600,data/world/spawns.xml,6420,1,encounter-level verification required
+G06424/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32537,31973,11,600,data/world/spawns.xml,6424,1,encounter-level verification required
+G06424/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32538,31974,11,600,data/world/spawns.xml,6424,2,encounter-level verification required
+G06424/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32538,31975,11,600,data/world/spawns.xml,6424,3,encounter-level verification required
+G06424/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32535,31976,11,600,data/world/spawns.xml,6424,4,encounter-level verification required
+G06425/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32545,31976,11,600,data/world/spawns.xml,6425,1,encounter-level verification required
+G06425/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32548,31977,11,600,data/world/spawns.xml,6425,2,encounter-level verification required
+G06425/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32548,31978,11,600,data/world/spawns.xml,6425,3,encounter-level verification required
+G06425/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32549,31981,11,600,data/world/spawns.xml,6425,4,encounter-level verification required
+G06426/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32502,31978,11,600,data/world/spawns.xml,6426,1,encounter-level verification required
+G06426/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32504,31978,11,600,data/world/spawns.xml,6426,2,encounter-level verification required
+G06426/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32504,31981,11,600,data/world/spawns.xml,6426,3,encounter-level verification required
+G06426/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32506,31981,11,600,data/world/spawns.xml,6426,4,encounter-level verification required
+G06427/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32526,31975,11,600,data/world/spawns.xml,6427,1,encounter-level verification required
+G06427/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32528,31975,11,600,data/world/spawns.xml,6427,2,encounter-level verification required
+G06427/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32530,31975,11,600,data/world/spawns.xml,6427,3,encounter-level verification required
+G06427/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32521,31978,11,600,data/world/spawns.xml,6427,4,encounter-level verification required
+G06427/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32525,31978,11,600,data/world/spawns.xml,6427,5,encounter-level verification required
+G06428/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32492,31977,11,600,data/world/spawns.xml,6428,1,encounter-level verification required
+G06428/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32493,31979,11,600,data/world/spawns.xml,6428,2,encounter-level verification required
+G06428/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32496,31980,11,600,data/world/spawns.xml,6428,3,encounter-level verification required
+G06429/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32515,31980,11,600,data/world/spawns.xml,6429,1,encounter-level verification required
+G06429/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32514,31981,11,600,data/world/spawns.xml,6429,2,encounter-level verification required
+G06429/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32515,31981,11,600,data/world/spawns.xml,6429,3,encounter-level verification required
+G06434/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32442,31981,11,600,data/world/spawns.xml,6434,1,encounter-level verification required
+G06434/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32442,31983,11,600,data/world/spawns.xml,6434,2,encounter-level verification required
+G06434/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32442,31986,11,600,data/world/spawns.xml,6434,3,encounter-level verification required
+G06435/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32547,31984,11,600,data/world/spawns.xml,6435,1,encounter-level verification required
+G06435/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32546,31985,11,600,data/world/spawns.xml,6435,2,encounter-level verification required
+G06435/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32549,31988,11,600,data/world/spawns.xml,6435,3,encounter-level verification required
+G06436/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32433,31985,11,600,data/world/spawns.xml,6436,1,encounter-level verification required
+G06438/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32431,31986,11,600,data/world/spawns.xml,6438,1,encounter-level verification required
+G06438/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32428,31988,11,600,data/world/spawns.xml,6438,2,encounter-level verification required
+G06438/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32426,31989,11,600,data/world/spawns.xml,6438,3,encounter-level verification required
+G06439/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32527,31989,11,600,data/world/spawns.xml,6439,1,encounter-level verification required
+G06441/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32473,31990,11,600,data/world/spawns.xml,6441,1,encounter-level verification required
+G06441/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32475,31990,11,600,data/world/spawns.xml,6441,2,encounter-level verification required
+G06441/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32474,31991,11,600,data/world/spawns.xml,6441,3,encounter-level verification required
+G06441/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32474,31992,11,600,data/world/spawns.xml,6441,4,encounter-level verification required
+G06443/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32490,31990,11,600,data/world/spawns.xml,6443,1,encounter-level verification required
+G06443/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32491,31991,11,600,data/world/spawns.xml,6443,2,encounter-level verification required
+G06443/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32488,31992,11,600,data/world/spawns.xml,6443,3,encounter-level verification required
+G06443/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32489,31992,11,600,data/world/spawns.xml,6443,4,encounter-level verification required
+G06443/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32492,31993,11,600,data/world/spawns.xml,6443,5,encounter-level verification required
+G06445/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32551,31994,11,600,data/world/spawns.xml,6445,1,encounter-level verification required
+G06664/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,33157,32603,11,600,data/world/spawns.xml,6664,1,encounter-level verification required
+G06971/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32399,31585,12,800,data/world/spawns.xml,6971,1,encounter-level verification required; exceptional historical timer
+G06971/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32401,31585,12,800,data/world/spawns.xml,6971,2,encounter-level verification required; exceptional historical timer
+G06971/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32401,31586,12,700,data/world/spawns.xml,6971,3,encounter-level verification required; exceptional historical timer
+G06971/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32402,31586,12,800,data/world/spawns.xml,6971,4,encounter-level verification required; exceptional historical timer
+G06971/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32403,31586,12,700,data/world/spawns.xml,6971,5,encounter-level verification required; exceptional historical timer
+G06972/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32407,31582,12,700,data/world/spawns.xml,6972,1,encounter-level verification required; exceptional historical timer
+G06972/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32402,31590,12,700,data/world/spawns.xml,6972,2,encounter-level verification required; exceptional historical timer
+G07051/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32472,31878,12,600,data/world/spawns.xml,7051,1,encounter-level verification required
+G07052/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32494,31878,12,600,data/world/spawns.xml,7052,1,encounter-level verification required
+G07052/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32496,31879,12,600,data/world/spawns.xml,7052,2,encounter-level verification required
+G07053/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32452,31879,12,600,data/world/spawns.xml,7053,1,encounter-level verification required
+G07053/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32451,31880,12,600,data/world/spawns.xml,7053,2,encounter-level verification required
+G07053/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32454,31880,12,600,data/world/spawns.xml,7053,3,encounter-level verification required
+G07054/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32466,31883,12,600,data/world/spawns.xml,7054,1,encounter-level verification required
+G07054/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32465,31885,12,600,data/world/spawns.xml,7054,2,encounter-level verification required
+G07054/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32467,31885,12,600,data/world/spawns.xml,7054,3,encounter-level verification required
+G07055/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32506,31887,12,600,data/world/spawns.xml,7055,1,encounter-level verification required
+G07055/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32506,31888,12,600,data/world/spawns.xml,7055,2,encounter-level verification required
+G07055/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32507,31888,12,600,data/world/spawns.xml,7055,3,encounter-level verification required
+G07055/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32507,31892,12,600,data/world/spawns.xml,7055,4,encounter-level verification required
+G07057/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32531,31887,12,600,data/world/spawns.xml,7057,1,encounter-level verification required
+G07057/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32527,31889,12,600,data/world/spawns.xml,7057,2,encounter-level verification required
+G07057/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32530,31889,12,600,data/world/spawns.xml,7057,3,encounter-level verification required
+G07059/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32484,31891,12,600,data/world/spawns.xml,7059,1,encounter-level verification required
+G07059/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32483,31892,12,600,data/world/spawns.xml,7059,2,encounter-level verification required
+G07059/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32483,31894,12,600,data/world/spawns.xml,7059,3,encounter-level verification required
+G07062/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32473,31891,12,600,data/world/spawns.xml,7062,1,encounter-level verification required
+G07062/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32473,31892,12,600,data/world/spawns.xml,7062,2,encounter-level verification required
+G07062/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32473,31893,12,600,data/world/spawns.xml,7062,3,encounter-level verification required
+G07064/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32428,31898,12,600,data/world/spawns.xml,7064,1,encounter-level verification required
+G07064/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32429,31899,12,600,data/world/spawns.xml,7064,2,encounter-level verification required
+G07065/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32475,31898,12,600,data/world/spawns.xml,7065,1,encounter-level verification required
+G07065/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32477,31898,12,600,data/world/spawns.xml,7065,2,encounter-level verification required
+G07065/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32474,31900,12,600,data/world/spawns.xml,7065,3,encounter-level verification required
+G07066/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32533,31900,12,600,data/world/spawns.xml,7066,1,encounter-level verification required
+G07066/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32535,31900,12,600,data/world/spawns.xml,7066,2,encounter-level verification required
+G07066/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32537,31901,12,600,data/world/spawns.xml,7066,3,encounter-level verification required
+G07068/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32441,31900,12,600,data/world/spawns.xml,7068,1,encounter-level verification required
+G07068/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32442,31903,12,600,data/world/spawns.xml,7068,2,encounter-level verification required
+G07068/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32443,31904,12,600,data/world/spawns.xml,7068,3,encounter-level verification required
+G07069/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32487,31904,12,600,data/world/spawns.xml,7069,1,encounter-level verification required
+G07069/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32489,31904,12,600,data/world/spawns.xml,7069,2,encounter-level verification required
+G07069/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32490,31904,12,600,data/world/spawns.xml,7069,3,encounter-level verification required
+G07070/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32460,31911,12,600,data/world/spawns.xml,7070,1,encounter-level verification required
+G07070/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32458,31912,12,600,data/world/spawns.xml,7070,2,encounter-level verification required
+G07071/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32502,31910,12,600,data/world/spawns.xml,7071,1,encounter-level verification required
+G07071/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32500,31911,12,600,data/world/spawns.xml,7071,2,encounter-level verification required
+G07071/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32502,31912,12,600,data/world/spawns.xml,7071,3,encounter-level verification required
+G07071/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32499,31915,12,600,data/world/spawns.xml,7071,4,encounter-level verification required
+G07074/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32537,31917,12,600,data/world/spawns.xml,7074,1,encounter-level verification required
+G07074/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32538,31919,12,600,data/world/spawns.xml,7074,2,encounter-level verification required
+G07074/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32539,31920,12,600,data/world/spawns.xml,7074,3,encounter-level verification required
+G07075/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32519,31920,12,600,data/world/spawns.xml,7075,1,encounter-level verification required
+G07075/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32521,31921,12,600,data/world/spawns.xml,7075,2,encounter-level verification required
+G07076/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32497,31921,12,600,data/world/spawns.xml,7076,1,encounter-level verification required
+G07076/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32499,31921,12,600,data/world/spawns.xml,7076,2,encounter-level verification required
+G07076/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32498,31923,12,600,data/world/spawns.xml,7076,3,encounter-level verification required
+G07076/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32495,31925,12,600,data/world/spawns.xml,7076,4,encounter-level verification required
+G07079/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32471,31929,12,600,data/world/spawns.xml,7079,1,encounter-level verification required
+G07079/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32471,31930,12,600,data/world/spawns.xml,7079,2,encounter-level verification required
+G07080/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32489,31930,12,600,data/world/spawns.xml,7080,1,encounter-level verification required
+G07080/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32490,31930,12,600,data/world/spawns.xml,7080,2,encounter-level verification required
+G07080/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32490,31933,12,600,data/world/spawns.xml,7080,3,encounter-level verification required
+G07082/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32543,31933,12,600,data/world/spawns.xml,7082,1,encounter-level verification required
+G07082/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32545,31933,12,600,data/world/spawns.xml,7082,2,encounter-level verification required
+G07084/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32437,31936,12,600,data/world/spawns.xml,7084,1,encounter-level verification required
+G07084/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32439,31938,12,600,data/world/spawns.xml,7084,2,encounter-level verification required
+G07084/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32437,31939,12,600,data/world/spawns.xml,7084,3,encounter-level verification required
+G07085/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32525,31934,12,600,data/world/spawns.xml,7085,1,encounter-level verification required
+G07085/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32526,31936,12,600,data/world/spawns.xml,7085,2,encounter-level verification required
+G07085/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32528,31936,12,600,data/world/spawns.xml,7085,3,encounter-level verification required
+G07089/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32669,31939,12,600,data/world/spawns.xml,7089,1,encounter-level verification required
+G07091/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32451,31942,12,600,data/world/spawns.xml,7091,1,encounter-level verification required
+G07091/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32452,31943,12,600,data/world/spawns.xml,7091,2,encounter-level verification required
+G07091/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32450,31945,12,600,data/world/spawns.xml,7091,3,encounter-level verification required
+G07092/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32529,31942,12,600,data/world/spawns.xml,7092,1,encounter-level verification required
+G07092/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32528,31943,12,600,data/world/spawns.xml,7092,2,encounter-level verification required
+G07092/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32527,31945,12,600,data/world/spawns.xml,7092,3,encounter-level verification required
+G07092/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32527,31946,12,600,data/world/spawns.xml,7092,4,encounter-level verification required
+G07096/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32509,31945,12,600,data/world/spawns.xml,7096,1,encounter-level verification required
+G07096/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32510,31947,12,600,data/world/spawns.xml,7096,2,encounter-level verification required
+G07096/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32512,31947,12,600,data/world/spawns.xml,7096,3,encounter-level verification required
+G07097/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32430,31950,12,600,data/world/spawns.xml,7097,1,encounter-level verification required
+G07098/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32484,31952,12,600,data/world/spawns.xml,7098,1,encounter-level verification required
+G07098/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32483,31953,12,600,data/world/spawns.xml,7098,2,encounter-level verification required
+G07098/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32482,31954,12,600,data/world/spawns.xml,7098,3,encounter-level verification required
+G07099/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32501,31959,12,600,data/world/spawns.xml,7099,1,encounter-level verification required
+G07099/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32500,31960,12,600,data/world/spawns.xml,7099,2,encounter-level verification required
+G07099/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32504,31960,12,600,data/world/spawns.xml,7099,3,encounter-level verification required
+G07101/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32537,31962,12,600,data/world/spawns.xml,7101,1,encounter-level verification required
+G07101/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32535,31965,12,600,data/world/spawns.xml,7101,2,encounter-level verification required
+G07101/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32536,31967,12,600,data/world/spawns.xml,7101,3,encounter-level verification required
+G07102/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32454,31966,12,600,data/world/spawns.xml,7102,1,encounter-level verification required
+G07102/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32454,31968,12,600,data/world/spawns.xml,7102,2,encounter-level verification required
+G07103/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32553,31968,12,600,data/world/spawns.xml,7103,1,encounter-level verification required
+G07103/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32554,31969,12,600,data/world/spawns.xml,7103,2,encounter-level verification required
+G07104/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32522,31969,12,600,data/world/spawns.xml,7104,1,encounter-level verification required
+G07104/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32521,31970,12,600,data/world/spawns.xml,7104,2,encounter-level verification required
+G07105/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32430,31971,12,600,data/world/spawns.xml,7105,1,encounter-level verification required
+G07105/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32431,31972,12,600,data/world/spawns.xml,7105,2,encounter-level verification required
+G07106/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32485,31974,12,600,data/world/spawns.xml,7106,1,encounter-level verification required
+G07106/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32485,31976,12,600,data/world/spawns.xml,7106,2,encounter-level verification required
+G07107/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32445,31983,12,600,data/world/spawns.xml,7107,1,encounter-level verification required
+G07107/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32444,31985,12,600,data/world/spawns.xml,7107,2,encounter-level verification required
+G07107/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32444,31987,12,600,data/world/spawns.xml,7107,3,encounter-level verification required
+G07108/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32506,31986,12,600,data/world/spawns.xml,7108,1,encounter-level verification required
+G07108/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32508,31986,12,600,data/world/spawns.xml,7108,2,encounter-level verification required
+G07108/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32508,31988,12,600,data/world/spawns.xml,7108,3,encounter-level verification required
+G07109/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32559,31989,12,600,data/world/spawns.xml,7109,1,encounter-level verification required
+G07109/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32561,31989,12,600,data/world/spawns.xml,7109,2,encounter-level verification required
+G07579/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,33300,31691,13,500,data/world/spawns.xml,7579,2,encounter-level verification required; exceptional historical timer
+G07579/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,33303,31693,13,500,data/world/spawns.xml,7579,4,encounter-level verification required; exceptional historical timer
+G07580/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,33306,31695,13,500,data/world/spawns.xml,7580,1,encounter-level verification required; exceptional historical timer
+G07591/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32606,31874,13,600,data/world/spawns.xml,7591,1,encounter-level verification required
+G07591/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32605,31876,13,600,data/world/spawns.xml,7591,2,encounter-level verification required
+G07591/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32604,31877,13,600,data/world/spawns.xml,7591,3,encounter-level verification required
+G07593/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32564,31875,13,600,data/world/spawns.xml,7593,1,encounter-level verification required
+G07593/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32564,31876,13,600,data/world/spawns.xml,7593,2,encounter-level verification required
+G07593/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32565,31878,13,600,data/world/spawns.xml,7593,3,encounter-level verification required
+G07595/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32626,31873,13,600,data/world/spawns.xml,7595,1,encounter-level verification required
+G07595/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32627,31875,13,600,data/world/spawns.xml,7595,2,encounter-level verification required
+G07597/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32459,31876,13,600,data/world/spawns.xml,7597,1,encounter-level verification required
+G07597/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32459,31877,13,600,data/world/spawns.xml,7597,2,encounter-level verification required
+G07597/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32461,31877,13,600,data/world/spawns.xml,7597,3,encounter-level verification required
+G07597/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32458,31878,13,600,data/world/spawns.xml,7597,4,encounter-level verification required
+G07597/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32458,31879,13,600,data/world/spawns.xml,7597,5,encounter-level verification required
+G07599/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32583,31879,13,600,data/world/spawns.xml,7599,1,encounter-level verification required
+G07599/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32583,31881,13,600,data/world/spawns.xml,7599,2,encounter-level verification required
+G07600/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32503,31881,13,600,data/world/spawns.xml,7600,1,encounter-level verification required
+G07600/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32505,31881,13,600,data/world/spawns.xml,7600,2,encounter-level verification required
+G07600/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32501,31882,13,600,data/world/spawns.xml,7600,3,encounter-level verification required
+G07600/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32499,31885,13,600,data/world/spawns.xml,7600,4,encounter-level verification required
+G07600/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32501,31885,13,600,data/world/spawns.xml,7600,5,encounter-level verification required
+G07600/C06,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32503,31885,13,600,data/world/spawns.xml,7600,6,encounter-level verification required
+G07601/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32526,31878,13,600,data/world/spawns.xml,7601,1,encounter-level verification required
+G07601/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32527,31880,13,600,data/world/spawns.xml,7601,2,encounter-level verification required
+G07601/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32527,31881,13,600,data/world/spawns.xml,7601,3,encounter-level verification required
+G07601/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32527,31882,13,600,data/world/spawns.xml,7601,4,encounter-level verification required
+G07601/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32529,31882,13,600,data/world/spawns.xml,7601,5,encounter-level verification required
+G07602/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32609,31881,13,600,data/world/spawns.xml,7602,1,encounter-level verification required
+G07602/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32610,31881,13,600,data/world/spawns.xml,7602,2,encounter-level verification required
+G07602/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32609,31884,13,600,data/world/spawns.xml,7602,3,encounter-level verification required
+G07604/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32502,31887,13,600,data/world/spawns.xml,7604,1,encounter-level verification required
+G07604/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32503,31889,13,600,data/world/spawns.xml,7604,2,encounter-level verification required
+G07606/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32470,31891,13,600,data/world/spawns.xml,7606,1,encounter-level verification required
+G07606/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32473,31891,13,600,data/world/spawns.xml,7606,2,encounter-level verification required
+G07606/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32469,31892,13,600,data/world/spawns.xml,7606,3,encounter-level verification required
+G07606/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32470,31893,13,600,data/world/spawns.xml,7606,4,encounter-level verification required
+G07606/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32470,31895,13,600,data/world/spawns.xml,7606,5,encounter-level verification required
+G07607/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32575,31889,13,600,data/world/spawns.xml,7607,1,encounter-level verification required
+G07607/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32576,31890,13,600,data/world/spawns.xml,7607,2,encounter-level verification required
+G07607/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32575,31891,13,600,data/world/spawns.xml,7607,3,encounter-level verification required
+G07607/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32578,31893,13,600,data/world/spawns.xml,7607,4,encounter-level verification required
+G07608/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32515,31891,13,600,data/world/spawns.xml,7608,1,encounter-level verification required
+G07608/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32515,31892,13,600,data/world/spawns.xml,7608,2,encounter-level verification required
+G07608/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32518,31893,13,600,data/world/spawns.xml,7608,3,encounter-level verification required
+G07609/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32669,31892,13,600,data/world/spawns.xml,7609,1,encounter-level verification required
+G07609/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32668,31893,13,600,data/world/spawns.xml,7609,2,encounter-level verification required
+G07609/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32669,31894,13,600,data/world/spawns.xml,7609,3,encounter-level verification required
+G07614/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32584,31901,13,600,data/world/spawns.xml,7614,1,encounter-level verification required
+G07614/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32586,31901,13,600,data/world/spawns.xml,7614,2,encounter-level verification required
+G07614/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32587,31903,13,600,data/world/spawns.xml,7614,3,encounter-level verification required
+G07614/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32581,31904,13,600,data/world/spawns.xml,7614,4,encounter-level verification required
+G07614/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32583,31904,13,600,data/world/spawns.xml,7614,5,encounter-level verification required
+G07615/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32600,31907,13,600,data/world/spawns.xml,7615,1,encounter-level verification required
+G07615/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32602,31908,13,600,data/world/spawns.xml,7615,2,encounter-level verification required
+G07615/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32603,31908,13,600,data/world/spawns.xml,7615,3,encounter-level verification required
+G07619/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32572,31910,13,600,data/world/spawns.xml,7619,1,encounter-level verification required
+G07619/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32576,31910,13,600,data/world/spawns.xml,7619,2,encounter-level verification required
+G07619/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32577,31912,13,600,data/world/spawns.xml,7619,3,encounter-level verification required
+G07619/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32574,31913,13,600,data/world/spawns.xml,7619,4,encounter-level verification required
+G07619/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32575,31913,13,600,data/world/spawns.xml,7619,5,encounter-level verification required
+G07619/C06,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32575,31916,13,600,data/world/spawns.xml,7619,6,encounter-level verification required
+G07621/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32604,31914,13,600,data/world/spawns.xml,7621,1,encounter-level verification required
+G07621/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32608,31916,13,600,data/world/spawns.xml,7621,2,encounter-level verification required
+G07621/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32605,31917,13,600,data/world/spawns.xml,7621,3,encounter-level verification required
+G07621/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32606,31918,13,600,data/world/spawns.xml,7621,4,encounter-level verification required
+G07622/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32481,31915,13,600,data/world/spawns.xml,7622,1,encounter-level verification required
+G07622/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32482,31915,13,600,data/world/spawns.xml,7622,2,encounter-level verification required
+G07622/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32478,31916,13,600,data/world/spawns.xml,7622,3,encounter-level verification required
+G07622/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32478,31917,13,600,data/world/spawns.xml,7622,4,encounter-level verification required
+G07626/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32553,31919,13,600,data/world/spawns.xml,7626,1,encounter-level verification required
+G07626/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32552,31920,13,600,data/world/spawns.xml,7626,3,encounter-level verification required
+G07626/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32555,31922,13,600,data/world/spawns.xml,7626,5,encounter-level verification required
+G07628/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32624,31917,13,600,data/world/spawns.xml,7628,1,encounter-level verification required
+G07628/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32621,31919,13,600,data/world/spawns.xml,7628,2,encounter-level verification required
+G07628/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32620,31920,13,600,data/world/spawns.xml,7628,3,encounter-level verification required
+G07628/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32619,31923,13,600,data/world/spawns.xml,7628,4,encounter-level verification required
+G07631/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32523,31918,13,600,data/world/spawns.xml,7631,1,encounter-level verification required
+G07631/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32525,31920,13,600,data/world/spawns.xml,7631,2,encounter-level verification required
+G07631/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32526,31921,13,600,data/world/spawns.xml,7631,3,encounter-level verification required
+G07635/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32493,31925,13,600,data/world/spawns.xml,7635,1,encounter-level verification required
+G07635/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32495,31925,13,600,data/world/spawns.xml,7635,2,encounter-level verification required
+G07635/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32492,31926,13,600,data/world/spawns.xml,7635,3,encounter-level verification required
+G07635/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32493,31926,13,600,data/world/spawns.xml,7635,4,encounter-level verification required
+G07636/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32518,31920,13,600,data/world/spawns.xml,7636,1,encounter-level verification required
+G07636/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32515,31923,13,600,data/world/spawns.xml,7636,2,encounter-level verification required
+G07636/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32515,31924,13,600,data/world/spawns.xml,7636,3,encounter-level verification required
+G07636/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32513,31925,13,600,data/world/spawns.xml,7636,4,encounter-level verification required
+G07636/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32517,31929,13,600,data/world/spawns.xml,7636,5,encounter-level verification required
+G07648/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32501,31934,13,600,data/world/spawns.xml,7648,1,encounter-level verification required
+G07648/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32502,31938,13,600,data/world/spawns.xml,7648,2,encounter-level verification required
+G07648/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32502,31940,13,600,data/world/spawns.xml,7648,3,encounter-level verification required
+G07648/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32505,31940,13,600,data/world/spawns.xml,7648,4,encounter-level verification required
+G07649/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32669,31938,13,600,data/world/spawns.xml,7649,1,encounter-level verification required
+G07649/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32668,31940,13,600,data/world/spawns.xml,7649,2,encounter-level verification required
+G07649/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32668,31941,13,600,data/world/spawns.xml,7649,3,encounter-level verification required
+G07649/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32665,31942,13,600,data/world/spawns.xml,7649,4,encounter-level verification required
+G07652/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32632,31934,13,600,data/world/spawns.xml,7652,1,encounter-level verification required
+G07652/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32634,31936,13,600,data/world/spawns.xml,7652,2,encounter-level verification required
+G07652/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32629,31939,13,600,data/world/spawns.xml,7652,3,encounter-level verification required
+G07652/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32631,31939,13,600,data/world/spawns.xml,7652,4,encounter-level verification required
+G07652/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32630,31940,13,600,data/world/spawns.xml,7652,5,encounter-level verification required
+G07654/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32664,31940,13,600,data/world/spawns.xml,7654,1,encounter-level verification required
+G07654/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32665,31943,13,600,data/world/spawns.xml,7654,2,encounter-level verification required
+G07658/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32437,31942,13,600,data/world/spawns.xml,7658,1,encounter-level verification required
+G07658/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32437,31943,13,600,data/world/spawns.xml,7658,2,encounter-level verification required
+G07658/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32438,31943,13,600,data/world/spawns.xml,7658,3,encounter-level verification required
+G07658/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32440,31945,13,600,data/world/spawns.xml,7658,4,encounter-level verification required
+G07658/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32441,31947,13,600,data/world/spawns.xml,7658,5,encounter-level verification required
+G07667/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32502,31951,13,600,data/world/spawns.xml,7667,1,encounter-level verification required
+G07667/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32503,31953,13,600,data/world/spawns.xml,7667,2,encounter-level verification required
+G07667/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32502,31954,13,600,data/world/spawns.xml,7667,3,encounter-level verification required
+G07667/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32506,31954,13,600,data/world/spawns.xml,7667,4,encounter-level verification required
+G07668/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32664,31951,13,600,data/world/spawns.xml,7668,1,encounter-level verification required
+G07668/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32665,31951,13,600,data/world/spawns.xml,7668,2,encounter-level verification required
+G07668/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32663,31953,13,600,data/world/spawns.xml,7668,3,encounter-level verification required
+G07668/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32663,31955,13,600,data/world/spawns.xml,7668,4,encounter-level verification required
+G07673/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32455,31956,13,600,data/world/spawns.xml,7673,1,encounter-level verification required
+G07673/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32455,31957,13,600,data/world/spawns.xml,7673,2,encounter-level verification required
+G07673/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32461,31957,13,600,data/world/spawns.xml,7673,3,encounter-level verification required
+G07673/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32456,31958,13,600,data/world/spawns.xml,7673,4,encounter-level verification required
+G07673/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32462,31958,13,600,data/world/spawns.xml,7673,5,encounter-level verification required
+G07673/C06,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32454,31960,13,600,data/world/spawns.xml,7673,6,encounter-level verification required
+G07674/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32465,31955,13,600,data/world/spawns.xml,7674,1,encounter-level verification required
+G07674/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32463,31959,13,600,data/world/spawns.xml,7674,2,encounter-level verification required
+G07677/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32602,31961,13,600,data/world/spawns.xml,7677,1,encounter-level verification required
+G07680/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32510,31965,13,600,data/world/spawns.xml,7680,1,encounter-level verification required
+G07680/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32512,31965,13,600,data/world/spawns.xml,7680,2,encounter-level verification required
+G07680/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32514,31965,13,600,data/world/spawns.xml,7680,3,encounter-level verification required
+G07680/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32514,31969,13,600,data/world/spawns.xml,7680,4,encounter-level verification required
+G07682/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32480,31968,13,600,data/world/spawns.xml,7682,1,encounter-level verification required
+G07682/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32479,31969,13,600,data/world/spawns.xml,7682,2,encounter-level verification required
+G07682/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32480,31969,13,600,data/world/spawns.xml,7682,3,encounter-level verification required
+G07682/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32478,31970,13,600,data/world/spawns.xml,7682,4,encounter-level verification required
+G07682/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32477,31971,13,600,data/world/spawns.xml,7682,5,encounter-level verification required
+G07682/C06,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32479,31971,13,600,data/world/spawns.xml,7682,6,encounter-level verification required
+G07683/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32662,31970,13,600,data/world/spawns.xml,7683,3,encounter-level verification required
+G07683/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32663,31971,13,600,data/world/spawns.xml,7683,4,encounter-level verification required
+G07683/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32664,31972,13,600,data/world/spawns.xml,7683,5,encounter-level verification required
+G07686/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32515,31975,13,600,data/world/spawns.xml,7686,1,encounter-level verification required
+G07686/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32518,31975,13,600,data/world/spawns.xml,7686,2,encounter-level verification required
+G07686/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32513,31976,13,600,data/world/spawns.xml,7686,3,encounter-level verification required
+G07686/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32518,31976,13,600,data/world/spawns.xml,7686,4,encounter-level verification required
+G07686/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32513,31979,13,600,data/world/spawns.xml,7686,5,encounter-level verification required
+G07686/C06,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32514,31979,13,600,data/world/spawns.xml,7686,6,encounter-level verification required
+G07686/C07,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32513,31980,13,600,data/world/spawns.xml,7686,7,encounter-level verification required
+G07688/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32662,31979,13,600,data/world/spawns.xml,7688,1,encounter-level verification required
+G07688/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32663,31980,13,600,data/world/spawns.xml,7688,2,encounter-level verification required
+G07688/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32661,31981,13,600,data/world/spawns.xml,7688,3,encounter-level verification required
+G07688/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32665,31981,13,600,data/world/spawns.xml,7688,4,encounter-level verification required
+G07688/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32662,31982,13,600,data/world/spawns.xml,7688,5,encounter-level verification required
+G07690/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32557,31986,13,600,data/world/spawns.xml,7690,2,encounter-level verification required
+G07691/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32650,31984,13,600,data/world/spawns.xml,7691,1,encounter-level verification required
+G07691/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf,32648,31985,13,600,data/world/spawns.xml,7691,2,encounter-level verification required
+G07692/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32560,31984,13,600,data/world/spawns.xml,7692,1,encounter-level verification required
+G07692/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32559,31986,13,600,data/world/spawns.xml,7692,2,encounter-level verification required
+G07692/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32558,31987,13,600,data/world/spawns.xml,7692,3,encounter-level verification required
+G07692/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32558,31991,13,600,data/world/spawns.xml,7692,4,encounter-level verification required
+G07692/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32561,31991,13,600,data/world/spawns.xml,7692,5,encounter-level verification required
+G07692/C06,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32558,31992,13,600,data/world/spawns.xml,7692,6,encounter-level verification required
+G07693/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32459,31986,13,600,data/world/spawns.xml,7693,1,encounter-level verification required
+G07693/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32458,31987,13,600,data/world/spawns.xml,7693,2,encounter-level verification required
+G07693/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32456,31988,13,600,data/world/spawns.xml,7693,3,encounter-level verification required
+G07693/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32457,31988,13,600,data/world/spawns.xml,7693,4,encounter-level verification required
+G07693/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32452,31991,13,600,data/world/spawns.xml,7693,5,encounter-level verification required
+G07694/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32525,31989,13,600,data/world/spawns.xml,7694,1,encounter-level verification required
+G07694/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32526,31992,13,600,data/world/spawns.xml,7694,2,encounter-level verification required
+G07694/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32527,31992,13,600,data/world/spawns.xml,7694,3,encounter-level verification required
+G07694/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32527,31995,13,600,data/world/spawns.xml,7694,4,encounter-level verification required
+G07696/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32496,31994,13,600,data/world/spawns.xml,7696,1,encounter-level verification required
+G07696/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32491,31995,13,600,data/world/spawns.xml,7696,2,encounter-level verification required
+G07696/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32492,31996,13,600,data/world/spawns.xml,7696,3,encounter-level verification required
+G07696/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32493,31996,13,600,data/world/spawns.xml,7696,4,encounter-level verification required
+G07697/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32452,32006,13,8000,data/world/spawns.xml,7697,1,encounter-level verification required; exceptional historical timer
+G07697/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32451,32007,13,8000,data/world/spawns.xml,7697,2,encounter-level verification required; exceptional historical timer
+G08396/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32628,31874,14,600,data/world/spawns.xml,8396,1,encounter-level verification required
+G08396/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32629,31874,14,600,data/world/spawns.xml,8396,2,encounter-level verification required
+G08396/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32630,31875,14,600,data/world/spawns.xml,8396,3,encounter-level verification required
+G08411/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32552,31896,14,600,data/world/spawns.xml,8411,1,encounter-level verification required
+G08452/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32553,31925,14,600,data/world/spawns.xml,8452,1,encounter-level verification required
+G08464/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32596,31934,14,600,data/world/spawns.xml,8464,1,encounter-level verification required
+G08477/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32500,31943,14,600,data/world/spawns.xml,8477,3,encounter-level verification required
+G08477/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32498,31944,14,600,data/world/spawns.xml,8477,4,encounter-level verification required
+G08479/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32498,31945,14,600,data/world/spawns.xml,8479,1,encounter-level verification required
+G08479/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32499,31945,14,600,data/world/spawns.xml,8479,2,encounter-level verification required
+G08479/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32500,31945,14,600,data/world/spawns.xml,8479,3,encounter-level verification required
+G08479/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32501,31945,14,600,data/world/spawns.xml,8479,4,encounter-level verification required
+G08480/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32495,31948,14,600,data/world/spawns.xml,8480,1,encounter-level verification required
+G08484/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32492,31949,14,600,data/world/spawns.xml,8484,1,encounter-level verification required
+G08484/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32490,31951,14,600,data/world/spawns.xml,8484,2,encounter-level verification required
+G08484/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32494,31952,14,600,data/world/spawns.xml,8484,3,encounter-level verification required
+G08484/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32493,31953,14,600,data/world/spawns.xml,8484,4,encounter-level verification required
+G08484/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32500,31954,14,600,data/world/spawns.xml,8484,5,encounter-level verification required
+G08484/C06,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32494,31955,14,600,data/world/spawns.xml,8484,6,encounter-level verification required
+G08484/C07,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32495,31956,14,600,data/world/spawns.xml,8484,7,encounter-level verification required
+G08484/C08,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32493,31957,14,600,data/world/spawns.xml,8484,8,encounter-level verification required
+G08484/C09,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32496,31957,14,600,data/world/spawns.xml,8484,9,encounter-level verification required
+G08484/C10,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32500,31957,14,600,data/world/spawns.xml,8484,10,encounter-level verification required
+G08484/C11,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32493,31958,14,600,data/world/spawns.xml,8484,11,encounter-level verification required
+G08484/C12,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32496,31958,14,600,data/world/spawns.xml,8484,12,encounter-level verification required
+G08486/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32503,31954,14,600,data/world/spawns.xml,8486,1,encounter-level verification required
+G08490/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32519,31953,14,600,data/world/spawns.xml,8490,1,encounter-level verification required
+G08490/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32518,31955,14,600,data/world/spawns.xml,8490,2,encounter-level verification required
+G08490/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32521,31957,14,600,data/world/spawns.xml,8490,3,encounter-level verification required
+G08490/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32519,31958,14,600,data/world/spawns.xml,8490,4,encounter-level verification required
+G08490/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32517,31959,14,600,data/world/spawns.xml,8490,5,encounter-level verification required
+G08490/C06,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32519,31959,14,600,data/world/spawns.xml,8490,6,encounter-level verification required
+G08490/C08,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32519,31960,14,600,data/world/spawns.xml,8490,8,encounter-level verification required
+G08497/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32506,31960,14,600,data/world/spawns.xml,8497,1,encounter-level verification required
+G08497/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32507,31961,14,600,data/world/spawns.xml,8497,2,encounter-level verification required
+G08497/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32506,31962,14,600,data/world/spawns.xml,8497,3,encounter-level verification required
+G08497/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32513,31962,14,600,data/world/spawns.xml,8497,4,encounter-level verification required
+G08497/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32512,31963,14,600,data/world/spawns.xml,8497,5,encounter-level verification required
+G08497/C06,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32505,31964,14,600,data/world/spawns.xml,8497,6,encounter-level verification required
+G08497/C08,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32511,31964,14,600,data/world/spawns.xml,8497,8,encounter-level verification required
+G08497/C09,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32505,31965,14,600,data/world/spawns.xml,8497,9,encounter-level verification required
+G08497/C10,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32506,31965,14,600,data/world/spawns.xml,8497,10,encounter-level verification required
+G08497/C12,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32511,31967,14,600,data/world/spawns.xml,8497,12,encounter-level verification required
+G08497/C13,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32513,31969,14,600,data/world/spawns.xml,8497,13,encounter-level verification required
+G08497/C14,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32514,31969,14,600,data/world/spawns.xml,8497,14,encounter-level verification required
+G08497/C15,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32515,31969,14,600,data/world/spawns.xml,8497,15,encounter-level verification required
+G08498/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32502,31966,14,600,data/world/spawns.xml,8498,1,encounter-level verification required
+G08498/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32500,31968,14,600,data/world/spawns.xml,8498,2,encounter-level verification required
+G08498/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32503,31971,14,600,data/world/spawns.xml,8498,5,encounter-level verification required
+G08499/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32499,31965,14,600,data/world/spawns.xml,8499,1,encounter-level verification required
+G08501/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32485,31969,14,600,data/world/spawns.xml,8501,2,encounter-level verification required
+G08501/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32484,31970,14,600,data/world/spawns.xml,8501,3,encounter-level verification required
+G08501/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32486,31971,14,600,data/world/spawns.xml,8501,5,encounter-level verification required
+G08501/C06,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32487,31971,14,600,data/world/spawns.xml,8501,6,encounter-level verification required
+G08502/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32489,31971,14,600,data/world/spawns.xml,8502,1,encounter-level verification required
+G08502/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32488,31972,14,600,data/world/spawns.xml,8502,2,encounter-level verification required
+G08502/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32488,31973,14,600,data/world/spawns.xml,8502,3,encounter-level verification required
+G08502/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32489,31973,14,600,data/world/spawns.xml,8502,4,encounter-level verification required
+G08502/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32490,31973,14,600,data/world/spawns.xml,8502,5,encounter-level verification required
+G08503/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32500,31973,14,600,data/world/spawns.xml,8503,1,encounter-level verification required
+G08503/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32504,31973,14,600,data/world/spawns.xml,8503,2,encounter-level verification required
+G08503/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32500,31974,14,600,data/world/spawns.xml,8503,3,encounter-level verification required
+G08505/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32515,31973,14,600,data/world/spawns.xml,8505,1,encounter-level verification required
+G08505/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32516,31974,14,600,data/world/spawns.xml,8505,2,encounter-level verification required
+G08505/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32516,31975,14,600,data/world/spawns.xml,8505,3,encounter-level verification required
+G08505/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32516,31976,14,600,data/world/spawns.xml,8505,4,encounter-level verification required
+G08505/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32516,31977,14,600,data/world/spawns.xml,8505,5,encounter-level verification required
+G08505/C06,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32520,31978,14,600,data/world/spawns.xml,8505,6,encounter-level verification required
+G08506/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32502,31976,14,600,data/world/spawns.xml,8506,1,encounter-level verification required
+G08506/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32498,31977,14,600,data/world/spawns.xml,8506,2,encounter-level verification required
+G08507/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32504,31977,14,600,data/world/spawns.xml,8507,1,encounter-level verification required
+G08507/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32496,31980,14,600,data/world/spawns.xml,8507,2,encounter-level verification required
+G08508/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32514,31979,14,600,data/world/spawns.xml,8508,1,encounter-level verification required
+G08508/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32511,31980,14,600,data/world/spawns.xml,8508,2,encounter-level verification required
+G08510/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32646,31986,14,600,data/world/spawns.xml,8510,1,encounter-level verification required
+G08511/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32494,31983,14,600,data/world/spawns.xml,8511,1,encounter-level verification required
+G08511/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32493,31985,14,600,data/world/spawns.xml,8511,2,encounter-level verification required
+G08511/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32494,31985,14,600,data/world/spawns.xml,8511,3,encounter-level verification required
+G08511/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32496,31988,14,600,data/world/spawns.xml,8511,4,encounter-level verification required
+G08511/C06,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32496,31989,14,600,data/world/spawns.xml,8511,6,encounter-level verification required
+G08511/C08,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32499,31989,14,600,data/world/spawns.xml,8511,8,encounter-level verification required
+G08511/C09,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32500,31989,14,600,data/world/spawns.xml,8511,9,encounter-level verification required
+G08511/C10,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32495,31990,14,600,data/world/spawns.xml,8511,10,encounter-level verification required
+G08512/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32557,31987,14,600,data/world/spawns.xml,8512,1,encounter-level verification required
+G08512/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32562,31987,14,600,data/world/spawns.xml,8512,2,encounter-level verification required
+G08512/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32560,31988,14,600,data/world/spawns.xml,8512,3,encounter-level verification required
+G09195/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,33294,31684,15,500,data/world/spawns.xml,9195,1,encounter-level verification required; exceptional historical timer
+G09195/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,33292,31686,15,500,data/world/spawns.xml,9195,2,encounter-level verification required; exceptional historical timer
+G09195/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,33295,31687,15,500,data/world/spawns.xml,9195,3,encounter-level verification required; exceptional historical timer
+G09195/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,33288,31690,15,500,data/world/spawns.xml,9195,4,encounter-level verification required; exceptional historical timer
+G09205/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,33302,31706,15,500,data/world/spawns.xml,9205,1,encounter-level verification required; exceptional historical timer
+G09205/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,33301,31708,15,500,data/world/spawns.xml,9205,2,encounter-level verification required; exceptional historical timer
+G09212/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32505,31722,15,700,data/world/spawns.xml,9212,5,encounter-level verification required; exceptional historical timer
+G09212/C06,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32506,31722,15,700,data/world/spawns.xml,9212,6,encounter-level verification required; exceptional historical timer
+G09222/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32566,31876,15,600,data/world/spawns.xml,9222,2,encounter-level verification required
+G09222/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32568,31876,15,600,data/world/spawns.xml,9222,3,encounter-level verification required
+G09222/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32568,31877,15,600,data/world/spawns.xml,9222,5,encounter-level verification required
+G09224/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32612,31877,15,600,data/world/spawns.xml,9224,1,encounter-level verification required
+G09224/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32615,31877,15,600,data/world/spawns.xml,9224,2,encounter-level verification required
+G09224/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32617,31879,15,600,data/world/spawns.xml,9224,3,encounter-level verification required
+G09226/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32634,31878,15,600,data/world/spawns.xml,9226,1,encounter-level verification required
+G09226/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32635,31879,15,600,data/world/spawns.xml,9226,2,encounter-level verification required
+G09226/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32637,31880,15,600,data/world/spawns.xml,9226,3,encounter-level verification required
+G09229/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32555,31880,15,600,data/world/spawns.xml,9229,1,encounter-level verification required
+G09229/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32557,31880,15,600,data/world/spawns.xml,9229,2,encounter-level verification required
+G09229/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32555,31883,15,600,data/world/spawns.xml,9229,3,encounter-level verification required
+G09231/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32644,31882,15,600,data/world/spawns.xml,9231,2,encounter-level verification required
+G09231/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32646,31883,15,600,data/world/spawns.xml,9231,3,encounter-level verification required
+G09232/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32607,31881,15,600,data/world/spawns.xml,9232,1,encounter-level verification required
+G09232/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32604,31883,15,600,data/world/spawns.xml,9232,2,encounter-level verification required
+G09232/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32604,31884,15,600,data/world/spawns.xml,9232,3,encounter-level verification required
+G09233/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32582,31881,15,600,data/world/spawns.xml,9233,1,encounter-level verification required
+G09233/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32579,31882,15,600,data/world/spawns.xml,9233,2,encounter-level verification required
+G09233/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32580,31882,15,600,data/world/spawns.xml,9233,3,encounter-level verification required
+G09233/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32581,31882,15,600,data/world/spawns.xml,9233,4,encounter-level verification required
+G09233/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32583,31882,15,600,data/world/spawns.xml,9233,5,encounter-level verification required
+G09235/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32647,31882,15,600,data/world/spawns.xml,9235,1,encounter-level verification required
+G09235/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32648,31882,15,600,data/world/spawns.xml,9235,2,encounter-level verification required
+G09235/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32647,31883,15,600,data/world/spawns.xml,9235,3,encounter-level verification required
+G09235/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32647,31885,15,600,data/world/spawns.xml,9235,4,encounter-level verification required
+G09236/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32650,31883,15,600,data/world/spawns.xml,9236,1,encounter-level verification required
+G09239/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32554,31884,15,600,data/world/spawns.xml,9239,1,encounter-level verification required
+G09239/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32554,31885,15,600,data/world/spawns.xml,9239,2,encounter-level verification required
+G09239/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32555,31885,15,600,data/world/spawns.xml,9239,3,encounter-level verification required
+G09245/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32635,31890,15,600,data/world/spawns.xml,9245,1,encounter-level verification required
+G09245/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32634,31891,15,600,data/world/spawns.xml,9245,2,encounter-level verification required
+G09247/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32563,31896,15,600,data/world/spawns.xml,9247,1,encounter-level verification required
+G09261/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32548,31910,15,600,data/world/spawns.xml,9261,1,encounter-level verification required
+G09261/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32550,31911,15,600,data/world/spawns.xml,9261,2,encounter-level verification required
+G09261/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32553,31912,15,600,data/world/spawns.xml,9261,3,encounter-level verification required
+G09261/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32551,31913,15,600,data/world/spawns.xml,9261,4,encounter-level verification required
+G09261/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32553,31915,15,600,data/world/spawns.xml,9261,5,encounter-level verification required
+G09267/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32564,31924,15,600,data/world/spawns.xml,9267,1,encounter-level verification required
+G09267/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32565,31926,15,600,data/world/spawns.xml,9267,2,encounter-level verification required
+G09270/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32598,31925,15,600,data/world/spawns.xml,9270,1,encounter-level verification required
+G09270/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32597,31926,15,600,data/world/spawns.xml,9270,2,encounter-level verification required
+G09270/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32599,31926,15,600,data/world/spawns.xml,9270,3,encounter-level verification required
+G09270/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32598,31927,15,600,data/world/spawns.xml,9270,4,encounter-level verification required
+G09270/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32595,31928,15,600,data/world/spawns.xml,9270,5,encounter-level verification required
+G09270/C06,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32595,31929,15,600,data/world/spawns.xml,9270,6,encounter-level verification required
+G09277/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32557,31939,15,600,data/world/spawns.xml,9277,1,encounter-level verification required
+G09277/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32558,31940,15,600,data/world/spawns.xml,9277,2,encounter-level verification required
+G09283/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32558,31955,15,600,data/world/spawns.xml,9283,1,encounter-level verification required
+G09283/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32558,31956,15,600,data/world/spawns.xml,9283,2,encounter-level verification required
+G09283/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32560,31956,15,600,data/world/spawns.xml,9283,3,encounter-level verification required
+G09283/C06,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32559,31958,15,600,data/world/spawns.xml,9283,6,encounter-level verification required
+G09288/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32576,31959,15,600,data/world/spawns.xml,9288,1,encounter-level verification required
+G09288/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32575,31960,15,600,data/world/spawns.xml,9288,2,encounter-level verification required
+G09288/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32578,31960,15,600,data/world/spawns.xml,9288,3,encounter-level verification required
+G09288/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32578,31961,15,600,data/world/spawns.xml,9288,4,encounter-level verification required
+G09292/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32568,31965,15,600,data/world/spawns.xml,9292,1,encounter-level verification required
+G09292/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32571,31965,15,600,data/world/spawns.xml,9292,2,encounter-level verification required
+G09292/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32570,31967,15,600,data/world/spawns.xml,9292,3,encounter-level verification required
+G09292/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32569,31968,15,600,data/world/spawns.xml,9292,4,encounter-level verification required
+G09293/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32626,31967,15,600,data/world/spawns.xml,9293,1,encounter-level verification required
+G09294/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32610,31969,15,600,data/world/spawns.xml,9294,1,encounter-level verification required
+G09294/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32607,31971,15,600,data/world/spawns.xml,9294,2,encounter-level verification required
+G09294/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32608,31971,15,600,data/world/spawns.xml,9294,3,encounter-level verification required
+G09294/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32610,31972,15,600,data/world/spawns.xml,9294,4,encounter-level verification required
+G09296/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32567,31972,15,600,data/world/spawns.xml,9296,1,encounter-level verification required
+G09296/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32566,31973,15,600,data/world/spawns.xml,9296,2,encounter-level verification required
+G09296/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32568,31975,15,600,data/world/spawns.xml,9296,3,encounter-level verification required
+G09299/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32600,31974,15,600,data/world/spawns.xml,9299,1,encounter-level verification required
+G09299/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32597,31975,15,600,data/world/spawns.xml,9299,2,encounter-level verification required
+G09299/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32598,31975,15,600,data/world/spawns.xml,9299,3,encounter-level verification required
+G09302/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32628,31979,15,600,data/world/spawns.xml,9302,1,encounter-level verification required
+G09302/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32625,31981,15,600,data/world/spawns.xml,9302,2,encounter-level verification required
+G09302/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32631,31981,15,600,data/world/spawns.xml,9302,3,encounter-level verification required
+G09302/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32630,31982,15,600,data/world/spawns.xml,9302,4,encounter-level verification required
+G09304/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32610,31989,15,600,data/world/spawns.xml,9304,1,encounter-level verification required
+G09306/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32606,31990,15,600,data/world/spawns.xml,9306,1,encounter-level verification required
+G09306/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32608,31990,15,600,data/world/spawns.xml,9306,2,encounter-level verification required
+G09307/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32551,31990,15,600,data/world/spawns.xml,9307,1,encounter-level verification required
+G09307/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32553,31990,15,600,data/world/spawns.xml,9307,2,encounter-level verification required
+G09307/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32551,31992,15,600,data/world/spawns.xml,9307,3,encounter-level verification required
+G09307/C04,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32553,31992,15,600,data/world/spawns.xml,9307,4,encounter-level verification required
+G09307/C05,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf guard,32552,31993,15,600,data/world/spawns.xml,9307,5,encounter-level verification required
+G09307/C06,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32553,31994,15,600,data/world/spawns.xml,9307,6,encounter-level verification required
+G09309/C01,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32626,31995,15,600,data/world/spawns.xml,9309,1,encounter-level verification required
+G09309/C02,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32629,31996,15,600,data/world/spawns.xml,9309,2,encounter-level verification required
+G09309/C03,UNVERIFIED_DO_NOT_ACTIVATE,candidate only,dwarf soldier,32627,31997,15,600,data/world/spawns.xml,9309,3,encounter-level verification required
