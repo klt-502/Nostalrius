@@ -12,6 +12,15 @@ class Container;
 class Tile;
 
 namespace EasyMode {
+static constexpr uint16_t LIGHT_WAND_ITEM_ID = 3046;
+static constexpr uint16_t LIGHT_WAND_LIT_ITEM_ID = 3047;
+static constexpr uint16_t LIGHT_WAND_ACTION_ID = 65006;
+bool isEndlessLightWand(const Item& item);
+void giveLightWand(Player& player);
+bool lightWandEnabled();
+uint32_t npcWandCount(Player& player, uint16_t id, int32_t subtype);
+bool npcRemoveWands(Player& player, uint16_t id, uint32_t amount, int32_t subtype);
+
 static constexpr int64_t AUTO_TARGET_UNREACHABLE_MS = 3000;
 static constexpr int GOLD_PICKUP_RADIUS_TILES = 5;
 static constexpr size_t MAX_REGISTERED_CORPSES = 1024;

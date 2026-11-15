@@ -97,6 +97,7 @@ static constexpr int32_t EVENT_DECAY_BUCKETS = 4;
 
 class Game
 {
+    friend struct LightWandTestAccess;
 	public:
 		Game() = default;
 		~Game();

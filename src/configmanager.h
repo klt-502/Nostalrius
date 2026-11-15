@@ -52,6 +52,7 @@ class ConfigManager
 			EASY_MODE_RESPAWN,
 			EASY_MODE_LOOT_BROKER,
 
+			EASY_MODE_ENDLESS_LIGHT_WAND,
 			LAST_BOOLEAN_CONFIG /* this must be the last one */
 		};
 

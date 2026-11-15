@@ -4,6 +4,7 @@
 easyModeEnabled = false
 easyModeEndlessRunes = false
 easyModeEndlessManaFluid = false
+easyModeEndlessLightWand = false
 easyModeCommands = false
 easyModeAutoTarget = false
 easyModeAutoGold = false

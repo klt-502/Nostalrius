@@ -26,6 +26,7 @@
 #include "spells.h"
 #include "monster.h"
 #include "scheduler.h"
+#include "easymode.h"
 
 extern Game g_game;
 extern Monsters g_monsters;
@@ -847,6 +848,10 @@ void BehaviourDatabase::checkAction(const NpcBehaviourAction* action, Player* pl
 			data = -1;
 		}
 
+        if (EasyMode::lightWandEnabled() && (type==EasyMode::LIGHT_WAND_ITEM_ID || type==EasyMode::LIGHT_WAND_LIT_ITEM_ID)) {
+            EasyMode::npcRemoveWands(*player,type,amount,data);
+            break;
+        }
 		if (!player->removeItemOfType(type, amount, data, true)) {
 			player->removeItemOfType(type, amount, data, false);
 		}
@@ -1019,7 +1024,9 @@ int32_t BehaviourDatabase::evaluate(NpcBehaviourNode* node, Player* player, cons
 		if (itemType.stackable || !itemType.hasSubType()) {
 			data = -1;
 		}
-		return player->getItemTypeCount(itemId, data);
+		if (EasyMode::lightWandEnabled() && (itemId==EasyMode::LIGHT_WAND_ITEM_ID || itemId==EasyMode::LIGHT_WAND_LIT_ITEM_ID))
+            return EasyMode::npcWandCount(*player,itemId,data);
+        return player->getItemTypeCount(itemId, data);
 	}
 	case BEHAVIOUR_TYPE_COUNTMONEY:
 		return player->getMoney();

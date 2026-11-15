@@ -45,6 +45,14 @@ static void require(bool condition, const char* message)
 	}
 }
 
+struct LightWandTestAccess {
+    static void expire(Item* item) {
+        item->setDuration(0);
+        g_game.cleanup();
+        for (int i=0;i<EVENT_DECAY_BUCKETS && !item->isRemoved() && item->getDuration()==0;++i) g_game.checkDecay();
+    }
+};
+
 static Group ordinaryGroup = {"Test", 0, 0, 0, 1, false};
 void testRespawnEngine(Player& observer);
 
@@ -173,6 +181,7 @@ int main(int argc, char** argv)
 	if (scenario == "defaults") {
 		require(!Broker::enabled() && !g_config.getBoolean(ConfigManager::EASY_MODE_LOOT_BROKER),
 		        "broker defaults disabled");
+        require(!EasyMode::lightWandEnabled() && g_config.getNumber(ConfigManager::EASY_MODE_RESPAWN_PERCENT)==50, "light disabled and respawn 50 defaults");
 		require(g_config.getNumber(ConfigManager::EASY_MODE_BROKER_GRACE_SECONDS) == 45 &&
 		            g_config.getNumber(ConfigManager::EASY_MODE_BROKER_COMMISSION_BPS) == 2500 &&
 		            g_config.getNumber(ConfigManager::EASY_MODE_BROKER_LEASH_TILES) == 7,
@@ -269,7 +278,7 @@ int main(int argc, char** argv)
 		testGoldBag();
 		return 0;
 	}
-	const bool enabled = scenario != "disabled" && scenario != "feature_disabled" && scenario != "defaults";
+	const bool enabled = scenario != "disabled" && scenario != "feature_disabled" && scenario != "defaults" && scenario != "light_disabled";
 	for (const auto& definition : EasyMode::CONSUMABLES) {
 		Item* item = Item::CreateItem(definition.itemId, definition.subtype ? definition.subtype : 2);
 		item->setActionId(definition.actionId);
@@ -289,6 +298,62 @@ int main(int argc, char** argv)
 		restored->decrementReferenceCounter();
 	}
 	Player* player = makePlayer();
+    if (scenario.rfind("light_",0)==0) {
+        const bool endless=scenario=="light_enabled";
+        Item* marked=carry(*player,3046,65006);
+        Container* bag=marked->getParent()->getContainer();
+        Item* ordinary=Item::CreateItem(3046);
+        require(g_game.internalAddItem(bag,ordinary)==RETURNVALUE_NOERROR,"ordinary wand alongside marked wand");
+        require(EasyMode::isEndlessLightWand(*marked)==endless,"exact wand and master/feature gates");
+        Item* spoof=Item::CreateItem(3160); spoof->setActionId(65006);
+        require(!EasyMode::isEndlessLightWand(*spoof),"arbitrary item with light AID never endless");
+        spoof->decrementReferenceCounter();
+        if(endless) {
+            const size_t before=EasyMode::getCarriedItems(*player).size();
+            EasyMode::giveLightWand(*player);
+            require(EasyMode::getCarriedItems(*player).size()==before,"nested marked wand prevents duplicate grant");
+            require(EasyMode::npcWandCount(*player,3046,-1)==1,"NPC values only ordinary wand");
+            require(EasyMode::npcRemoveWands(*player,3046,1,-1) && marked->getParent()==bag,"NPC sale leaves endless wand untouched");
+            require(!EasyMode::npcRemoveWands(*player,3046,1,-1),"cannot repeatedly sell free marked wand");
+        } else {
+            require(EasyMode::npcWandCount(*player,3046,-1)==2,"disabled marking has historical valuation");
+        }
+        Item* identity=marked;
+        require(g_actions->useItem(player,Position(0xFFFF,CONST_SLOT_BACKPACK,0),0,marked),"native ChangeUse lights wand");
+        require(marked==identity && marked->getID()==3047 && marked->getDuration()==3000000,
+                "same physical lit wand has authentic 3000-second duration");
+        require(Item::items[marked->getID()].lightLevel==8 && Item::items[marked->getID()].lightColor==209,
+                "native intensity and color unchanged");
+        if(endless) {
+            marked->setDuration(0);
+            LightWandTestAccess::expire(marked);
+            require(marked==identity && marked->getID()==3047 && marked->getParent()==bag &&
+                    marked->getDuration()==3000000 && marked->getActionId()==65006,
+                    "expiry renews same lit instance without depletion, replacement or duplication");
+            require(g_actions->useItem(player,Position(0xFFFF,CONST_SLOT_BACKPACK,0),0,marked) && marked->getID()==3046,
+                    "native toggle still switches light off");
+            Item* normal=Item::CreateItem(3046);
+            require(g_game.internalAddItem(bag,normal)==RETURNVALUE_NOERROR,"ordinary wand in enabled mode");
+            require(g_actions->useItem(player,Position(0xFFFF,CONST_SLOT_BACKPACK,0),0,normal),"ordinary native wand use");
+            normal->incrementReferenceCounter();
+            LightWandTestAccess::expire(normal);
+            require(normal->isRemoved(),"ordinary wand still depletes while endless feature enabled");
+            normal->decrementReferenceCounter();
+            Player* other=makePlayer(101,100);
+            // Empty player has no backpack: give one, then exercise real command grant.
+            Container* pack=Item::CreateItem(2854)->getContainer();
+            require(g_game.internalAddItem(other,pack,CONST_SLOT_BACKPACK)==RETURNVALUE_NOERROR,"grant recipient backpack");
+            EasyMode::giveLightWand(*other); EasyMode::giveLightWand(*other);
+            size_t count=0; for(Item* item:EasyMode::getCarriedItems(*other)) if(EasyMode::isEndlessLightWand(*item))++count;
+            require(count==1,"repeated light grant creates one exact carried wand");
+        } else {
+            marked->incrementReferenceCounter();
+            LightWandTestAccess::expire(marked);
+            require(marked->isRemoved(),"disabled marked wand depletes normally");
+            marked->decrementReferenceCounter();
+        }
+        return 0;
+    }
 	if (scenario == "respawn_enabled") {
 		testRespawnEngine(*player);
 		return 0;

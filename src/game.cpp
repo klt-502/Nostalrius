@@ -3717,6 +3717,13 @@ void Game::startDecay(Item* item)
 
 void Game::internalDecayItem(Item* item)
 {
+    if (item->getID()==EasyMode::LIGHT_WAND_LIT_ITEM_ID && EasyMode::isEndlessLightWand(*item)) {
+        // Renew the authentic duration on the same lit instance; no depletion transform.
+        item->setDefaultDuration();
+        item->setDecaying(DECAYING_FALSE);
+        startDecay(item);
+        return;
+    }
 	const ItemType& it = Item::items[item->getID()];
 	if (it.decayTo != 0) {
 		Item* newItem = transformItem(item, it.decayTo);

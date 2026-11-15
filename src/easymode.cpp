@@ -134,3 +134,58 @@ bool EasyMode::isPlayerControlled(const Creature& creature)
 	}
 	return master != nullptr; // Exclude malformed/cyclic master chains as well.
 }
+
+namespace {
+std::vector<Item*> allLightInventory(Player& player)
+{
+    std::vector<Item*> items;
+    for (int slot=CONST_SLOT_FIRST;slot<=CONST_SLOT_LAST;++slot)
+        if (Item* item=player.getInventoryItem(static_cast<slots_t>(slot))) items.push_back(item);
+    for (size_t i=0;i<items.size();++i)
+        if (Container* bag=items[i]->getContainer()) items.insert(items.end(),bag->getItemList().begin(),bag->getItemList().end());
+    return items;
+}
+}
+bool EasyMode::lightWandEnabled()
+{
+    return g_config.getBoolean(ConfigManager::EASY_MODE_ENABLED) && g_config.getBoolean(ConfigManager::EASY_MODE_ENDLESS_LIGHT_WAND);
+}
+bool EasyMode::isEndlessLightWand(const Item& item)
+{
+    return lightWandEnabled() && item.getActionId()==LIGHT_WAND_ACTION_ID &&
+           (item.getID()==LIGHT_WAND_ITEM_ID || item.getID()==LIGHT_WAND_LIT_ITEM_ID);
+}
+void EasyMode::giveLightWand(Player& player)
+{
+    if (!lightWandEnabled() || !g_config.getBoolean(ConfigManager::EASY_MODE_COMMANDS)) {
+        player.sendCancelMessage("Easy Mode endless light commands are disabled."); return;
+    }
+    for (Item* item : allLightInventory(player)) if (isEndlessLightWand(*item)) {
+        player.sendTextMessage(MESSAGE_STATUS_DEFAULT,"You already carry an endless Magic Light Wand. Use it normally."); return;
+    }
+    std::unique_ptr<Item> item(Item::CreateItem(LIGHT_WAND_ITEM_ID,1));
+    item->setActionId(LIGHT_WAND_ACTION_ID);
+    ReturnValue result=g_game.internalAddItem(&player,item.get(),INDEX_WHEREEVER);
+    if (result!=RETURNVALUE_NOERROR) { player.sendCancelMessage(result); return; }
+    item.release();
+    player.sendTextMessage(MESSAGE_STATUS_DEFAULT,"Endless Magic Light Wand received. Use it normally; it is not NPC-sellable.");
+}
+uint32_t EasyMode::npcWandCount(Player& player,uint16_t id,int32_t subtype)
+{
+    uint32_t count=0;
+    for(Item* item:allLightInventory(player))
+        if(item->getID()==id && !isEndlessLightWand(*item) && (subtype<0 || item->getSubType()==subtype)) count+=Item::countByType(item,subtype);
+    return count;
+}
+bool EasyMode::npcRemoveWands(Player& player,uint16_t id,uint32_t amount,int32_t subtype)
+{
+    if(npcWandCount(player,id,subtype)<amount) return false;
+    for(Item* item:allLightInventory(player)) {
+        if(!amount)break;
+        if(item->getID()!=id || isEndlessLightWand(*item) || (subtype>=0 && item->getSubType()!=subtype))continue;
+        const uint32_t count=std::min(amount,Item::countByType(item,subtype));
+        if(g_game.internalRemoveItem(item,count)!=RETURNVALUE_NOERROR)return false;
+        amount-=count;
+    }
+    return amount==0;
+}

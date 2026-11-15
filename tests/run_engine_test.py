@@ -77,6 +77,10 @@ with tempfile.TemporaryDirectory(prefix="zedas-engine-") as directory:
         'easyModeCommands = true\neasyModeAutoTarget = true\neasyModeAutoGold = true\n'
         'removeChargesFromRunes = true\ntimeBetweenExActions = 25\n'
         'autoStackCumulatives = false\nqueryPlayerContainers = false\n')
+    if scenario.startswith("light_"):
+        config += 'easyModeEndlessLightWand = true\n'
+        if scenario=="light_disabled": config += 'easyModeEnabled = false\n'
+        if scenario=="light_feature_disabled": config += 'easyModeEndlessLightWand = false\n'
     if scenario == "defaults":
         config = 'removeChargesFromRunes = true\ntimeBetweenExActions = 25\n'
     if scenario == "bag_enabled":
@@ -113,7 +117,7 @@ with tempfile.TemporaryDirectory(prefix="zedas-engine-") as directory:
         # Exercise each startup setting independently, including newly reserved flags.
         valid = config.replace('"invalid"', 'false')
         for key in ("easyModeEnabled", "easyModeEndlessRunes", "easyModeEndlessManaFluid",
-                    "easyModeCommands", "easyModeAutoTarget", "easyModeAutoGold",
+                    "easyModeEndlessLightWand", "easyModeCommands", "easyModeAutoTarget", "easyModeAutoGold",
                     "easyModeLootSpill", "easyModeGoldBag", "easyModeRespawn", "easyModeLootBroker"):
             (root / "config.lua").write_text(valid + f'\n{key} = "invalid"\n')
             subprocess.run([binary, scenario], cwd=root, check=True)

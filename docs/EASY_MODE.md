@@ -47,6 +47,7 @@ normally, subject to existing historical settings such as `removeChargesFromRune
 | 3200 | 65003 | Endless Explosion | Existing rune requirements |
 | 2874 | 65004 | Endless Mana Fluid | Mana subtype 10 |
 | 2856 | 65005 | Dedicated Gold Bag | Existing five-slot present container |
+| 3046 / 3047 | 65006 | Endless Magic Light Wand | Authentic unlit/lit pair; separate feature gate |
 
 Wrong pairings, ordinary items and other fluid containers receive no exemption.
 Existing spell/action scripts still apply effects, costs and exhaustion. Mana
@@ -246,5 +247,8 @@ legacy broker grace setting. See [NPC_BUY_AUDIT.md](NPC_BUY_AUDIT.md) for all pr
 source/access exclusions and safe quest metadata. Current collector/courier logistics
 and witness lifetime are in [BROKER_LOGISTICS.md](BROKER_LOGISTICS.md).
 
-Respawn runtime controls, `easyModeRespawnPercent = 50` (strict integer 1–100),
-and the empty reviewed manifest are documented in [EASY_RESPAWN.md](EASY_RESPAWN.md).
+Respawn runtime controls and the empty reviewed manifest are documented in
+[EASY_RESPAWN.md](EASY_RESPAWN.md). New startup settings are
+`easyModeRespawnPercent = 50` (integer 1–100) and
+`easyModeEndlessLightWand = false`; see [ENDLESS_LIGHT_WAND.md](ENDLESS_LIGHT_WAND.md)
+for `!light`, native duration and NPC sale protection.

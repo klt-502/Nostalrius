@@ -1984,6 +1984,7 @@ void LuaScriptInterface::registerFunctions()
 	registerMethod("Player", "removeItem", LuaScriptInterface::luaPlayerRemoveItem);
 
 	registerMethod("Player", "getMoney", LuaScriptInterface::luaPlayerGetMoney);
+	registerMethod("Player", "giveEasyLightWand", LuaScriptInterface::luaPlayerGiveLightWand);
     registerMethod("Player", "respawnCommand", LuaScriptInterface::luaPlayerRespawnCommand);
 	registerMethod("Player", "brokerCommand", LuaScriptInterface::luaPlayerBrokerCommand);
 	registerMethod("Player", "useEasyModeItem", LuaScriptInterface::luaPlayerUseEasyModeItem);
@@ -11486,4 +11487,11 @@ int LuaScriptInterface::luaPlayerRespawnCommand(lua_State* L)
     Player* player = getUserdata<Player>(L,1);
     if (player) g_game.map.spawns.command(*player,getString(L,2));
     pushBoolean(L, player != nullptr); return 1;
+}
+
+int LuaScriptInterface::luaPlayerGiveLightWand(lua_State* L)
+{
+    Player* player=getUserdata<Player>(L,1);
+    if(player)EasyMode::giveLightWand(*player);
+    pushBoolean(L,player!=nullptr);return 1;
 }
