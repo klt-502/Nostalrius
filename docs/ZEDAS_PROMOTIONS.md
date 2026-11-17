@@ -78,7 +78,8 @@ GM command is:
 
 Run it while logged in **as that specific verified Paladin/Knight**, then log out
 normally (saving storage) and log back in while premium. The native login script
-then sets 3 → 7 or 4 → 8. This command does not target a name and does not itself
+then sets 3 → 7 or 4 → 8. Log out normally again after verifying the result to
+save the promoted vocation. This command does not target a name and does not itself
 change vocation immediately. Do not pass a character name to it. Already promoted
 7/8 characters are not promoted again by the login script. Ordinary players cannot
 use it; use the NPC or guarded offline SQL instead. It bypasses NPC cost/level
@@ -119,3 +120,21 @@ The disposable MariaDB test exercises dry-run rollback, missing/wrong IDs,
 wrong ownership/name/vocation, deletion/online blocks, operator assertions,
 exact updates, unrelated player/account fields and idempotent replay. It creates
 synthetic Kyle-named rows only in `zedas_broker_test`; those are not live evidence.
+
+## Saved food regeneration after offline SQL
+
+Prefer the NPC or the existing GM/login method for a **base-vocation** character:
+`Player::setVocation` refreshes the active regeneration condition. During login,
+stored conditions are attached in `Player::onCreatureAppear` before Lua onLogin
+runs, so the 3/4 → 7/8 promotion in that script also refreshes restored food rates.
+
+The offline SQL deliberately preserves the `conditions` blob. `IOLoginData` sets
+the saved vocation before those stored conditions are attached, and onLogin does
+not call setVocation again for an already-promoted 7/8 character. An existing food
+condition saved at base-vocation rates can therefore keep those rates until it
+expires. After offline SQL, verify the promoted vocation, let the old food condition
+expire without feeding, then eat to create a new condition using the promoted
+vocation. Simply eating while the old condition is active extends its time;
+`Player.feed` does not refresh its rates. Do not erase or edit the serialized blob:
+it can include unrelated conditions. This existing persistence behavior is not
+changed by the polish pass and does not affect the requested stored vocation IDs.
