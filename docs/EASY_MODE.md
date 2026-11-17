@@ -252,3 +252,7 @@ Respawn runtime controls and the empty reviewed manifest are documented in
 `easyModeRespawnPercent = 50` (integer 1–100) and
 `easyModeEndlessLightWand = false`; see [ENDLESS_LIGHT_WAND.md](ENDLESS_LIGHT_WAND.md)
 for `!light`, native duration and NPC sale protection.
+
+All five active endless consumables now have explicit original-client Look names;
+see [ENDLESS_ITEM_PRESENTATION.md](ENDLESS_ITEM_PRESENTATION.md). No sprite,
+persistent item attribute, config option or reserved Action ID is added.

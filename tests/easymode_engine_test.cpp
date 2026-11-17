@@ -168,6 +168,9 @@ static void setup()
 	}
 }
 
+
+#include "endless_presentation_cases.h"
+
 int main(int argc, char** argv)
 {
 	require(argc == 2, "scenario argument");
@@ -200,6 +203,7 @@ int main(int argc, char** argv)
 		require(g_config.getString(ConfigManager::EASY_MODE_RESPAWN_POLICY_FILE) == "data/zedas/spawns.xml", "manifest path remains startup only");
 	}
 	setup();
+    if (scenario.rfind("look_",0)==0) { testEndlessPresentation(scenario=="look_enabled"); return 0; }
     if (scenario=="broker_food_rings" || scenario=="broker_food_ring_guard") {
         require(g_moveEvents->loadFromXml(), "food/ring real movement handlers");
         testBrokerFoodRings(scenario=="broker_food_ring_guard"); return 0;

@@ -52,3 +52,7 @@ failure, normal wand expiry and marked wand renewal after 3000 seconds (or use
 an isolated server test to shorten remaining duration, without editing item
 definitions). Disable the feature and verify historical use/expiry. Confirm
 existing runes, mana, gold bag and broker remain as accepted.
+
+Look names and finite-timer suppression are documented in
+[ENDLESS_ITEM_PRESENTATION.md](ENDLESS_ITEM_PRESENTATION.md). Internal duration
+renewal remains unchanged; only active marked-item Look text is replaced.

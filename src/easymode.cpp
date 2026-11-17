@@ -189,3 +189,18 @@ bool EasyMode::npcRemoveWands(Player& player,uint16_t id,uint32_t amount,int32_t
     }
     return amount==0;
 }
+
+const char* EasyMode::endlessDisplayName(const Item& item)
+{
+    if (isEndlessRune(item)) {
+        switch (recognizeConsumable(item.getID(), item.getActionId(), item.getSubType())) {
+            case Consumable::UltimateHealing: return "endless ultimate healing rune";
+            case Consumable::GreatFireball: return "endless great fireball rune";
+            case Consumable::Explosion: return "endless explosion rune";
+            default: break;
+        }
+    }
+    if (isEndlessManaFluid(item)) return "endless mana fluid";
+    if (isEndlessLightWand(item)) return "endless magic light wand";
+    return nullptr;
+}

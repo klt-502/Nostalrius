@@ -77,6 +77,11 @@ with tempfile.TemporaryDirectory(prefix="zedas-engine-") as directory:
         'easyModeCommands = true\neasyModeAutoTarget = true\neasyModeAutoGold = true\n'
         'removeChargesFromRunes = true\ntimeBetweenExActions = 25\n'
         'autoStackCumulatives = false\nqueryPlayerContainers = false\n')
+    if scenario.startswith("look_"):
+        config += 'easyModeEndlessLightWand = true\n'
+        if scenario=="look_disabled": config += 'easyModeEnabled = false\n'
+        if scenario=="look_feature_disabled":
+            config += 'easyModeEndlessRunes = false\neasyModeEndlessManaFluid = false\neasyModeEndlessLightWand = false\n'
     if scenario.startswith("light_"):
         config += 'easyModeEndlessLightWand = true\n'
         if scenario=="light_disabled": config += 'easyModeEnabled = false\n'

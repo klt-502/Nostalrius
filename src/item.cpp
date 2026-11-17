@@ -18,6 +18,7 @@
  */
 
 #include "otpch.h"
+#include "easymode.h"
 
 #include "item.h"
 #include "container.h"
@@ -851,7 +852,13 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance,
 		}
 
 		s << " for magic level " << it.runeMagLevel;
-		s << ". It's an \"" << it.runeSpellName << "\"-spell (" << charges << "x). ";
+		s << ". It's an \"" << it.runeSpellName << "\"-spell (";
+		if (item && EasyMode::isEndlessRune(*item)) {
+			s << "endless uses";
+		} else {
+			s << charges << "x";
+		}
+		s << "). ";
 	} else if (it.isDoor() && item) {
 		if (item->hasAttribute(ITEM_ATTRIBUTE_DOORLEVEL)) {
 			s << " for level " << item->getIntAttr(ITEM_ATTRIBUTE_DOORLEVEL);
@@ -889,7 +896,9 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance,
 
 		s << " (Arm:" << it.armor << ").";
 	} else if (it.isFluidContainer()) {
-		if (item && item->getFluidType() != 0) {
+		if (item && EasyMode::isEndlessManaFluid(*item)) {
+			s << ".";
+		} else if (item && item->getFluidType() != 0) {
 			s << " of " << items[item->getFluidType()].name << ".";
 		} else {
 			s << ". It is empty.";
@@ -942,7 +951,9 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance,
 			s << " that has 1 charge left.";
 		}
 	} else if (it.showDuration) {
-		if (item && item->hasAttribute(ITEM_ATTRIBUTE_DURATION)) {
+		if (item && EasyMode::isEndlessLightWand(*item)) {
+			s << " that provides endless light while lit.";
+		} else if (item && item->hasAttribute(ITEM_ATTRIBUTE_DURATION)) {
 			int32_t duration = item->getDuration() / 1000;
 			s << " that has energy for ";
 
@@ -1014,6 +1025,11 @@ std::string Item::getDescription(int32_t lookDistance) const
 
 std::string Item::getNameDescription(const ItemType& it, const Item* item /*= nullptr*/, int32_t subType /*= -1*/, bool addArticle /*= true*/)
 {
+	if (item) {
+		if (const char* name = EasyMode::endlessDisplayName(*item)) {
+			return (addArticle ? "an " : "") + std::string(name);
+		}
+	}
 	if (item) {
 		subType = item->getSubType();
 	}

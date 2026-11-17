@@ -16,6 +16,8 @@ static constexpr uint16_t LIGHT_WAND_ITEM_ID = 3046;
 static constexpr uint16_t LIGHT_WAND_LIT_ITEM_ID = 3047;
 static constexpr uint16_t LIGHT_WAND_ACTION_ID = 65006;
 bool isEndlessLightWand(const Item& item);
+// Look text only: never mutates persisted names, item types or recognition.
+const char* endlessDisplayName(const Item& item);
 void giveLightWand(Player& player);
 bool lightWandEnabled();
 uint32_t npcWandCount(Player& player, uint16_t id, int32_t subtype);
