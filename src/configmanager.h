@@ -53,7 +53,10 @@ class ConfigManager
 			EASY_MODE_LOOT_BROKER,
 
 			EASY_MODE_ENDLESS_LIGHT_WAND,
-			LAST_BOOLEAN_CONFIG /* this must be the last one */
+			EASY_MODE_HOUSE_FURNISHING,
+            EASY_MODE_HOUSE_LOOT,
+
+            LAST_BOOLEAN_CONFIG /* this must be the last one */
 		};
 
 		enum string_config_t {

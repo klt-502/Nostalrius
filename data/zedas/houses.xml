@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Zero approved interiors. Profiles are a restricted vocabulary, never area approval. -->
+<easyhouses version="1" mapSha1="b1a0819aa36549e5185ec3bb21a0e125d381a500">
+  <profile id="poor-residence">
+    <fixture role="table" item="2322" name="table" count="1" />
+    <loot role="food" item="3600" name="bread" count="1" />
+  </profile>
+  <profile id="working-residence">
+    <fixture role="table" item="2323" name="table" count="1" />
+    <loot role="food" item="3607" name="cheese" count="1" />
+  </profile>
+  <profile id="merchant-residence">
+    <fixture role="table" item="2324" name="table" count="1" />
+    <loot role="coins" item="3031" name="gold coin" count="3" />
+  </profile>
+  <profile id="wealthy-residence">
+    <fixture role="carpet" item="2581" name="oriental carpet" count="1" />
+    <loot role="coins" item="3031" name="gold coin" count="5" />
+  </profile>
+  <profile id="abandoned-residence">
+    <fixture role="bones" item="4306" name="pile of bones" count="1" />
+    <loot role="coins" item="3031" name="gold coin" count="1" />
+  </profile>
+</easyhouses>

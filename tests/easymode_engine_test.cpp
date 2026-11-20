@@ -170,6 +170,7 @@ static void setup()
 
 
 #include "endless_presentation_cases.h"
+#include "house_cases.h"
 
 int main(int argc, char** argv)
 {
@@ -189,6 +190,7 @@ int main(int argc, char** argv)
 		            g_config.getNumber(ConfigManager::EASY_MODE_BROKER_COMMISSION_BPS) == 2500 &&
 		            g_config.getNumber(ConfigManager::EASY_MODE_BROKER_LEASH_TILES) == 7,
 		        "broker validated defaults");
+        require(!g_config.getBoolean(ConfigManager::EASY_MODE_HOUSE_FURNISHING) && !g_config.getBoolean(ConfigManager::EASY_MODE_HOUSE_LOOT), "house defaults disabled");
 		Broker::initialize(); // Disabled mode must not need a schema/DB/catalog.
 		const ConfigManager::boolean_config_t wave2[] = {ConfigManager::EASY_MODE_LOOT_SPILL,
 			ConfigManager::EASY_MODE_GOLD_BAG, ConfigManager::EASY_MODE_RESPAWN};
@@ -203,6 +205,7 @@ int main(int argc, char** argv)
 		require(g_config.getString(ConfigManager::EASY_MODE_RESPAWN_POLICY_FILE) == "data/zedas/spawns.xml", "manifest path remains startup only");
 	}
 	setup();
+    if (scenario.rfind("houses_",0)==0) { testHouses(scenario); return 0; }
     if (scenario.rfind("look_",0)==0) { testEndlessPresentation(scenario=="look_enabled"); return 0; }
     if (scenario=="broker_food_rings" || scenario=="broker_food_ring_guard") {
         require(g_moveEvents->loadFromXml(), "food/ring real movement handlers");

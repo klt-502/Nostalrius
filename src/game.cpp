@@ -18,6 +18,7 @@
  */
 
 #include "otpch.h"
+#include "easyhouse.h"
 
 #include "pugicast.h"
 
@@ -58,6 +59,7 @@ void Game::start(ServiceManager* manager)
 {
 	serviceManager = manager;
 	Broker::initialize();
+	EasyMode::initializeHouses();
 
 	g_scheduler.addEvent(createSchedulerTask(EVENT_LIGHTINTERVAL, std::bind(&Game::checkLight, this)));
 	g_scheduler.addEvent(createSchedulerTask(EVENT_CREATURE_THINK_INTERVAL, std::bind(&Game::checkCreatures, this, 0)));

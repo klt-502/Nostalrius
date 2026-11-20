@@ -245,6 +245,7 @@ class House
 		time_t paidUntil = 0;
 
 		uint32_t id;
+		friend struct HouseOverlayTestAccess;
 		uint32_t owner = 0;
 		uint32_t rentWarnings = 0;
 		uint32_t rent = 0;

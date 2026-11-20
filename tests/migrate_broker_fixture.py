@@ -46,4 +46,5 @@ assert sql("SELECT claim_key,item,count,price,sold,COALESCE(sale,'NULL'),trip FR
     "legacy-claim-2\t3355\t1\t4\t1\tlegacy-returning\tlegacy-returning")
 assert sql("SELECT operation,gross,net,commission FROM zedas_broker_sales") == "legacy-returning\t4\t3\t1"
 sql("DELETE FROM zedas_broker_escrow; DELETE FROM zedas_broker_sales; DELETE FROM zedas_broker_payouts; DELETE FROM zedas_broker_accounts;")
+sql((root / "migrations/003_house_loot.sql").read_text())
 print("Legacy outbound/returning migration preserves items, batch ownership, deadlines, money and muted historical notices")

@@ -9,7 +9,7 @@ import xml.etree.ElementTree as ET
 
 binary, source, scenario = sys.argv[1:]
 source = pathlib.Path(source)
-if scenario in {"broker_food_rings", "broker_notice", "broker_batch", "broker_floor", "broker_witness", "broker", "broker_restart", "broker_feedback"} and not os.environ.get("ZEDAS_BROKER_TEST_PORT"):
+if scenario in {"houses_store", "broker_food_rings", "broker_notice", "broker_batch", "broker_floor", "broker_witness", "broker", "broker_restart", "broker_feedback"} and not os.environ.get("ZEDAS_BROKER_TEST_PORT"):
     sys.exit(77)
 with tempfile.TemporaryDirectory(prefix="zedas-engine-") as directory:
     root = pathlib.Path(directory)
@@ -77,6 +77,14 @@ with tempfile.TemporaryDirectory(prefix="zedas-engine-") as directory:
         'easyModeCommands = true\neasyModeAutoTarget = true\neasyModeAutoGold = true\n'
         'removeChargesFromRunes = true\ntimeBetweenExActions = 25\n'
         'autoStackCumulatives = false\nqueryPlayerContainers = false\n')
+    if scenario == "houses_store":
+        config += ('mysqlHost="127.0.0.1"\nmysqlUser="root"\nmysqlPass="fixture-only"\n'
+                   'mysqlDatabase="zedas_broker_test"\nmysqlPort=' + os.environ["ZEDAS_BROKER_TEST_PORT"] + '\n')
+    if scenario.startswith("houses_"):
+        shutil.copytree(source / "data/zedas", root / "data/zedas")
+        config += 'easyModeHouseFurnishing = true\neasyModeHouseLoot = true\n'
+        if scenario=="houses_disabled": config += 'easyModeEnabled = false\n'
+        if scenario=="houses_fixture_only": config += 'easyModeHouseLoot = false\n'
     if scenario.startswith("look_"):
         config += 'easyModeEndlessLightWand = true\n'
         if scenario=="look_disabled": config += 'easyModeEnabled = false\n'
@@ -122,7 +130,7 @@ with tempfile.TemporaryDirectory(prefix="zedas-engine-") as directory:
         # Exercise each startup setting independently, including newly reserved flags.
         valid = config.replace('"invalid"', 'false')
         for key in ("easyModeEnabled", "easyModeEndlessRunes", "easyModeEndlessManaFluid",
-                    "easyModeEndlessLightWand", "easyModeCommands", "easyModeAutoTarget", "easyModeAutoGold",
+                    "easyModeHouseFurnishing", "easyModeHouseLoot", "easyModeEndlessLightWand", "easyModeCommands", "easyModeAutoTarget", "easyModeAutoGold",
                     "easyModeLootSpill", "easyModeGoldBag", "easyModeRespawn", "easyModeLootBroker"):
             (root / "config.lua").write_text(valid + f'\n{key} = "invalid"\n')
             subprocess.run([binary, scenario], cwd=root, check=True)
@@ -137,7 +145,10 @@ with tempfile.TemporaryDirectory(prefix="zedas-engine-") as directory:
                 (root / "config.lua").write_text(valid + f'\n{key} = {value}\n')
                 subprocess.run([binary, scenario], cwd=root, check=True)
         (root / "config.lua").write_text(valid + '\neasyModeRespawnPolicyFile = 123\n')
-    if scenario == "broker_restart":
+    if scenario == "houses_store":
+        for stage in ("houses_store_seed", "houses_store_replay"):
+            subprocess.run([binary, stage], cwd=root, check=True)
+    elif scenario == "broker_restart":
         for stage in ("broker_seed", "broker_handoff_restart", "broker_travel_restart", "broker_sale_restart", "broker_payout_restart", "broker_final_restart"):
             subprocess.run([binary, stage], cwd=root, check=True)
     else:

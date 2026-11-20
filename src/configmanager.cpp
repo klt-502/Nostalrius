@@ -51,11 +51,11 @@ bool ConfigManager::load()
 		const char *easyNames[] = {"easyModeEnabled",   "easyModeEndlessRunes", "easyModeEndlessManaFluid",
 		                           "easyModeCommands",  "easyModeAutoTarget",   "easyModeAutoGold",
 		                           "easyModeLootSpill", "easyModeGoldBag",      "easyModeRespawn",
-		                           "easyModeLootBroker", "easyModeEndlessLightWand"};
+		                           "easyModeLootBroker", "easyModeEndlessLightWand", "easyModeHouseFurnishing", "easyModeHouseLoot"};
 		const boolean_config_t easyKeys[] = {
 		    EASY_MODE_ENABLED,     EASY_MODE_ENDLESS_RUNES, EASY_MODE_ENDLESS_MANA_FLUID, EASY_MODE_COMMANDS,
 		    EASY_MODE_AUTO_TARGET, EASY_MODE_AUTO_GOLD,     EASY_MODE_LOOT_SPILL,         EASY_MODE_GOLD_BAG,
-		    EASY_MODE_RESPAWN,     EASY_MODE_LOOT_BROKER, EASY_MODE_ENDLESS_LIGHT_WAND};
+		    EASY_MODE_RESPAWN,     EASY_MODE_LOOT_BROKER, EASY_MODE_ENDLESS_LIGHT_WAND, EASY_MODE_HOUSE_FURNISHING, EASY_MODE_HOUSE_LOOT};
 		constexpr size_t easyCount = sizeof(easyKeys) / sizeof(easyKeys[0]);
 		static_assert(easyCount == sizeof(easyNames) / sizeof(easyNames[0]), "Easy Mode configuration registry mismatch");
 		bool easyValues[easyCount] = {};
