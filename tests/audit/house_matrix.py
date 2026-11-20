@@ -44,27 +44,29 @@ def collect(root):
         for h,o in re.findall(r'\((\d+),\s*(\d+),',m[1]):
             if int(h) in owners: raise ValueError('duplicate sample house SQL rows')
             owners[int(h)]=int(o)
+    approvals=ET.parse(root/'data/zedas/houses.xml').getroot().findall('interior')
+    listed={int(n.get('houseId','0')) for n in approvals if n.get('classification')=='reviewed-unowned-house'}
     rows=[]
     for hid in sorted(set(houses)|set(tiles)):
         record=houses.get(hid,{})
         rows.append(dict(house_id=hid,name=record.get('name',''),entry_x=record.get('entryx',''),entry_y=record.get('entryy',''),entry_z=record.get('entryz',''),
                          tile_count=len(tiles[hid]),sample_owner=owners.get(hid),live_owner='UNKNOWN',
                          classification='currently-owned (sample dump only)' if owners.get(hid,0)>0 else 'player-ownable house',
-                         approved=False,reason='HouseTile excluded even if unowned; live ownership/encounter review required',
+                         approved=False,manifest_listed=hid in listed,reason='Requires encounter review, live unowned admission and clear fixture targets; never auto-approved',
                          tiles=sorted(tiles[hid],key=lambda p:(p[2],p[1],p[0]))))
     npcs=[]
     for p in sorted((root/'data/npc').glob('*.npc')):
         text=p.read_bytes().decode('latin1');home=re.search(r'Home\s*=\s*\[(\d+),(\d+),(\d+)\]',text)
         name=re.search(r'Name\s*=\s*"([^"]+)"',text)
         if home and name: npcs.append(dict(name=name[1],position=list(map(int,home.groups())),source=str(p.relative_to(root)),classification='NPC/public reference; commerce/special role requires review',approved=False))
-    return dict(map_file=str(world.relative_to(root)),house_file=str(path.relative_to(root)),map_sha256=hashlib.sha256(raw).hexdigest(),map_sha1=hashlib.sha1(raw).hexdigest(),
+    return dict(policy_scope='Ownable fixture lifecycle: inventory only; no safety or live ownership inferred',map_file=str(world.relative_to(root)),house_file=str(path.relative_to(root)),map_sha256=hashlib.sha256(raw).hexdigest(),map_sha1=hashlib.sha1(raw).hexdigest(),
                 house_file_sha256=hashlib.sha256(path.read_bytes()).hexdigest(),houses=rows,npc_references=npcs,
                 counts=dict(xml_houses=len(houses),map_house_ids=len(tiles),house_tiles=sum(map(len,tiles.values())),sample_owned=sum(o>0 for o in owners.values()),
-                            npc_references=len(npcs),safe_candidates=0,production_entries=0),
+                            npc_references=len(npcs),safe_candidates=0,production_entries=len(approvals),production_ownable_entries=len(listed)),
                 caveat='Ownership is sample dump data, never live. Non-HouseTile buildings have no authoritative region inventory; quest/special/uncertain areas remain unapproved.')
 
 def outputs(bundle):
-    out=io.StringIO(newline='');fields=['house_id','name','entry_x','entry_y','entry_z','tile_count','sample_owner','live_owner','classification','approved','reason']
+    out=io.StringIO(newline='');fields=['house_id','name','entry_x','entry_y','entry_z','tile_count','sample_owner','live_owner','classification','approved','manifest_listed','reason']
     w=csv.DictWriter(out,fields,lineterminator='\n');w.writeheader()
     for r in bundle['houses']: w.writerow({k:r[k] for k in fields})
     return {'docs/HOUSE_REVIEW_QUEUE.csv':out.getvalue(),'docs/HOUSE_MATRIX.json':json.dumps(bundle,indent=2,sort_keys=True)+'\n'}

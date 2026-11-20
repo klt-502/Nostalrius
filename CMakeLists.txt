@@ -109,6 +109,8 @@ if(BUILD_TESTING)
     add_test(NAME character_promotion_sql COMMAND ${PYTHON_EXECUTABLE}
         ${CMAKE_SOURCE_DIR}/tests/check_character_promotion.py)
     set_tests_properties(character_promotion_sql PROPERTIES SKIP_RETURN_CODE 77 RUN_SERIAL TRUE)
+    add_test(NAME house_fixture_signatures COMMAND ${PYTHON_EXECUTABLE} -B -m unittest
+        discover -s ${CMAKE_SOURCE_DIR}/tests/audit -p test_house_fixture_signatures.py)
     add_test(NAME house_matrix_regeneration COMMAND ${PYTHON_EXECUTABLE} -B
         ${CMAKE_SOURCE_DIR}/tests/audit/house_matrix.py --check)
     add_test(NAME npc_catalog_source_audit COMMAND ${PYTHON_EXECUTABLE}
