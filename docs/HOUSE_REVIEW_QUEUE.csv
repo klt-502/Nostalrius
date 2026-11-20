@@ -1,0 +1,862 @@
+house_id,name,entry_x,entry_y,entry_z,tile_count,sample_owner,live_owner,classification,approved,reason
+1,Spiritkeep,32265,32316,7,378,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+2,Snake Tower,32436,32359,7,616,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+3,Halls of the Adventurers,32397,32042,7,304,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+4,Dark Mansion,32397,32155,7,361,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+5,Bloodhall,32469,32170,7,306,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+6,"Sunset Homes, Flat 01",32333,32232,7,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+7,"Sunset Homes, Flat 02",32333,32237,7,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+8,"Sunset Homes, Flat 03",32334,32244,7,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+9,"Sunset Homes, Flat 11",32333,32232,6,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+10,"Sunset Homes, Flat 12",32333,32237,6,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+11,"Sunset Homes, Flat 13",32334,32244,6,19,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+12,"Sunset Homes, Flat 14",32334,32249,6,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+13,"Sunset Homes, Flat 21",32333,32232,5,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+14,"Sunset Homes, Flat 22",32333,32237,5,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+15,"Sunset Homes, Flat 23",32334,32244,5,19,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+16,"Sunset Homes, Flat 24",32334,32249,5,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+17,"Beach Home Apartments, Flat 01",32314,32245,7,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+18,"Beach Home Apartments, Flat 02",32314,32240,7,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+19,"Beach Home Apartments, Flat 03",32317,32235,7,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+20,"Beach Home Apartments, Flat 04",32313,32235,7,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+21,"Beach Home Apartments, Flat 05",32309,32235,7,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+22,"Beach Home Apartments, Flat 06",32309,32243,7,19,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+23,"Beach Home Apartments, Flat 11",32314,32243,6,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+24,"Beach Home Apartments, Flat 12",32314,32238,6,16,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+25,"Beach Home Apartments, Flat 13",32314,32234,6,16,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+26,"Beach Home Apartments, Flat 14",32312,32234,6,7,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+27,"Beach Home Apartments, Flat 15",32309,32234,6,7,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+28,"Beach Home Apartments, Flat 16",32303,32244,6,19,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+29,"Alai Flats, Flat 01",32377,32256,7,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+30,"Alai Flats, Flat 02",32382,32256,7,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+31,"Alai Flats, Flat 03",32374,32264,7,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+32,"Alai Flats, Flat 04",32386,32261,7,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+33,"Alai Flats, Flat 05",32386,32268,7,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+34,"Alai Flats, Flat 06",32386,32268,7,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+35,"Alai Flats, Flat 07",32382,32268,7,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+36,"Alai Flats, Flat 08",32377,32268,7,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+37,"Alai Flats, Flat 11",32382,32256,6,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+38,"Alai Flats, Flat 12",32377,32256,6,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+39,"Alai Flats, Flat 13",32377,32268,6,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+40,"Alai Flats, Flat 14",32386,32261,6,20,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+41,"Alai Flats, Flat 15",32386,32268,6,30,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+42,"Alai Flats, Flat 16",32386,32268,6,30,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+43,"Alai Flats, Flat 17",32382,32268,6,20,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+44,"Alai Flats, Flat 18",32377,32268,6,20,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+45,"Alai Flats, Flat 22",32377,32256,5,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+46,"Alai Flats, Flat 21",32382,32256,5,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+47,"Alai Flats, Flat 23",32377,32268,5,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+48,"Alai Flats, Flat 24",32386,32261,5,20,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+49,"Alai Flats, Flat 25",32386,32268,5,30,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+50,"Alai Flats, Flat 26",32386,32268,5,30,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+51,"Alai Flats, Flat 27",32382,32268,5,20,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+52,"Alai Flats, Flat 28",32377,32268,5,20,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+53,Upper Swamp Lane 2,32348,32252,7,74,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+54,Upper Swamp Lane 4,32360,32252,7,74,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+55,Lower Swamp Lane 1,32356,32262,7,74,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+56,Lower Swamp Lane 3,32368,32262,7,74,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+57,Upper Swamp Lane 8,32398,32256,7,132,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+58,Southern Thais Guildhall,32401,32254,7,346,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+59,Upper Swamp Lane 10,32412,32256,7,31,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+60,Upper Swamp Lane 12,32419,32256,7,60,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+61,Sorcerer's Avenue 1a,32300,32254,7,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+62,Sorcerer's Avenue 1b,32300,32251,6,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+63,Sorcerer's Avenue 1c,32300,32249,6,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+64,Sorcerer's Avenue 5,32284,32256,7,49,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+65,Sorcerer's Avenue Labs 2a,32297,32273,8,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+66,Sorcerer's Avenue Labs 2b,32293,32273,8,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+67,Sorcerer's Avenue Labs 2c,32305,32274,8,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+68,Sorcerer's Avenue Labs 2d,32301,32274,8,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+69,Sorcerer's Avenue Labs 2e,32297,32274,8,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+70,Sorcerer's Avenue Labs 2f,32293,32274,8,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+71,Thais Clanhall,32326,32272,7,188,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+72,Harbour Street 4,32332,32257,7,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+73,Thais Hostel,32333,32255,6,117,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+74,"Farm Lane, Basement (Shop)",32382,32231,8,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+75,"Farm Lane, 1st floor (Shop)",32382,32232,7,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+76,"Farm Lane, 2nd Floor (Shop)",32382,32233,6,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+77,Warriors Guildhall,32348,32213,7,305,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+78,"Main Street 9, 1st floor (Shop)",32377,32224,7,32,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+79,"Main Street 9a, 2nd floor (Shop)",32377,32222,6,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+80,"Main Street 9b, 2nd floor (Shop)",32377,32224,6,28,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+81,Mill Avenue 1 (Shop),32398,32181,7,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+82,Mill Avenue 2 (Shop),32404,32181,7,45,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+83,Mill Avenue 3,32410,32184,7,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+84,Mill Avenue 4,32413,32189,6,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+85,Mill Avenue 5,32422,32178,7,59,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+86,The City Wall 5a,32416,32220,7,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+87,The City Wall 5b,32416,32220,6,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+88,The City Wall 5c,32416,32223,7,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+89,The City Wall 5d,32416,32223,6,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+90,The City Wall 5e,32416,32226,7,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+91,The City Wall 5f,32416,32226,6,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+92,The City Wall 7a,32419,32237,7,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+93,The City Wall 7b,32419,32237,6,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+94,The City Wall 7c,32413,32237,7,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+95,The City Wall 7d,32413,32237,6,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+96,The City Wall 7e,32413,32238,7,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+97,The City Wall 7f,32413,32238,6,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+98,The City Wall 7g,32419,32238,7,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+99,The City Wall 7h,32419,32238,6,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+100,The City Wall 9,32419,32247,7,19,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+101,The City Wall 3a,32423,32208,7,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+102,The City Wall 3b,32423,32203,7,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+103,The City Wall 3c,32423,32198,7,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+104,The City Wall 3d,32423,32208,6,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+105,The City Wall 3e,32423,32203,6,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+106,The City Wall 3f,32423,32198,6,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+107,The City Wall 1a,32422,32189,7,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+108,The City Wall 1b,32422,32189,6,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+109,Harbour Place 2 (Shop),32336,32210,7,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+110,Harbour Place 1 (Shop),32336,32222,7,22,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+111,Mercenary Tower,32208,32437,7,607,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+112,Guildhall of the Red Rose,32180,32427,7,405,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+113,Fibula Village 1,32176,32433,7,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+114,Fibula Village 2,32184,32433,7,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+115,Fibula Village 3,32196,32438,7,54,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+116,Fibula Village 4,32175,32440,7,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+117,Fibula Village 5,32171,32440,7,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+118,"Fibula Village, Tower Flat",32159,32439,7,77,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+119,"Fibula Village, Bar",32151,32399,7,79,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+120,Fibula Clanhall,32178,32373,7,162,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+121,"Fibula Village, Villa",32140,32374,7,242,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+122,The Tibianic,32277,32011,5,540,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+123,Castle of Greenshore,32290,32070,7,294,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+124,"Greenshore Village, Villa",32276,32045,7,169,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+125,"Greenshore Village, Shop",32278,32052,7,30,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+126,Greenshore Village 1,32274,32062,7,37,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+127,Greenshore Village 2,32264,32042,7,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+128,Greenshore Village 3,32259,32042,7,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+129,Greenshore Village 4,32259,32041,7,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+130,Greenshore Village 5,32264,32041,7,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+131,Greenshore Village 6,32258,32041,6,71,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+132,Greenshore Village 7,32266,32032,7,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+133,Greenshore Clanhall,32278,32069,7,165,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+134,Moonkeep,32432,31761,7,288,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+135,House of Recreation,32280,31823,7,412,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+136,Nordic Stronghold,32297,31675,7,410,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+137,Druids Retreat A,32277,31729,7,31,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+138,Druids Retreat B,32272,31767,7,29,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+139,Druids Retreat C,32284,31766,7,22,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+140,Druids Retreat D,32324,31724,7,27,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+141,Central Plaza 3,32345,31800,7,12,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+142,Central Plaza 2,32345,31806,7,12,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+143,Central Plaza 1,32345,31812,7,12,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+144,Park Lane 1a,32335,31767,7,28,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+145,Park Lane 1b,32329,31763,6,32,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+146,Park Lane 3b,32329,31764,6,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+147,Park Lane 3a,32326,31767,7,28,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+148,Park Lane 4,32327,31768,7,22,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+149,Park Lane 2,32335,31768,7,22,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+150,Theater Avenue 6a,32376,31794,7,16,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+151,Theater Avenue 6b,32376,31794,6,16,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+152,Theater Avenue 6c,32376,31794,7,5,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+153,Theater Avenue 6d,32376,31794,6,5,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+154,Theater Avenue 6e,32375,31794,7,16,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+155,Theater Avenue 6f,32375,31794,6,16,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+156,Theater Avenue 5a,32361,31782,6,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+157,Theater Avenue 5b,32359,31782,6,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+158,Theater Avenue 5c,32359,31782,6,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+159,Theater Avenue 5d,32361,31782,6,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+160,Theater Avenue 8a,32357,31795,6,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+161,Theater Avenue 8b,32357,31792,5,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+162,"Theater Avenue 7, Flat 01",32349,31786,7,7,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+163,"Theater Avenue 7, Flat 02",32350,31783,7,9,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+164,"Theater Avenue 7, Flat 03",32350,31780,7,9,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+165,"Theater Avenue 7, Flat 04",32348,31780,7,11,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+166,"Theater Avenue 7, Flat 05",32347,31783,7,9,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+167,"Theater Avenue 7, Flat 06",32348,31786,7,7,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+168,"Theater Avenue 7, Flat 11",32350,31783,6,11,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+169,"Theater Avenue 7, Flat 12",32350,31783,6,9,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+170,"Theater Avenue 7, Flat 13",32350,31780,6,9,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+171,"Theater Avenue 7, Flat 14",32348,31780,6,11,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+172,"Theater Avenue 7, Flat 15",32347,31783,6,9,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+173,"Theater Avenue 7, Flat 16",32347,31783,6,9,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+174,Theater Avenue 10,32314,31791,7,22,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+175,Theater Avenue 12,32310,31791,7,19,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+176,Theater Avenue 14 (Shop),32301,31791,7,47,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+177,Theater Avenue 11a,32314,31781,5,29,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+178,Theater Avenue 11b,32314,31781,5,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+179,Theater Avenue 11c,32310,31781,5,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+180,Magician's Alley 1,32307,31801,7,19,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+181,Magician's Alley 1a,32311,31798,6,12,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+182,Magician's Alley 1b,32311,31795,6,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+183,Magician's Alley 1c,32311,31795,6,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+184,Magician's Alley 1d,32311,31798,6,9,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+185,Magician's Alley 5a,32324,31804,7,7,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+186,Magician's Alley 5b,32327,31804,7,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+187,Magician's Alley 5c,32322,31802,6,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+188,Magician's Alley 5d,32324,31804,7,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+189,Magician's Alley 5e,32327,31804,7,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+190,Magician's Alley 5f,32322,31807,6,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+191,Magician's Alley 4,32317,31820,7,49,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+192,Magician's Alley 8,32331,31819,7,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+193,Carlin Clanhall,32307,31818,7,218,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+194,Northern Street 1a,32356,31767,7,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+195,Northern Street 1b,32356,31767,6,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+196,Northern Street 1c,32357,31767,6,16,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+197,Northern Street 3a,32368,31767,6,16,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+198,Northern Street 3b,32370,31769,6,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+199,Northern Street 5,32380,31772,7,47,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+200,Northern Street 7,32389,31774,7,40,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+201,Harbour Lane 1 (Shop),32366,31799,6,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+202,Harbour Lane 3,32362,31823,7,84,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+203,Harbour Lane 2a (Shop),32380,31809,7,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+204,Harbour Lane 2b (Shop),32383,31809,7,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+205,"Harbour Flats, Flat 11",32378,31836,6,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+206,"Harbour Flats, Flat 12",32376,31840,6,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+207,"Harbour Flats, Flat 13",32382,31836,6,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+208,"Harbour Flats, Flat 14",32380,31840,6,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+209,"Harbour Flats, Flat 15",32386,31836,6,9,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+210,"Harbour Flats, Flat 16",32384,31840,6,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+211,"Harbour Flats, Flat 17",32389,31836,6,9,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+212,"Harbour Flats, Flat 18",32388,31840,6,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+213,"Harbour Flats, Flat 21",32381,31835,5,19,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+214,"Harbour Flats, Flat 22",32385,31835,5,22,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+215,"Harbour Flats, Flat 23",32385,31843,5,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+216,East Lane 1a,32393,31796,7,54,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+217,East Lane 1b,32396,31801,6,40,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+218,East Lane 2,32399,31798,7,112,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+219,Suntower,32341,31847,7,232,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+220,Lonely Sea Side Hostel,32319,31839,7,287,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+221,Northport Village 1,32482,31614,7,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+222,Northport Village 2,32482,31609,7,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+223,Northport Village 3,32482,31611,6,97,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+224,Northport Village 4,32490,31602,7,46,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+225,Seawatch,32520,31600,7,422,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+226,Northport Village 5,32503,31605,7,31,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+227,Northport Village 6,32502,31606,7,37,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+228,Northport Clanhall,32468,31614,7,162,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+229,Senja Village 1a,32160,31663,7,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+230,Senja Village 1b,32163,31660,6,34,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+231,Senja Village 2,32161,31664,7,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+232,Senja Village 3,32155,31663,7,37,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+233,Senja Village 4,32156,31664,7,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+234,Senja Village 5,32150,31658,7,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+235,Senja Village 6a,32151,31655,7,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+236,Senja Village 6b,32158,31654,6,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+237,Senja Village 7,32132,31659,6,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+238,Senja Village 8,32136,31664,7,35,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+239,Senja Village 9,32132,31670,7,55,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+240,Senja Village 10,32144,31674,7,33,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+241,Senja Village 11,32141,31675,7,56,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+242,Senja Clanhall,32168,31664,7,215,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+243,Wolftower,32643,32025,7,387,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+244,Hill Hideout,32593,31826,9,251,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+245,Riverspring,32762,32128,7,353,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+246,The Farms 1,32627,31921,2,42,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+247,The Farms 2,32641,31918,2,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+248,The Farms 3,32645,31908,2,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+249,The Farms 4,32648,31899,2,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+250,The Farms 5,32650,31890,2,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+251,"The Farms 6, Fishing Hut",32629,31888,7,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+252,Nobility Quarter 1,32595,31924,4,37,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+253,Nobility Quarter 2,32602,31919,4,37,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+254,Nobility Quarter 3,32602,31912,4,37,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+255,Nobility Quarter 4,32607,31921,4,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+256,Nobility Quarter 5,32612,31921,4,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+257,Nobility Quarter 6,32612,31921,4,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+258,Nobility Quarter 7,32607,31914,4,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+259,Nobility Quarter 8,32607,31914,4,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+260,Nobility Quarter 9,32612,31914,4,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+261,Upper Barracks 1,32605,31923,5,7,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+262,Upper Barracks 2,32605,31920,5,7,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+263,Upper Barracks 3,32605,31917,5,7,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+264,Upper Barracks 4,32605,31914,5,7,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+265,Upper Barracks 5,32605,31914,5,7,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+266,Upper Barracks 6,32605,31917,5,7,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+267,Upper Barracks 7,32605,31920,5,7,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+268,Upper Barracks 8,32615,31923,5,7,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+269,Upper Barracks 9,32615,31920,5,7,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+270,Upper Barracks 10,32615,31917,5,7,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+271,Upper Barracks 11,32615,31914,5,7,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+272,Upper Barracks 12,32615,31914,5,7,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+273,Upper Barracks 13,32615,31923,5,16,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+274,The Market 1 (Shop),32631,31922,8,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+275,The Market 2 (Shop),32634,31930,8,22,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+276,The Market 3 (Shop),32635,31926,8,29,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+277,The Market 4 (Shop),32635,31933,8,36,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+278,Lower Barracks 1,32624,31906,9,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+279,Lower Barracks 2,32625,31906,9,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+280,Lower Barracks 3,32624,31911,9,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+281,Lower Barracks 4,32625,31911,9,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+282,Lower Barracks 5,32624,31916,9,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+283,Lower Barracks 6,32625,31916,9,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+284,Lower Barracks 7,32624,31921,9,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+285,Lower Barracks 8,32625,31921,9,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+286,Lower Barracks 9,32624,31926,9,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+287,Lower Barracks 10,32625,31926,9,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+288,Lower Barracks 11,32624,31931,9,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+289,Lower Barracks 12,32625,31931,9,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+290,Lower Barracks 13,32637,31931,9,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+291,Lower Barracks 14,32636,31931,9,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+292,Lower Barracks 15,32637,31926,9,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+293,Lower Barracks 16,32636,31926,9,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+294,Lower Barracks 17,32637,31921,9,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+295,Lower Barracks 18,32636,31921,9,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+296,Lower Barracks 19,32637,31916,9,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+297,Lower Barracks 20,32636,31916,9,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+298,Lower Barracks 21,32637,31911,9,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+299,Lower Barracks 22,32636,31911,9,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+300,Lower Barracks 23,32637,31906,9,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+301,Lower Barracks 24,32636,31906,9,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+302,Tunnel Gardens 1,32606,31908,11,27,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+303,Tunnel Gardens 2 ,32606,31909,11,27,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+304,Tunnel Gardens 3,32603,31908,11,30,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+305,Tunnel Gardens 4,32602,31909,11,30,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+306,Tunnel Gardens 5,32594,31905,11,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+307,Tunnel Gardens 6,32594,31910,11,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+308,Tunnel Gardens 7,32594,31907,12,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+309,Tunnel Gardens 8,32594,31911,12,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+310,Tunnel Gardens 9,32605,31924,11,15,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+311,Tunnel Gardens 10,32606,31924,11,15,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+312,Tunnel Gardens 11,32607,31924,12,16,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+313,Tunnel Gardens 12,32603,31924,12,16,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+314,Marble Guildhall,32622,31954,9,338,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+315,Iron Guildhall,32607,31893,9,308,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+316,Granite Guildhall,32599,31949,5,361,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+317,Outlaw Camp 1,32645,32204,7,39,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+318,Outlaw Camp 2,32649,32212,7,7,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+319,Outlaw Camp 3,32649,32212,6,16,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+320,Outlaw Camp 4,32657,32209,7,5,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+321,Outlaw Camp 5,32660,32209,7,5,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+322,Outlaw Camp 6,32663,32209,7,5,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+323,Outlaw Camp 7,32648,32212,8,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+324,Outlaw Camp 8,32649,32212,8,7,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+325,Outlaw Camp 9,32657,32209,8,5,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+326,Outlaw Camp 10,32660,32209,8,5,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+327,Outlaw Camp 11,32663,32209,8,5,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+328,Outlaw Camp 12 (Shop),32661,32200,8,7,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+329,Outlaw Camp 13 (Shop),32666,32200,8,7,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+330,Outlaw Camp 14 (Shop),32665,32199,8,16,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+331,Outlaw Castle,32660,32236,7,180,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+332,Blessed Shield Guildhall,32908,32126,6,162,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+333,Steel Home,32929,32125,6,281,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+334,Swamp Watch,32958,32119,6,222,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+335,Golden Axe Guildhall,32987,32109,6,213,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+336,Valorous Venore,32979,32096,6,303,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+337,Dagger Alley 1,32921,32134,6,57,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+338,Iron Alley 1,32942,32126,6,70,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+339,Iron Alley 2,32948,32126,6,70,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+340,Dream Street 1 (Shop),32897,32107,6,94,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+341,Dream Street 2,32898,32077,6,72,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+342,Dream Street 3,32897,32069,6,58,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+343,Dream Street 4,32898,32042,6,77,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+344,Elm Street 1,32894,32056,6,58,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+345,Elm Street 2,32894,32055,6,57,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+346,Elm Street 3,32902,32056,6,59,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+347,Elm Street 4,32902,32055,6,56,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+348,Seagull Walk 1,32918,32052,6,111,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+349,Seagull Walk 2,32915,32037,6,57,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+350,Lucky Lane 1 (Shop),32936,32090,6,148,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+351,"Paupers Palace, Flat 01",32918,32094,7,9,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+352,"Paupers Palace, Flat 02",32914,32094,7,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+353,"Paupers Palace, Flat 03",32911,32100,7,9,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+354,"Paupers Palace, Flat 04",32906,32099,7,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+355,"Paupers Palace, Flat 05",32906,32096,7,7,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+356,"Paupers Palace, Flat 06",32906,32092,7,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+357,"Paupers Palace, Flat 07",32910,32091,7,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+358,"Paupers Palace, Flat 11",32903,32095,6,7,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+359,"Paupers Palace, Flat 12",32904,32096,6,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+360,"Paupers Palace, Flat 13",32907,32095,6,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+361,"Paupers Palace, Flat 14",32909,32096,6,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+362,"Paupers Palace, Flat 15",32911,32095,6,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+363,"Paupers Palace, Flat 16",32914,32096,6,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+364,"Paupers Palace, Flat 17",32915,32095,6,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+365,"Paupers Palace, Flat 18",32918,32095,6,7,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+366,"Paupers Palace, Flat 21",32918,32095,5,7,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+367,"Paupers Palace, Flat 22",32915,32095,5,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+368,"Paupers Palace, Flat 23",32914,32096,5,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+369,"Paupers Palace, Flat 24",32911,32095,5,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+370,"Paupers Palace, Flat 25",32909,32096,5,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+371,"Paupers Palace, Flat 26",32907,32095,5,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+372,"Paupers Palace, Flat 27",32904,32096,5,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+373,"Paupers Palace, Flat 28",32903,32095,5,7,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+374,"Paupers Palace, Flat 31",32918,32095,4,19,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+375,"Paupers Palace, Flat 32",32914,32096,4,23,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+376,"Paupers Palace, Flat 33",32911,32095,4,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+377,"Paupers Palace, Flat 34",32906,32095,4,35,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+378,Salvation Street 1 (Shop),32929,32096,6,132,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+379,Salvation Street 2,32967,32096,6,82,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+380,Salvation Street 3,32972,32096,6,82,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+381,Mystic Lane 1,32975,32072,6,61,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+382,Mystic Lane 2,32979,32072,6,64,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+383,Silver Street 1,32998,32109,6,57,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+384,Silver Street 2,32998,32088,6,44,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+385,Silver Street 3,32998,32084,6,44,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+386,Silver Street 4,32997,32077,6,71,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+387,Loot Lane 1 (Shop),32981,32059,6,97,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+388,Old Lighthouse,32926,32037,6,78,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+389,Market Street 1,32932,32051,6,144,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+390,Market Street 2,32944,32053,6,105,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+391,Market Street 3,32950,32052,6,75,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+392,Market Street 4 (Shop),32960,32052,6,109,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+393,Market Street 5 (Shop),32964,32053,6,135,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+394,Market Street 6,32993,32052,6,113,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+395,Market Street 7,33004,32052,6,49,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+396,Shadow Towers,32698,31773,7,402,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+397,The Hideout,32547,31666,7,378,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+398,Underwood 1,32643,31691,7,31,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+399,Underwood 2,32646,31676,7,31,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+400,Underwood 3,32643,31657,7,33,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+401,Underwood 4,32626,31656,7,43,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+402,Underwood 5,32652,31668,7,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+403,Underwood 6,32652,31656,7,31,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+404,Underwood 7,32677,31678,7,28,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+405,Underwood 8,32690,31647,7,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+406,Underwood 9,32712,31665,7,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+407,Underwood 10,32626,31657,7,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+408,Ab'Dendriel Clanhall,32714,31643,7,310,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+409,Castle of the Winds,32658,31583,7,493,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+410,Great Willow 1a,32660,31641,7,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+411,Great Willow 1b,32663,31641,7,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+412,Great Willow 1c,32662,31636,7,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+413,Great Willow 2a,32659,31641,6,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+414,Great Willow 2b,32662,31642,6,9,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+415,Great Willow 2c,32662,31638,6,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+416,Great Willow 2d,32662,31635,6,9,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+417,Great Willow 3a,32659,31641,5,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+418,Great Willow 3b,32662,31642,5,9,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+419,Great Willow 3c,32662,31638,5,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+420,Great Willow 3d,32662,31635,5,9,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+421,Great Willow 4a,32660,31641,4,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+422,Great Willow 4b,32662,31639,4,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+423,Great Willow 4c,32664,31639,4,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+424,Great Willow 4d,32664,31639,4,15,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+425,Mangrove 1,32648,31602,7,31,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+426,Mangrove 2,32681,31592,7,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+427,Mangrove 3,32693,31605,7,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+428,Mangrove 4,32717,31621,7,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+429,Treetop 1,32636,31689,6,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+430,Treetop 2,32640,31689,6,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+431,Treetop 3 (Shop),32644,31676,6,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+432,Treetop 4 (Shop),32644,31672,6,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+433,Treetop 5 (Shop),32656,31654,6,27,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+434,Treetop 6,32642,31661,6,9,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+435,Treetop 7,32642,31657,6,16,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+436,Treetop 8,32628,31654,6,16,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+437,Treetop 9,32624,31654,6,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+438,Treetop 10,32626,31656,6,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+439,Treetop 11,32688,31642,6,16,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+440,Treetop 12 (Shop),32681,31675,6,27,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+441,Treetop 13,32713,31665,6,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+442,Coastwood 1,32647,31603,6,16,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+443,Coastwood 2,32647,31599,6,16,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+444,Coastwood 3,32668,31612,6,22,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+445,Coastwood 4,32671,31612,6,19,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+446,Coastwood 5,32676,31592,6,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+447,Coastwood 6 (Shop),32691,31592,6,29,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+448,Coastwood 7,32695,31592,6,12,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+449,Coastwood 8,32690,31600,6,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+450,Coastwood 9,32688,31614,6,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+451,Coastwood 10,32717,31621,6,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+452,Shadow Caves 1,32654,31672,8,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+453,Shadow Caves 2,32656,31672,8,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+454,Shadow Caves 3,32654,31676,8,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+455,Shadow Caves 4,32656,31676,8,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+456,Shadow Caves 11,32654,31664,9,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+457,Shadow Caves 12,32656,31664,9,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+458,Shadow Caves 13,32654,31668,9,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+459,Shadow Caves 14,32656,31668,9,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+460,Shadow Caves 15,32654,31672,9,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+461,Shadow Caves 16,32656,31672,9,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+462,Shadow Caves 17,32654,31676,9,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+463,Shadow Caves 18,32656,31676,9,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+464,Shadow Caves 21,32654,31664,10,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+465,Shadow Caves 22,32656,31664,10,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+466,Shadow Caves 23,32654,31668,10,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+467,Shadow Caves 24,32656,31668,10,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+468,Shadow Caves 25,32654,31672,10,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+469,Shadow Caves 26,32656,31672,10,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+470,Shadow Caves 27,32654,31676,10,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+471,Shadow Caves 28,32656,31676,10,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+472,Haggler's Hangout 1,32593,32759,7,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+473,Haggler's Hangout 2,32601,32761,7,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+474,Haggler's Hangout 3,32612,32739,7,145,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+475,Haggler's Hangout 4a,32616,32752,7,37,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+476,Haggler's Hangout 4b,32616,32758,7,31,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+477,Haggler's Hangout 5,32630,32757,7,31,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+478,Haggler's Hangout 6,32638,32750,7,123,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+479,Banana Bay 1,32553,32799,6,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+480,Banana Bay 2,32550,32803,6,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+481,Banana Bay 3,32561,32805,6,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+482,Banana Bay 4,32556,32814,6,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+483,Crocodile Bridge 1,32571,32794,6,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+484,Crocodile Bridge 2,32571,32787,6,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+485,Crocodile Bridge 3,32579,32788,6,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+486,Crocodile Bridge 4,32592,32792,6,99,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+487,Crocodile Bridge 5,32605,32793,6,86,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+488,Woodway 1,32618,32787,6,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+489,Woodway 2,32629,32784,6,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+490,Woodway 3,32642,32784,6,32,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+491,Woodway 4,32653,32782,6,9,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+492,Flamingo Flats 1,32664,32773,6,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+493,Flamingo Flats 2,32672,32774,6,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+494,Flamingo Flats 3,32681,32770,6,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+495,Flamingo Flats 4,32674,32783,6,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+496,Flamingo Flats 5,32664,32786,6,41,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+497,Bamboo Garden 1,32574,32795,7,32,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+498,Bamboo Garden 2,32622,32796,7,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+499,Bamboo Garden 3,32645,32789,7,32,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+500,Coconut Quay 1,32568,32775,6,37,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+501,Coconut Quay 2,32577,32766,6,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+502,Coconut Quay 3,32586,32773,6,41,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+503,Coconut Quay 4,32598,32773,6,43,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+504,River Homes 1,32618,32773,6,73,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+505,River Homes 2a,32627,32773,6,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+506,River Homes 2b,32634,32773,6,31,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+507,River Homes 3,32647,32769,6,99,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+508,Jungle Edge 1,32662,32752,6,51,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+509,Jungle Edge 2,32673,32746,6,66,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+510,Jungle Edge 3,32680,32745,6,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+511,Jungle Edge 4,32674,32757,6,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+512,Jungle Edge 5,32680,32756,6,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+513,Jungle Edge 6,32690,32757,6,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+514,Shark Manor,32556,32767,6,164,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+515,Bamboo Fortress,32664,32791,7,446,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+516,The Treehouse,32747,32697,7,548,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+517,Castle Shop 1,33205,31794,7,42,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+518,Castle Shop 2,33205,31801,7,42,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+519,Castle Shop 3,33205,31808,7,42,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+520,"Castle, 3rd Floor, Flat 01",33170,31817,5,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+521,"Castle, 3rd Floor, Flat 02",33170,31812,5,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+522,"Castle, 3rd Floor, Flat 03",33169,31812,5,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+523,"Castle, 3rd Floor, Flat 04",33169,31807,5,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+524,"Castle, 3rd Floor, Flat 05",33170,31807,5,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+525,"Castle, 3rd Floor, Flat 06",33170,31802,5,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+526,"Castle, 3rd Floor, Flat 07",33169,31802,5,16,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+527,"Castle, 4th Floor, Flat 01",33170,31817,4,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+528,"Castle, 4th Floor, Flat 02",33170,31812,4,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+529,"Castle, 4th Floor, Flat 03",33169,31812,4,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+530,"Castle, 4th Floor, Flat 04",33169,31807,4,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+531,"Castle, 4th Floor, Flat 05",33170,31807,4,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+532,"Castle, 4th Floor, Flat 06",33170,31802,4,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+533,"Castle, 4th Floor, Flat 07",33169,31802,4,16,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+534,"Castle, 4th Floor, Flat 08",33166,31794,4,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+535,"Castle, 4th Floor, Flat 09",33166,31789,4,16,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+536,"Castle, Basement, Flat 01",33204,31790,8,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+537,"Castle, Basement, Flat 02",33204,31791,8,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+538,"Castle, Basement, Flat 03",33208,31791,8,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+539,"Castle, Basement, Flat 04",33212,31791,8,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+540,"Castle, Basement, Flat 05",33212,31790,8,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+541,"Castle, Basement, Flat 06",33216,31790,8,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+542,"Castle, Basement, Flat 07",33216,31791,8,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+543,"Castle, Basement, Flat 08",33220,31791,8,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+544,"Castle, Basement, Flat 09",33220,31790,8,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+545,Castle Street 1,33167,31835,7,60,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+546,Castle Street 2,33154,31798,7,31,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+547,Castle Street 3,33150,31797,7,37,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+548,Castle Street 4,33155,31791,7,37,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+549,Castle Street 5,33148,31784,7,37,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+550,"Edron Flats, Flat 01",33189,31844,7,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+551,"Edron Flats, Flat 02",33189,31845,7,19,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+552,"Edron Flats, Flat 03",33183,31845,7,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+553,"Edron Flats, Flat 04",33183,31844,7,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+554,"Edron Flats, Flat 05",33179,31844,7,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+555,"Edron Flats, Flat 06",33179,31845,7,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+556,"Edron Flats, Flat 07",33175,31845,7,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+557,"Edron Flats, Flat 08",33175,31844,7,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+558,"Edron Flats, Flat 11",33189,31844,6,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+559,"Edron Flats, Flat 12",33189,31845,6,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+560,"Edron Flats, Flat 13",33183,31845,6,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+561,"Edron Flats, Flat 14",33183,31844,6,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+562,"Edron Flats, Flat 15",33179,31844,6,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+563,"Edron Flats, Flat 16",33179,31845,6,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+564,"Edron Flats, Flat 17",33175,31845,6,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+565,"Edron Flats, Flat 18",33175,31844,6,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+566,"Edron Flats, Flat 21",33189,31844,5,19,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+567,"Edron Flats, Flat 22",33189,31845,5,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+568,"Edron Flats, Flat 23",33183,31845,5,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+569,"Edron Flats, Flat 24",33183,31844,5,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+570,"Edron Flats, Flat 25",33179,31844,5,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+571,"Edron Flats, Flat 26",33179,31845,5,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+572,"Edron Flats, Flat 27",33175,31845,5,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+573,"Edron Flats, Flat 28",33175,31844,5,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+574,"Edron Flats, Basement Flat 1",33187,31841,8,36,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+575,"Edron Flats, Basement Flat 2",33183,31841,8,36,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+576,Central Circle 1,33203,31841,7,73,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+577,Central Circle 2,33210,31841,7,80,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+578,Central Circle 3,33201,31848,7,94,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+579,Central Circle 4,33208,31848,7,94,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+580,Central Circle 5,33215,31848,7,94,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+581,Central Circle 6 (Shop),33214,31864,7,97,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+582,Central Circle 7 (Shop),33207,31864,7,97,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+583,Central Circle 8 (Shop),33200,31864,7,97,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+584,Central Circle 9a,33191,31864,7,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+585,Central Circle 9b,33191,31864,6,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+586,Wood Avenue 1,33230,31801,7,37,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+587,Wood Avenue 2,33228,31810,7,37,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+588,Wood Avenue 3,33225,31817,7,37,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+589,Wood Avenue 4,33237,31821,7,37,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+590,Wood Avenue 5,33238,31831,7,37,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+591,Wood Avenue 6a,33225,31841,7,30,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+592,Wood Avenue 6b,33228,31843,6,30,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+593,Wood Avenue 7,33231,31847,7,128,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+594,Wood Avenue 8,33231,31854,7,128,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+595,Wood Avenue 9a,33228,31854,7,32,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+596,Wood Avenue 9b,33228,31850,6,31,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+597,Wood Avenue 10a,33228,31859,7,32,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+598,Wood Avenue 10b,33228,31857,6,31,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+599,Wood Avenue 11,33231,31861,7,149,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+600,Wood Avenue 4a,33233,31817,6,31,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+601,Wood Avenue 4b,33233,31817,6,31,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+602,Wood Avenue 4c,33233,31814,6,37,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+603,"Sky Lane, Guild 1",33221,31874,7,421,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+604,"Sky Lane, Guild 2",33226,31876,7,400,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+605,"Sky Lane, Guild 3",33230,31889,7,347,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+606,"Sky Lane, Sea Tower",33245,31890,7,95,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+607,"Magic Academy, Guild",33271,31825,6,195,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+608,"Magic Academy, Shop",33254,31840,8,29,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+609,"Magic Academy, Flat 1",33282,31832,8,23,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+610,"Magic Academy, Flat 2",33282,31832,7,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+611,"Magic Academy, Flat 3",33282,31832,5,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+612,"Magic Academy, Flat 4",33282,31832,4,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+613,"Magic Academy, Flat 5",33282,31832,3,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+614,Stonehome Village 1,33287,31765,7,42,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+615,Stonehome Village 2,33311,31774,6,16,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+616,Stonehome Village 3,33305,31767,6,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+617,Stonehome Village 4,33302,31759,6,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+618,Stonehome Village 5,33326,31771,6,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+619,Stonehome Village 6,33326,31766,6,30,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+620,Stonehome Village 7,33313,31753,7,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+621,Stonehome Village 8,33318,31753,7,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+622,Stonehome Village 9,33324,31755,7,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+623,"Stonehome Flats, Flat 01",33299,31781,7,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+624,"Stonehome Flats, Flat 02",33299,31782,7,16,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+625,"Stonehome Flats, Flat 03",33294,31782,7,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+626,"Stonehome Flats, Flat 04",33294,31781,7,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+627,"Stonehome Flats, Flat 05",33290,31781,7,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+628,"Stonehome Flats, Flat 06",33290,31782,7,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+629,"Stonehome Flats, Flat 11",33297,31781,6,16,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+630,"Stonehome Flats, Flat 12",33297,31782,6,16,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+631,"Stonehome Flats, Flat 13",33294,31782,6,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+632,"Stonehome Flats, Flat 14",33294,31781,6,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+633,"Stonehome Flats, Flat 15",33290,31781,6,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+634,"Stonehome Flats, Flat 16",33290,31782,6,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+635,Stonehome Clanhall,33333,31760,7,192,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+636,"Cormaya Flats, Flat 01",33311,31965,7,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+637,"Cormaya Flats, Flat 02",33315,31965,7,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+638,"Cormaya Flats, Flat 03",33320,31965,7,16,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+639,"Cormaya Flats, Flat 04",33320,31966,7,16,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+640,"Cormaya Flats, Flat 05",33315,31966,7,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+641,"Cormaya Flats, Flat 06",33311,31966,7,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+642,"Cormaya Flats, Flat 11",33311,31965,6,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+643,"Cormaya Flats, Flat 12",33315,31965,6,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+644,"Cormaya Flats, Flat 13",33318,31965,6,16,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+645,"Cormaya Flats, Flat 14",33318,31966,6,16,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+646,"Cormaya Flats, Flat 15",33315,31966,6,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+647,"Cormaya Flats, Flat 16",33311,31966,6,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+648,Cormaya 1,33302,31963,7,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+649,Cormaya 2,33297,31968,7,78,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+650,Cormaya 3,33304,31978,7,43,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+651,Cormaya 4,33292,31982,7,36,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+652,Cormaya 5,33278,31980,7,120,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+653,Cormaya 6,33287,31988,7,51,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+654,Cormaya 7,33287,31994,7,51,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+655,Cormaya 8,33287,32000,7,58,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+656,Cormaya 9a,33288,32013,7,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+657,Cormaya 9b,33286,32012,7,56,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+658,Cormaya 9c,33288,32013,6,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+659,Cormaya 9d,33286,32012,6,56,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+660,Cormaya 10,33294,32005,7,80,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+661,Cormaya 11,33305,32005,7,43,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+662,Castle of the White Dragon,33297,31986,7,515,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+663,Chameken I,33099,32857,7,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+664,Chameken II,33121,32861,7,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+665,Thanah I a,33109,32822,5,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+666,Thanah I b,33114,32821,6,56,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+667,Thanah I c,33109,32811,7,61,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+668,Thanah I d,33109,32826,7,52,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+669,Thanah II a,33107,32840,5,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+670,Thanah II b,33103,32837,6,9,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+671,Thanah II c,33104,32837,6,9,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+672,Thanah II d,33103,32843,6,7,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+673,Thanah II e,33104,32843,6,7,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+674,Thanah II f,33105,32840,7,53,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+675,Thanah II g,33104,32841,7,31,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+676,Thanah II h,33105,32841,7,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+677,Thrarhor I a (Shop),33128,32811,7,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+678,Thrarhor I b (Shop),33132,32811,7,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+679,Thrarhor I c (Shop),33128,32819,7,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+680,Thrarhor I d (Shop),33132,32819,7,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+681,Botham I a,33199,32831,5,19,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+682,Botham I b,33195,32836,6,56,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+683,Botham I c,33187,32830,7,32,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+684,Botham I d,33199,32838,7,57,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+685,Botham I e,33192,32838,7,31,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+686,Botham II a,33213,32853,5,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+687,Botham II b,33222,32851,6,30,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+688,Botham II c,33217,32858,6,23,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+689,Botham II d,33209,32849,7,37,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+690,Botham II e,33220,32845,7,31,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+691,Botham II f,33213,32860,7,31,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+692,Botham II g,33220,32860,7,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+693,Botham III a,33193,32871,5,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+694,Botham III b,33195,32865,6,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+695,Botham III c,33203,32869,6,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+696,Botham III d,33195,32877,6,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+697,Botham III e,33200,32877,6,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+698,Botham III f,33189,32867,7,43,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+699,Botham III g,33201,32863,7,31,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+700,Botham III h,33189,32875,7,71,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+701,Botham IV a,33175,32853,5,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+702,Botham IV b,33169,32855,6,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+703,Botham IV c,33181,32855,6,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+704,Botham IV d,33173,32863,6,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+705,Botham IV e,33181,32860,6,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+706,Botham IV f,33172,32849,7,32,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+707,Botham IV g,33179,32849,7,31,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+708,Botham IV h,33167,32861,7,37,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+709,Botham IV i,33180,32865,7,32,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+710,Ramen Tah,33174,32843,7,123,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+711,Charsirakh I a,33076,32816,6,7,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+712,Charsirakh I b,33073,32820,7,37,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+713,Charsirakh II,33072,32830,7,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+714,Charsirakh III,33072,32843,7,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+715,Othehothep I a,33089,32805,5,7,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+716,Othehothep I b,33088,32797,6,32,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+717,Othehothep I c,33095,32799,7,38,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+718,Othehothep I d,33089,32808,7,43,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+719,Othehothep II a,33111,32797,5,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+720,Othehothep II b,33108,32802,6,43,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+721,Othehothep II c,33101,32794,7,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+722,Othehothep II d,33115,32794,7,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+723,Othehothep II e,33105,32804,7,31,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+724,Othehothep II f,33111,32804,7,31,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+725,Othehothep III a,33131,32793,5,7,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+726,Othehothep III b,33123,32794,6,31,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+727,Othehothep III c,33121,32790,7,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+728,Othehothep III d,33131,32786,7,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+729,Othehothep III e,33126,32799,7,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+730,Othehothep III f,33131,32799,7,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+731,Harrah I,33088,32827,7,121,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+732,Murkhol I a,33084,32840,7,11,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+733,Murkhol I b,33084,32841,7,11,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+734,Murkhol I c,33084,32841,7,11,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+735,Murkhol I d,33083,32841,7,11,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+736,Oskahl I a,33077,32865,5,37,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+737,Oskahl I b,33070,32858,6,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+738,Oskahl I c,33083,32858,6,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+739,Oskahl I d,33070,32863,6,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+740,Oskahl I e,33083,32863,6,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+741,Oskahl I f,33076,32865,7,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+742,Oskahl I g,33076,32860,7,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+743,Oskahl I h,33077,32858,7,39,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+744,Oskahl I i,33078,32860,7,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+745,Oskahl I j,33078,32865,7,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+746,Mothrem I,33116,32781,7,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+747,Arakmehn I,33137,32777,7,28,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+748,Arakmehn II,33146,32778,7,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+749,Arakmehn III,33159,32778,7,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+750,Arakmehn IV,33177,32778,7,28,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+751,Unklath I a,33153,32792,5,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+752,Unklath I b,33150,32785,6,34,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+753,Unklath I c,33143,32794,6,34,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+754,Unklath I d,33141,32787,7,37,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+755,Unklath I e,33157,32788,7,37,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+756,Unklath I f,33146,32799,7,37,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+757,Unklath I g,33153,32799,7,37,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+758,Unklath II a,33170,32789,6,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+759,Unklath II b,33164,32791,7,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+760,Unklath II c,33176,32791,7,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+761,Unklath II d,33170,32799,7,37,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+762,Rathal I a,33187,32785,6,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+763,Rathal I b,33181,32787,7,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+764,Rathal I c,33193,32787,7,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+765,Rathal I d,33185,32795,7,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+766,Rathal I e,33190,32795,7,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+767,Rathal II a,33210,32793,6,26,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+768,Rathal II b,33200,32790,7,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+769,Rathal II c,33212,32790,7,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+770,Rathal II d,33207,32798,7,34,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+771,Uthemath I a,33188,32812,5,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+772,Uthemath I b,33183,32811,6,20,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+773,Uthemath I c,33193,32811,6,20,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+774,Uthemath I d,33181,32806,7,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+775,Uthemath I e,33195,32806,7,21,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+776,Uthemath I f,33189,32816,7,56,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+777,Uthemath II,33208,32816,7,94,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+778,Esuph I,33219,32800,7,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+779,Esuph II a,33227,32813,6,7,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+780,Esuph II b,33223,32817,7,32,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+781,Esuph III a,33241,32820,6,7,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+782,Esuph III b,33233,32819,7,31,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+783,Esuph IV a,33234,32831,6,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+784,Esuph IV b,33229,32832,7,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+785,Esuph IV c,33239,32832,7,10,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+786,Esuph IV d,33236,32839,7,20,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+787,Horakhal,33217,32836,6,203,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+788,"Darashia 1, Flat 01",33210,32413,7,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+789,"Darashia 1, Flat 02",33202,32411,7,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+790,"Darashia 1, Flat 03",33201,32414,7,59,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+791,"Darashia 1, Flat 04",33202,32416,7,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+792,"Darashia 1, Flat 05",33210,32414,7,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+793,"Darashia 1, Flat 11",33202,32411,6,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+794,"Darashia 1, Flat 12",33201,32412,6,42,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+795,"Darashia 1, Flat 13",33206,32416,6,42,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+796,"Darashia 1, Flat 14",33206,32416,6,59,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+797,"Darashia 2, Flat 01",33212,32436,7,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+798,"Darashia 2, Flat 02",33207,32434,7,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+799,"Darashia 2, Flat 03",33204,32435,7,29,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+800,"Darashia 2, Flat 04",33204,32438,7,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+801,"Darashia 2, Flat 05",33205,32439,7,29,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+802,"Darashia 2, Flat 06",33208,32439,7,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+803,"Darashia 2, Flat 07",33212,32437,7,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+804,"Darashia 2, Flat 11",33209,32434,6,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+805,"Darashia 2, Flat 12",33208,32434,6,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+806,"Darashia 2, Flat 13",33205,32434,6,29,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+807,"Darashia 2, Flat 14",33204,32435,6,13,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+808,"Darashia 2, Flat 15",33204,32439,6,29,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+809,"Darashia 2, Flat 16",33205,32439,6,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+810,"Darashia 2, Flat 17",33209,32439,6,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+811,"Darashia 2, Flat 18",33209,32439,6,17,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+812,"Darashia 3, Flat 01",33229,32442,7,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+813,"Darashia 3, Flat 02",33227,32447,7,38,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+814,"Darashia 3, Flat 03",33230,32449,7,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+815,"Darashia 3, Flat 04",33232,32447,7,38,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+816,"Darashia 3, Flat 05",33230,32442,7,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+817,"Darashia 3, Flat 11",33228,32445,6,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+818,"Darashia 3, Flat 12",33227,32446,6,55,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+819,"Darashia 3, Flat 13",33232,32449,6,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+820,"Darashia 3, Flat 14",33232,32449,6,55,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+821,"Darashia 4, Flat 01",33250,32424,7,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+822,"Darashia 4, Flat 02",33244,32422,7,42,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+823,"Darashia 4, Flat 03",33241,32425,7,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+824,"Darashia 4, Flat 04",33244,32427,7,42,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+825,"Darashia 4, Flat 05",33250,32425,7,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+826,"Darashia 4, Flat 11",33242,32422,6,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+827,"Darashia 4, Flat 12",33241,32423,6,59,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+828,"Darashia 4, Flat 13",33246,32427,6,42,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+829,"Darashia 4, Flat 14",33246,32427,6,42,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+830,"Darashia 5, Flat 01",33256,32409,7,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+831,"Darashia 5, Flat 02",33254,32403,7,38,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+832,"Darashia 5, Flat 03",33256,32401,7,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+833,"Darashia 5, Flat 04",33259,32403,7,38,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+834,"Darashia 5, Flat 05",33257,32409,7,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+835,"Darashia 5, Flat 11",33255,32401,6,42,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+836,"Darashia 5, Flat 12",33254,32402,6,38,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+837,"Darashia 5, Flat 13",33259,32405,6,42,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+838,"Darashia 5, Flat 14",33259,32405,6,38,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+839,Darashia 6a,33273,32405,7,67,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+840,Darashia 6b,33273,32406,7,74,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+841,"Darashia 7, Flat 01",33259,32424,7,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+842,"Darashia 7, Flat 02",33265,32422,7,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+843,"Darashia 7, Flat 03",33267,32425,7,59,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+844,"Darashia 7, Flat 04",33265,32427,7,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+845,"Darashia 7, Flat 05",33259,32425,7,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+846,"Darashia 7, Flat 11",33263,32422,6,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+847,"Darashia 7, Flat 12",33262,32423,6,59,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+848,"Darashia 7, Flat 13",33267,32427,6,25,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+849,"Darashia 7, Flat 14",33267,32427,6,59,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+850,"Darashia 8, Flat 01",33251,32442,7,53,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+851,"Darashia 8, Flat 02",33249,32447,7,73,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+852,"Darashia 8, Flat 03",33252,32449,7,100,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+853,"Darashia 8, Flat 04",33254,32447,7,61,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+854,"Darashia 8, Flat 05",33252,32442,7,57,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+855,"Darashia, Villa",33266,32453,7,113,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+856,"Darashia, Western Guildhall",33228,32470,7,203,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+857,"Darashia, Eastern Guildhall",33232,32470,7,248,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+858,"Darashia 8, Flat 11",33250,32445,6,42,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+859,"Darashia 8, Flat 12",33249,32446,6,38,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+860,"Darashia 8, Flat 13",33254,32449,6,42,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
+861,"Darashia 8, Flat 14",33254,32449,6,38,0,UNKNOWN,player-ownable house,False,HouseTile excluded even if unowned; live ownership/encounter review required
