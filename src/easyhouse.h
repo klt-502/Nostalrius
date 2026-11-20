@@ -9,6 +9,7 @@
 #include <ostream>
 #include "position.h"
 class Map;
+class House;
 namespace EasyMode {
 struct HouseRole {
 	uint16_t item = 0, count = 1;
@@ -22,6 +23,8 @@ struct HousePoint {
 };
 struct HouseInterior {
 	std::string id, profile, review;
+	uint32_t houseId = 0;
+	std::string houseSignature;
 	Position anchor;
 	uint16_t ground = 0;
 	std::vector<HousePoint> points;
@@ -34,9 +37,13 @@ class HouseOverlay {
 	using Claim = std::function<bool(const std::string &, const std::string &)>;
 	bool load(const std::string &file, const std::string &mapIdentity, std::string &error);
 	HouseCounts apply(Map &map, bool furnishing, bool loot, const Claim &claim);
+	bool loadXml(const std::string &xml, const std::string &mapIdentity, std::string &error);
 	size_t size() const { return interiors.size(); }
 
   private:
+	friend HouseCounts restoreOwnableHouseFixtures(Map &, const std::string &);
+	HouseCounts restoreStored(Map &map, uint32_t houseId);
+	std::string snapshot(const HouseInterior &in) const;
 	std::string identity;
 	std::map<std::string, std::map<std::string, HouseRole>> profiles;
 	std::vector<HouseInterior> interiors;
@@ -45,5 +52,9 @@ class HouseOverlay {
 // Explicit one-time world issuance, durable reservation before item placement.
 bool claimHouseLoot(const std::string &key, const std::string &identity);
 void initializeHouses();
+std::string houseFixtureSignature(const House &house);
+bool ownableHouseFixturesEnabled();
+HouseCounts restoreOwnableHouseFixtures(Map &map, const std::string &mapIdentity);
+void restoreOwnableHouseFixturesFromMap(Map &map, const std::string &filename);
 } // namespace EasyMode
 #endif

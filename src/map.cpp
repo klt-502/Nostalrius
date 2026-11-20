@@ -25,6 +25,7 @@
 #include "creature.h"
 #include "monster.h"
 #include "game.h"
+#include "easyhouse.h"
 
 extern Game g_game;
 
@@ -47,6 +48,7 @@ bool Map::loadMap(const std::string& identifier, bool loadHouses)
 		}
 
 		IOMapSerialize::loadHouseInfo();
+		EasyMode::restoreOwnableHouseFixturesFromMap(*this, identifier);
 		IOMapSerialize::loadHouseItems(this);
 	}
 	return true;

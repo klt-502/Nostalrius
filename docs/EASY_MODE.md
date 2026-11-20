@@ -256,3 +256,7 @@ for `!light`, native duration and NPC sale protection.
 All five active endless consumables now have explicit original-client Look names;
 see [ENDLESS_ITEM_PRESENTATION.md](ENDLESS_ITEM_PRESENTATION.md). No sprite,
 persistent item attribute, config option or reserved Action ID is added.
+
+`easyModeOwnableHouseFurnishing = false` adds an explicit startup opt-in for
+reviewed vacant-house fixtures. Read [OWNABLE_HOUSE_FURNISHING.md](OWNABLE_HOUSE_FURNISHING.md)
+before migration 004 or any approval; existing owned homes are never newly furnished.

@@ -1,5 +1,11 @@
 # Easy Mode house/interior overlay
 
+**Ownable-house update:** the initial blanket HouseTile exclusion described below
+is superseded only for explicitly reviewed, durably activated fixture-only houses.
+See [OWNABLE_HOUSE_FURNISHING.md](OWNABLE_HOUSE_FURNISHING.md) for the current
+ownership/save/reset contract. Historical source facts and zero production approvals
+remain unchanged.
+
 Production pilot: **0 interiors**, no location promoted from the review queue.
 All 861 ownable HouseTile identities are excluded. Read
 [HOUSE_SYSTEM_AUDIT.md](HOUSE_SYSTEM_AUDIT.md) for persistence evidence, counts,

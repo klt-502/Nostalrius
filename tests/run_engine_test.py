@@ -9,7 +9,7 @@ import xml.etree.ElementTree as ET
 
 binary, source, scenario = sys.argv[1:]
 source = pathlib.Path(source)
-if scenario in {"houses_store", "broker_food_rings", "broker_notice", "broker_batch", "broker_floor", "broker_witness", "broker", "broker_restart", "broker_feedback"} and not os.environ.get("ZEDAS_BROKER_TEST_PORT"):
+if scenario in {"ownable_house_cycle", "houses_store", "broker_food_rings", "broker_notice", "broker_batch", "broker_floor", "broker_witness", "broker", "broker_restart", "broker_feedback"} and not os.environ.get("ZEDAS_BROKER_TEST_PORT"):
     sys.exit(77)
 with tempfile.TemporaryDirectory(prefix="zedas-engine-") as directory:
     root = pathlib.Path(directory)
@@ -77,9 +77,11 @@ with tempfile.TemporaryDirectory(prefix="zedas-engine-") as directory:
         'easyModeCommands = true\neasyModeAutoTarget = true\neasyModeAutoGold = true\n'
         'removeChargesFromRunes = true\ntimeBetweenExActions = 25\n'
         'autoStackCumulatives = false\nqueryPlayerContainers = false\n')
-    if scenario == "houses_store":
+    if scenario in {"ownable_house_cycle","houses_store"}:
         config += ('mysqlHost="127.0.0.1"\nmysqlUser="root"\nmysqlPass="fixture-only"\n'
                    'mysqlDatabase="zedas_broker_test"\nmysqlPort=' + os.environ["ZEDAS_BROKER_TEST_PORT"] + '\n')
+    if scenario=="ownable_house_cycle":
+        config += 'easyModeHouseFurnishing = true\neasyModeOwnableHouseFurnishing = true\neasyModeHouseLoot = true\n'
     if scenario.startswith("houses_"):
         shutil.copytree(source / "data/zedas", root / "data/zedas")
         config += 'easyModeHouseFurnishing = true\neasyModeHouseLoot = true\n'
@@ -130,7 +132,7 @@ with tempfile.TemporaryDirectory(prefix="zedas-engine-") as directory:
         # Exercise each startup setting independently, including newly reserved flags.
         valid = config.replace('"invalid"', 'false')
         for key in ("easyModeEnabled", "easyModeEndlessRunes", "easyModeEndlessManaFluid",
-                    "easyModeHouseFurnishing", "easyModeHouseLoot", "easyModeEndlessLightWand", "easyModeCommands", "easyModeAutoTarget", "easyModeAutoGold",
+                    "easyModeOwnableHouseFurnishing", "easyModeHouseFurnishing", "easyModeHouseLoot", "easyModeEndlessLightWand", "easyModeCommands", "easyModeAutoTarget", "easyModeAutoGold",
                     "easyModeLootSpill", "easyModeGoldBag", "easyModeRespawn", "easyModeLootBroker"):
             (root / "config.lua").write_text(valid + f'\n{key} = "invalid"\n')
             subprocess.run([binary, scenario], cwd=root, check=True)
@@ -145,7 +147,14 @@ with tempfile.TemporaryDirectory(prefix="zedas-engine-") as directory:
                 (root / "config.lua").write_text(valid + f'\n{key} = {value}\n')
                 subprocess.run([binary, scenario], cwd=root, check=True)
         (root / "config.lua").write_text(valid + '\neasyModeRespawnPolicyFile = 123\n')
-    if scenario == "houses_store":
+    if scenario=="ownable_house_cycle":
+        for stage in ("ownable_seed","ownable_transfer","ownable_vacate","ownable_rebuy","ownable_mismatch","ownable_master_disabled","ownable_disabled","ownable_corrupt","ownable_cleanup"):
+            original=(root/"config.lua").read_text()
+            if stage=="ownable_disabled": (root/"config.lua").write_text(original+'\neasyModeOwnableHouseFurnishing = false\n')
+            if stage=="ownable_master_disabled": (root/"config.lua").write_text(original+'\neasyModeEnabled = false\n')
+            subprocess.run([binary,stage],cwd=root,check=True)
+            (root/"config.lua").write_text(original)
+    elif scenario == "houses_store":
         for stage in ("houses_store_seed", "houses_store_replay"):
             subprocess.run([binary, stage], cwd=root, check=True)
     elif scenario == "broker_restart":

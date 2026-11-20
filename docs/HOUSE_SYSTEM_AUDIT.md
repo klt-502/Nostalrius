@@ -1,5 +1,11 @@
 # House architecture and conservative exploration overlay audit
 
+**Ownable-house update:** the initial blanket HouseTile exclusion described below
+is superseded only for explicitly reviewed, durably activated fixture-only houses.
+See [OWNABLE_HOUSE_FURNISHING.md](OWNABLE_HOUSE_FURNISHING.md) for the current
+ownership/save/reset contract. Historical source facts and zero production approvals
+remain unchanged.
+
 Audited from accepted `9b5eae2` before this implementation. Historical OTBM, world
 houses/spawns XML, native ownership, save logic and item definitions are unchanged.
 No live database/configuration was supplied: sample SQL ownership is not current

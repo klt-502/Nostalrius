@@ -56,6 +56,8 @@ class ConfigManager
 			EASY_MODE_HOUSE_FURNISHING,
             EASY_MODE_HOUSE_LOOT,
 
+            EASY_MODE_OWNABLE_HOUSE_FURNISHING,
+
             LAST_BOOLEAN_CONFIG /* this must be the last one */
 		};
 

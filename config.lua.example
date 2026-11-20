@@ -1,7 +1,8 @@
 -- Combat settings
 -- Zedas Easy Mode (startup-only; all features disabled by default).
 -- See docs/EASY_MODE.md. The master switch and individual feature must both be true.
-easyModeHouseFurnishing = false -- exact reviewed non-HouseTile interiors only
+easyModeHouseFurnishing = false -- exact reviewed fixture placements
+easyModeOwnableHouseFurnishing = false -- durable fixed plans for reviewed unowned houses; migration 004
 easyModeHouseLoot = false -- one-time loose loot; explicit migration 003 required
 easyModeEnabled = false
 easyModeEndlessRunes = false
