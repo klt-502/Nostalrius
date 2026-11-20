@@ -35,8 +35,13 @@ jobs:
           fetch-depth: 0 # Historical spawn audit regenerates its pinned runtime snapshot.
       - name: Install build dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends build-essential cmake ninja-build libboost-system-dev libboost-filesystem-dev libpugixml-dev libluajit-5.1-dev luajit liblua5.2-dev lua5.2 default-libmysqlclient-dev libgmp-dev python3 default-mysql-client
+          # Avoid an unavailable HTTP mirror hanging the entire build job.
+          sudo sed -i \
+            -e 's|mirror+file:/etc/apt/apt-mirrors.txt|https://archive.ubuntu.com/ubuntu/|g' \
+            -e 's|mirror+file:/etc/apt/apt-mirrors-security.txt|https://security.ubuntu.com/ubuntu/|g' \
+            /etc/apt/sources.list.d/ubuntu.sources
+          sudo apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 update
+          sudo apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 install -y --no-install-recommends build-essential cmake ninja-build libboost-system-dev libboost-filesystem-dev libpugixml-dev libluajit-5.1-dev luajit liblua5.2-dev lua5.2 default-libmysqlclient-dev libgmp-dev python3 default-mysql-client
       - name: Configure
         run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DUSE_LUAJIT=${{ matrix.use_luajit }} -DUSE_COTIRE=OFF -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
       - name: Verify cotire and PCH are absent
