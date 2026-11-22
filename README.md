@@ -12,6 +12,7 @@ Wave 1 ruleset. All Easy features default off. Keep Classic and the preserved
 - [Wave 2 local Tibia 7.72 acceptance checklist](docs/WAVE2_TEST_CHECKLIST.md)
 - [Conservative exact-slot respawn policy](docs/EASY_RESPAWN.md)
 - [Historical Automap generator and local GM World Map](docs/WORLD_MAP_TOOLS.md)
+- [Original-client XP tooltip feasibility (deferred)](docs/XP_TOOLTIP_FEASIBILITY.md)
 
 Wave 2 needs original-client and live save/relog acceptance before deployment.
 Respawn infrastructure ships with an empty policy and accelerates no world
