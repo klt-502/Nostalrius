@@ -3,6 +3,7 @@
 
 #include <cstdint>
 #include <string>
+#include <map>
 #include <vector>
 
 class Item;
@@ -24,6 +25,8 @@ uint32_t npcWandCount(Player& player, uint16_t id, int32_t subtype);
 bool npcRemoveWands(Player& player, uint16_t id, uint32_t amount, int32_t subtype);
 
 static constexpr int64_t AUTO_TARGET_UNREACHABLE_MS = 3000;
+static constexpr int64_t AUTO_TARGET_RETRY_MS = 10000;
+static constexpr size_t MAX_SUPPRESSED_TARGETS = 32;
 static constexpr int GOLD_PICKUP_RADIUS_TILES = 5;
 static constexpr size_t MAX_REGISTERED_CORPSES = 1024;
 static constexpr int64_t CORPSE_REGISTRY_TTL_MS = 300000;
@@ -40,6 +43,7 @@ struct AutoTargetState {
 	bool active = false;
 	uint32_t automaticTargetId = 0;
 	int64_t unreachableSince = 0;
+	std::map<uint32_t, int64_t> unreachableUntil; // Bounded, temporary; manual targeting ignores this.
 	void manualInput(bool suspend) {
 		automaticTargetId = 0;
 		unreachableSince = 0;

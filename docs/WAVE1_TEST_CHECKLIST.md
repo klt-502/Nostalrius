@@ -74,19 +74,20 @@ Put correctly marked items inside a bag inside a closed backpack.
 
 - On login, `!autotarget status` reports off. With nearby monsters, there should be
   no automatic acquisition until `!autotarget on`.
-- Present healthy and wounded monsters of different species. Use a GM observer's
-  look information to compare current absolute HP. The highest eligible **current**
-  HP wins, not max HP or percentage. Players, NPCs, nonhostiles, unattackable or
+- Present monsters at different straight/diagonal distances. The closest eligible
+  monster wins using Chebyshev tile distance; ties use creature ID. HP does not
+  determine ranking. Players, NPCs, nonhostiles, unattackable or
   invisible creatures, other floors and player-controlled summons are excluded.
-- Introduce a stronger monster after acquisition: it must not steal the target.
+- Introduce a closer monster after acquisition: it must not steal the target.
   Repeat `!autotarget on`: it must not reset ownership or the failure timer.
 - Manually select another target: the selection must win. Press Escape/cancel:
   no automatic reacquisition occurs until `!autotarget on` is issued again.
 - Try manual follow and `!autotarget off`. Turning automation off must not clear
   an unrelated manually selected target.
 - Kill/remove the automatic target. Block its route and line of fire for over
-  three seconds, then reopen them. Verify bounded release and subsequent normal
-  acquisition. Brief blockage should retain the target.
+  three seconds. Verify release to the next nearest eligible target and no
+  immediate reacquisition of the blocked target for ten seconds. Reopen the route
+  and verify it can be acquired again after that temporary suppression. Brief blockage should retain the target.
 - Verify attack speed, chase/stand mode, stair behavior, disconnect/reconnect and
   logout/login. A new/reconnected session must require explicit resume.
 - Observe the red square and battle list separately from actual server attacks.

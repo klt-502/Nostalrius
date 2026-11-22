@@ -54,6 +54,7 @@ bool EasyMode::setAutoTarget(Player& player, bool active)
 	}
 	state.manualInput(false);
 	state.active = active;
+	if (!active) state.unreachableUntil.clear();
 	return true;
 }
 
@@ -74,22 +75,40 @@ void EasyMode::updateAutoTarget(Player& player, int64_t now)
 			}
 			if (state.unreachableSince == 0) state.unreachableSince = now;
 			if (now - state.unreachableSince < AUTO_TARGET_UNREACHABLE_MS) return;
+			if (state.unreachableUntil.size() >= MAX_SUPPRESSED_TARGETS) {
+				auto oldest = std::min_element(state.unreachableUntil.begin(), state.unreachableUntil.end(),
+					[](const std::pair<const uint32_t, int64_t>& a, const std::pair<const uint32_t, int64_t>& b) {
+						return a.second < b.second;
+					});
+				state.unreachableUntil.erase(oldest);
+			}
+			state.unreachableUntil[target->getID()] = now + AUTO_TARGET_RETRY_MS;
 		}
 		player.setAttackedCreature(nullptr);
 		player.sendCancelTarget();
 	}
 	state.manualInput(false);
+	for (auto it = state.unreachableUntil.begin(); it != state.unreachableUntil.end();) {
+		if (it->second <= now) it = state.unreachableUntil.erase(it);
+		else ++it;
+	}
 	SpectatorVec spectators;
 	g_game.map.getSpectators(spectators, player.getPosition(), false, false, 7, 7, 5, 5);
 	std::vector<Creature*> candidates;
 	for (Creature* creature : spectators) {
-		if (eligible(player, *creature)) candidates.push_back(creature);
+		if (!state.unreachableUntil.count(creature->getID()) && eligible(player, *creature)) candidates.push_back(creature);
 	}
-	std::sort(candidates.begin(), candidates.end(), [](const Creature* left, const Creature* right) {
-		return left->getHealth() != right->getHealth() ? left->getHealth() > right->getHealth() : left->getID() < right->getID();
+	const Position center = player.getPosition();
+	std::sort(candidates.begin(), candidates.end(), [&center](const Creature* left, const Creature* right) {
+		const auto distance = [&center](const Creature* creature) {
+			return std::max(Position::getDistanceX(center, creature->getPosition()),
+			                Position::getDistanceY(center, creature->getPosition()));
+		};
+		return distance(left) != distance(right) ? distance(left) < distance(right) : left->getID() < right->getID();
 	});
 	for (Creature* candidate : candidates) {
-		if (reachable(player, *candidate) && player.setAttackedCreature(candidate) && player.getAttackedCreature() == candidate) {
+		// Check reachability only for the retained target; never pathfind every acquisition candidate.
+		if (player.setAttackedCreature(candidate) && player.getAttackedCreature() == candidate) {
 			state.automaticTargetId = candidate->getID();
 			return;
 		}

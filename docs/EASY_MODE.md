@@ -108,20 +108,23 @@ a blockage and still requires release at the original deadline.
 
 Each normal player think selects a living visible same-floor attackable hostile
 monster in the 7-by-5 viewport only when no target exists. Player-controlled
-summons (including master chains), players and NPCs are excluded. Highest current
-absolute HP wins; ties use creature ID. Existing targets are retained when a
-stronger monster appears. Automatic invalid/dead/disappeared targets are released;
+summons (including master chains), players and NPCs are excluded. Nearest Chebyshev tile distance (`max(abs(dx), abs(dy))`) wins; ties use
+creature ID. Existing valid targets are retained when a closer monster appears. Automatic invalid/dead/disappeared targets are released;
 unreachability must last 3000 ms (`AUTO_TARGET_UNREACHABLE_MS`) before release.
-Reachability uses normal weapon sight/range or the existing bounded pathfinder.
+Reachability uses normal weapon sight/range or the existing bounded pathfinder
+for the retained target only. Acquisition does not pathfind each candidate. An
+automatic target abandoned as unreachable is suppressed for 10 seconds, in a
+session-only map capped at 32 entries; expired entries can be selected again.
+Manual targeting ignores suppression. Explicit off clears it.
 Attack speed, chase mode, combat permission and exhaustion remain unchanged.
 State/IDs/timers are session-only and never saved. Auto-target does not cast runes.
 Disconnect also suspends automation and releases its automatic target. Native
-tests exercise real protocol visibility, current-HP ranking, ineligible hostiles,
+tests exercise real protocol visibility, nearest-distance ranking, ineligible hostiles,
 invisibility, summons, target retention, manual override/Escape/resume/follow,
 death and a blocked route immediately before/at the three-second deadline.
 
 Client checklist: enable/resume, observe attack/chase and target indicators;
-introduce stronger and wounded monsters; manually select another target; press
+introduce closer and wounded monsters; manually select another target; press
 Escape and verify no reacquisition; resume; block a route for over three seconds;
 try stairs, protected tiles, invisibility, summons and logout/relogin. Server
 target selection does not promise that an unchanged client's red target indicator

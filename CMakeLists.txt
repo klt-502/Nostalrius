@@ -56,7 +56,7 @@ if(BUILD_TESTING)
     add_executable(easymode_engine_test tests/easymode_engine_test.cpp tests/easyspawn_engine_test.cpp)
     target_include_directories(easymode_engine_test PRIVATE src)
     target_link_libraries(easymode_engine_test tfs_engine)
-    foreach(scenario enabled disabled feature_disabled invalid_config defaults commands_disabled target_disabled gold_disabled
+    foreach(scenario enabled disabled feature_disabled invalid_config defaults commands_disabled target_disabled target_nearest gold_disabled
             ownable_house_cycle houses_store houses_enabled houses_disabled houses_fixture_only look_enabled look_disabled look_feature_disabled bag_enabled bag_disabled spill_enabled spill_hunting spill_only spill_invalid_policy spill_missing_policy wave2_disabled respawn_enabled light_enabled light_disabled light_feature_disabled broker broker_food_rings broker_food_ring_guard broker_notice broker_batch broker_floor broker_witness broker_catalog broker_restart loot_classes broker_feedback broker_feedback_disabled)
         add_test(NAME engine_${scenario} COMMAND ${PYTHON_EXECUTABLE}
             ${CMAKE_SOURCE_DIR}/tests/run_engine_test.py

@@ -172,6 +172,7 @@ static void setup()
 #include "endless_presentation_cases.h"
 #include "house_cases.h"
 #include "ownable_house_cases.h"
+#include "target_nearest_cases.h"
 
 int main(int argc, char** argv)
 {
@@ -207,6 +208,17 @@ int main(int argc, char** argv)
 		require(g_config.getString(ConfigManager::EASY_MODE_RESPAWN_POLICY_FILE) == "data/zedas/spawns.xml", "manifest path remains startup only");
 	}
 	setup();
+    if (scenario == "disabled") {
+        Player* classic = makePlayer(90, 94);
+        Monster* native = makeMonster(100, 93, 94);
+        classic->getEasyModeAutoTargetState().active = true;
+        EasyMode::updateAutoTarget(*classic, 1000);
+        require(!classic->getAttackedCreature() && !EasyMode::setAutoTarget(*classic, true), "Classic never acquires automatically");
+        g_game.playerSetAttackedCreature(classic->getID(), native->getID());
+        EasyMode::updateAutoTarget(*classic, 2000);
+        require(classic->getAttackedCreature() == native, "Classic manual attack unchanged");
+    }
+    if(scenario=="target_nearest"){testNearestTarget();return 0;}
     if(scenario.rfind("ownable_",0)==0){testOwnableHouse(scenario);return 0;}
     if (scenario.rfind("houses_",0)==0) { testHouses(scenario); return 0; }
     if (scenario.rfind("look_",0)==0) { testEndlessPresentation(scenario=="look_enabled"); return 0; }
@@ -487,10 +499,10 @@ int main(int argc, char** argv)
 	require(!hunter->getAttackedCreature(), "auto-target starts inactive");
 	g_game.playerSay(hunter->getID(), 0, TALKTYPE_SAY, "", "!autotarget on");
 	EasyMode::updateAutoTarget(*hunter, 1000);
-	require(hunter->getAttackedCreature() == healthy, "highest CURRENT HP eligible hostile selected");
-	Monster* stronger = makeMonster(900, 96, 95);
+	require(hunter->getAttackedCreature() == healthy, "nearest eligible hostile selected");
+	Monster* stronger = makeMonster(900, 91, 95);
 	EasyMode::updateAutoTarget(*hunter, 2000);
-	require(hunter->getAttackedCreature() == healthy, "stronger newcomer does not steal target");
+	require(hunter->getAttackedCreature() == healthy, "closer newcomer does not steal target");
 	g_game.playerSetAttackedCreature(hunter->getID(), wounded->getID());
 	EasyMode::updateAutoTarget(*hunter, 2000);
 	require(hunter->getAttackedCreature() == wounded, "manual target overrides automation");
@@ -499,7 +511,7 @@ int main(int argc, char** argv)
 	require(!hunter->getAttackedCreature() && !hunter->getEasyModeAutoTargetState().active, "Escape suspends reacquisition");
 	require(EasyMode::setAutoTarget(*hunter, true), "explicit resume");
 	EasyMode::updateAutoTarget(*hunter, 4000);
-	require(hunter->getAttackedCreature() == stronger, "resume acquires highest living target");
+	require(hunter->getAttackedCreature() == stronger, "resume acquires nearest living target");
 	stronger->changeHealth(-stronger->getHealth());
 	EasyMode::updateAutoTarget(*hunter, 4000);
 	require(hunter->getAttackedCreature() == healthy, "dead automatic target released");
