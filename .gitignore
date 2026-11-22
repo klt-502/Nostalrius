@@ -11,3 +11,9 @@ config.lua
 server.log
 rsa-search.txt
 save-error.txt
+
+# Reproducible local map/client data outputs
+generated/
+__pycache__/
+*.pyc
+Tibia.dat

@@ -1,0 +1,11 @@
+'use strict';
+const assert=require('node:assert/strict');
+const m=require(process.argv[2]);
+assert.deepEqual(m.parseCoordinates('/gotopos 33194,32853,7'),[33194,32853,7]);
+assert.deepEqual(m.parseCoordinates('100 200 15'),[100,200,15]);
+for(const s of ['1,2,16','-1,2,7','65536,2,7','1.2,2,7','1,,2,7','1,2,3;foo','1e3,2,7'])assert.equal(m.parseCoordinates(s),null,s);
+assert.equal(m.commandFor([1,2,7]),'/gotopos 1,2,7');
+assert.deepEqual(m.worldAt(400,300,100.5,200.5,4,800,600),[100,200]);
+assert.deepEqual(m.worldAt(408,288,100.5,200.5,4,800,600),[102,197]);
+assert.deepEqual(m.worldAt(399,299,100.5,200.5,.25,800,600),[96,196]);
+console.log('Viewer coordinate parsing, bounds, transforms and command formatting passed');

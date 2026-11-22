@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Zedas GM World Map</title><link rel="icon" href="icon.svg"><link rel="stylesheet" href="viewer.css"></head>
+<body><aside><header><div class="eyebrow">PROJECT ZEDAS · LOCAL EXPLORER</div><h1>GM World Map</h1><p>Explore the historical world.<br>Take coordinates back into Tibia.</p></header>
+<section><div class="row"><label for="floor">Floor / Z</label><select id="floor"></select><button id="fit">Fit floor</button></div>
+<label for="coordinates">Jump to coordinates</label><div class="row"><input id="coordinates" placeholder="X, Y, Z" aria-label="Jump coordinates"><button id="go">Go</button></div><p id="coordinate-error" role="status"></p>
+<label for="search">Search source entities</label><input id="search" type="search" placeholder="Ankrahmun, dragon, house name or ID…" autocomplete="off"><p id="matches" role="status"></p></section>
+<section id="selection"><div class="eyebrow">SELECTED TILE</div><h2 id="position">Click a tile</h2><p id="entity">Drag to pan. Scroll to zoom.</p><div class="row"><input id="command" readonly aria-label="GM teleport command"><button id="copy" disabled>Copy</button></div><p id="copy-status" role="status">Copies text only. No server connection.</p><p class="hint">Check walls, floor and access in-game before teleporting.</p></section>
+<nav id="results" aria-label="Matching map entities"></nav><footer id="source"></footer></aside>
+<main><canvas id="map" tabindex="0" aria-label="World map. Drag to pan, scroll or use buttons to zoom. Click to select coordinates."></canvas><div id="map-title">Historical source geometry</div><div id="zoom"><button id="zoom-out" aria-label="Zoom out">−</button><span id="scale"></span><button id="zoom-in" aria-label="Zoom in">+</button></div><div id="cursor">X — · Y — · Z —</div></main>
+<script src="data.js"></script><script src="viewer.js"></script></body></html>

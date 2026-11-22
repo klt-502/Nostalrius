@@ -116,3 +116,14 @@ if(BUILD_TESTING)
     add_test(NAME npc_catalog_source_audit COMMAND ${PYTHON_EXECUTABLE}
         ${CMAKE_SOURCE_DIR}/tests/audit/check_broker_catalog.py ${CMAKE_SOURCE_DIR})
 endif()
+
+if(BUILD_TESTING)
+    add_test(NAME automap_format_and_outputs COMMAND ${PYTHON_EXECUTABLE} -B -m unittest
+        discover -s ${CMAKE_SOURCE_DIR}/tests/automap -p test_automap.py)
+    find_program(NODE_EXECUTABLE NAMES node nodejs)
+    if(NODE_EXECUTABLE)
+        add_test(NAME gm_map_coordinates COMMAND ${NODE_EXECUTABLE}
+            ${CMAKE_SOURCE_DIR}/tests/automap/test_viewer_math.js
+            ${CMAKE_SOURCE_DIR}/tools/automap/viewer/viewer.js)
+    endif()
+endif()
